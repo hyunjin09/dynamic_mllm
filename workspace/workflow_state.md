@@ -7,7 +7,11 @@
 - Execution is restricted to four concurrent one-GPU jobs on node02/node06/node07;
   node03 and node04 are excluded. Ten epochs and the unchanged 22,307-record
   external evaluation are required before the phase decision.
-- Current gate: cap-manifest/geometry/oracle freeze and static/runtime readiness.
+- Manifest/readiness gate: PASS. Common population is 5,944 train / 857
+  validation; initialization/component hashes are identical across caps.
+- Submitted one-GPU pipelines: CAP18 job 102858 on node07, CAP20 job 102859 on
+  node06, CAP22 job 102860 on node02, CAP24 job 102861 on node02. All were
+  pending cluster priority/capacity at handoff; no run uses node03 or node04.
 - Phase memory: `workspace/phase_memory/phase_25_binary_bce_cap_sweep.md`.
 
 - Repository organization update (2026-08-19): root-level `analysis*` packages

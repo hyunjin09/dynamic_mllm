@@ -19,7 +19,10 @@ by the unchanged 22,307-record external execution evaluation.
 ## Current State
 
 - Done: plan and inherited contracts inspected; cap transform unit tests pass.
-- In progress: freeze manifests, geometry/oracles, configs, and readiness gate.
+- Done: manifests, geometry/oracles, four configs, static readiness, matched
+  initialization hashes, and corrected one-node/one-GPU Slurm contracts.
+- In progress: four full train-to-external-evaluation pipelines are submitted
+  to Slurm and pending allowed-node capacity.
 - Blocked: none.
 - Most recent useful observation: the parent manifest contains all selected
   route masks and their exact ON counts, so cap filtering needs no new inference.
@@ -60,9 +63,16 @@ by the unchanged 22,307-record external execution evaluation.
 
 ## Latest Research-Action Result
 
-- Action taken: in progress.
-- Result: pending.
-- Evidence saved: pending under `outputs/binary_cap_sweep_v1/`.
-- Failure or issue: none.
-- Lesson learned: pending.
-- Next implication: pending.
+- Action taken: froze cap supervision and submitted all four pipelines.
+- Result: 6,801 common-eligible records (5,944 train / 857 validation); jobs
+  102858 (CAP18/node07), 102859 (CAP20/node06), 102860 (CAP22/node02), and
+  102861 (CAP24/node02) each request exactly one GPU.
+- Evidence saved: `outputs/binary_cap_sweep_v1/audits/` and isolated logs under
+  `runs/binary_cap_sweep_v1/`.
+- Failure or issue: the first GPU submission form expanded a multi-node list
+  into three required nodes. Jobs 102853--102856 were cancelled while still
+  pending and before outputs; fixed single-node jobs replaced them.
+- Lesson learned: in this Slurm configuration, use one explicit `--node` for a
+  one-node job rather than a candidate `--nodelist`.
+- Next implication: monitor the four immutable pipelines; after all complete,
+  aggregate their frozen internal/external results and assign one plan outcome.
