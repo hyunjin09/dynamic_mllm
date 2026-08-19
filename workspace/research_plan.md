@@ -390,3 +390,16 @@ cancelling or modifying active P3. Its source plan is
   NCCL safeguards.
 - Isolation: separate manifests, contract hash, logs, and output cache; do not
   overwrite or merge the original 8K artifacts.
+# Active Amendment: Binary BCE Absolute-Cap Sweep
+
+The user approved `plans/cap_training.md` (SHA-256
+`0addf141e19345252fb74e89c85347624167439cfda2623a0be01a1d93df1baa`) as the
+active bounded research action. Using the original regenerated
+GQA/TextVQA/ChartQA max-50 supervision, train four otherwise identical
+Image+Question duplicated-BCE predictors with valid routes restricted to at
+most 24, 22, 20, or 18 VISUAL_ON layers. The primary comparison uses identical
+CAP=18-eligible train/validation UIDs, runs all ten epochs, selects checkpoints
+only by the frozen internal rule, and evaluates each selected checkpoint on the
+unchanged no-DocVQA 22,307-record suite. No new MCTS, Pareto filtering, NLL,
+architecture change, threshold tuning, or automatic follow-on experiment is
+authorized.

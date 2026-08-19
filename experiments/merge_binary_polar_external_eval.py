@@ -113,6 +113,11 @@ def summarize_rows(
         "mean_mask_transitions": statistics.fmean(int(item["transition_count"]) for item in predicted),
         "unique_predicted_masks": len(mask_counts),
         "all_on_rate": mask_counts.get("1" * 28, 0) / len(rows),
+        "all_off_rate": mask_counts.get("0" * 28, 0) / len(rows),
+        "behavior_changing_executions": sum(
+            item.get("generated_ids") != row.get("baseline_generated_ids")
+            for row, item in zip(rows, predicted)
+        ),
         "top_predicted_masks": [
             {"mask": mask, "count": count, "fraction": count / len(rows)}
             for mask, count in mask_counts.most_common(10)

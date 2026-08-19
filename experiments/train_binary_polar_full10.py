@@ -226,6 +226,7 @@ class MetricAccumulator:
         self.mask_counts: Counter[tuple[int, ...]] = Counter()
         self.original_valid_hits = 0
         self.original_valid_examples = 0
+        self.original_valid_hamming_sum = 0.0
 
     def update(
         self,
@@ -274,10 +275,14 @@ class MetricAccumulator:
             if uids is None or len(uids) != count:
                 raise ValueError("UIDs must align with logits for original-valid metrics")
             decoded = (logits >= 0).to(torch.int64).detach().cpu().tolist()
-            self.original_valid_hits += sum(
-                tuple(mask) in original_valid_masks[uid]
-                for uid, mask in zip(uids, decoded)
-            )
+            for uid, mask in zip(uids, decoded):
+                predicted = tuple(mask)
+                candidates = original_valid_masks[uid]
+                self.original_valid_hits += int(predicted in candidates)
+                self.original_valid_hamming_sum += min(
+                    sum(left != right for left, right in zip(predicted, candidate))
+                    for candidate in candidates
+                )
             self.original_valid_examples += count
 
     def finalize(self) -> dict:
@@ -295,6 +300,11 @@ class MetricAccumulator:
             self.original_valid_hits / self.original_valid_examples
             if self.original_valid_examples
             else result["top1_valid_route_coverage"]
+        )
+        result["nearest_original_valid_hamming"] = (
+            self.original_valid_hamming_sum / self.original_valid_examples
+            if self.original_valid_examples
+            else result["nearest_valid_hamming"]
         )
         return result
 
@@ -365,9 +375,9 @@ def validate_epoch(
             update_subset(accumulators[benchmark], indices, batch, logits)
         if validation_metadata is not None:
             for name, condition in (
-                ("singleton", lambda item: item["pareto_efficient_route_count"] == 1),
-                ("doubleton", lambda item: item["pareto_efficient_route_count"] == 2),
-                ("three_or_more", lambda item: item["pareto_efficient_route_count"] >= 3),
+                ("singleton", lambda item: item.get("supervision_route_count", item.get("pareto_efficient_route_count")) == 1),
+                ("doubleton", lambda item: item.get("supervision_route_count", item.get("pareto_efficient_route_count")) == 2),
+                ("three_or_more", lambda item: item.get("supervision_route_count", item.get("pareto_efficient_route_count")) >= 3),
             ):
                 indices = torch.tensor(
                     [
@@ -408,6 +418,7 @@ def validate_epoch(
             if accumulator.examples
         },
     }
+    result["by_supervision_multiplicity"] = result["by_pareto_multiplicity"]
     for current in [
         result["overall"],
         *result["by_benchmark"].values(),
@@ -496,6 +507,7 @@ def main() -> None:
     if config["authorization"] not in {
         "full10_question_and_image_question_only",
         "binary_pareto_full10_image_question_only",
+        "binary_cap_sweep_full10_image_question_only",
     }:
         raise RuntimeError("config does not authorize this full10 action")
     for name, specification in config["gates"].items():
@@ -563,11 +575,18 @@ def main() -> None:
     validation_dataset = BinaryPolicyManifestDataset(
         manifest_path, "validation", max_valid_routes=route_cap
     )
-    if len(train_dataset) != 6043 or len(validation_dataset) != 874:
-        raise RuntimeError("full10 positive population differs from 6043/874")
+    expected_train = int(config["data"].get("train_positive_records", 6043))
+    expected_validation = int(config["data"].get("validation_positive_records", 874))
+    if len(train_dataset) != expected_train or len(validation_dataset) != expected_validation:
+        raise RuntimeError(
+            "full10 positive population differs from config: "
+            f"{len(train_dataset)}/{len(validation_dataset)} != "
+            f"{expected_train}/{expected_validation}"
+        )
     if set(row["uid"] for row in train_dataset.rows + validation_dataset.rows) - feature_index.keys():
         raise RuntimeError("full10 feature cache is incomplete")
     validation_metadata = {str(row["uid"]): row for row in validation_dataset.rows}
+    train_metadata = {str(row["uid"]): row for row in train_dataset.rows}
     if args.modality == "image_question":
         unique_tensors = {
             row["path"]: row["sha256"] for row in feature_index.values()
@@ -622,6 +641,9 @@ def main() -> None:
     )
     validation_loader = DataLoader(
         validation_dataset, shuffle=False, collate_fn=validation_collator, **common_loader
+    )
+    train_evaluation_loader = DataLoader(
+        train_dataset, shuffle=False, collate_fn=validation_collator, **common_loader
     )
     optimizer = torch.optim.AdamW(
         predictor.parameters(),
@@ -700,11 +722,22 @@ def main() -> None:
             validation_metadata=validation_metadata,
             objective=args.objective,
         )
+        train_evaluation = validate_epoch(
+            predictor,
+            encoder,
+            train_evaluation_loader,
+            modality=args.modality,
+            device=device,
+            epoch=epoch,
+            validation_metadata=train_metadata,
+            objective=args.objective,
+        )
         row = {
             "epoch": epoch,
             "global_step": global_step,
             "learning_rate": optimizer.param_groups[0]["lr"],
             "train": train_metrics,
+            "train_evaluation": train_evaluation,
             "validation": validation,
         }
         history.append(row)

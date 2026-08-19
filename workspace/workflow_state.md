@@ -1,5 +1,15 @@
 # Workflow State
 
+- Active phase (2026-08-20): approved four-way binary duplicated-BCE absolute
+  VISUAL_ON-cap sweep under `plans/cap_training.md` (CAP 24/22/20/18).
+- The primary comparison uses one identical CAP=18-eligible GQA/TextVQA/ChartQA
+  train/validation population; only the surviving max-50 route sets differ.
+- Execution is restricted to four concurrent one-GPU jobs on node02/node06/node07;
+  node03 and node04 are excluded. Ten epochs and the unchanged 22,307-record
+  external evaluation are required before the phase decision.
+- Current gate: cap-manifest/geometry/oracle freeze and static/runtime readiness.
+- Phase memory: `workspace/phase_memory/phase_25_binary_bce_cap_sweep.md`.
+
 - Repository organization update (2026-08-19): root-level `analysis*` packages
   were migrated to versioned packages under `tools/research_analysis/`, and
   `03_experiments/` was moved to `runs/experiments/`. The scheduler default and

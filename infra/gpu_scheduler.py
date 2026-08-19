@@ -88,6 +88,11 @@ def parse_args() -> argparse.Namespace:
     launch = sub.add_parser("launch", help="Launch planned jobs through sbatch.")
     add_status_common(launch)
     launch.add_argument("--execute", action="store_true", help="Actually submit planned jobs with sbatch.")
+    launch.add_argument(
+        "--submit-pending",
+        action="store_true",
+        help="Submit fixed-node GPU jobs to Slurm even when no GPU is currently free; still enforce the user GPU cap.",
+    )
 
     list_cmd = sub.add_parser("list", help="List GPU jobs.")
     list_cmd.add_argument("--project", required=True)
@@ -717,6 +722,29 @@ def plan_jobs(queue: dict[str, Any], status: dict[str, Any]) -> list[dict[str, A
     return planned
 
 
+def pending_submission_jobs(queue: dict[str, Any], status: dict[str, Any]) -> list[dict[str, Any]]:
+    """Prepare fixed-placement jobs for Slurm pending state under the user cap."""
+    remaining = int(status["remaining_user_slots"])
+    planned: list[dict[str, Any]] = []
+    for job in selectable_jobs(queue):
+        needed = int(job.get("gpus") or 0)
+        if needed < 1 or needed > remaining:
+            continue
+        gpu_type = str(job.get("gpu_type") or "auto").lower()
+        if gpu_type == "auto" or gpu_type not in GPU_PROFILES:
+            raise HarnessError("--submit-pending requires an explicit GPU type")
+        if not (str(job.get("node") or "").strip() or str(job.get("nodelist") or "").strip()):
+            raise HarnessError("--submit-pending requires --node or --nodelist")
+        planned_job = dict(job)
+        planned_job["partition"] = job.get("partition") or GPU_PROFILES[gpu_type]["partition"]
+        planned_job["mem"] = job.get("mem") or GPU_PROFILES[gpu_type]["mem"]
+        planned_job["cpus"] = job.get("cpus") or GPU_PROFILES[gpu_type]["cpus"]
+        validate_job_memory_cap(planned_job)
+        planned.append(planned_job)
+        remaining -= needed
+    return planned
+
+
 def sbatch_args(root: Path, job: dict[str, Any]) -> list[str]:
     validate_job_memory_cap(job)
     log_path = root / str(job.get("log_path") or f"runs/experiments/{job['exp_id']}/run.log")
@@ -906,7 +934,11 @@ def main() -> int:
             print_status(status, queue)
             return 0
 
-        planned = plan_jobs(queue, status)
+        planned = (
+            pending_submission_jobs(queue, status)
+            if args.action == "launch" and args.submit_pending
+            else plan_jobs(queue, status)
+        )
         if args.action == "plan":
             if args.json:
                 print(json.dumps({"status": status, "planned_jobs": planned}, indent=2))
