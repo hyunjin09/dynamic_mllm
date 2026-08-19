@@ -76,3 +76,12 @@ by the unchanged 22,307-record external execution evaluation.
   one-node job rather than a candidate `--nodelist`.
 - Next implication: monitor the four immutable pipelines; after all complete,
   aggregate their frozen internal/external results and assign one plan outcome.
+
+### Scheduling amendment (2026-08-20)
+
+- The four still-unmodified scientific jobs inherited the partition default
+  time limit of 14 days 12 hours, preventing backfill onto an idle reserved GPU.
+- With explicit user approval, jobs 102858--102861 were changed in place to a
+  10-hour limit; commands, nodes, GPU count, data, configs, and outputs did not
+  change.
+- CAP22 job 102860 began running on node02 immediately after the amendment.

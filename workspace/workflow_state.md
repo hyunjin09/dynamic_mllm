@@ -11,7 +11,9 @@
   validation; initialization/component hashes are identical across caps.
 - Submitted one-GPU pipelines: CAP18 job 102858 on node07, CAP20 job 102859 on
   node06, CAP22 job 102860 on node02, CAP24 job 102861 on node02. All were
-  pending cluster priority/capacity at handoff; no run uses node03 or node04.
+  amended in place from the 14.5-day partition default to a user-approved
+  10-hour limit to permit backfill. CAP22 began on node02 at 00:51 KST; the
+  others remain queued for allowed-node capacity. No run uses node03 or node04.
 - Phase memory: `workspace/phase_memory/phase_25_binary_bce_cap_sweep.md`.
 
 - Repository organization update (2026-08-19): root-level `analysis*` packages
