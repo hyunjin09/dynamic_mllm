@@ -1,0 +1,24 @@
+{
+  "exp_id": "wemath2pro-greedy-recovery-v1",
+  "status": "running",
+  "owner_agent": "code_agent",
+  "current_step": "Running GPU job wemath-greedy-manifest-v1",
+  "tmux_session": "",
+  "slurm_job_name": "wemath_greedy_manifest",
+  "slurm_job_id": "101705",
+  "gpu_type": "A4000",
+  "node": "node05",
+  "log_path": "runs/wemath_greedy_recovery/manifest.log",
+  "result_path": "outputs/label_regeneration/wemath2pro_greedy_recovery_v1/manifest/recovery_manifest_audit_v1.json",
+  "display_summary": "GPU job wemath-greedy-manifest-v1 is running for wemath2pro-greedy-recovery-v1.",
+  "history": [
+    {
+      "time": "2026-08-18T03:30:35+00:00",
+      "event": "gpu_launch",
+      "message": "sbatch_job_id=101705 slurm_job=wemath_greedy_manifest"
+    }
+  ],
+  "created_at": "2026-08-18T03:30:35+00:00",
+  "started_at": "2026-08-18T03:30:35+00:00",
+  "updated_at": "2026-08-18T03:30:35+00:00"
+}

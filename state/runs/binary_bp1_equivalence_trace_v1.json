@@ -1,0 +1,24 @@
+{
+  "exp_id": "binary_bp1_equivalence_trace_v1",
+  "status": "running",
+  "owner_agent": "root",
+  "current_step": "Running GPU job binary_bp1_equivalence_trace_20260809",
+  "tmux_session": "",
+  "slurm_job_name": "binary_bp1_equivalence_trace_20260809_a6000",
+  "slurm_job_id": "99728",
+  "gpu_type": "A6000",
+  "node": "node03",
+  "log_path": "runs/experiments/binary_bp1_equivalence_trace_v1/run.log",
+  "result_path": "outputs/binary_polar/preflight/executor_equivalence_trace_v1.json",
+  "display_summary": "GPU job binary_bp1_equivalence_trace_20260809 is running for binary_bp1_equivalence_trace_v1.",
+  "history": [
+    {
+      "time": "2026-08-09T13:01:11+00:00",
+      "event": "gpu_launch",
+      "message": "sbatch_job_id=99728 slurm_job=binary_bp1_equivalence_trace_20260809_a6000"
+    }
+  ],
+  "created_at": "2026-08-09T13:01:11+00:00",
+  "started_at": "2026-08-09T13:01:11+00:00",
+  "updated_at": "2026-08-09T13:01:11+00:00"
+}

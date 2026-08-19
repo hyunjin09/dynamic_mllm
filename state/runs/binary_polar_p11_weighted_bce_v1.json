@@ -1,0 +1,24 @@
+{
+  "exp_id": "binary_polar_p11_weighted_bce_v1",
+  "status": "running",
+  "owner_agent": "root",
+  "current_step": "Running GPU job binary_polar_p11_weighted_bce_20260813",
+  "tmux_session": "",
+  "slurm_job_name": "bp11_bce",
+  "slurm_job_id": "100420",
+  "gpu_type": "A6000",
+  "node": "node03",
+  "log_path": "runs/binary_polar/p11_weighted_bce_v1.log",
+  "result_path": "outputs/binary_polar/p11/question/duplicated_bce_v1/best_checkpoint.json",
+  "display_summary": "GPU job binary_polar_p11_weighted_bce_20260813 is running for binary_polar_p11_weighted_bce_v1.",
+  "history": [
+    {
+      "time": "2026-08-12T16:16:13+00:00",
+      "event": "gpu_launch",
+      "message": "sbatch_job_id=100420 slurm_job=bp11_bce"
+    }
+  ],
+  "created_at": "2026-08-12T16:16:13+00:00",
+  "started_at": "2026-08-12T16:16:13+00:00",
+  "updated_at": "2026-08-12T16:16:13+00:00"
+}

@@ -1,0 +1,24 @@
+{
+  "exp_id": "p7_eval_suite_audit_v1",
+  "status": "running",
+  "owner_agent": "code_agent",
+  "current_step": "Running GPU job binary_router_eval_suite_audit_20260812",
+  "tmux_session": "",
+  "slurm_job_name": "br_eval_audit",
+  "slurm_job_id": "100357",
+  "gpu_type": "A4000",
+  "node": "node05",
+  "log_path": "runs/label_regeneration/eval_suite_overlap_audit_v1.log",
+  "result_path": "outputs/label_regeneration/v1/post_generation/eval_suite_overlap_audit_v1.json",
+  "display_summary": "GPU job binary_router_eval_suite_audit_20260812 is running for p7_eval_suite_audit_v1.",
+  "history": [
+    {
+      "time": "2026-08-12T12:26:01+00:00",
+      "event": "gpu_launch",
+      "message": "sbatch_job_id=100357 slurm_job=br_eval_audit"
+    }
+  ],
+  "created_at": "2026-08-12T12:26:01+00:00",
+  "started_at": "2026-08-12T12:26:01+00:00",
+  "updated_at": "2026-08-12T12:26:01+00:00"
+}

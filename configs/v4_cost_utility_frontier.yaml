@@ -1,0 +1,107 @@
+schema_version: v4_cost_utility_frontier_v1
+source_q: outputs/v4_discovery/analysis_v1/question_layer_q_v_v1.parquet
+source_manifest: outputs/v4_discovery/manifest/v4_gqa_discovery_manifest_v1.jsonl
+source_analysis_manifest: outputs/v4_discovery/analysis_v1/analysis_manifest.json
+model_config: configs/model.yaml
+output_frontier: outputs/v4_discovery/cost_utility_frontier_v1.csv
+output_action_costs: outputs/v4_discovery/oracle_action_costs_v1.csv
+output_summary: outputs/v4_discovery/cost_utility_frontier_summary_v1.json
+
+utility: per_token_accepted_reference_log_likelihood
+epsilon_utility: 0.000001
+tie_rule: lowest_cost_within_epsilon_then_IGNORE_READ_ONLY_WRITE_ONLY_FULL
+layers: [0, 4, 8, 12, 16, 20, 24]
+actions: [IGNORE, READ_ONLY, WRITE_ONLY, FULL]
+
+flop_convention:
+  multiply_add_flops: 2
+  nonlinear_ops_included: false
+  description: exact matrix-multiply FLOPs for operation-level row/edge-sparse execution aligned to the validated fixed-softmax counterfactual
+  read_formula: 2 * postvisual_query_rows * visual_rows * hidden_size
+  write_visual_q_formula: 2 * visual_rows * hidden_size^2
+  write_visual_attention_formula: 4 * hidden_size * (visual_rows * prefix_rows + visual_rows * (visual_rows + 1) / 2)
+  write_visual_o_formula: 2 * visual_rows * hidden_size^2
+  write_visual_ffn_formula: 6 * visual_rows * hidden_size * intermediate_size
+  action_costs:
+    IGNORE: 0
+    READ_ONLY: read
+    WRITE_ONLY: write
+    FULL: read + write
+  note: text-to-visual QK logits remain action-invariant because READ OFF preserves the original softmax weights; the current counterfactual runner itself executes the dense FULL layer for every branch
+
+cost_normalization: per_image_layer_FULL_cost
+lambda_grid: [0.0, 0.00001, 0.00003, 0.0001, 0.0003, 0.001, 0.003, 0.01, 0.03, 0.1, 0.3, 1.0, 3.0, 10.0]
+relative_budget_grid:
+  - 0.0
+  - 0.00025
+  - 0.0005
+  - 0.00075
+  - 0.001
+  - 0.025
+  - 0.05
+  - 0.075
+  - 0.1
+  - 0.125
+  - 0.15
+  - 0.175
+  - 0.2
+  - 0.225
+  - 0.25
+  - 0.275
+  - 0.3
+  - 0.325
+  - 0.35
+  - 0.375
+  - 0.4
+  - 0.425
+  - 0.45
+  - 0.475
+  - 0.5
+  - 0.525
+  - 0.55
+  - 0.575
+  - 0.6
+  - 0.625
+  - 0.65
+  - 0.675
+  - 0.7
+  - 0.725
+  - 0.75
+  - 0.775
+  - 0.8
+  - 0.825
+  - 0.85
+  - 0.875
+  - 0.9
+  - 0.925
+  - 0.95
+  - 0.975
+  - 1.0
+
+frontier_interpolation:
+  method: linear_between_nondominated_aggregate_raw_grid_points
+  normalized_compute_grid_points: 1001
+pairwise_pareto_rules:
+  frontier_expansion: a query-specific action pair is above the best shared-action utility attainable at no greater cost by more than epsilon
+  unconstrained_shared_dominance: a query-specific action pair has no greater cost and higher utility, or lower cost and utility within epsilon, relative to the epsilon-tied lowest-cost unconstrained shared action
+bootstrap:
+  unit: image
+  replicates: 10000
+  seed: 2026080715
+trim_fraction: 0.20
+
+robustness:
+  scopes: [all, robust_non_tie]
+  summaries: [mean, median, trimmed_mean_20]
+  layerwise: true
+  predefined_descriptive_covariates: [question_length, answer_length, baseline_FULL_difficulty]
+  question_length_word_bins: [0, 8, 12, 1000000]
+  question_length_labels: [short_le_8, medium_9_12, long_ge_13]
+  answer_length_groups: [all_one_token, any_multi_token]
+  baseline_FULL_difficulty_groups: tertiles
+
+interpretation_reference:
+  practical_utility_nats_per_token: 0.05
+  material_compute_fraction_of_mean_FULL: 0.10
+  minimum_contiguous_normalized_compute_width: 0.10
+  claim_boundary: oracle local-compute accounting only; no routing, latency, or acceleration claim

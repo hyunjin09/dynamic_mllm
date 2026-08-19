@@ -1,0 +1,96 @@
+protocol_version: binary_pareto_full10_bce_v1
+authorization: binary_pareto_full10_image_question_only
+source_plan:
+  path: plans/filter_train.md
+  sha256: b1dd327fa2708de05363cd480d98e9f50690ea5c9eca09b9bc9afaf8d67821e3
+gates:
+  pareto_integrity:
+    path: outputs/binary_pareto_v1/audits/pareto_integrity_audit_v1.json
+    sha256: 6a5d22c2c52c992912284a5b5fba8a7cb7d57c8d46d6a1318334d009ad7c029c
+  full_visual_cache:
+    path: outputs/binary_polar/full10/visual_features_v1/cache_audit_v1.json
+    sha256: 6a1cb404196139921a40750aac7daac21004068a3863a805ba542a9db5ecf1d2
+base_model:
+  model_id: Qwen/Qwen2.5-VL-7B-Instruct
+  revision: cc594898137f460bfe9f0759e9844b3ce807cfb5
+  precision: bfloat16
+policy:
+  num_layers: 28
+  representation: direct_factorized_binary_mask
+  decode_threshold: 0.5
+data:
+  manifest: outputs/binary_pareto_v1/manifests/binary_pareto_predictor_manifest_v1.jsonl
+  manifest_sha256: c0ce6620fe21ef5c14804778433436fc613432676572bec92723ed4f0aebb74c
+  parent_manifest: outputs/label_regeneration/v1/post_generation/binary_predictor_manifest_v1.jsonl
+  parent_manifest_sha256: 3620a347a3498d16853463a6f9f8b842fecbab7b442cb869f1fb11bc9ab8aa52
+  train_positive_records: 6043
+  validation_positive_records: 874
+  max_valid_routes_per_sample: 50
+  route_cap_policy: frozen_parent_max50_then_per_sample_pareto_filter
+  route_weighting: polar_full_downweight_0.3
+  max_question_tokens: 512
+evidence:
+  pareto_geometry:
+    path: outputs/binary_pareto_v1/audits/pareto_geometry_v1.json
+    sha256: 06774801d52cf495e2962b927e27ca58996292f55842fe7538057d3c2940472f
+  label_oracles:
+    path: outputs/binary_pareto_v1/oracle_analysis/label_oracles_v1.json
+    sha256: fd4e81630b7749fa9c63b1538913a09f017ec338ac71c6b19df67bc458c009a5
+visual_features:
+  manifest: outputs/binary_polar/full10/visual_features_v1/feature_manifest_v1.jsonl
+  manifest_sha256: fd0e9163ac6ef6eb863e32b65a81720f191fce7200440e6ebe401d1beb7eb60a
+  validation_permutations: outputs/binary_polar/full10/validation_modality_permutations_group_disjoint_v2.json
+  validation_permutations_sha256: 5e82e456628a06c4b366967fe631218903b765484e74caec6d660aa6fa80db45
+  source: projected_visual_rows_entering_decoder_layer_0
+  feature_width: 3584
+  dtype: bfloat16
+  unpooled: true
+predictor:
+  embedding_model_id: Qwen/Qwen3-Embedding-0.6B
+  embedding_revision: c54f2e6e80b2d7b7de06f51cec4959f6b3e03418
+  embedding_model_path: /home/hyunjin/.cache/huggingface/hub/models--Qwen--Qwen3-Embedding-0.6B/snapshots/c54f2e6e80b2d7b7de06f51cec4959f6b3e03418
+  frozen_embedding_model: true
+  modality: image_question
+  d_model: 256
+  num_heads: 4
+  num_layer_blocks: 2
+  dropout: 0.1
+  head: direct_28_binary_logits
+training:
+  objective: duplicated_bce
+  seed: 20260809
+  epochs: 10
+  physical_batch_size: 128
+  gradient_accumulation_steps: 1
+  effective_batch_size: 128
+  duplicated_route_microbatch_size: 32
+  learning_rate: 0.0005
+  optimizer: AdamW
+  weight_decay: 0.01
+  scheduler: cosine
+  warmup_steps: 10
+  num_workers: 4
+  gradient_clip_norm: 1.0
+  precision: bfloat16
+  deterministic_algorithms: true
+  no_early_stopping: true
+  save_every_epoch: true
+evaluation:
+  internal_primary: pareto_valid_hit_at_1
+  checkpoint_selection: max_pareto_hit_then_min_nearest_then_min_nll_then_earlier
+  external_records: 22307
+  external_suite: unchanged_full10_no_docvqa
+  scientific_baseline: current_live_all_on
+source_sha256:
+  binary_policy/dataset.py: 96dcb2c4d6bc78bd8e6f0da906ce5c65cf091f832b503b863ce9e22d43ed243e
+  binary_policy/decode.py: fb9a7314d103f9bab1bf0e2ac233596a2a2a41ff62d81ac45fb78f34c256be79
+  binary_policy/evaluation.py: 3d1da4e90f4de66f2275212885e7ed745c3f38a5e67d2333db7109b4bc597f29
+  binary_policy/losses.py: 5f2c2789b0422b075a054e6c6d4affcb73e718fc19adcff179f63257cd7c7ada
+  binary_policy/multimodal.py: 3229a257751bdf6c6c67d8b2366df3f71d432c0f3e6171691d728388b829ddbc
+  binary_policy/predictor.py: 8b0199dc5384eb4b59ad252b2fdcad337d3f8c5136a0ffa449859ff47179bd40
+  label_regeneration/pareto_supervision.py: a68ccf954c9c54a55d30282c72e45d5cf8d20ae9e4e2260b44d854438c9c0ab7
+  experiments/train_binary_polar_full10.py: a252ccb9a7a99ac79f8ced84903e7b7d2b56d2ed92576f0eaecabf379c9f05a5
+  experiments/preflight_binary_polar_full10.py: 734276f6e560038c225eef76de58068ea0e8f9b604576b935e834aa8972a9388
+  experiments/evaluate_binary_polar_external.py: 36267c926bd2c85b729c5d5ea8ddf5ec90b38a038e01815b1b24d41655a7818e
+  experiments/summarize_binary_pareto_external_eval.py: 8d9e8e1ab6664ded145db81f8c336a31e29191e04f0fb5acfc827f20bcff9b21
+  experiments/run_binary_pareto_train_eval.py: 283dbe36edf26b09629d7ea9e1dc5c1feba3697c91fc1207ede5d43385bef4a4

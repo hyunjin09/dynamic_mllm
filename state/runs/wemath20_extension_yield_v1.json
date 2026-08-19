@@ -1,0 +1,29 @@
+{
+  "exp_id": "wemath20_extension_yield_v1",
+  "status": "running",
+  "owner_agent": "code_agent",
+  "current_step": "Running GPU job wemath20_extension_yield_r2_20260812",
+  "tmux_session": "",
+  "slurm_job_name": "wemath_ext_yield",
+  "slurm_job_id": "100401",
+  "gpu_type": "A6000",
+  "node": "node07",
+  "log_path": "runs/label_regeneration/wemath2pro_extension_yield_r2.log",
+  "result_path": "outputs/label_regeneration/wemath2pro_v1/extension_yield_snapshot_v1.json",
+  "display_summary": "GPU job wemath20_extension_yield_r2_20260812 is running for wemath20_extension_yield_v1.",
+  "history": [
+    {
+      "time": "2026-08-12T14:56:26+00:00",
+      "event": "gpu_launch",
+      "message": "sbatch_job_id=100400 slurm_job=wemath_ext_yield"
+    },
+    {
+      "time": "2026-08-12T14:56:46+00:00",
+      "event": "gpu_launch",
+      "message": "sbatch_job_id=100401 slurm_job=wemath_ext_yield"
+    }
+  ],
+  "created_at": "2026-08-12T14:56:26+00:00",
+  "started_at": "2026-08-12T14:56:26+00:00",
+  "updated_at": "2026-08-12T14:56:46+00:00"
+}

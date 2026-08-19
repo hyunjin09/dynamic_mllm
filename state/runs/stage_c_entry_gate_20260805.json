@@ -1,0 +1,24 @@
+{
+  "exp_id": "stage_c_entry_gate_20260805",
+  "status": "running",
+  "owner_agent": "code_agent",
+  "current_step": "Running GPU job stage_c_entry_gate_20260805",
+  "tmux_session": "",
+  "slurm_job_name": "stage_c_entry_gate_a6000",
+  "slurm_job_id": "98377",
+  "gpu_type": "A6000",
+  "node": "node03",
+  "log_path": "runs/stage_c_entry_gate_20260805/slurm.log",
+  "result_path": "outputs/stage_c/nulls/null_calibration_and_smoke_v1.json",
+  "display_summary": "GPU job stage_c_entry_gate_20260805 is running for stage_c_entry_gate_20260805.",
+  "history": [
+    {
+      "time": "2026-08-05T05:03:02+00:00",
+      "event": "gpu_launch",
+      "message": "sbatch_job_id=98377 slurm_job=stage_c_entry_gate_a6000"
+    }
+  ],
+  "created_at": "2026-08-05T05:03:02+00:00",
+  "started_at": "2026-08-05T05:03:02+00:00",
+  "updated_at": "2026-08-05T05:03:02+00:00"
+}

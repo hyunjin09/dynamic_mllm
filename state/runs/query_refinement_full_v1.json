@@ -1,0 +1,64 @@
+{
+  "exp_id": "query_refinement_full_v1",
+  "status": "running",
+  "owner_agent": "root",
+  "current_step": "Running GPU job query_refinement_full_s03_r2_20260807",
+  "tmux_session": "",
+  "slurm_job_name": "query_refinement_full_s03_r2_20260807_a6000",
+  "slurm_job_id": "99185",
+  "gpu_type": "A6000",
+  "node": "node02",
+  "log_path": "runs/query_refinement_full_v1/shard_03_r2.log",
+  "result_path": "outputs/query_refinement/shards_v1/shard_03/completion.json",
+  "display_summary": "GPU job query_refinement_full_s03_r2_20260807 is running for query_refinement_full_v1.",
+  "history": [
+    {
+      "time": "2026-08-07T10:37:47+00:00",
+      "event": "gpu_launch",
+      "message": "sbatch_job_id=99176 slurm_job=query_refinement_full_s00_20260807_a6000"
+    },
+    {
+      "time": "2026-08-07T10:37:47+00:00",
+      "event": "gpu_launch",
+      "message": "sbatch_job_id=99177 slurm_job=query_refinement_full_s02_20260807_a6000"
+    },
+    {
+      "time": "2026-08-07T10:37:47+00:00",
+      "event": "gpu_launch",
+      "message": "sbatch_job_id=99178 slurm_job=query_refinement_full_s03_20260807_a6000"
+    },
+    {
+      "time": "2026-08-07T10:37:47+00:00",
+      "event": "gpu_launch",
+      "message": "sbatch_job_id=99179 slurm_job=query_refinement_full_s01_20260807_a6000"
+    },
+    {
+      "time": "2026-08-07T10:38:11+00:00",
+      "event": "gpu_launch",
+      "message": "sbatch_job_id=99180 slurm_job=query_refinement_full_s01_r2_20260807_a6000"
+    },
+    {
+      "time": "2026-08-07T10:40:00+00:00",
+      "event": "gpu_launch",
+      "message": "sbatch_job_id=99182 slurm_job=query_refinement_full_s01_r3_20260807_a6000"
+    },
+    {
+      "time": "2026-08-07T10:41:12+00:00",
+      "event": "gpu_launch",
+      "message": "sbatch_job_id=99183 slurm_job=query_refinement_full_s02_r2_20260807_a6000"
+    },
+    {
+      "time": "2026-08-07T10:42:11+00:00",
+      "event": "gpu_launch",
+      "message": "sbatch_job_id=99184 slurm_job=query_refinement_full_s02_r3_20260807_a6000"
+    },
+    {
+      "time": "2026-08-07T10:44:13+00:00",
+      "event": "gpu_launch",
+      "message": "sbatch_job_id=99185 slurm_job=query_refinement_full_s03_r2_20260807_a6000"
+    }
+  ],
+  "created_at": "2026-08-07T10:37:47+00:00",
+  "started_at": "2026-08-07T10:37:47+00:00",
+  "updated_at": "2026-08-07T10:44:13+00:00"
+}

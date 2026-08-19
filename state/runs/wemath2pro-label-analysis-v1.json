@@ -1,0 +1,29 @@
+{
+  "exp_id": "wemath2pro-label-analysis-v1",
+  "status": "running",
+  "owner_agent": "code_agent",
+  "current_step": "Running GPU job wemath2pro-label-analysis-v2",
+  "tmux_session": "",
+  "slurm_job_name": "wemath-label-analysis",
+  "slurm_job_id": "101423",
+  "gpu_type": "A4000",
+  "node": "node05",
+  "log_path": "runs/wemath2pro_label_analysis_v1/slurm_v2.log",
+  "result_path": "outputs/wemath2pro_mcts_label_analysis_v1/analysis_manifest.json",
+  "display_summary": "GPU job wemath2pro-label-analysis-v2 is running for wemath2pro-label-analysis-v1.",
+  "history": [
+    {
+      "time": "2026-08-17T02:53:28+00:00",
+      "event": "gpu_launch",
+      "message": "sbatch_job_id=101422 slurm_job=wemath-label-analysis"
+    },
+    {
+      "time": "2026-08-17T02:57:09+00:00",
+      "event": "gpu_launch",
+      "message": "sbatch_job_id=101423 slurm_job=wemath-label-analysis"
+    }
+  ],
+  "created_at": "2026-08-17T02:53:28+00:00",
+  "started_at": "2026-08-17T02:53:28+00:00",
+  "updated_at": "2026-08-17T02:57:09+00:00"
+}

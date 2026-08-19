@@ -1,0 +1,24 @@
+{
+  "exp_id": "v3_null_redesign_delta_s10_v1",
+  "status": "running",
+  "owner_agent": "code_agent",
+  "current_step": "Running GPU job v3_null_redesign_delta_s10_20260807",
+  "tmux_session": "",
+  "slurm_job_name": "v3nd_10",
+  "slurm_job_id": "98975",
+  "gpu_type": "A6000",
+  "node": "node03",
+  "log_path": "runs/v3_null_redesign_geometry_delta_20260807/shard_10.log",
+  "result_path": "artifacts/v3_null_redesign/read_write_geometry_delta_v2/shards/shard_10/shard_manifest.json",
+  "display_summary": "GPU job v3_null_redesign_delta_s10_20260807 is running for v3_null_redesign_delta_s10_v1.",
+  "history": [
+    {
+      "time": "2026-08-07T01:22:46+00:00",
+      "event": "gpu_launch",
+      "message": "sbatch_job_id=98975 slurm_job=v3nd_10"
+    }
+  ],
+  "created_at": "2026-08-07T01:22:46+00:00",
+  "started_at": "2026-08-07T01:22:46+00:00",
+  "updated_at": "2026-08-07T01:22:46+00:00"
+}

@@ -1,0 +1,74 @@
+{
+  "exp_id": "stage_c_full_v2_20260805",
+  "status": "running",
+  "owner_agent": "code_agent",
+  "current_step": "Running GPU job stage_c_analysis_v1_retry_20260805",
+  "tmux_session": "",
+  "slurm_job_name": "stage-c-analysis",
+  "slurm_job_id": "98472",
+  "gpu_type": "A4000",
+  "node": "node05",
+  "log_path": "runs/stage_c_full_v2_20260805/analysis_retry/slurm.log",
+  "result_path": "outputs/stage_c/analysis_v1/final_decision.json",
+  "display_summary": "GPU job stage_c_analysis_v1_retry_20260805 is running for stage_c_full_v2_20260805.",
+  "history": [
+    {
+      "time": "2026-08-05T07:16:50+00:00",
+      "event": "gpu_launch",
+      "message": "sbatch_job_id=98453 slurm_job=stage-c-v2-00"
+    },
+    {
+      "time": "2026-08-05T07:16:50+00:00",
+      "event": "gpu_launch",
+      "message": "sbatch_job_id=98454 slurm_job=stage-c-v2-01"
+    },
+    {
+      "time": "2026-08-05T07:16:50+00:00",
+      "event": "gpu_launch",
+      "message": "sbatch_job_id=98455 slurm_job=stage-c-v2-02"
+    },
+    {
+      "time": "2026-08-05T07:16:50+00:00",
+      "event": "gpu_launch",
+      "message": "sbatch_job_id=98456 slurm_job=stage-c-v2-03"
+    },
+    {
+      "time": "2026-08-05T07:16:50+00:00",
+      "event": "gpu_launch",
+      "message": "sbatch_job_id=98457 slurm_job=stage-c-v2-04"
+    },
+    {
+      "time": "2026-08-05T07:16:50+00:00",
+      "event": "gpu_launch",
+      "message": "sbatch_job_id=98458 slurm_job=stage-c-v2-05"
+    },
+    {
+      "time": "2026-08-05T07:16:50+00:00",
+      "event": "gpu_launch",
+      "message": "sbatch_job_id=98459 slurm_job=stage-c-v2-06"
+    },
+    {
+      "time": "2026-08-05T07:16:50+00:00",
+      "event": "gpu_launch",
+      "message": "sbatch_job_id=98460 slurm_job=stage-c-v2-07"
+    },
+    {
+      "time": "2026-08-05T07:36:40+00:00",
+      "event": "gpu_launch",
+      "message": "sbatch_job_id=98470 slurm_job=stage-c-merge-v2"
+    },
+    {
+      "time": "2026-08-05T07:37:36+00:00",
+      "event": "gpu_launch",
+      "message": "sbatch_job_id=98471 slurm_job=stage-c-analysis"
+    },
+    {
+      "time": "2026-08-05T07:38:54+00:00",
+      "event": "gpu_launch",
+      "message": "sbatch_job_id=98472 slurm_job=stage-c-analysis"
+    }
+  ],
+  "created_at": "2026-08-05T07:16:50+00:00",
+  "started_at": "2026-08-05T07:16:50+00:00",
+  "updated_at": "2026-08-05T07:38:54+00:00"
+}

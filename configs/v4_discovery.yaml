@@ -1,0 +1,29 @@
+stage: v4_query_conditional_discovery
+status: authorized
+model_config: configs/model.yaml
+manifest: outputs/v4_discovery/manifest/v4_gqa_discovery_manifest_v1.jsonl
+manifest_checksum: outputs/v4_discovery/manifest/v4_gqa_discovery_manifest_v1.sha256
+manifest_audit: outputs/v4_discovery/manifest/v4_gqa_discovery_manifest_audit_v1.json
+preflight_output_dir: outputs/v4_discovery/preflight
+shard_output_dir: outputs/v4_discovery/shards
+merged_output: outputs/v4_discovery/v4_four_action_results_v1.jsonl
+analysis_output_dir: outputs/v4_discovery/analysis_v1
+seed: 2026080712
+bootstrap_seed: 2026080713
+bootstrap_replicates: 10000
+dataset: gqa
+image_count: 120
+questions_per_image: 2
+sample_count: 240
+layer_grid: [0, 4, 8, 12, 16, 20, 24]
+actions: [IGNORE, READ_ONLY, WRITE_ONLY, FULL]
+preflight_image_count: 12
+validated_prompt_token_max: 4861
+noise_floor_sequence: 0.00001
+noise_floor_mean: 0.000001
+score_tolerance: 0.00001
+logit_tolerance: 0.0001
+visual_identity_tolerance: 0.0
+practical_threshold_mean: 0.05
+shard_count: 4
+scope_note: exactly 240 natural questions; no extra paraphrase prompts

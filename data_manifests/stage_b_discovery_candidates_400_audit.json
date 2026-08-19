@@ -1,0 +1,27 @@
+{
+  "stage": "B",
+  "status": "candidate_manifest_only",
+  "source_plan_sha256": "d476736dde6d5d7d44ab3e18794ebc3c4e988d703829657271bc285ecd5171d1",
+  "approved_sample_count_exception": {
+    "source_plan_suggested": "100-200",
+    "user_approved": 400,
+    "approved_at": "2026-08-04"
+  },
+  "seed": 20260804,
+  "candidate_count": 400,
+  "counts_by_inherited_cell": {
+    "gqa:complete_correct": 100,
+    "gqa:complete_wrong": 100,
+    "textvqa:complete_correct": 100,
+    "textvqa:complete_wrong": 100
+  },
+  "unique_selection_assets": 400,
+  "unique_sample_ids": 400,
+  "excluded_stage_a_ids": 24,
+  "stage_a_overlap_count": 0,
+  "candidate_manifest_sha256": "de4dada63a677172bb4eafaaba2787ea338750dd8c4e8fb5eeaa5cc820211ed7",
+  "pinned_full_relabeling_complete": false,
+  "option_protocol_status": "unresolved",
+  "layer_grid_status": "unresolved",
+  "intervention_sweep_executed": false
+}

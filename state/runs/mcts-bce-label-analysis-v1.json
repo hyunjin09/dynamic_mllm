@@ -1,0 +1,39 @@
+{
+  "exp_id": "mcts-bce-label-analysis-v1",
+  "status": "running",
+  "owner_agent": "code_agent",
+  "current_step": "Running GPU job mcts-bce-label-analysis-v4",
+  "tmux_session": "",
+  "slurm_job_name": "mcts-bce-label-analysis",
+  "slurm_job_id": "101276",
+  "gpu_type": "A4000",
+  "node": "node05",
+  "log_path": "runs/mcts_bce_label_analysis_v4/slurm.log",
+  "result_path": "outputs/binary_mcts_label_geometry_v1/analysis_manifest.json",
+  "display_summary": "GPU job mcts-bce-label-analysis-v4 is running for mcts-bce-label-analysis-v1.",
+  "history": [
+    {
+      "time": "2026-08-16T05:43:08+00:00",
+      "event": "gpu_launch",
+      "message": "sbatch_job_id=101273 slurm_job=mcts-bce-label-analysis"
+    },
+    {
+      "time": "2026-08-16T05:45:31+00:00",
+      "event": "gpu_launch",
+      "message": "sbatch_job_id=101274 slurm_job=mcts-bce-label-analysis"
+    },
+    {
+      "time": "2026-08-16T05:49:17+00:00",
+      "event": "gpu_launch",
+      "message": "sbatch_job_id=101275 slurm_job=mcts-bce-label-analysis"
+    },
+    {
+      "time": "2026-08-16T06:01:28+00:00",
+      "event": "gpu_launch",
+      "message": "sbatch_job_id=101276 slurm_job=mcts-bce-label-analysis"
+    }
+  ],
+  "created_at": "2026-08-16T05:43:08+00:00",
+  "started_at": "2026-08-16T05:43:08+00:00",
+  "updated_at": "2026-08-16T06:01:28+00:00"
+}

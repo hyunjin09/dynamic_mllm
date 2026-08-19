@@ -1,0 +1,24 @@
+{
+  "exp_id": "v3_null_redesign_c_rank1024_v1",
+  "status": "running",
+  "owner_agent": "code_agent",
+  "current_step": "Running GPU job v3_null_redesign_c_rank_20260807",
+  "tmux_session": "",
+  "slurm_job_name": "v3n_crank",
+  "slurm_job_id": "98964",
+  "gpu_type": "A6000",
+  "node": "node03",
+  "log_path": "runs/v3_null_redesign_c_rank_20260807/slurm.log",
+  "result_path": "outputs/v3_null_redesign/covariance_representation_c_rank_extension.json",
+  "display_summary": "GPU job v3_null_redesign_c_rank_20260807 is running for v3_null_redesign_c_rank1024_v1.",
+  "history": [
+    {
+      "time": "2026-08-07T01:10:02+00:00",
+      "event": "gpu_launch",
+      "message": "sbatch_job_id=98964 slurm_job=v3n_crank"
+    }
+  ],
+  "created_at": "2026-08-07T01:10:02+00:00",
+  "started_at": "2026-08-07T01:10:02+00:00",
+  "updated_at": "2026-08-07T01:10:02+00:00"
+}

@@ -1,0 +1,40 @@
+stage: query_conditioned_visual_refinement_gqa_discovery
+status: authorized
+model_config: configs/model.yaml
+manifest: outputs/query_refinement/gqa_discovery_manifest_v1.jsonl
+manifest_checksum: outputs/query_refinement/gqa_discovery_manifest_v1.sha256
+manifest_audit: outputs/query_refinement/gqa_discovery_manifest_audit_v1.json
+preflight_output_dir: outputs/query_refinement/preflight_v1
+shard_output_dir: outputs/query_refinement/shards_v1
+merged_jsonl: outputs/query_refinement/query_refinement_results_v1.jsonl
+q_parquet: outputs/query_refinement/query_refinement_q_v1.parquet
+contrasts_csv: outputs/query_refinement/conditioning_contrasts_v1.csv
+analysis_manifest: outputs/query_refinement/analysis_manifest.json
+seed: 2026080718
+bootstrap_seed: 2026080719
+bootstrap_replicates: 10000
+dataset: gqa
+image_count: 100
+questions_per_image: 2
+sample_count: 200
+refinement_layers: [4, 12, 20]
+variants: [BASELINE, UNCONDITIONED_REPLAY, TARGET_QUERY_REPLAY, OTHER_QUERY_REPLAY]
+preflight_image_count: 12
+validated_prompt_token_max: 4861
+score_tolerance: 0.00001
+logit_tolerance: 0.0001
+visual_identity_tolerance: 0.0
+replay_reconstruction_tolerance: 0.0
+deterministic_score_tolerance: 0.00001
+activation_rms_ratio_min: 0.5
+activation_rms_ratio_max: 2.0
+activation_cosine_min: 0.5
+replay_delta_to_native_write_rms_max: 4.0
+practical_effect_threshold_mean: 0.05
+positive_fraction_min: 0.55
+minimum_successful_layers: 2
+shard_count: 4
+max_new_tokens: 32
+scope_note: >-
+  Output-boundary native frozen replay over every existing visual row; only
+  literal-question access/content differs across equal-compute replay variants.

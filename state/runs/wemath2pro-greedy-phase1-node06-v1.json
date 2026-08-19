@@ -1,0 +1,24 @@
+{
+  "exp_id": "wemath2pro-greedy-phase1-node06-v1",
+  "status": "running",
+  "owner_agent": "code_agent",
+  "current_step": "Running GPU job wemath-greedy-phase1-node06-v1",
+  "tmux_session": "",
+  "slurm_job_name": "wemath_greedy_p1_n06",
+  "slurm_job_id": "101708",
+  "gpu_type": "A6000",
+  "node": "node06",
+  "log_path": "runs/wemath_greedy_recovery/phase1_node06.log",
+  "result_path": "outputs/label_regeneration/wemath2pro_greedy_recovery_v1/phase1/shard_000_of_004/summary.json",
+  "display_summary": "GPU job wemath-greedy-phase1-node06-v1 is running for wemath2pro-greedy-phase1-node06-v1.",
+  "history": [
+    {
+      "time": "2026-08-18T03:35:28+00:00",
+      "event": "gpu_launch",
+      "message": "sbatch_job_id=101708 slurm_job=wemath_greedy_p1_n06"
+    }
+  ],
+  "created_at": "2026-08-18T03:35:28+00:00",
+  "started_at": "2026-08-18T03:35:28+00:00",
+  "updated_at": "2026-08-18T03:35:28+00:00"
+}

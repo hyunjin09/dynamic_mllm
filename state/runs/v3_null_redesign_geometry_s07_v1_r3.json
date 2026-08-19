@@ -1,0 +1,24 @@
+{
+  "exp_id": "v3_null_redesign_geometry_s07_v1_r3",
+  "status": "running",
+  "owner_agent": "code_agent",
+  "current_step": "Running GPU job v3_null_redesign_geom_s07_r3_20260807",
+  "tmux_session": "",
+  "slurm_job_name": "v3nt_07",
+  "slurm_job_id": "98927",
+  "gpu_type": "A6000",
+  "node": "node02",
+  "log_path": "runs/v3_null_redesign_geometry_r3_20260807/shard_07.log",
+  "result_path": "artifacts/v3_null_redesign/read_write_geometry_v2/shards/shard_07/shard_manifest.json",
+  "display_summary": "GPU job v3_null_redesign_geom_s07_r3_20260807 is running for v3_null_redesign_geometry_s07_v1_r3.",
+  "history": [
+    {
+      "time": "2026-08-07T00:26:48+00:00",
+      "event": "gpu_launch",
+      "message": "sbatch_job_id=98927 slurm_job=v3nt_07"
+    }
+  ],
+  "created_at": "2026-08-07T00:26:48+00:00",
+  "started_at": "2026-08-07T00:26:48+00:00",
+  "updated_at": "2026-08-07T00:26:48+00:00"
+}

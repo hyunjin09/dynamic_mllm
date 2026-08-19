@@ -1,0 +1,24 @@
+{
+  "exp_id": "bp_external_freeze_contract_v1",
+  "status": "running",
+  "owner_agent": "code_agent",
+  "current_step": "Running GPU job bp_external_freeze_contract_v1",
+  "tmux_session": "",
+  "slurm_job_name": "bp_ext_contract",
+  "slurm_job_id": "100781",
+  "gpu_type": "A4000",
+  "node": "node05",
+  "log_path": "runs/binary_polar/external_eval/freeze_contract_%j.log",
+  "result_path": "outputs/binary_polar/external_eval/full10_best_v1/evaluation_contract_v1.json",
+  "display_summary": "GPU job bp_external_freeze_contract_v1 is running for bp_external_freeze_contract_v1.",
+  "history": [
+    {
+      "time": "2026-08-13T09:08:28+00:00",
+      "event": "gpu_launch",
+      "message": "sbatch_job_id=100781 slurm_job=bp_ext_contract"
+    }
+  ],
+  "created_at": "2026-08-13T09:08:28+00:00",
+  "started_at": "2026-08-13T09:08:28+00:00",
+  "updated_at": "2026-08-13T09:08:28+00:00"
+}

@@ -1,0 +1,29 @@
+{
+  "exp_id": "binary_polar_p10_smoke_exact_set_nll_v1",
+  "status": "running",
+  "owner_agent": "root",
+  "current_step": "Running GPU job binary_polar_p10_smoke_exact_set_nll_r2_20260813",
+  "tmux_session": "",
+  "slurm_job_name": "bp10_smoke_setnll",
+  "slurm_job_id": "100411",
+  "gpu_type": "A6000",
+  "node": "node03",
+  "log_path": "runs/binary_polar/p10_smoke_exact_set_nll_r2_v1.log",
+  "result_path": "outputs/binary_polar/p10_smoke/exact_set_nll_execution_v1.json",
+  "display_summary": "GPU job binary_polar_p10_smoke_exact_set_nll_r2_20260813 is running for binary_polar_p10_smoke_exact_set_nll_v1.",
+  "history": [
+    {
+      "time": "2026-08-12T15:27:42+00:00",
+      "event": "gpu_launch",
+      "message": "sbatch_job_id=100409 slurm_job=bp10_smoke_setnll"
+    },
+    {
+      "time": "2026-08-12T15:29:20+00:00",
+      "event": "gpu_launch",
+      "message": "sbatch_job_id=100411 slurm_job=bp10_smoke_setnll"
+    }
+  ],
+  "created_at": "2026-08-12T15:27:42+00:00",
+  "started_at": "2026-08-12T15:27:42+00:00",
+  "updated_at": "2026-08-12T15:29:20+00:00"
+}

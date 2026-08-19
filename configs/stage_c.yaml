@@ -1,0 +1,90 @@
+stage: C
+status: frozen_full_sweep
+source_plan: plans/dynamic_mllm_read_write_causal_analysis_plan_v2.md
+source_plan_sha256: d476736dde6d5d7d44ab3e18794ebc3c4e988d703829657271bc285ecd5171d1
+frozen_amendment: workspace/stage_c_reference_likelihood_proposal.md
+frozen_amendment_sha256: dbe3c84c6dc85a476fed71ab571497f9da2f2f65f368b4f5033073bfd395716a
+entry_gate_report: reports/stage_c_entry_gate_report.md
+entry_gate_report_sha256: a66c9f9e3c849910d5c5ac4d7a2db041c374010ff72b978dd8e56dc98f668421
+scoring_spec: workspace/stage_c_scoring_spec.md
+scoring_spec_sha256: 809febab269c8ff44f6e9187a14a551683159f8daeda6638fd3185cf4e888088
+structured_null_spec: workspace/stage_c_structured_null_spec.md
+structured_null_spec_sha256: 9f077f5a838702d5067a37bb80112113e19bd80ca1083057bf2381bce6fb510b
+prefix_tokenization_amendment: workspace/stage_c_prefix_contextual_tokenization_amendment_v1.md
+prefix_tokenization_amendment_sha256: c4e30ef900f2312ae628123ae73256279299bbe3be4dd8fb03f4f40a22300d66
+real_residual_caliper_amendment: workspace/stage_c_real_residual_caliper_amendment_v1.md
+real_residual_caliper_amendment_sha256: a75830cb5cdb5f68e5708496606c200e3c4da84edfbf11483d13e1d86bd1cd35
+donor_coverage_audit: outputs/stage_c/preflight/stage_c_donor_coverage_audit_v1.json
+donor_coverage_audit_sha256: fe8dac6d00ac42bb185e6025fc4aac8372e96fe1fcf8dfb528307546ceda5994
+model_config: configs/model.yaml
+model_config_sha256: 86dfcf82e1d54ae3680e65dfc941b91f02e926dc91714f04e30a8c5d650eac74
+scoring_implementation: scoring/reference_likelihood.py
+scoring_implementation_sha256: 654860d1874d226369b7bffa50802ff83a8d0da211d12fbc67a586f3c3d0976e
+normalization_implementation: scoring/benchmark_metrics.py
+normalization_implementation_sha256: bab93464c86e3ee485d32ef0e943f8d5b55b6160365ed9cfa570d0ac29d86975
+contextual_scoring_implementation: scoring/contextual_reference_likelihood.py
+contextual_scoring_implementation_sha256: a83df7abdc677c2be62a02d140356487814ab9887d7ab657599d0ac986a356cb
+dataset_id: lmms-lab/textvqa
+dataset_revision: 9c0699cd19768ac5ab97568f6b3cbac4c0062884
+dataset_split: validation
+dataset_cache: /data/dataset/huggingface/datasets
+manifest_path: outputs/stage_c/manifest/stage_c_manifest_v1.jsonl
+manifest_sha256: e3e9e08329fa626bc75706fba6623357f9ca05140bae1f138c98b9cd26e45357
+sample_count: 800
+require_unique_images: true
+primary_layer: 0
+primary_contrast: FULL_MINUS_WRITE_ONLY
+primary_score: accepted_reference_per_token_mean_log_likelihood
+secondary_sequence_score: accepted_reference_sequence_log_likelihood
+validated_prompt_token_max: 4861
+max_new_tokens: 32
+strict_correctness_threshold: 1.0
+full_parity_logit_tolerance: 0.0001
+full_parity_score_tolerance: 0.00001
+answer_prefix_robustness_literal: "Answer: "
+answer_prefix_prompt_suffix: "Answer:"
+answer_prefix_target_prefix: " "
+answer_prefix_subset: all_800_frozen_records
+accepted_answer_aggregation_robustness: uniform_unique_normalized_answers
+sequence_epsilon: 0.00001
+mean_epsilon: 0.000001
+chat_template_sha256: a0bc6f6fc7a29a80017a433e8f03a1cc1236e838a944a2d034295a60c4f2fddb
+transformers_version: 4.51.3
+practical_threshold_nats_per_token: -0.05
+quantiles: [0.01, 0.05, 0.10, 0.25, 0.50, 0.75, 0.90, 0.95, 0.99]
+trim_fractions: [0.05, 0.20]
+bootstrap:
+  draws: 10000
+  confidence: 0.95
+  primary_seed: 2026080531
+  covariance_seed: 2026080532
+  real_residual_seed: 2026080533
+nulls:
+  covariance_parameters: outputs/stage_c/nulls/covariance_subspace_parameters_v1.pt
+  covariance_parameters_sha256: 0006a2332498860b5265a71de3bc5a4c29ecf07794e4959f2143ec008969d743
+  calibration_residuals: outputs/stage_c/nulls/stage_b_read_residuals_v1.pt
+  calibration_residuals_sha256: 0d0fc1bb9c5d3cbb048f2e684b1e87c0bd29222ac8165364d9f74a6a0385e889
+  donor_index: outputs/stage_c/nulls/real_residual_donor_index_v1.jsonl
+  donor_index_sha256: 88ba16adaacd747edacf235707768355853e3833e99521320b46dd6fbf047f25
+  real_donor_match_index: outputs/stage_c/nulls/stage_c_real_residual_match_index_v2.jsonl
+  real_donor_match_index_sha256: bafa4e61c67c55c661956267402971071201ce2cf17551a99d2d687ec358f605
+  real_donor_match_index_summary: outputs/stage_c/nulls/stage_c_real_residual_match_index_v2.summary.json
+  real_donor_match_index_summary_sha256: d97351df9f43b9f3f29f23460eefe767dadb2af5a8ec44d9dc285c973076d322
+  deterministic_seeds: outputs/stage_c/nulls/deterministic_null_seeds_v1.jsonl
+  deterministic_seeds_sha256: 6b9a5cb676aac187be06b03daa9e5c32e30c5a6adc7972a8a1d10374c76addd8
+  rank: 66
+  grid_rows: 32
+  variance_target: 0.90
+  eigen_shrinkage: 0.05
+  draws_per_family: 8
+  real_donor_original_caliper: 1.5
+  real_donor_matching_ratio_cap: 1.5833333333333333
+output:
+  shard_dir: outputs/stage_c/shards_v2
+  results_path: outputs/stage_c/stage_c_results_v1.jsonl
+  runtime_path: outputs/stage_c/stage_c_runtime_v1.json
+  execution_freeze_path: outputs/stage_c/stage_c_execution_freeze_v2.json
+  prefix_static_preflight_path: outputs/stage_c/prefix_preflight_v1/static_preflight.json
+  prefix_preflight_shard_dir: outputs/stage_c/prefix_preflight_v1/shards
+  prefix_preflight_summary_path: outputs/stage_c/prefix_preflight_v1/summary.json
+  analysis_dir: outputs/stage_c/analysis_v1

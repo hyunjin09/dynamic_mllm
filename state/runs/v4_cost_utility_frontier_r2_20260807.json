@@ -1,0 +1,24 @@
+{
+  "exp_id": "v4_cost_utility_frontier_r2_20260807",
+  "status": "running",
+  "owner_agent": "code_agent",
+  "current_step": "Running GPU job v4_cost_utility_frontier_r2_20260807",
+  "tmux_session": "",
+  "slurm_job_name": "v4_cost_utility_frontier_r2_20260807_a4000",
+  "slurm_job_id": "99129",
+  "gpu_type": "A4000",
+  "node": "node05",
+  "log_path": "runs/v4_cost_utility_frontier_r2_20260807/slurm.log",
+  "result_path": "outputs/v4_discovery/cost_utility_frontier_summary_v1.json",
+  "display_summary": "GPU job v4_cost_utility_frontier_r2_20260807 is running for v4_cost_utility_frontier_r2_20260807.",
+  "history": [
+    {
+      "time": "2026-08-07T09:02:51+00:00",
+      "event": "gpu_launch",
+      "message": "sbatch_job_id=99129 slurm_job=v4_cost_utility_frontier_r2_20260807_a4000"
+    }
+  ],
+  "created_at": "2026-08-07T09:02:51+00:00",
+  "started_at": "2026-08-07T09:02:51+00:00",
+  "updated_at": "2026-08-07T09:02:51+00:00"
+}

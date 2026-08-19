@@ -1,0 +1,5 @@
+# Install the CUDA-compatible PyTorch 2.9.1 wheel separately.
+accelerate==1.11.0
+pillow==12.0.0
+qwen-vl-utils==0.0.14
+transformers==4.57.1

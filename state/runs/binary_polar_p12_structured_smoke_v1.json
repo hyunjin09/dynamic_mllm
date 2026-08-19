@@ -1,0 +1,24 @@
+{
+  "exp_id": "binary_polar_p12_structured_smoke_v1",
+  "status": "running",
+  "owner_agent": "root",
+  "current_step": "Running GPU job binary_polar_p12_structured_smoke_20260813",
+  "tmux_session": "",
+  "slurm_job_name": "p12_struct_smoke",
+  "slurm_job_id": "100544",
+  "gpu_type": "A6000",
+  "node": "node03",
+  "log_path": "runs/binary_polar/p12/structured_smoke_%j.log",
+  "result_path": "outputs/binary_polar/p12/structured_exact_set_v1/best_checkpoint.json",
+  "display_summary": "GPU job binary_polar_p12_structured_smoke_20260813 is running for binary_polar_p12_structured_smoke_v1.",
+  "history": [
+    {
+      "time": "2026-08-13T03:34:58+00:00",
+      "event": "gpu_launch",
+      "message": "sbatch_job_id=100544 slurm_job=p12_struct_smoke"
+    }
+  ],
+  "created_at": "2026-08-13T03:34:58+00:00",
+  "started_at": "2026-08-13T03:34:58+00:00",
+  "updated_at": "2026-08-13T03:34:58+00:00"
+}

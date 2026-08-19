@@ -1,0 +1,24 @@
+{
+  "exp_id": "binary_polar_full10_question_v1",
+  "status": "running",
+  "owner_agent": "root",
+  "current_step": "Running GPU job binary_polar_full10_question_20260813",
+  "tmux_session": "",
+  "slurm_job_name": "full10_question",
+  "slurm_job_id": "100757",
+  "gpu_type": "A6000",
+  "node": "node03",
+  "log_path": "runs/binary_polar/full10_question_%j.log",
+  "result_path": "outputs/binary_polar/full10/question_v1/training_summary.json",
+  "display_summary": "GPU job binary_polar_full10_question_20260813 is running for binary_polar_full10_question_v1.",
+  "history": [
+    {
+      "time": "2026-08-13T08:10:54+00:00",
+      "event": "gpu_launch",
+      "message": "sbatch_job_id=100757 slurm_job=full10_question"
+    }
+  ],
+  "created_at": "2026-08-13T08:10:54+00:00",
+  "started_at": "2026-08-13T08:10:54+00:00",
+  "updated_at": "2026-08-13T08:10:54+00:00"
+}

@@ -1,0 +1,59 @@
+{
+  "exp_id": "stage_c_donor_coverage_audit_v1_20260805",
+  "status": "running",
+  "owner_agent": "code_agent",
+  "current_step": "Running GPU job stage_c_donor_audit_s07_20260805",
+  "tmux_session": "",
+  "slurm_job_name": "donor-audit-07",
+  "slurm_job_id": "98428",
+  "gpu_type": "A6000",
+  "node": "node03",
+  "log_path": "runs/stage_c_donor_coverage_audit_v1_20260805/shard_07/slurm.log",
+  "result_path": "outputs/stage_c/preflight/donor_coverage_v1/shards/shard_07/geometry.jsonl",
+  "display_summary": "GPU job stage_c_donor_audit_s07_20260805 is running for stage_c_donor_coverage_audit_v1_20260805.",
+  "history": [
+    {
+      "time": "2026-08-05T06:42:55+00:00",
+      "event": "gpu_launch",
+      "message": "sbatch_job_id=98421 slurm_job=donor-audit-00"
+    },
+    {
+      "time": "2026-08-05T06:42:55+00:00",
+      "event": "gpu_launch",
+      "message": "sbatch_job_id=98422 slurm_job=donor-audit-01"
+    },
+    {
+      "time": "2026-08-05T06:42:55+00:00",
+      "event": "gpu_launch",
+      "message": "sbatch_job_id=98423 slurm_job=donor-audit-02"
+    },
+    {
+      "time": "2026-08-05T06:42:55+00:00",
+      "event": "gpu_launch",
+      "message": "sbatch_job_id=98424 slurm_job=donor-audit-03"
+    },
+    {
+      "time": "2026-08-05T06:42:55+00:00",
+      "event": "gpu_launch",
+      "message": "sbatch_job_id=98425 slurm_job=donor-audit-04"
+    },
+    {
+      "time": "2026-08-05T06:42:55+00:00",
+      "event": "gpu_launch",
+      "message": "sbatch_job_id=98426 slurm_job=donor-audit-05"
+    },
+    {
+      "time": "2026-08-05T06:42:55+00:00",
+      "event": "gpu_launch",
+      "message": "sbatch_job_id=98427 slurm_job=donor-audit-06"
+    },
+    {
+      "time": "2026-08-05T06:42:55+00:00",
+      "event": "gpu_launch",
+      "message": "sbatch_job_id=98428 slurm_job=donor-audit-07"
+    }
+  ],
+  "created_at": "2026-08-05T06:42:55+00:00",
+  "started_at": "2026-08-05T06:42:55+00:00",
+  "updated_at": "2026-08-05T06:42:55+00:00"
+}

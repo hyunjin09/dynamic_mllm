@@ -1,0 +1,29 @@
+{
+  "exp_id": "stage_b_c_archive_outcome_b_20260805",
+  "status": "running",
+  "owner_agent": "code_agent",
+  "current_step": "Running GPU job stage_b_c_archive_outcome_b_retry_20260805",
+  "tmux_session": "",
+  "slurm_job_name": "stage-bc-archive",
+  "slurm_job_id": "98522",
+  "gpu_type": "A4000",
+  "node": "node05",
+  "log_path": "runs/stage_b_c_archive_outcome_b_retry_20260805/slurm.log",
+  "result_path": "archives/stage_b_stage_c_frozen_outcome_b_v1/archive_summary_v1.json",
+  "display_summary": "GPU job stage_b_c_archive_outcome_b_retry_20260805 is running for stage_b_c_archive_outcome_b_20260805.",
+  "history": [
+    {
+      "time": "2026-08-05T08:29:13+00:00",
+      "event": "gpu_launch",
+      "message": "sbatch_job_id=98521 slurm_job=stage-bc-archive"
+    },
+    {
+      "time": "2026-08-05T08:31:01+00:00",
+      "event": "gpu_launch",
+      "message": "sbatch_job_id=98522 slurm_job=stage-bc-archive"
+    }
+  ],
+  "created_at": "2026-08-05T08:29:13+00:00",
+  "started_at": "2026-08-05T08:29:13+00:00",
+  "updated_at": "2026-08-05T08:31:01+00:00"
+}

@@ -1,0 +1,24 @@
+{
+  "exp_id": "wemath20_mathruler_env_v1",
+  "status": "running",
+  "owner_agent": "code_agent",
+  "current_step": "Running GPU job wemath20_mathruler_env_20260811",
+  "tmux_session": "",
+  "slurm_job_name": "wemath20_mathruler_env",
+  "slurm_job_id": "99832",
+  "gpu_type": "A4000",
+  "node": "node05",
+  "log_path": "runs/env/wemath20_mathruler_env_v1.log",
+  "result_path": "workspace/env_state.md",
+  "display_summary": "GPU job wemath20_mathruler_env_20260811 is running for wemath20_mathruler_env_v1.",
+  "history": [
+    {
+      "time": "2026-08-10T15:17:56+00:00",
+      "event": "gpu_launch",
+      "message": "sbatch_job_id=99832 slurm_job=wemath20_mathruler_env"
+    }
+  ],
+  "created_at": "2026-08-10T15:17:56+00:00",
+  "started_at": "2026-08-10T15:17:56+00:00",
+  "updated_at": "2026-08-10T15:17:56+00:00"
+}

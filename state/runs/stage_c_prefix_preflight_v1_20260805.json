@@ -1,0 +1,24 @@
+{
+  "exp_id": "stage_c_prefix_preflight_v1_20260805",
+  "status": "running",
+  "owner_agent": "code_agent",
+  "current_step": "Running GPU job stage_c_prefix_preflight_merge_20260805",
+  "tmux_session": "",
+  "slurm_job_name": "c_prefix_pf_merge",
+  "slurm_job_id": "98397",
+  "gpu_type": "A4000",
+  "node": "node05",
+  "log_path": "runs/stage_c_prefix_preflight_merge_20260805/slurm-%j.out",
+  "result_path": "outputs/stage_c/prefix_preflight_v1/summary.json",
+  "display_summary": "GPU job stage_c_prefix_preflight_merge_20260805 is running for stage_c_prefix_preflight_v1_20260805.",
+  "history": [
+    {
+      "time": "2026-08-05T06:16:19+00:00",
+      "event": "gpu_launch",
+      "message": "sbatch_job_id=98397 slurm_job=c_prefix_pf_merge"
+    }
+  ],
+  "created_at": "2026-08-05T06:16:19+00:00",
+  "started_at": "2026-08-05T06:16:19+00:00",
+  "updated_at": "2026-08-05T06:16:19+00:00"
+}

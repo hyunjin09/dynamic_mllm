@@ -1,0 +1,29 @@
+{
+  "exp_id": "query_refinement_manifest_v1",
+  "status": "running",
+  "owner_agent": "root",
+  "current_step": "Running GPU job query_refinement_manifest_audit_fix_20260807",
+  "tmux_session": "",
+  "slurm_job_name": "query_refinement_manifest_audit_fix_20260807_a4000",
+  "slurm_job_id": "99173",
+  "gpu_type": "A4000",
+  "node": "node05",
+  "log_path": "runs/query_refinement_manifest_v1/audit_fix.log",
+  "result_path": "outputs/query_refinement/gqa_discovery_manifest_audit_v1.json",
+  "display_summary": "GPU job query_refinement_manifest_audit_fix_20260807 is running for query_refinement_manifest_v1.",
+  "history": [
+    {
+      "time": "2026-08-07T10:27:59+00:00",
+      "event": "gpu_launch",
+      "message": "sbatch_job_id=99169 slurm_job=query_refinement_manifest_a4000_20260807_a4000"
+    },
+    {
+      "time": "2026-08-07T10:33:51+00:00",
+      "event": "gpu_launch",
+      "message": "sbatch_job_id=99173 slurm_job=query_refinement_manifest_audit_fix_20260807_a4000"
+    }
+  ],
+  "created_at": "2026-08-07T10:27:59+00:00",
+  "started_at": "2026-08-07T10:27:59+00:00",
+  "updated_at": "2026-08-07T10:33:51+00:00"
+}

@@ -1,0 +1,61 @@
+# Project-local Python environment and caches
+.venv/
+.uv-cache/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+**/__pycache__/
+*.py[cod]
+
+# Local secrets and machine-specific environment files
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+
+# External datasets and labels (transferred separately)
+/datasets
+
+# Generated scientific artifacts, checkpoints, and execution logs
+/artifacts/
+/archives/
+/outputs/
+/runs/
+/state/gpu_experiment_queue.json
+/workspace/setup_backups/
+/search/greedy_phase1_phase2_reproduction/manifests/*.current_server.jsonl
+*.log
+slurm-*.out
+*.safetensors
+*.ckpt
+*.pt
+*.pth
+*.onnx
+*.tar
+*.tar.gz
+*.zip
+
+# Large payloads inside the portable evaluation bundle. Keep its code,
+# protocols, environment specifications, and checksums in Git.
+/eval/reference/shared_prefix_eval_20260812/model/
+/eval/reference/shared_prefix_eval_20260812/data/
+/eval/reference/shared_prefix_eval_20260812/checkpoints/
+/eval/reference/shared_prefix_eval_20260812/results/
+/eval/reference/shared_prefix_eval_20260812/baseline/
+/eval/reference/shared_prefix_eval_20260812/state/
+
+# Local scratch and tool state
+/.empty/
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
+.coverage
+htmlcov/
+wandb/

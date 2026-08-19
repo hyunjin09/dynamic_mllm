@@ -1,0 +1,24 @@
+{
+  "exp_id": "v3_null_redesign_donor_audit_v1",
+  "status": "running",
+  "owner_agent": "code_agent",
+  "current_step": "Running GPU job v3_null_redesign_donors_20260807",
+  "tmux_session": "",
+  "slurm_job_name": "v3n_donor",
+  "slurm_job_id": "98959",
+  "gpu_type": "A4000",
+  "node": "node05",
+  "log_path": "runs/v3_null_redesign_donors_20260807/slurm.log",
+  "result_path": "outputs/v3_null_redesign/donor_coverage.json",
+  "display_summary": "GPU job v3_null_redesign_donors_20260807 is running for v3_null_redesign_donor_audit_v1.",
+  "history": [
+    {
+      "time": "2026-08-07T00:46:31+00:00",
+      "event": "gpu_launch",
+      "message": "sbatch_job_id=98959 slurm_job=v3n_donor"
+    }
+  ],
+  "created_at": "2026-08-07T00:46:31+00:00",
+  "started_at": "2026-08-07T00:46:31+00:00",
+  "updated_at": "2026-08-07T00:46:31+00:00"
+}

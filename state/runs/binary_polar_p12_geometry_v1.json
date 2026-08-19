@@ -1,0 +1,29 @@
+{
+  "exp_id": "binary_polar_p12_geometry_v1",
+  "status": "running",
+  "owner_agent": "root",
+  "current_step": "Running GPU job binary_polar_p12_geometry_r2_20260813",
+  "tmux_session": "",
+  "slurm_job_name": "bp12_geometry",
+  "slurm_job_id": "100510",
+  "gpu_type": "A6000",
+  "node": "node03",
+  "log_path": "runs/binary_polar/p12_geometry_r2_v1.log",
+  "result_path": "outputs/binary_polar/p12/segment_geometry_v1.json",
+  "display_summary": "GPU job binary_polar_p12_geometry_r2_20260813 is running for binary_polar_p12_geometry_v1.",
+  "history": [
+    {
+      "time": "2026-08-13T03:22:17+00:00",
+      "event": "gpu_launch",
+      "message": "sbatch_job_id=100509 slurm_job=bp12_geometry"
+    },
+    {
+      "time": "2026-08-13T03:23:46+00:00",
+      "event": "gpu_launch",
+      "message": "sbatch_job_id=100510 slurm_job=bp12_geometry"
+    }
+  ],
+  "created_at": "2026-08-13T03:22:17+00:00",
+  "started_at": "2026-08-13T03:22:17+00:00",
+  "updated_at": "2026-08-13T03:23:46+00:00"
+}

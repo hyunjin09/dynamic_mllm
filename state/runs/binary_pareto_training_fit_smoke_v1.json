@@ -1,0 +1,24 @@
+{
+  "exp_id": "binary_pareto_training_fit_smoke_v1",
+  "status": "running",
+  "owner_agent": "root",
+  "current_step": "Running GPU job binary_pareto_training_fit_smoke_v1",
+  "tmux_session": "",
+  "slurm_job_name": "pareto_fit_smoke",
+  "slurm_job_id": "101688",
+  "gpu_type": "A4000",
+  "node": "node05",
+  "log_path": "runs/binary_pareto_v1/training_fit_analysis_v1/smoke_bce.log",
+  "result_path": "outputs/binary_pareto_v1/training_fit_analysis_v1/smoke_bce_epoch1.json",
+  "display_summary": "GPU job binary_pareto_training_fit_smoke_v1 is running for binary_pareto_training_fit_smoke_v1.",
+  "history": [
+    {
+      "time": "2026-08-18T02:19:36+00:00",
+      "event": "gpu_launch",
+      "message": "sbatch_job_id=101688 slurm_job=pareto_fit_smoke"
+    }
+  ],
+  "created_at": "2026-08-18T02:19:36+00:00",
+  "started_at": "2026-08-18T02:19:36+00:00",
+  "updated_at": "2026-08-18T02:19:36+00:00"
+}

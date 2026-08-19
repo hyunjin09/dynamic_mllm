@@ -1,0 +1,52 @@
+{
+  "dataset_version": "10k_mask_candidates_v1",
+  "source_manifest": "10k_dataset/complete_wrong_correct_manifest_10000.jsonl",
+  "split": {
+    "group_key": "image_content_sha256",
+    "method": "deterministic_group_hash",
+    "seed": 20260714,
+    "validation_fraction": 0.1
+  },
+  "generation": {
+    "attention_implementation": "sdpa",
+    "dtype": "bfloat16",
+    "generation_policy": "current_qwen_default_greedy",
+    "max_new_tokens": {
+      "chartqa": 16,
+      "docvqa": 32,
+      "gqa": 16,
+      "textvqa": 16
+    },
+    "image_size_policy": "per_source_row_manifest; curated DocVQA=1024, 2026-07 full-train DocVQA=2048, other benchmarks=native"
+  },
+  "search": {
+    "seed_route": "all_visual_on",
+    "target_policy": "current_binary_all_on_score",
+    "score_tolerance": 1e-09,
+    "orders": [
+      "early_to_late",
+      "late_to_early",
+      "center_out",
+      "outside_in",
+      "random:20260714",
+      "random:20260715",
+      "random:20260716",
+      "random:20260717",
+      "random:20260718",
+      "random:20260719"
+    ]
+  },
+  "phase_2": {
+    "status": "complete_integrity_audit_passed",
+    "canonical_raw_output": "10k_dataset_mask/raw/phase2_node06",
+    "canonical_final_output": "10k_dataset_mask/final_phase1_phase2",
+    "candidate_families": [
+      "budget_stratified_random",
+      "same_budget_swap",
+      "add_one",
+      "remove_one",
+      "success_union",
+      "success_intersection"
+    ]
+  }
+}

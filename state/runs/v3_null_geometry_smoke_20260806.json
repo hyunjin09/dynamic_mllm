@@ -1,0 +1,24 @@
+{
+  "exp_id": "v3_null_geometry_smoke_20260806",
+  "status": "running",
+  "owner_agent": "code_agent",
+  "current_step": "Running GPU job v3_null_geometry_smoke_20260806",
+  "tmux_session": "",
+  "slurm_job_name": "v3_null_geometry_smoke_20260806_gpu",
+  "slurm_job_id": "98774",
+  "gpu_type": "A6000",
+  "node": "node02",
+  "log_path": "runs/v3_null_geometry_smoke_20260806/slurm.log",
+  "result_path": "outputs/v3_preflight/null_geometry_smoke_v1/shards/shard_00/shard_manifest.json",
+  "display_summary": "GPU job v3_null_geometry_smoke_20260806 is running for v3_null_geometry_smoke_20260806.",
+  "history": [
+    {
+      "time": "2026-08-06T14:33:50+00:00",
+      "event": "gpu_launch",
+      "message": "sbatch_job_id=98774 slurm_job=v3_null_geometry_smoke_20260806_gpu"
+    }
+  ],
+  "created_at": "2026-08-06T14:33:50+00:00",
+  "started_at": "2026-08-06T14:33:50+00:00",
+  "updated_at": "2026-08-06T14:33:50+00:00"
+}

@@ -1,0 +1,11 @@
+torch==2.6.0
+torchvision==0.21.0
+transformers==5.3.0
+accelerate==1.6.0
+pillow==11.1.0
+PyYAML==6.0.2
+datasets==4.0.0
+mathruler==0.1.0
+pylatexenc==2.10
+qwen-vl-utils==0.0.14
+av==17.0.1

@@ -1,0 +1,29 @@
+{
+  "exp_id": "binary_polar_p13_readiness_v2",
+  "status": "running",
+  "owner_agent": "root",
+  "current_step": "Running GPU job binary_polar_p13_freeze_readiness_r3_20260813",
+  "tmux_session": "",
+  "slurm_job_name": "p13_ready_r3",
+  "slurm_job_id": "100739",
+  "gpu_type": "A6000",
+  "node": "node03",
+  "log_path": "runs/binary_polar/p13_readiness_v2_r3_%j.log",
+  "result_path": "outputs/binary_polar/preflight/p13_readiness_gate_v2.json",
+  "display_summary": "GPU job binary_polar_p13_freeze_readiness_r3_20260813 is running for binary_polar_p13_readiness_v2.",
+  "history": [
+    {
+      "time": "2026-08-13T07:07:06+00:00",
+      "event": "gpu_launch",
+      "message": "sbatch_job_id=100738 slurm_job=p13_ready_r2"
+    },
+    {
+      "time": "2026-08-13T07:07:33+00:00",
+      "event": "gpu_launch",
+      "message": "sbatch_job_id=100739 slurm_job=p13_ready_r3"
+    }
+  ],
+  "created_at": "2026-08-13T07:07:06+00:00",
+  "started_at": "2026-08-13T07:07:06+00:00",
+  "updated_at": "2026-08-13T07:07:33+00:00"
+}

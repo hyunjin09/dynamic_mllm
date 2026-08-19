@@ -1,0 +1,34 @@
+model_config: configs/model.yaml
+dataset_root: /data/dataset/dynamic_mllm/Qwen2.5VL/easy_hard_5k/complete_correct_wrong_pools_20260713
+output_dir: outputs/stage_a
+sample_count: 24
+samples_per_benchmark_bucket: 3
+resource_exclusions:
+  - sample_id: docvqa:docvqa_train_15c12d5eadbbcc36
+    reason: Stock eager decoder attention exceeds the 48 GiB A6000 budget at 16,314 prompt tokens; SDPA and query-chunked substitutes failed the frozen suffix-logit equivalence gate.
+benchmarks:
+  - gqa
+  - chartqa
+  - docvqa
+  - textvqa
+buckets:
+  - complete_correct
+  - complete_wrong
+primary_layer: 14
+sentinel_layers:
+  - 0
+  - 27
+sentinel_sample_count: 4
+max_new_tokens: 32
+seed: 20260804
+tolerances:
+  no_op_layer_max_abs: 0.0
+  no_op_logit_max_abs: 0.0
+  read_quantization_half_ulp_ratio_max: 1.000001
+  read_reference_activation_rms_ratio: 0.0078125
+  read_reference_logit_rms_ratio: 0.0078125
+  read_reference_option_score_abs: 0.0078125
+  reconstruction_hook_max_abs: 0.00001
+  reconstruction_logit_max_abs: 0.0001
+  repeat_logit_max_abs: 0.0
+  scoring_abs: 0.00001

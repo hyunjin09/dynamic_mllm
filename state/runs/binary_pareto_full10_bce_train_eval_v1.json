@@ -1,0 +1,24 @@
+{
+  "exp_id": "binary_pareto_full10_bce_train_eval_v1",
+  "status": "running",
+  "owner_agent": "root",
+  "current_step": "Running GPU job binary_pareto_full10_bce_train_eval_v1",
+  "tmux_session": "",
+  "slurm_job_name": "pareto_bce",
+  "slurm_job_id": "101489",
+  "gpu_type": "A6000",
+  "node": "node06",
+  "log_path": "runs/binary_pareto_v1/bce/slurm.log",
+  "result_path": "outputs/binary_pareto_v1/bce_pipeline_complete.json",
+  "display_summary": "GPU job binary_pareto_full10_bce_train_eval_v1 is running for binary_pareto_full10_bce_train_eval_v1.",
+  "history": [
+    {
+      "time": "2026-08-17T07:45:47+00:00",
+      "event": "gpu_launch",
+      "message": "sbatch_job_id=101489 slurm_job=pareto_bce"
+    }
+  ],
+  "created_at": "2026-08-17T07:45:47+00:00",
+  "started_at": "2026-08-17T07:45:47+00:00",
+  "updated_at": "2026-08-17T07:45:47+00:00"
+}

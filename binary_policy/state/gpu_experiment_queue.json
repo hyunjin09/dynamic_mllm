@@ -1,0 +1,7 @@
+{
+  "project": "/data/projects/hyunjin/MLLM/dynamic_mllm/binary_policy",
+  "max_user_gpus": 8,
+  "jobs": [],
+  "created_at": "2026-08-18T02:34:08+00:00",
+  "updated_at": "2026-08-18T02:34:08+00:00"
+}

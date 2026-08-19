@@ -1,0 +1,24 @@
+{
+  "exp_id": "stage_c_full_preflight_20260805",
+  "status": "running",
+  "owner_agent": "code_agent",
+  "current_step": "Running GPU job stage_c_full_preflight_20260805",
+  "tmux_session": "",
+  "slurm_job_name": "stage_c_preflight",
+  "slurm_job_id": "98384",
+  "gpu_type": "A4000",
+  "node": "node05",
+  "log_path": "runs/stage_c_full_preflight_20260805/slurm-%j.out",
+  "result_path": "outputs/stage_c/stage_c_execution_freeze_v1.json",
+  "display_summary": "GPU job stage_c_full_preflight_20260805 is running for stage_c_full_preflight_20260805.",
+  "history": [
+    {
+      "time": "2026-08-05T05:51:13+00:00",
+      "event": "gpu_launch",
+      "message": "sbatch_job_id=98384 slurm_job=stage_c_preflight"
+    }
+  ],
+  "created_at": "2026-08-05T05:51:13+00:00",
+  "started_at": "2026-08-05T05:51:13+00:00",
+  "updated_at": "2026-08-05T05:51:13+00:00"
+}

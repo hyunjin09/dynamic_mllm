@@ -1,0 +1,24 @@
+{
+  "exp_id": "stage_b_reference_full_v2_20260804",
+  "status": "running",
+  "owner_agent": "code_agent",
+  "current_step": "Running GPU job stage_b_reference_full_v2_20260804",
+  "tmux_session": "",
+  "slurm_job_name": "stage_b_ref_full_v2_20260804_a6000",
+  "slurm_job_id": "98089",
+  "gpu_type": "A6000",
+  "node": "node07",
+  "log_path": "runs/stage_b_reference_full_v2_20260804/slurm.log",
+  "result_path": "outputs/stage_b/stage_b_results_v1.jsonl",
+  "display_summary": "GPU job stage_b_reference_full_v2_20260804 is running for stage_b_reference_full_v2_20260804.",
+  "history": [
+    {
+      "time": "2026-08-04T12:47:11+00:00",
+      "event": "gpu_launch",
+      "message": "sbatch_job_id=98089 slurm_job=stage_b_ref_full_v2_20260804_a6000"
+    }
+  ],
+  "created_at": "2026-08-04T12:47:11+00:00",
+  "started_at": "2026-08-04T12:47:11+00:00",
+  "updated_at": "2026-08-04T12:47:11+00:00"
+}

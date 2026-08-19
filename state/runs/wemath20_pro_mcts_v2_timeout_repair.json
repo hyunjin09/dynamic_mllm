@@ -1,0 +1,24 @@
+{
+  "exp_id": "wemath20_pro_mcts_v2_timeout_repair",
+  "status": "running",
+  "owner_agent": "code_agent",
+  "current_step": "Running GPU job wemath20_pro_mcts_6gpu_resume_v2_20260812",
+  "tmux_session": "",
+  "slurm_job_name": "wemath20pro_mcts_r6_v2",
+  "slurm_job_id": "100398",
+  "gpu_type": "A6000",
+  "node": "node06",
+  "log_path": "runs/label_regeneration/wemath2pro_mcts_r5.log",
+  "result_path": "outputs/label_regeneration/wemath2pro_v1/raw_route_cache",
+  "display_summary": "GPU job wemath20_pro_mcts_6gpu_resume_v2_20260812 is running for wemath20_pro_mcts_v2_timeout_repair.",
+  "history": [
+    {
+      "time": "2026-08-12T14:23:04+00:00",
+      "event": "gpu_launch",
+      "message": "sbatch_job_id=100398 slurm_job=wemath20pro_mcts_r6_v2"
+    }
+  ],
+  "created_at": "2026-08-12T14:23:04+00:00",
+  "started_at": "2026-08-12T14:23:04+00:00",
+  "updated_at": "2026-08-12T14:23:04+00:00"
+}

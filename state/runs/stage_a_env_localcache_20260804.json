@@ -1,0 +1,24 @@
+{
+  "exp_id": "stage_a_env_localcache_20260804",
+  "status": "running",
+  "owner_agent": "code_agent",
+  "current_step": "Running GPU job stage_a_env_localcache_20260804",
+  "tmux_session": "",
+  "slurm_job_name": "stage_a_env_localcache_20260804_a4000",
+  "slurm_job_id": "97995",
+  "gpu_type": "A4000",
+  "node": "node05",
+  "log_path": "runs/stage_a_env_localcache_20260804/slurm.log",
+  "result_path": "outputs/stage_a/env_ready.json",
+  "display_summary": "GPU job stage_a_env_localcache_20260804 is running for stage_a_env_localcache_20260804.",
+  "history": [
+    {
+      "time": "2026-08-04T06:06:37+00:00",
+      "event": "gpu_launch",
+      "message": "sbatch_job_id=97995 slurm_job=stage_a_env_localcache_20260804_a4000"
+    }
+  ],
+  "created_at": "2026-08-04T06:06:37+00:00",
+  "started_at": "2026-08-04T06:06:37+00:00",
+  "updated_at": "2026-08-04T06:06:37+00:00"
+}

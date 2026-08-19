@@ -1,0 +1,34 @@
+stage: C
+status: outcome_blind_entry_gate
+source_plan: plans/dynamic_mllm_read_write_causal_analysis_plan_v2.md
+frozen_amendment: workspace/stage_c_reference_likelihood_proposal.md
+model_config: configs/model.yaml
+dataset_id: lmms-lab/textvqa
+dataset_revision: 9c0699cd19768ac5ab97568f6b3cbac4c0062884
+dataset_split: validation
+dataset_cache: /data/dataset/huggingface/datasets
+selected_image_dir: /data/dataset/dynamic_mllm/TextVQA/stage_c_validation_images_v1
+stage_b_manifest: data_manifests/stage_b_discovery_candidates_400.jsonl
+manifest_path: outputs/stage_c/manifest/stage_c_manifest_v1.jsonl
+manifest_sha256_path: outputs/stage_c/manifest/stage_c_manifest_v1.sha256
+audit_json_path: outputs/stage_c/manifest/stage_c_eligibility_overlap_audit_v1.json
+selection_seed: 20260805
+sample_count: 800
+require_unique_images: true
+validated_prompt_token_max: 4861
+prompt_suffix: "Answer the question using a single word or phrase."
+primary_layer: 0
+nulls:
+  calibration_manifest: data_manifests/stage_b_discovery_candidates_400.jsonl
+  calibration_dataset: textvqa
+  grid_rows: 32
+  variance_target: 0.90
+  eigen_shrinkage: 0.05
+  draws_per_family: 8
+  covariance_seed: 2026080511
+  real_donor_seed: 2026080521
+  real_donor_caliper_rule: "maximum Stage-B leave-one-image-out eighth-nearest max-ratio distance"
+  bootstrap_draws: 10000
+  primary_bootstrap_seed: 2026080531
+  covariance_bootstrap_seed: 2026080532
+  real_donor_bootstrap_seed: 2026080533

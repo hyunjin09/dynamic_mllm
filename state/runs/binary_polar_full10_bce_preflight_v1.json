@@ -1,0 +1,24 @@
+{
+  "exp_id": "binary_polar_full10_bce_preflight_v1",
+  "status": "running",
+  "owner_agent": "code_agent",
+  "current_step": "Running GPU job binary_polar_full10_bce_preflight_v1",
+  "tmux_session": "",
+  "slurm_job_name": "binary_polar_full10_bce_preflight_v1_a6000",
+  "slurm_job_id": "101019",
+  "gpu_type": "A6000",
+  "node": "node02",
+  "log_path": "runs/binary_polar_full10_bce_preflight_v1/slurm.log",
+  "result_path": "outputs/binary_polar/full10_bce/preflight_v1.json",
+  "display_summary": "GPU job binary_polar_full10_bce_preflight_v1 is running for binary_polar_full10_bce_preflight_v1.",
+  "history": [
+    {
+      "time": "2026-08-15T00:05:51+00:00",
+      "event": "gpu_launch",
+      "message": "sbatch_job_id=101019 slurm_job=binary_polar_full10_bce_preflight_v1_a6000"
+    }
+  ],
+  "created_at": "2026-08-15T00:05:51+00:00",
+  "started_at": "2026-08-15T00:05:51+00:00",
+  "updated_at": "2026-08-15T00:05:51+00:00"
+}

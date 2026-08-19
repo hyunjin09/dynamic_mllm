@@ -1,0 +1,87 @@
+protocol_version: binary_polar_loss_only_comparison_v2
+
+gates:
+  regenerated_label_cache:
+    path: outputs/label_regeneration/v1/post_generation/cache_audit_v1.json
+    sha256: 0afc2e62a0b20b5821bc847d8be2080d0f9cc9cef3cd94b829ff0e924a353cf2
+  image_group_splits:
+    path: outputs/label_regeneration/v1/post_generation/predictor_split_audit_v1.json
+    sha256: 2f60e4688e7727d5f6d715c255daba4cba4a2f0e10476b390371522c0b1ad84e
+  derived_valid_set:
+    path: outputs/label_regeneration/v1/post_generation/derived_supervision_audit_v1.json
+    sha256: 29ed03efdb548fa19fc6eddccd03612e6f348b8f382ce11237cbeb03f9b54856
+  p9_final_freeze:
+    path: outputs/label_regeneration/v1/post_generation/p9_final_audit_v1.json
+    sha256: d24278687112fafe50d413f8644353ab95b9ebc71df91b5db5c83de8701f8fb1
+  objective_sanity:
+    path: outputs/binary_polar/preflight/loss_comparison_sanity_v1.json
+    sha256: 4efdbd9b5725eacff2e0a85fb062679f19852d9375907839abc28882ae6daa0a
+
+base_model:
+  model_id: Qwen/Qwen2.5-VL-7B-Instruct
+  revision: cc594898137f460bfe9f0759e9844b3ce807cfb5
+  attention_implementation: sdpa
+  precision: bfloat16
+
+policy:
+  action_semantics: layer_local_visual_token_presence
+  num_layers: 28
+  visual_off: compact_text_control_rows_and_bypass_visual_rows
+  visual_on: native_full_sequence_decoder_layer
+  representation: direct_factorized_binary_mask
+
+data:
+  source: outputs/label_regeneration/v1/raw_route_cache
+  manifest: outputs/label_regeneration/v1/post_generation/binary_predictor_manifest_v1.jsonl
+  manifest_sha256: 3620a347a3498d16853463a6f9f8b842fecbab7b442cb869f1fb11bc9ab8aa52
+  max_valid_routes_per_sample: 50
+  route_cap_policy: frozen_diverse_50_polar_matched
+  route_weighting: equal
+  split_policy: image_group_disjoint_exact_7000_1000_plus_expanded_external_evaluation_22307_no_docvqa
+  max_question_tokens: 512
+  no_success_record_policy: evaluation_only
+
+predictor:
+  # Released POLAR is question-only. Adding image features would no longer be
+  # the approved loss-only comparison.
+  input: question_only
+  embedding_model_id: Qwen/Qwen3-Embedding-0.6B
+  embedding_revision: c54f2e6e80b2d7b7de06f51cec4959f6b3e03418
+  embedding_model_path: /home/hyunjin/.cache/huggingface/hub/models--Qwen--Qwen3-Embedding-0.6B/snapshots/c54f2e6e80b2d7b7de06f51cec4959f6b3e03418
+  frozen_embedding_model: true
+  d_model: 256
+  num_heads: 4
+  num_layer_blocks: 2
+  dropout: 0.1
+  head: direct_28_binary_logits
+
+training:
+  seed: 20260809
+  batch_size: 32
+  duplicated_route_microbatch_size: 32
+  learning_rate: 0.0003
+  weight_decay: 0.01
+  scheduler: none
+  epochs: 10
+  num_workers: 4
+  gradient_clip_norm: 1.0
+  precision: bfloat16
+  deterministic_algorithms: true
+  dataloader_generator_seed: 20260809
+  checkpoint_selection: max_hit1_then_hit5_then_min_hamming_then_min_set_nll_then_earliest
+
+smoke:
+  manifest: outputs/binary_polar/preflight/p10_smoke_manifest_v1.json
+  manifest_sha256: ac0d0fa76331511794fe01532e41af97bde4b474f3cff5814ca2a0e7325bafe0
+  selection_seed: 20260809
+  train_positive_per_dataset: 100
+  validation_positive_per_dataset: 50
+  execution_records_per_dataset: 6
+  epochs: 2
+
+evaluation:
+  top_k: 5
+  primary_online_policy: top1
+  report_by_benchmark: true
+  require_uncached_top1_execution: true
+  include_zero_positive_records_in_execution: true

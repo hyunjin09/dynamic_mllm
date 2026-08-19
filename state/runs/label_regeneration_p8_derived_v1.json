@@ -1,0 +1,39 @@
+{
+  "exp_id": "label_regeneration_p8_derived_v1",
+  "status": "running",
+  "owner_agent": "code_agent",
+  "current_step": "Running GPU job label_regeneration_p8_derived_r4_20260812",
+  "tmux_session": "",
+  "slurm_job_name": "label_p8_derived_r4",
+  "slurm_job_id": "100364",
+  "gpu_type": "A4000",
+  "node": "node05",
+  "log_path": "runs/label_regeneration/p8_derived_v1_r4.log",
+  "result_path": "outputs/label_regeneration/v1/post_generation/derived_supervision_audit_v1.json",
+  "display_summary": "GPU job label_regeneration_p8_derived_r4_20260812 is running for label_regeneration_p8_derived_v1.",
+  "history": [
+    {
+      "time": "2026-08-12T13:04:00+00:00",
+      "event": "gpu_launch",
+      "message": "sbatch_job_id=100360 slurm_job=label_p8_derived"
+    },
+    {
+      "time": "2026-08-12T13:07:46+00:00",
+      "event": "gpu_launch",
+      "message": "sbatch_job_id=100361 slurm_job=label_p8_derived_r2"
+    },
+    {
+      "time": "2026-08-12T13:10:19+00:00",
+      "event": "gpu_launch",
+      "message": "sbatch_job_id=100363 slurm_job=label_p8_derived_r3"
+    },
+    {
+      "time": "2026-08-12T13:12:42+00:00",
+      "event": "gpu_launch",
+      "message": "sbatch_job_id=100364 slurm_job=label_p8_derived_r4"
+    }
+  ],
+  "created_at": "2026-08-12T13:04:00+00:00",
+  "started_at": "2026-08-12T13:04:00+00:00",
+  "updated_at": "2026-08-12T13:12:42+00:00"
+}

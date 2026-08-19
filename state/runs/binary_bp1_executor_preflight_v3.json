@@ -1,0 +1,29 @@
+{
+  "exp_id": "binary_bp1_executor_preflight_v3",
+  "status": "failed",
+  "owner_agent": "code_agent",
+  "current_step": "BP-1 input-contract repair rerun failed the frozen cached-ID gate; training blocked",
+  "tmux_session": "",
+  "slurm_job_name": "binary_bp1_executor_preflight_r3_20260810",
+  "slurm_job_id": "99737",
+  "gpu_type": "A6000",
+  "node": "node03",
+  "log_path": "runs/experiments/binary_bp1_executor_preflight_v3/run.log",
+  "result_path": "outputs/binary_polar/preflight/executor_preflight_v3.json",
+  "display_summary": "BP-1 v3 completed all 16 fixtures but failed exact cached-ID reproduction (12/16 complete rows passed).",
+  "history": [
+    {
+      "time": "2026-08-09T15:18:38+00:00",
+      "event": "gpu_launch",
+      "message": "sbatch_job_id=99737 slurm_job=binary_bp1_executor_preflight_r3_20260810"
+    },
+    {
+      "time": "2026-08-10T00:24:46+09:00",
+      "event": "run_failed",
+      "message": "Frozen BP-1 failed after input-contract repair: 12/16 complete rows passed; training remains blocked"
+    }
+  ],
+  "created_at": "2026-08-09T15:18:38+00:00",
+  "started_at": "2026-08-09T15:18:38+00:00",
+  "updated_at": "2026-08-10T00:24:46+09:00"
+}

@@ -1,0 +1,118 @@
+{
+  "bundle_version": "shared_prefix_eval_20260812_v2",
+  "python": "3.10",
+  "model": {
+    "repo_id": "Qwen/Qwen2.5-VL-7B-Instruct",
+    "revision": "cc594898137f460bfe9f0759e9844b3ce807cfb5",
+    "dtype": "bfloat16",
+    "attention_implementation": "sdpa",
+    "processor_use_fast": false,
+    "local_files_only": true,
+    "num_llm_layers": 28
+  },
+  "generation": {
+    "decoder": "custom greedy argmax with float32 repetition-penalty processing",
+    "max_new_tokens": "row-specific: 16 default, DocVQA=32, POPE=128",
+    "all_on_eos_token_ids": [151645],
+    "selected_sparse_eos_token_ids": [151643, 151645],
+    "stop_on_eos": true,
+    "repetition_penalty": 1.05
+  },
+  "router": {
+    "checkpoint": "checkpoints/sw31/router_epoch_001.pt",
+    "sha256": "6ecf2f9119b78d5d11c969b4602b93cecc59d27aab43440abacb84421c4af255",
+    "name": "sw31_bt_leg_s41_selected_full",
+    "threshold": 0.0,
+    "visual_summary_mode": "mean_abs",
+    "text_summary_mode": "all_text",
+    "actions": ["visual-off", "visual-on"]
+  },
+  "admission_gate": {
+    "checkpoint": "checkpoints/prefix_admission/prefix_admission_selection.pt",
+    "sha256": "3a1385420bc9abae7b596ecf967a34ea0a9ce86c636a99140c6be2c25ed07ef4",
+    "selection": "accuracy",
+    "forced_visual_on_prefix_layers": 8,
+    "feature_width": 17920,
+    "score_mode": "utility_only",
+    "harm_architecture": "mlp",
+    "rescue_architecture": "linear",
+    "ensemble_seeds": [17, 41, 73],
+    "uncertainty_beta": 2.0,
+    "rescue_weight": 4.0,
+    "admission_threshold": -1.5164537767623125,
+    "decision": "use sparse continuation iff admission_score <= threshold"
+  },
+  "dataset": {
+    "manifest": "data/heldout_mmstar_mmmu_final_v2/samples.jsonl",
+    "manifest_sha256": "717af22ceb0438ff609af8df5193646b48e7ae59e175683c0952d3be4d1409e2",
+    "rows": 5807,
+    "referenced_images": 6173,
+    "counts": {
+      "mmstar_val": 1500,
+      "mmmu_val": 847,
+      "mmmu_pro_standard_test": 1730,
+      "mmmu_pro_vision_test": 1730
+    }
+  },
+  "core_vqa_dataset": {
+    "manifest": "data/heldout_lmms_recommended_v1/samples.jsonl",
+    "manifest_sha256": "0ad5718d3ade02b7d812b023772adfdbe8bc811cd72e6970ce4f8773a75b34cc",
+    "rows": 12849,
+    "referenced_images": 12849,
+    "counts": {
+      "chartqa": 2500,
+      "textvqa": 5000,
+      "docvqa": 5349
+    },
+    "source_revisions": {
+      "chartqa": "9e63b7df1592a1c2158e735cc1725454aef0d6d9",
+      "textvqa": "9c0699cd19768ac5ab97568f6b3cbac4c0062884",
+      "docvqa": "539088ef8a8ada01ac8e2e6d4e372586748a265e"
+    }
+  },
+  "scoring": {
+    "implementation": "code/dvr_qwen/eval_metrics.py:multiple_choice_accuracy",
+    "rule": "first standalone A-J in upper-cased generation must equal the single-letter GT",
+    "correctness_threshold": 1.0
+  },
+  "baseline_cache": {
+    "path": "baseline/all_on_generation_rows.jsonl",
+    "sha256": "385eb60598ca294af326e66e8bc6c9f8f3845650797fed333a756390d916449b",
+    "rows": 5807
+  },
+  "core_vqa_scoring": {
+    "implementation": "code/dvr_qwen/eval_metrics.py",
+    "chartqa": "relaxed_accuracy, correctness threshold 1.0",
+    "textvqa": "EvalAI consensus, correctness threshold 0.5",
+    "docvqa": "ANLS, correctness threshold 0.5"
+  },
+  "core_vqa_baseline_cache": {
+    "path": "baseline/core_vqa_all_on_generation_rows.jsonl",
+    "sha256": "a52997cc4947d3ba932127c3fb88182461554ea6dfee64e129e0df41d8f66b8b",
+    "rows": 12849
+  },
+  "pope_dataset": {
+    "manifest": "data/heldout_pope_v1/samples.jsonl",
+    "manifest_sha256": "1a39be02d9d031715080908c284f6444b3bf3772e7e3a162c642caf7eb30695c",
+    "source_revision": "4db1276663dfa5eb8ad16a52d24c31a09e470896",
+    "rows": 9000,
+    "referenced_images": 9000,
+    "unique_image_content_hashes": 500,
+    "counts": {
+      "pope_adversarial": 3000,
+      "pope_popular": 3000,
+      "pope_random": 3000
+    }
+  },
+  "pope_scoring": {
+    "implementation": "code/dvr_qwen/eval_metrics.py:pope_yes_no_accuracy",
+    "rule": "map output starting with yes/no to that label and compare with GT",
+    "correctness_threshold": 1.0,
+    "max_new_tokens": 128
+  },
+  "pope_baseline_cache": {
+    "path": "baseline/pope_all_on_generation_rows.jsonl",
+    "sha256": "b859d7851cd3eef2b738764f18ae82a9938eafa9408a83e7e3a7f028788b9562",
+    "rows": 9000
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "decision": "pass_path_only_manifest_relocation",
+  "image_checksums_verified": false,
+  "input": "/home/aix7101/hyemin/0618_visual_on/greedy_phase1_phase2_reproduction/manifests/all_samples.jsonl",
+  "input_sha256": "406a0f03e98a68a703db3098fed612135871905baeed8299d055793590b01a52",
+  "new_prefix": "/mnt/hyemin/dvr_qwen/rl/complete_correct_wrong_pools_20260713",
+  "old_prefix": "/data/dataset/dynamic_mllm/Qwen2.5VL/easy_hard_5k/complete_correct_wrong_pools_20260713",
+  "output": "/home/aix7101/hyemin/0618_visual_on/greedy_phase1_phase2_reproduction/manifests/all_samples.current_server.jsonl",
+  "output_sha256": "859c24e9715e26d7f1dba363cfd2d8517875c9f0a382dae9e267765db39084de",
+  "rows": 10000,
+  "semantic_sha256": "2e03a1705c455ff56e23206c2ff3e9a6ef1653354387c523ca54ba0390d1571e"
+}

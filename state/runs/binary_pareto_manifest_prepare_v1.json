@@ -1,0 +1,24 @@
+{
+  "exp_id": "binary_pareto_manifest_prepare_v1",
+  "status": "running",
+  "owner_agent": "root",
+  "current_step": "Running GPU job binary_pareto_manifest_prepare_v1",
+  "tmux_session": "",
+  "slurm_job_name": "pareto_manifest",
+  "slurm_job_id": "101470",
+  "gpu_type": "A4000",
+  "node": "node05",
+  "log_path": "runs/binary_pareto_manifest_prepare_v1/slurm.log",
+  "result_path": "outputs/binary_pareto_v1/audits/pareto_integrity_audit_v1.json",
+  "display_summary": "GPU job binary_pareto_manifest_prepare_v1 is running for binary_pareto_manifest_prepare_v1.",
+  "history": [
+    {
+      "time": "2026-08-17T06:16:17+00:00",
+      "event": "gpu_launch",
+      "message": "sbatch_job_id=101470 slurm_job=pareto_manifest"
+    }
+  ],
+  "created_at": "2026-08-17T06:16:17+00:00",
+  "started_at": "2026-08-17T06:16:17+00:00",
+  "updated_at": "2026-08-17T06:16:17+00:00"
+}

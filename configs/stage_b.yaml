@@ -1,0 +1,52 @@
+stage: B
+status: protocol_preparation
+source_plan: plans/dynamic_mllm_read_write_causal_analysis_plan_v2.md
+source_pool: /data/dataset/dynamic_mllm/Qwen2.5VL/easy_hard_5k/complete_correct_wrong_pools_20260713
+model_config: configs/model.yaml
+seed: 20260804
+sample_count: 400
+quota_per_cell: 100
+benchmarks:
+  - gqa
+  - textvqa
+buckets:
+  - complete_correct
+  - complete_wrong
+exclude_manifest: outputs/stage_a/stage_a_requested_samples.jsonl
+candidate_manifest: data_manifests/stage_b_discovery_candidates_400.jsonl
+candidate_audit: data_manifests/stage_b_discovery_candidates_400_audit.json
+require_unique_source_assets: true
+require_pinned_full_relabeling: true
+validated_prompt_token_max: 4861
+metric:
+  primary: answer_token_sequence_log_likelihood
+  cross_sample: answer_token_mean_log_likelihood
+  textvqa_aggregation: weighted_logsumexp_by_normalized_annotation_frequency
+  include_eos_secondary: false
+layer_grid:
+  - 0
+  - 4
+  - 8
+  - 12
+  - 16
+  - 20
+  - 24
+  - 27
+max_new_tokens: 32
+behavior_correctness_threshold: 1.0
+validity_sample_ids:
+  - gqa:gqa_gh_01296694
+  - textvqa:textvqa_train_1194
+validity_output_dir: outputs/stage_b_validity_v4
+output_dir: outputs/stage_b
+noise_floor_sequence: 0.00001
+noise_floor_mean: 0.000001
+epsilon_sequence: 0.00001
+epsilon_mean: 0.000001
+epsilon_status: frozen_from_stage_b_validity_v4_before_corrected_full_sweep
+score_tolerance: 0.00001
+logit_tolerance: 0.0001
+bootstrap_replicates: 2000
+protocol_amendment_status: user_approved_reference_likelihood
+layer_grid_status: frozen_before_outcomes
+intervention_sweep_authorized: true

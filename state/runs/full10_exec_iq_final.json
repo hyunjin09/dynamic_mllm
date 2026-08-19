@@ -1,0 +1,24 @@
+{
+  "exp_id": "full10_exec_iq_final",
+  "status": "running",
+  "owner_agent": "root",
+  "current_step": "Running GPU job binary_polar_full10_exec_iq_final_20260813",
+  "tmux_session": "",
+  "slurm_job_name": "full10_exec_iq_final",
+  "slurm_job_id": "100766",
+  "gpu_type": "A6000",
+  "node": "node03",
+  "log_path": "runs/binary_polar/full10_exec_iq_final_%j.log",
+  "result_path": "outputs/binary_polar/full10/execution_image_question_final_v1.json",
+  "display_summary": "GPU job binary_polar_full10_exec_iq_final_20260813 is running for full10_exec_iq_final.",
+  "history": [
+    {
+      "time": "2026-08-13T08:35:08+00:00",
+      "event": "gpu_launch",
+      "message": "sbatch_job_id=100766 slurm_job=full10_exec_iq_final"
+    }
+  ],
+  "created_at": "2026-08-13T08:35:08+00:00",
+  "started_at": "2026-08-13T08:35:08+00:00",
+  "updated_at": "2026-08-13T08:35:08+00:00"
+}

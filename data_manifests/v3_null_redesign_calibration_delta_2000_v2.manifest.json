@@ -1,0 +1,12 @@
+{
+  "dataset_counts": {
+    "gqa": 1000,
+    "textvqa": 1000
+  },
+  "delta_sha256": "6ec178ace0ff251ff0414c939e094d66ea85f22e11fc046a5e0cd73f82ebdde9",
+  "expanded_sha256": "50d2a175c8a21e39a95119017edde3e60b5d2006290a15f5dcc44ae4a1631e8e",
+  "image_disjoint_from_initial": true,
+  "initial_sha256": "bcdefd423f5a48e2cef11c552ffc107249fbc546ae513aedced7695c63655f8e",
+  "record_count": 2000,
+  "schema_version": "v3_null_redesign_calibration_delta_v1"
+}
