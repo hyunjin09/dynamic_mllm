@@ -1,6 +1,7 @@
 # Project-local Python environment and caches
 .venv/
 .uv-cache/
+.uv-python/
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
@@ -16,6 +17,14 @@
 *.p12
 *.pfx
 
+# Server-local access, execution, scheduler, and environment state
+/ACCESS_POLICY.md
+/infra/README.md
+/infra/gpu_policy.md
+/infra/gpu_scheduler.py
+/tests/test_gpu_scheduler_pending.py
+/workspace/env_state.md
+
 # External datasets and labels (transferred separately)
 /datasets
 
@@ -25,6 +34,7 @@
 /outputs/
 /runs/
 /state/gpu_experiment_queue.json
+/state/slurm_job_queue.json
 /workspace/setup_backups/
 /search/greedy_phase1_phase2_reproduction/manifests/*.current_server.jsonl
 *.log

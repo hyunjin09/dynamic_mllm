@@ -22,6 +22,12 @@ Do not read, search, list, write, modify, move, or delete outside its allowed
 roots. If access outside the policy is required, stop and ask before inspecting
 the path.
 
+`ACCESS_POLICY.md`, `infra/gpu_policy.md`, `infra/gpu_scheduler.py`, and
+`workspace/env_state.md` are machine-local files and are intentionally ignored
+by Git. Initialize them from tracked templates where provided or from local
+server guidance. Never assume one server's topology, storage roots, or
+scheduler applies to another.
+
 ## Environment Policy
 
 When Python packages are required, use a project-local `uv` environment:
@@ -38,7 +44,8 @@ Rules:
 - Do not assume `.venv` already exists.
 - If `uv` is missing, stop and report a blocker.
 - Record environment state in `workspace/env_state.md`.
-- Heavy environment setup must run through Slurm as a CPU-only job with `--gpus 0`.
+- Follow the machine-local compute policy for environment setup; tracked project
+  instructions do not assume that CPU work requires a scheduler.
 
 ## Dataset Policy
 
@@ -46,32 +53,12 @@ Before downloading a dataset:
 
 1. Parse the active plan for required datasets.
 2. Check existence in this order:
-   - `/data/dataset`
-   - `/home/hyunjin/.cache/huggingface/datasets`
+   - the project `datasets` link, if present;
+   - allowed dataset roots declared by machine-local `ACCESS_POLICY.md`.
 3. Update `workspace/dataset_inventory.md`.
 4. If missing, download exactly one dataset at a time.
-5. Run downloads through `infra/gpu_scheduler.py` with `--gpus 0`.
-6. Store each dataset in a dataset-specific directory under `/data/dataset`.
-7. For Hugging Face datasets, use `/data/dataset/huggingface/datasets`.
-8. Do not place dataset contents directly in the `/data/dataset` root.
-9. Do not create a project-local dataset cache.
-10. Do not write to the read-only Hugging Face cache roots.
-11. Use `num_workers <= 4` and `num_proc <= 4`.
-
-## Slurm / Compute Policy
-
-Do not run computational jobs on the login node.
-
-- GPU-required jobs: use `infra/gpu_scheduler.py` with `--gpus >= 1`.
-- CPU-heavy jobs: use `infra/gpu_scheduler.py` with `--gpus 0`.
-- Do not schedule any job on `node04` unless the user explicitly authorizes
-  `node04` for that job in the current conversation.
-- CPU-only jobs should target `node05` first. If `node05` is unavailable, use
-  an `a6000` node. Do not silently fall back to `node04`.
-
-Tiny local tasks may run directly only when expected to finish in seconds, such
-as file editing, small reads, static inspection, syntax checks, and lightweight
-imports that do not load large models.
+5. Store each dataset in a dataset-specific directory under an allowed external
+   dataset root; do not hard-code a server path in tracked project files.
 
 ## Core Engineering Principles
 

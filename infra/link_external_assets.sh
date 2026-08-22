@@ -2,7 +2,12 @@
 set -euo pipefail
 
 project_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-data_root="${1:-/data/dataset/dynamic_mllm}"
+data_root="${1:-}"
+
+if [[ -z "$data_root" ]]; then
+  echo "Usage: $0 /path/to/dynamic_mllm_data_root" >&2
+  exit 2
+fi
 
 if [[ ! -d "$data_root" ]]; then
   echo "Dataset root does not exist: $data_root" >&2

@@ -32,6 +32,18 @@ payload directories separately when running the evaluation:
 | `results/` | 31 MB | generated evaluation results |
 
 `baseline/` and `results/` are evidence, not prerequisites for a fresh run.
+If the exact pinned model revision already exists in an allowed machine-local
+model store, it may be linked instead of duplicated:
+
+```bash
+mkdir -p eval/reference/shared_prefix_eval_20260812/model
+ln -s \
+  /path/to/models--Qwen--Qwen2.5-VL-7B-Instruct/snapshots/cc594898137f460bfe9f0759e9844b3ce807cfb5 \
+  eval/reference/shared_prefix_eval_20260812/model/Qwen2.5-VL-7B-Instruct_cc594898137f460bfe9f0759e9844b3ce807cfb5
+```
+
+Do not create substitute links for `data/` or `checkpoints/` unless their
+bundle inventories and checksums match.
 
 ## Historical and regenerable artifacts
 
@@ -46,10 +58,10 @@ The following roots are excluded because they are large or machine-local:
 | `.venv/` | 5.7 GB | recreate from `requirements-lock.txt` |
 | `.uv-cache/` | 5.7 GB | recreate automatically; never transfer |
 
-The live Slurm queue file `state/gpu_experiment_queue.json` is also excluded;
-it refers to jobs on the source cluster and must not be replayed on another
-server. Compact completed-run records under `state/runs/` remain in Git as
-provenance.
+Live scheduler queue files such as `state/slurm_job_queue.json` and the legacy
+`state/gpu_experiment_queue.json` are excluded. They are machine-specific and
+must not be replayed on another server. Compact completed-run records under
+`state/runs/` remain in Git as provenance.
 
 Machine-relocated copies matching
 `search/greedy_phase1_phase2_reproduction/manifests/*.current_server.jsonl`

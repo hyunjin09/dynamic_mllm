@@ -11,7 +11,7 @@ artifacts.
   code;
 - predictor training and analysis implementations;
 - frozen plans, manifests, reports, and compact research state;
-- Slurm scheduling utilities and environment specifications;
+- portable environment setup and machine-local execution templates;
 - project-local agent instructions and the research-control skill;
 - reference implementations used to validate execution and training semantics.
 
@@ -26,9 +26,14 @@ transfer contract.
 git clone git@github.com:hyunjin09/dynamic_mllm.git
 cd dynamic_mllm
 
-uv venv .venv
-uv pip install --python .venv/bin/python -r requirements-lock.txt
+bash infra/setup_project_environment.sh
 ```
+
+The setup script installs managed Python 3.12.7 under `.uv-python/`, rebuilds
+`.venv/`, installs `requirements-lock.txt`, and runs the focused environment
+checks. Whether this CPU-only setup runs locally or through a batch system is a
+machine-local policy decision; tracked project files do not assume a cluster
+topology.
 
 The validated environment uses Python 3.12, PyTorch 2.6.0 with CUDA 12.4, and
 Transformers 5.3.0. `requirements.txt` is the concise direct-dependency list;
@@ -40,7 +45,7 @@ After transferring datasets and labels to the second server, create the local
 dataset link and compatibility label links:
 
 ```bash
-bash infra/link_external_assets.sh /data/dataset/dynamic_mllm
+bash infra/link_external_assets.sh /path/to/dynamic_mllm_data_root
 ```
 
 The expected canonical label directories are:
@@ -56,7 +61,9 @@ needed. Their expected paths and verified sizes are documented in
 
 ## Project navigation
 
-- `AGENTS.md`, `ACCESS_POLICY.md`: execution and access rules
+- `AGENTS.md`: portable project execution rules
+- `ACCESS_POLICY.example.md`, `infra/gpu_policy.example.md`,
+  `workspace/env_state.example.md`: templates for ignored machine-local files
 - `plans/`, `workspace/`: approved protocols and compact research state
 - `binary_policy/`, `label_regeneration/`, `interventions/`, `scoring/`:
   primary implementation
