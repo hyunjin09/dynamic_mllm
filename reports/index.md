@@ -381,6 +381,27 @@ Project: `/data/projects/hyunjin/MLLM/dynamic_mllm`
 | wemath-greedy-preflight-v2 | succeeded | wemath2pro-greedy-recovery-preflight-v2 | a6000 | 101707 | runs/wemath_greedy_recovery/preflight_r2.log |
 | wemath-greedy-phase1-node06-v1 | running | wemath2pro-greedy-phase1-node06-v1 | a6000 | 101708 | runs/wemath_greedy_recovery/phase1_node06.log |
 | wemath-greedy-phase1-node07-v1 | running | wemath2pro-greedy-phase1-node07-v1 | a6000 | 101709 | runs/wemath_greedy_recovery/phase1_node07.log |
+| cap_manifest_prep_v1 | failed | cap_manifest_prep_v1 | a4000 | 102849 | runs/binary_cap_sweep_v1/prep.log |
+| cap_manifest_prep_v2 | succeeded | cap_manifest_prep_v2 | a4000 | 102850 | runs/binary_cap_sweep_v1/prep_v2.log |
+| binary_cap24_full_v1 | cancelled | binary_cap24_full_v1 | a6000 | 102856 | runs/binary_cap_sweep_v1/cap24.log |
+| binary_cap22_full_v1 | cancelled | binary_cap22_full_v1 | a6000 | 102855 | runs/binary_cap_sweep_v1/cap22.log |
+| binary_cap20_full_v1 | cancelled | binary_cap20_full_v1 | a6000 | 102854 | runs/binary_cap_sweep_v1/cap20.log |
+| binary_cap18_full_v1 | cancelled | binary_cap18_full_v1 | a6000 | 102853 | runs/binary_cap_sweep_v1/cap18.log |
+| binary_cap24_full_v2 | running | binary_cap24_full_v2 | a6000 | 102861 | runs/binary_cap_sweep_v1/cap24_v2.log |
+| binary_cap22_full_v2 | running | binary_cap22_full_v2 | a6000 | 102860 | runs/binary_cap_sweep_v1/cap22_v2.log |
+| binary_cap20_full_v2 | running | binary_cap20_full_v2 | a6000 | 102859 | runs/binary_cap_sweep_v1/cap20_v2.log |
+| binary_cap18_full_v2 | running | binary_cap18_full_v2 | a6000 | 102858 | runs/binary_cap_sweep_v1/cap18_v2.log |
+| cap_nll5_freeze_cpu_v1 | failed | cap_nll5_freeze_cpu_v1 | a4000 | 102959 | runs/binary_cap_nll5_v1/freeze.log |
+| binary_cap26_nll5_execval_v1 | running | binary_cap26_nll5_execval_v1 | a6000 | 102961 | runs/binary_cap_nll5_v1/cap26.log |
+| binary_cap24_nll5_execval_v1 | running | binary_cap24_nll5_execval_v1 | a6000 | 102960 | runs/binary_cap_nll5_v1/cap24.log |
+| wemath2pro-visual-difficulty-v1 | succeeded | wemath2pro-visual-difficulty-v1 | a4000 | 103274 | runs/wemath2pro_visual_compute_difficulty_v1.log |
+| wemath2pro-visual-difficulty-final-v1 | succeeded | wemath2pro-visual-difficulty-final-v1 | a4000 | 103275 | runs/wemath2pro_visual_compute_difficulty_final_v1.log |
+| wemath2pro-visual-dependence-v1 | failed | wemath2pro-visual-dependence-v1 | a4000 | 103377 | runs/wemath2pro_visual_dependence_reanalysis_v1.log |
+| wemath2pro-visual-dependence-v1-module | succeeded | wemath2pro-visual-dependence-v1-module | a4000 | 103378 | runs/wemath2pro_visual_dependence_reanalysis_v1_module.log |
+| wemath2pro-visual-dependence-final-v1 | succeeded | wemath2pro-visual-dependence-final-v1 | a4000 | 103379 | runs/wemath2pro_visual_dependence_reanalysis_final_v1.log |
+| wemath2pro-visual-placement-v1 | succeeded | wemath2pro-visual-placement-v1 | a4000 | 103382 | runs/wemath2pro_visual_access_placement_v1.log |
+| cross-dataset-visual-access-v1 | failed | motivation-check4 | a4000 | 103405 | runs/cross_dataset_visual_access_v1.log |
+| cross-dataset-visual-access-v1-r2 | succeeded | motivation-check4 | a4000 | 103406 | runs/cross_dataset_visual_access_v1_r2.log |
 
 ## Run States
 
@@ -392,6 +413,16 @@ Project: `/data/projects/hyunjin/MLLM/dynamic_mllm`
 | binary_bp1_executor_preflight_v2 | running | Running GPU job binary_bp1_executor_preflight_r2_20260809 | runs/experiments/binary_bp1_executor_preflight_v2/run.log | outputs/binary_polar/preflight/executor_preflight_v2.json |
 | binary_bp1_executor_preflight_v3 | failed | BP-1 input-contract repair rerun failed the frozen cached-ID gate; training blocked | runs/experiments/binary_bp1_executor_preflight_v3/run.log | outputs/binary_polar/preflight/executor_preflight_v3.json |
 | binary_bp1_fixture_freeze_v1 | running | Running GPU job binary_bp1_fixture_freeze_20260809 | runs/binary_bp1_fixture_freeze_20260809/slurm.log | outputs/binary_polar/preflight/executor_fixtures_v1.json |
+| binary_cap18_full_v1 | running | Running GPU job binary_cap18_full_v1 | runs/binary_cap_sweep_v1/cap18.log | outputs/binary_cap_sweep_v1/cap18_pipeline_complete.json |
+| binary_cap18_full_v2 | running | Running GPU job binary_cap18_full_v2 | runs/binary_cap_sweep_v1/cap18_v2.log | outputs/binary_cap_sweep_v1/cap18_pipeline_complete.json |
+| binary_cap20_full_v1 | running | Running GPU job binary_cap20_full_v1 | runs/binary_cap_sweep_v1/cap20.log | outputs/binary_cap_sweep_v1/cap20_pipeline_complete.json |
+| binary_cap20_full_v2 | running | Running GPU job binary_cap20_full_v2 | runs/binary_cap_sweep_v1/cap20_v2.log | outputs/binary_cap_sweep_v1/cap20_pipeline_complete.json |
+| binary_cap22_full_v1 | running | Running GPU job binary_cap22_full_v1 | runs/binary_cap_sweep_v1/cap22.log | outputs/binary_cap_sweep_v1/cap22_pipeline_complete.json |
+| binary_cap22_full_v2 | running | Running GPU job binary_cap22_full_v2 | runs/binary_cap_sweep_v1/cap22_v2.log | outputs/binary_cap_sweep_v1/cap22_pipeline_complete.json |
+| binary_cap24_full_v1 | running | Running GPU job binary_cap24_full_v1 | runs/binary_cap_sweep_v1/cap24.log | outputs/binary_cap_sweep_v1/cap24_pipeline_complete.json |
+| binary_cap24_full_v2 | running | Running GPU job binary_cap24_full_v2 | runs/binary_cap_sweep_v1/cap24_v2.log | outputs/binary_cap_sweep_v1/cap24_pipeline_complete.json |
+| binary_cap24_nll5_execval_v1 | running | Running GPU job binary_cap24_nll5_execval_v1 | runs/binary_cap_nll5_v1/cap24.log | outputs/binary_cap_nll5_v1/cap24_pipeline_complete.json |
+| binary_cap26_nll5_execval_v1 | running | Running GPU job binary_cap26_nll5_execval_v1 | runs/binary_cap_nll5_v1/cap26.log | outputs/binary_cap_nll5_v1/cap26_pipeline_complete.json |
 | binary_env_tf53_20260809 | running | Running GPU job binary_env_tf53_20260809 | runs/binary_env_tf53_20260809/slurm.log | outputs/env_migrations/transformers_5_3_0_v1.json |
 | binary_label_audit_bp0_v1 | running | Running GPU job binary_label_audit_bp0_20260809 | runs/binary_label_audit_bp0_20260809/slurm.log | /data/dataset/dynamic_mllm/binary_polar_v1/binary_polar_label_geometry_audit_v1.json |
 | binary_label_runtime_contract_v1 | running | Running GPU job binary_label_runtime_contract_v1 | runs/experiments/binary_label_runtime_contract_v1/run.log | outputs/binary_polar/preflight/label_runtime_contract_v1.json |
@@ -453,6 +484,9 @@ Project: `/data/projects/hyunjin/MLLM/dynamic_mllm`
 | bp_external_image_question_v1 | running | Running GPU job bp_external_full_image_question_v1_r2 | runs/binary_polar/external_eval/image_question_full_r2_%j.log | outputs/binary_polar/external_eval/full10_best_v1/image_question/shard_000_of_001/metadata.json |
 | bp_external_preflight_v1 | running | Running GPU job bp_external_preflight_v1_r3 | runs/binary_polar/external_eval/preflight_r3_%j.log | outputs/binary_polar/external_eval/full10_best_v1/preflight_v1.json |
 | bp_external_question_v1 | running | Running GPU job bp_external_full_question_v1_r2 | runs/binary_polar/external_eval/question_full_r2_%j.log | outputs/binary_polar/external_eval/full10_best_v1/question/shard_000_of_001/metadata.json |
+| cap_manifest_prep_v1 | running | Running GPU job cap_manifest_prep_v1 | runs/binary_cap_sweep_v1/prep.log | outputs/binary_cap_sweep_v1/audits/cap_supervision_audit_v1.json |
+| cap_manifest_prep_v2 | running | Running GPU job cap_manifest_prep_v2 | runs/binary_cap_sweep_v1/prep_v2.log | outputs/binary_cap_sweep_v1/audits/cap_supervision_audit_v1.json |
+| cap_nll5_freeze_cpu_v1 | running | Running GPU job cap_nll5_freeze_cpu_v1 | runs/binary_cap_nll5_v1/freeze.log | outputs/binary_cap_nll5_v1/audits/training_readiness_v1.json |
 | full10_conditioning | running | Running GPU job binary_polar_full10_conditioning_20260813 | runs/binary_polar/full10_conditioning_%j.log | outputs/binary_polar/full10/conditioning_v1.json |
 | full10_exec_iq_best | running | Running GPU job binary_polar_full10_exec_iq_best_20260813 | runs/binary_polar/full10_exec_iq_best_%j.log | outputs/binary_polar/full10/execution_image_question_best_hit_at_1_v1.json |
 | full10_exec_iq_best_r2 | running | Running GPU job binary_polar_full10_exec_iq_best_r2_20260813 | runs/binary_polar/full10_exec_iq_best_r2_%j.log | outputs/binary_polar/full10/execution_image_question_best_hit_at_1_v1.json |
@@ -472,6 +506,7 @@ Project: `/data/projects/hyunjin/MLLM/dynamic_mllm`
 | label_regeneration_p9_verify_final_v1 | running | Running GPU job label_regeneration_p9_verify_final_20260812 | runs/label_regeneration/p9_verify_final_v1.log | outputs/label_regeneration/v1/post_generation/P9_SHA256SUMS |
 | label_regeneration_p9_verify_v1 | running | Running GPU job label_regeneration_p9_verify_checksums_20260812 | runs/label_regeneration/p9_verify_checksums_v1.log | outputs/label_regeneration/v1/post_generation/P9_SHA256SUMS |
 | mcts-bce-label-analysis-v1 | running | Running GPU job mcts-bce-label-analysis-v4 | runs/mcts_bce_label_analysis_v4/slurm.log | outputs/binary_mcts_label_geometry_v1/analysis_manifest.json |
+| motivation-check4 | running | Running GPU job cross-dataset-visual-access-v1-r2 | runs/cross_dataset_visual_access_v1_r2.log | outputs/cross_dataset_visual_access_v1/analysis_manifest.json |
 | p7_eval_suite_audit_v1 | running | Running GPU job binary_router_eval_suite_audit_20260812 | runs/label_regeneration/eval_suite_overlap_audit_v1.log | outputs/label_regeneration/v1/post_generation/eval_suite_overlap_audit_v1.json |
 | query_refinement_analysis_v1 | running | Running GPU job query_refinement_analysis_r3_20260807 | runs/query_refinement_analysis_v1/retry3.log | outputs/query_refinement/analysis_manifest.json |
 | query_refinement_full_v1 | running | Running GPU job query_refinement_full_s03_r2_20260807 | runs/query_refinement_full_v1/shard_03_r2.log | outputs/query_refinement/shards_v1/shard_03/completion.json |
@@ -644,3 +679,10 @@ Project: `/data/projects/hyunjin/MLLM/dynamic_mllm`
 | wemath2pro-greedy-recovery-preflight-v2 | running | Running GPU job wemath-greedy-preflight-v2 | runs/wemath_greedy_recovery/preflight_r2.log | outputs/label_regeneration/wemath2pro_greedy_recovery_v1/preflight/preflight_report_v1.json |
 | wemath2pro-greedy-recovery-v1 | running | Running GPU job wemath-greedy-manifest-v1 | runs/wemath_greedy_recovery/manifest.log | outputs/label_regeneration/wemath2pro_greedy_recovery_v1/manifest/recovery_manifest_audit_v1.json |
 | wemath2pro-label-analysis-v1 | running | Running GPU job wemath2pro-label-analysis-v2 | runs/wemath2pro_label_analysis_v1/slurm_v2.log | outputs/wemath2pro_mcts_label_analysis_v1/analysis_manifest.json |
+| wemath2pro-visual-dependence-final-v1 | running | Running GPU job wemath2pro-visual-dependence-final-v1 | runs/wemath2pro_visual_dependence_reanalysis_final_v1.log | outputs/wemath2pro_visual_dependence_reanalysis_v1/analysis_summary.json |
+| wemath2pro-visual-dependence-v1-module | running | Running GPU job wemath2pro-visual-dependence-v1-module | runs/wemath2pro_visual_dependence_reanalysis_v1_module.log | outputs/wemath2pro_visual_dependence_reanalysis_v1/analysis_summary.json |
+| wemath2pro-visual-dependence-v1 | running | Running GPU job wemath2pro-visual-dependence-v1 | runs/wemath2pro_visual_dependence_reanalysis_v1.log | outputs/wemath2pro_visual_dependence_reanalysis_v1/analysis_summary.json |
+| wemath2pro-visual-difficulty-final-v1 | running | Running GPU job wemath2pro-visual-difficulty-final-v1 | runs/wemath2pro_visual_compute_difficulty_final_v1.log | outputs/wemath2pro_visual_compute_difficulty_v1/analysis_summary.json |
+| wemath2pro-visual-difficulty-v1 | running | Running GPU job wemath2pro-visual-difficulty-v1 | runs/wemath2pro_visual_compute_difficulty_v1.log | outputs/wemath2pro_visual_compute_difficulty_v1/analysis_summary.json |
+| wemath2pro-visual-placement-v1 | running | Running GPU job wemath2pro-visual-placement-v1 | runs/wemath2pro_visual_access_placement_v1.log | outputs/wemath2pro_visual_access_placement_v1/analysis_summary.json |
+

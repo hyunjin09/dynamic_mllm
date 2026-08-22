@@ -1,5 +1,108 @@
 # Operational Research Plan: Binary Route Label Regeneration
 
+## Completed cross-dataset visual-access analysis (2026-08-22)
+
+The user authorized `plans/motivation_check4.md` as one bounded read-only
+comparison of authoritative GQA, TextVQA, ChartQA, and WeMath2.0-Pro raw MCTS
+caches. Preserve identical 28-bit ON/OFF semantics and use matched search
+prefixes: anchors plus the first 200 simulations for current FULL-correct
+records and anchors plus the first 400 for current FULL-wrong records. Analyze
+V+ visual dependence, minimum positive ON, budget feasibility, sample-balanced
+minimum/+2/+4 placement, amount and visual-token controls, per-layer profiles,
+and pairwise profile distances; analyze A+ correcting routes separately. The
+legacy 600-simulation tail is an all-available sensitivity only. No model
+execution, MCTS, training, max-50 view, or new route is authorized. Evidence is
+to be saved under `outputs/cross_dataset_visual_access_v1/` and
+`reports/cross_dataset_visual_access_v1.md`.
+
+The analysis passed all 12,544 source/hash/anchor/trace checks and ended as
+Outcome C. Under matched prefixes, V+ mean minimum positive ON is 8.66 for
+GQA, 10.74 for TextVQA, 12.47 for ChartQA, and 13.86 for WeMath2.0-Pro; native
+visual-token adjustment does not remove the differences. Placement is not a
+comparably strong task-family signal: exact-min aggregate profile cosine is
+0.982--0.996 and min+4 cosine is 0.994--0.999, while the maximum normalized-
+centroid difference is 0.019. Direct-dependence prevalence also differs in the
+selected frozen populations. No follow-up experiment is authorized.
+
+## Completed WeMath2.0-Pro visual-access placement analysis (2026-08-22)
+
+The user authorized `plans/motivation_check3.md` as one read-only analysis of
+the same checksum-bound 4,544-record hard-cap-400 WeMath2.0-Pro cache. The
+primary population is the 428 V+ records (FULL correct, exact ALL-OFF wrong).
+For every sample, analyze all minimum-budget valid routes sample-balanced, with
+prospectively frozen +2/+4 near-minimum sensitivities. Measure layer profiles,
+centroid, first/latest access, decoder-third fractions, access segments, and
+late re-entry across all eight difficulty strata; adjust descriptively for
+minimum ON and prioritize paired family and same-image comparisons. The
+authors' released scheduler defines `x=contextual`, `y=visual`, and `z=step`
+complexity. A+ correcting-route placement is secondary and separate. No Qwen
+execution, MCTS, training, new route, or max-50 view is authorized. Current
+The analysis passed all integrity gates and ended as Outcome D: exact-minimum
+schedules are heterogeneous (normalized centroid range 0.210--0.794; ON
+segments range 1--11), but no stable global-degree or axis-specific placement
+relationship survives minimum-ON adjustment, 274 family-paired transitions,
+135 same-image transitions, or exact-min/min+2/min+4 sensitivity. Aggregate
+paired normalized-centroid delta is 0.0053 (95% CI [-0.0091, 0.0190]); the
+same-image delta is 0.0041 (CI [-0.0138, 0.0214]). No follow-up experiment is
+authorized. Evidence: `reports/wemath2pro_visual_access_placement_v1.md` and
+phase memory `workspace/phase_memory/phase_29_wemath_visual_access_placement.md`.
+
+## Completed WeMath2.0-Pro visual-dependence reanalysis (2026-08-22)
+
+The user authorized `plans/motivation_check2.md` as a read-only correction to
+the completed difficulty analysis. Verify all 4,544 exact ALL-OFF anchors from
+the authoritative raw records, then decompose the 841 FULL-correct records into
+V0 (FULL and ALL-OFF correct) and V+ (FULL correct, ALL-OFF wrong). Recompute
+minimum positive VISUAL_ON depth, budget feasibility, decomposition, paired
+family/image transitions, the full FULL/OFF contingency, and A0/A+ correction
+counts across all eight strata before any axis summary. No model, search,
+training, validity change, or REPEAT analysis was run. The analysis passed as
+Outcome A: 413/841 FULL-correct records are V0, and V0 prevalence rises from
+32.5% to 73.4% across degree 0 to 3. After restricting to 428 V+ records, rho
+is -0.057 with clustered 95% CI [-0.154, 0.037], and paired-family mean delta
+is -0.04 with CI [-0.63, 0.57]. The old trend is primarily ALL-OFF
+composition, not a stable conditional visual-budget effect. Evidence:
+`reports/wemath2pro_visual_dependence_reanalysis_v1.md` and phase memory
+`workspace/phase_memory/phase_28_wemath_visual_dependence_reanalysis.md`.
+
+## Completed WeMath2.0-Pro visual-compute difficulty analysis (2026-08-22)
+
+The user authorized `plans/motivation.md` as one read-only analysis of the
+completed 4,544-record hard-cap-400 WeMath2.0-Pro MCTS cache. The primary cohort
+is the 841 current-FULL-correct records, using minimum raw valid-route VISUAL_ON
+count and budget-feasibility curves across the eight official difficulty
+strata and coarse factorial degree. FULL-wrong correction discovery, paired
+seed-family comparisons, visual-token controls, and raw route geometry are
+secondary. No new search, inference, training, route cap, Pareto filter, repeat
+action, or validity change was authorized. The analysis passed and is Outcome
+E: minimum discovered ON decreased with coarse degree among FULL-correct
+survivors (rho -0.225, clustered 95% CI [-0.291, -0.159]), but the pattern is
+axis-specific and driven mainly by x-containing strata. FULL-wrong correction
+discovery simultaneously fell from 50.0% to 26.7% across degree 0 to 3. The
+monotonic higher-difficulty-requires-more-visual-depth claim is unsupported;
+no follow-up experiment is authorized. Evidence:
+`reports/wemath2pro_visual_compute_difficulty_v1.md` and phase memory
+`workspace/phase_memory/phase_27_wemath_visual_compute_difficulty.md`.
+
+## Active CAP26/CAP24 exact-NLL executed-validation experiment (2026-08-20)
+
+The user authorized `plans/binary_cap_nll5_executed_validation_plan.md` as one
+bounded comparison. Train matched Image+Question direct 28-bit predictors for
+five epochs with exact valid-set NLL. CAP26 and CAP24 use the identical frozen
+CAP24-eligible GQA/TextVQA/ChartQA population (6,007 train / 872 validation),
+identical architecture, initialization, optimizer, schedule, and decoding;
+only the cap-filtered valid-route sets differ.
+
+Every saved epoch is executed on all 872 validation records. Checkpoints are
+selected prospectively by highest executed validation accuracy, then lower
+mean VISUAL_ON, lower validation set NLL, and earlier epoch. Cached route Hit@1
+is diagnostic only. The selected checkpoint then runs the unchanged 22,307-
+record external suite. CAP26 and CAP24 run concurrently with one node02 GPU
+each. No new MCTS, architecture change, or follow-on experiment is authorized.
+
+Readiness: PASS. Jobs 102961 (CAP26) and 102960 (CAP24) are submitted to node02
+with ten-hour limits and are waiting for the two requested GPU slots.
+
 ## Active WeMath2.0-Pro greedy-recovery detour (2026-08-18)
 
 The user reopened label extraction for the 2,278 WeMath2.0-Pro records where

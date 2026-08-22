@@ -1,0 +1,25 @@
+{
+  "exp_id": "binary_cap20_full_v1",
+  "status": "running",
+  "owner_agent": "root",
+  "current_step": "Running GPU job binary_cap20_full_v1",
+  "tmux_session": "",
+  "slurm_job_name": "binary_cap20_full",
+  "slurm_job_id": "102854",
+  "gpu_type": "A6000",
+  "node": "",
+  "log_path": "runs/binary_cap_sweep_v1/cap20.log",
+  "result_path": "outputs/binary_cap_sweep_v1/cap20_pipeline_complete.json",
+  "display_summary": "GPU job binary_cap20_full_v1 is running for binary_cap20_full_v1.",
+  "history": [
+    {
+      "time": "2026-08-19T15:26:36+00:00",
+      "event": "gpu_launch",
+      "message": "sbatch_job_id=102854 slurm_job=binary_cap20_full"
+    }
+  ],
+  "created_at": "2026-08-19T15:26:36+00:00",
+  "started_at": "2026-08-19T15:26:36+00:00",
+  "updated_at": "2026-08-19T15:26:36+00:00",
+  "nodelist": "node[02,06-07]"
+}

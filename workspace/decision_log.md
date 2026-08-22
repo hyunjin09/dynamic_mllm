@@ -3,6 +3,108 @@
 Record only decisions, pivots, and lessons that should affect later phases.
 Do not copy raw logs or provisional explanations here.
 
+## 2026-08-22 — Task family predicts visual-access amount more than placement
+
+- Decision or promoted lesson: Preserve task-family differences in direct
+  visual dependence and positive visual-access amount, but do not infer a
+  strongly task-specific depth schedule from the current MCTS caches.
+- Triggering evidence: Under matched 200-simulation FULL-correct prefixes, V+
+  minimum ON means are 8.66 (GQA), 10.74 (TextVQA), 12.47 (ChartQA), and 13.86
+  (WeMath2.0-Pro), and visual-token-adjusted dataset coefficients remain large.
+  Exact-min normalized centroids differ by at most 0.019, however; pairwise
+  profile cosine similarities are 0.982--0.996 and rise to 0.994--0.999 at
+  min+4. The result is Outcome C.
+- Evidence paths: `reports/cross_dataset_visual_access_v1.md` and
+  `outputs/cross_dataset_visual_access_v1/`.
+- Confidence: high for the matched-prefix frozen-cache description; low for a
+  causal task effect because source sampling, prompts, scorers, answer formats,
+  and input geometry differ.
+- Applies when: Motivating visual-access amount controls or interpreting these
+  four raw route caches.
+- Does not apply when: Treating dataset identity as scalar difficulty, claiming
+  a layer is necessary, or using these selected populations for natural
+  prevalence claims.
+- Consequence for future actions: If task family is used as context, separate
+  V0/V+ and amount from placement. Do not justify a task-conditioned depth
+  schedule from the small aggregate placement shifts.
+- Revisit condition: prospective image/query-matched evidence shows a material
+  and reproducible task-specific profile shape after equal search and amount.
+
+## 2026-08-22 — Do not condition visual-access schedules on WeMath difficulty
+
+- Decision or promoted lesson: The official WeMath2.0-Pro difficulty degree
+  and contextual (`x`), visual (`y`), and step (`z`) axes are not supported as
+  stable predictors of where direct visual access appears across decoder depth.
+- Triggering evidence: Among 428 V+ samples, exact-minimum schedules are
+  heterogeneous, but the aggregate family-paired normalized-centroid delta is
+  0.0053 (95% CI [-0.0091, 0.0190]) and the same-image delta is 0.0041 (CI
+  [-0.0138, 0.0214]). Latest access, late fraction, segment count, late
+  re-entry, amount-adjusted degree, and every axis aggregate cross zero across
+  exact-min, min+2, and min+4.
+- Evidence paths: `reports/wemath2pro_visual_access_placement_v1.md` and
+  `outputs/wemath2pro_visual_access_placement_v1/`.
+- Confidence: high for the frozen-cache descriptive conclusion; low for causal
+  layer necessity because MCTS does not exhaust the valid route space.
+- Applies when: Proposing difficulty-conditioned layer-placement or direct-
+  visual-access schedule predictors from this WeMath cache.
+- Does not apply when: Claiming schedules are identical across inputs or that
+  other question/image properties cannot predict them.
+- Consequence for future actions: Do not motivate a schedule router from
+  WeMath difficulty labels alone. Any future conditioning variable requires a
+  separately approved hypothesis and actual executed-route validation.
+- Revisit condition: independent prospective data show a robust paired
+  schedule shift under an exhaustively or independently validated route set.
+
+## 2026-08-22 — Separate direct visual dependence from positive visual-access budget
+
+- Decision or promoted lesson: Treat ALL-OFF correctness as a distinct
+  no-direct-visual-K/V regime. Estimate positive VISUAL_ON budgets only among
+  samples where FULL is correct and ALL-OFF is wrong; do not mix the zero mass
+  with positive visual routes.
+- Triggering evidence: Of 841 FULL-correct WeMath2.0-Pro records, 413 are V0.
+  V0 prevalence rises from 32.5% at degree 0 to 73.4% at degree 3 and explains
+  83.7–94.9% of the degree-level mean decline. The V+-only rho is -0.057 with
+  family-clustered 95% CI [-0.154, 0.037], and the paired V+ aggregate is null.
+- Evidence paths: `reports/wemath2pro_visual_dependence_reanalysis_v1.md` and
+  `outputs/wemath2pro_visual_dependence_reanalysis_v1/`.
+- Confidence: high for the frozen-cache decomposition; low for causal
+  necessity outside the finite binary search space.
+- Applies when: Interpreting minimum-ON routes, route sparsity, or difficulty
+  relationships in binary visual-routing caches.
+- Does not apply when: Claiming ALL-OFF removes every structural image side
+  channel, or that a V+ minimum is an identified physical requirement.
+- Consequence for future actions: Always report V0 prevalence separately and
+  condition positive visual-budget analyses on ALL-OFF failure. The previous
+  x pattern should be described primarily as visual-dependence composition.
+- Revisit condition: A prospectively independent cache or expanded action
+  space shows a robust conditional budget relationship among V+ samples.
+
+## 2026-08-22 — Do not use WeMath difficulty degree as a monotonic visual-depth proxy
+
+- Decision or promoted lesson: Preserve the eight WeMath2.0-Pro difficulty
+  strata in visual-compute analyses; coarse degree conflates distinct axes and
+  must not be interpreted as a monotonic requirement for visual decoder depth.
+- Triggering evidence: Among 841 FULL-correct records, minimum discovered ON
+  falls from 9.74 at degree 0 to 3.66 at degree 3 (Spearman -0.225, family-
+  clustered 95% CI [-0.291, -0.159]). The change is concentrated in
+  x-containing strata, while FULL-wrong correction discovery separately falls
+  from 50.0% to 26.7% across degree 0 to 3.
+- Evidence paths: `reports/wemath2pro_visual_compute_difficulty_v1.md` and
+  `outputs/wemath2pro_visual_compute_difficulty_v1/`.
+- Confidence: high for the frozen-cache descriptive result; low for any causal
+  statement about intrinsic computation need because FULL-correct survivors
+  and discovered routes are search-selected.
+- Applies when: Interpreting or stratifying the completed WeMath2.0-Pro binary
+  route cache.
+- Does not apply when: Claiming difficult samples need less computation,
+  treating zero-positive as requiring more than FULL, or assessing REPEAT.
+- Consequence for future actions: Do not motivate a larger visual-depth or
+  REPEAT experiment from aggregate difficulty degree alone. Any follow-up must
+  state an axis-specific hypothesis and handle route-coverage selection.
+- Revisit condition: Independent, prospectively powered execution evidence
+  shows a different within-family relationship under an expanded valid action
+  space.
+
 ## 2026-08-17 — Do not use multimodal valid-mask sets as unfiltered duplicated-BCE targets
 
 - Decision or promoted lesson: When complete valid masks form separated modes,

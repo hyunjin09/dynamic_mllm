@@ -44,7 +44,7 @@ def main() -> None:
     parser.add_argument("--input-root", type=Path, required=True)
     parser.add_argument("--preflight-path", type=Path, required=True)
     parser.add_argument("--output-root", type=Path, required=True)
-    parser.add_argument("--cap", type=int, choices=(24, 22, 20, 18), required=True)
+    parser.add_argument("--cap", type=int, choices=(26, 24, 22, 20, 18), required=True)
     parser.add_argument("--checkpoint", type=Path, required=True)
     parser.add_argument("--report", type=Path, required=True)
     parser.add_argument("--bootstrap-draws", type=int, default=5000)

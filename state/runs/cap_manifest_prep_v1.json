@@ -1,0 +1,24 @@
+{
+  "exp_id": "cap_manifest_prep_v1",
+  "status": "running",
+  "owner_agent": "root",
+  "current_step": "Running GPU job cap_manifest_prep_v1",
+  "tmux_session": "",
+  "slurm_job_name": "cap_manifest_prep",
+  "slurm_job_id": "102849",
+  "gpu_type": "A4000",
+  "node": "node05",
+  "log_path": "runs/binary_cap_sweep_v1/prep.log",
+  "result_path": "outputs/binary_cap_sweep_v1/audits/cap_supervision_audit_v1.json",
+  "display_summary": "GPU job cap_manifest_prep_v1 is running for cap_manifest_prep_v1.",
+  "history": [
+    {
+      "time": "2026-08-19T15:18:02+00:00",
+      "event": "gpu_launch",
+      "message": "sbatch_job_id=102849 slurm_job=cap_manifest_prep"
+    }
+  ],
+  "created_at": "2026-08-19T15:18:02+00:00",
+  "started_at": "2026-08-19T15:18:02+00:00",
+  "updated_at": "2026-08-19T15:18:02+00:00"
+}

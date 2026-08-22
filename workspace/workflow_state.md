@@ -1,19 +1,76 @@
 # Workflow State
 
+- Completed bounded analysis (2026-08-22): `plans/motivation_check4.md` passed
+  all 12,544 raw-record, checksum, anchor, trace, and route-semantics checks.
+  Outcome C: matched-prefix V+ minimum ON means are 8.66 GQA, 10.74 TextVQA,
+  12.47 ChartQA, and 13.86 WeMath2.0-Pro; the differences remain after native
+  visual-token adjustment. Placement profiles are highly similar (exact-min
+  cosine 0.982--0.996; min+4 0.994--0.999), with at most a 0.019 normalized-
+  centroid gap. V+ prevalence also differs, but is descriptive for the frozen
+  selected populations. No new inference, MCTS, training, or routes were run.
+  Evidence: `reports/cross_dataset_visual_access_v1.md` and
+  `outputs/cross_dataset_visual_access_v1/`.
+
+- Completed bounded analysis (2026-08-22): `plans/motivation_check3.md` passed
+  all 4,544 raw-record/hash/anchor/route checks and ended as Outcome D. Across
+  428 V+ samples, exact-minimum schedules vary materially (normalized centroid
+  0.210--0.794; 1--11 ON segments), but difficulty does not explain the
+  variation. Family-paired centroid delta is 0.0053 (95% CI
+  [-0.0091, 0.0190]); same-image delta is 0.0041 (CI [-0.0138, 0.0214]); every
+  global, amount-adjusted, and axis aggregate crosses zero across exact-min,
+  min+2, and min+4. No new inference, MCTS, training, or routes were run.
+  Evidence: `reports/wemath2pro_visual_access_placement_v1.md` and
+  `outputs/wemath2pro_visual_access_placement_v1/`.
+
+- Completed bounded reanalysis (2026-08-22):
+  `plans/motivation_check2.md` passed with all 4,544 exact ALL-OFF/FULL raw
+  anchors and hashes verified. Outcome A: 413/841 FULL-correct records are V0;
+  V0 prevalence rises from 32.5% to 73.4% across degree 0 to 3 and explains
+  83.7–94.9% of degree-level mean declines. The 428-record V+-only rho is
+  -0.057 (95% CI [-0.154, 0.037]); paired V+ mean delta is -0.04 (CI
+  [-0.63, 0.57]). Among FULL-wrong records, 162 corrections are A0 and 1,263
+  are A+. No inference, search, training, or REPEAT was run. Evidence:
+  `reports/wemath2pro_visual_dependence_reanalysis_v1.md` and
+  `outputs/wemath2pro_visual_dependence_reanalysis_v1/`.
+
+- Completed bounded analysis (2026-08-22): `plans/motivation.md` passed over
+  all 4,544 hard-cap-400 WeMath2.0-Pro records using raw-route-derived fields.
+  Outcome E: the proposed monotonic visual-depth scaling failed. Among 841
+  FULL-correct survivors, minimum ON decreases with degree (rho -0.225,
+  clustered 95% CI [-0.291, -0.159]) and is lowest in x-containing strata;
+  y/z-only strata remain near base. FULL-wrong correction discovery separately
+  declines from 50.0% to 26.7% across degrees 0 to 3. This is axis-specific,
+  search-conditioned evidence and does not justify REPEAT or >FULL claims.
+  Evidence: `reports/wemath2pro_visual_compute_difficulty_v1.md` and
+  `outputs/wemath2pro_visual_compute_difficulty_v1/`.
+
+- New active bounded experiment (2026-08-20): CAP26 versus CAP24
+  Image+Question exact-set-NLL, five epochs, on the identical 6,007 train / 872
+  validation CAP24-eligible population. All five checkpoints receive actual
+  route-conditioned validation execution; selection is accuracy first, then
+  lower mean ON, lower validation NLL, and earlier epoch. The selected epoch
+  receives the unchanged 22,307-record external evaluation.
+- Readiness is PASS (20 focused tests; manifest/config/source checks pass).
+  Slurm jobs 102961 (CAP26) and 102960 (CAP24) request one node02 GPU each and
+  have ten-hour limits. At submission, two other one-GPU jobs had just occupied
+  node02's previously free GPUs, so both jobs are pending without protocol
+  changes. Evidence: `outputs/binary_cap_nll5_v1/audits/training_readiness_v1.json`
+  and `workspace/phase_memory/phase_26_binary_cap_nll5_execval.md`.
+
 - Active phase (2026-08-20): approved four-way binary duplicated-BCE absolute
   VISUAL_ON-cap sweep under `plans/cap_training.md` (CAP 24/22/20/18).
 - The primary comparison uses one identical CAP=18-eligible GQA/TextVQA/ChartQA
   train/validation population; only the surviving max-50 route sets differ.
-- Execution is restricted to four concurrent one-GPU jobs on node02/node06/node07;
-  node03 and node04 are excluded. Ten epochs and the unchanged 22,307-record
-  external evaluation are required before the phase decision.
+- All four matched models completed ten epochs. CAP18, CAP22, and CAP24 also
+  completed the unchanged 22,307-record external evaluation with integrity
+  PASS; CAP20 is the only remaining external run (job 102859 on node07).
 - Manifest/readiness gate: PASS. Common population is 5,944 train / 857
   validation; initialization/component hashes are identical across caps.
-- Submitted one-GPU pipelines: CAP18 job 102858 on node07, CAP20 job 102859 on
-  node06, CAP22 job 102860 on node02, CAP24 job 102861 on node02. All were
-  amended in place from the 14.5-day partition default to a user-approved
-  10-hour limit to permit backfill. CAP22 began on node02 at 00:51 KST; the
-  others remain queued for allowed-node capacity. No run uses node03 or node04.
+- Interim nonoverlapping-suite pooled results: ALL-ON accuracy 75.89%; CAP22
+  75.89% at mean ON 28.00 (effectively ALL-ON); CAP24 67.10% at mean ON 15.26;
+  CAP18 58.23% at mean ON 9.79. CAP20 had completed 6,897/22,307 external rows
+  at the latest checkpoint. Do not assign the final cap outcome until it
+  completes. Evidence: `outputs/binary_cap_sweep_v1/interim_results_20260820.json`.
 - Phase memory: `workspace/phase_memory/phase_25_binary_bce_cap_sweep.md`.
 
 - Repository organization update (2026-08-19): root-level `analysis*` packages

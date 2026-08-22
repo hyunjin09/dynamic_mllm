@@ -21,11 +21,17 @@ by the unchanged 22,307-record external execution evaluation.
 - Done: plan and inherited contracts inspected; cap transform unit tests pass.
 - Done: manifests, geometry/oracles, four configs, static readiness, matched
   initialization hashes, and corrected one-node/one-GPU Slurm contracts.
-- In progress: four full train-to-external-evaluation pipelines are submitted
-  to Slurm and pending allowed-node capacity.
+- Done: all four models completed the fixed ten training epochs.
+- Done: CAP18, CAP22, and CAP24 completed all 22,307 external records with
+  integrity PASS.
+- In progress: CAP20 external execution is at 6,897/22,307 records (31%); its
+  training and checkpoint selection are complete.
 - Blocked: none.
-- Most recent useful observation: the parent manifest contains all selected
-  route masks and their exact ON counts, so cap filtering needs no new inference.
+- Most recent useful observation: completed caps span sharply different
+  behavior—CAP22 selected an effectively ALL-ON checkpoint, CAP24 reduces mean
+  ON to 15.26 with an 8.78-point overall accuracy loss, and CAP18 reduces mean
+  ON to 9.79 with a 17.65-point loss. CAP20 remains required before assigning
+  the frozen phase outcome.
 
 ## Evidence That Matters
 
@@ -34,6 +40,7 @@ by the unchanged 22,307-record external execution evaluation.
 | Frozen parent max-50 manifest SHA-256 is `3620a347...` | `outputs/label_regeneration/v1/post_generation/binary_predictor_manifest_v1.jsonl` | Fixes supervision provenance | confirmed |
 | Prior Pareto BCE best train Hit@1 was 18.27% | `reports/binary_pareto_training_fit_analysis.md` | Strong objection: cap filtering may not repair fitting | confirmed |
 | Existing full10 trainer implements matched duplicated BCE and checkpoint rule | `experiments/train_binary_polar_full10.py` | Allows a supervision-only comparison | confirmed |
+| Interim completed-cap execution checkpoint | `outputs/binary_cap_sweep_v1/interim_results_20260820.json` | Prevents partial results from being mistaken for the final four-cap comparison | confirmed |
 
 ## Failed Attempts and Lessons
 
@@ -49,17 +56,16 @@ by the unchanged 22,307-record external execution evaluation.
 
 ## Next-Step Decision
 
-- Deliberation mode: fast
-- Active objective and bottleneck: execute the already fixed four-cap experiment; first freeze exact matched manifests and verify the existing train/eval contract.
+- Deliberation mode: standard
+- Active objective and bottleneck: finish the already frozen four-cap external comparison; CAP20 is the sole incomplete condition.
 - Relevant memory item used: Phase 24 showed strict Pareto underfit and became ALL-OFF-heavy.
-- Confirmed observation: all required route geometry is present in the frozen parent manifest.
-- Unverified interpretation: an intermediate cap may improve the learned accuracy-compute frontier.
+- Confirmed observation: CAP18/22/24 completed with integrity PASS and have materially different accuracy/compute behavior.
+- Unverified interpretation: CAP20 may or may not occupy a useful intermediate frontier point.
 - Diagnosis: unknown
-- Chosen action: freeze and audit cap manifests, then run four matched ten-epoch train/eval pipelines in parallel.
-- How this differs from failed attempts: keeps every cap-valid selected route and changes only maximum ON count.
-- Automatic execution authorized: yes
-- Authorization basis: explicit user request to perform `plans/cap_training.md`.
-- Stop condition: finish the frozen external comparison and assign exactly one plan outcome, or stop on a technical integrity failure.
+- Chosen action: let the unchanged CAP20 pipeline complete, then aggregate all four caps once.
+- Strongest objection: three completed caps already look unfavorable, but concluding now would omit the prospectively selected CAP20 condition most likely to lie between CAP22 and CAP24.
+- Automatic execution authorized: already running under the approved plan; no new job or experiment is authorized.
+- Stop condition: CAP20 completion and frozen four-cap aggregation, or a technical integrity failure.
 
 ## Latest Research-Action Result
 
@@ -85,3 +91,16 @@ by the unchanged 22,307-record external execution evaluation.
   10-hour limit; commands, nodes, GPU count, data, configs, and outputs did not
   change.
 - CAP22 job 102860 began running on node02 immediately after the amendment.
+
+### Interim completed-cap result (2026-08-20)
+
+- CAP18, CAP22, and CAP24 each completed 22,307/22,307 external records with
+  integrity PASS; CAP20 completed training and is still executing externally.
+- Nonoverlapping-suite pooled results (22,307 records): ALL-ON accuracy 75.89%;
+  CAP22 75.89% at mean ON 28.00; CAP24 67.10% at mean ON 15.26; CAP18 58.23%
+  at mean ON 9.79.
+- Confirmed observation: CAP22 is effectively an ALL-ON collapse (99.996%);
+  CAP24 and CAP18 save visual-layer execution but incur large net Harm over
+  Rescue. This is interim evidence only, not the final plan outcome.
+- Evidence: `outputs/binary_cap_sweep_v1/interim_results_20260820.json` and
+  `reports/binary_cap{18,22,24}_external_eval.md`.

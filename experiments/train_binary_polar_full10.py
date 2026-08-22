@@ -508,6 +508,7 @@ def main() -> None:
         "full10_question_and_image_question_only",
         "binary_pareto_full10_image_question_only",
         "binary_cap_sweep_full10_image_question_only",
+        "binary_cap_nll5_executed_validation_image_question_only",
     }:
         raise RuntimeError("config does not authorize this full10 action")
     for name, specification in config["gates"].items():

@@ -1,0 +1,24 @@
+{
+  "exp_id": "cap_nll5_freeze_cpu_v1",
+  "status": "running",
+  "owner_agent": "code_agent",
+  "current_step": "Running GPU job cap_nll5_freeze_cpu_v1",
+  "tmux_session": "",
+  "slurm_job_name": "cap_nll5_freeze",
+  "slurm_job_id": "102959",
+  "gpu_type": "A4000",
+  "node": "node05",
+  "log_path": "runs/binary_cap_nll5_v1/freeze.log",
+  "result_path": "outputs/binary_cap_nll5_v1/audits/training_readiness_v1.json",
+  "display_summary": "GPU job cap_nll5_freeze_cpu_v1 is running for cap_nll5_freeze_cpu_v1.",
+  "history": [
+    {
+      "time": "2026-08-20T01:30:52+00:00",
+      "event": "gpu_launch",
+      "message": "sbatch_job_id=102959 slurm_job=cap_nll5_freeze"
+    }
+  ],
+  "created_at": "2026-08-20T01:30:52+00:00",
+  "started_at": "2026-08-20T01:30:52+00:00",
+  "updated_at": "2026-08-20T01:30:52+00:00"
+}
