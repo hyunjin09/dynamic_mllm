@@ -18,13 +18,22 @@
   routes, and 5,112,442 exact prefix-trie nodes. The 7,621,638-parameter router
   uses actual routed text/visual states, separate READ/WRITE queries, and
   set-valued valid-next-action supervision; Qwen remains frozen. All 476 tests
-  pass. The fail-closed Slurm chain is now historical: smoke 1663 failed on
+  pass. The first fail-closed Slurm chain is historical: smoke 1663 failed on
   2026-08-28 because `outputs/four_action_online_router/smoke_v1` already
   existed, and the user explicitly requested cancellation of never-started
   dependent training job 1664 and evaluation job 1665 at 11:00:54 KST. The
-  fresh user queue was empty immediately afterward. No fix or relaunch is
-  authorized. The separate POLAR job 1662 had already reached a terminal
-  failure and was not affected by this cancellation. Phase memory:
+  fresh user queue was empty immediately afterward. On 2026-08-29 the user
+  authorized the main training and restricted external evaluation. A focused
+  red/green regression proved and repaired the DDP smoke-directory race; all
+  480 project tests pass and portable fix commit `23ed41c` is pushed. A fresh
+  eight-H100 v2 chain is queued: semantic smoke 1684, ten-epoch training 1685
+  (`afterok:1684`), and ChartQA/MMMU-Pro/POPE evaluation 1686
+  (`afterok:1685`). Smoke is pending for `AssocGrpGRES` while all eight H100s
+  are occupied; downstream jobs are dependency-blocked. Fresh roots are
+  `smoke_v2`, `training_v2`, and `external_v2`; historical `smoke_v1` is
+  untouched. The separate POLAR job 1662 had already reached a terminal
+  failure and was not affected. Handoff:
+  `reports/four_action_online_router_h100_relaunch_20260829.md`. Phase memory:
   `workspace/phase_memory/phase_37_online_four_action_router.md`.
 
 - Active phase (2026-08-28): four-action Image+Question POLAR training on the

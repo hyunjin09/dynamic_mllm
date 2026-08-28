@@ -30,8 +30,12 @@ ChartQA, MMMU-Pro Standard/Vision, and POPE.
 - Canceled at the user's request on 2026-08-28: never-started training job 1664
   and never-started external-evaluation job 1665. The fresh user queue was
   empty immediately after cancellation.
-- Paused: no fix, replacement smoke, training, or evaluation launch is
-  authorized by the cancellation request.
+- Authorized and queued on 2026-08-29: fresh semantic smoke 1684, ten-epoch
+  training 1685 after successful smoke, and external evaluation 1686 after
+  successful training. Every job requests all eight H100s.
+- Current bottleneck: smoke 1684 is pending for `AssocGrpGRES`; training and
+  evaluation are dependency-blocked. No output exists under the fresh v2
+  roots yet.
 - Most recent useful observation: the existing audited VQA manifest contains
   6,811 replay-valid samples (5,945 train / 866 validation), 248,804 complete
   routes, and one executor contract across GQA, ChartQA, and TextVQA.
@@ -55,29 +59,43 @@ ChartQA, MMMU-Pro Standard/Vision, and POPE.
 | Approved online READ/WRITE router | Uses route-conditioned hidden states and function-specific features | Tests the plan's primary hypothesis | high | selected |
 
 ## Next-Step Decision
-- Deliberation mode: none; this was an explicit scheduler cancellation.
-- Active objective and bottleneck: paused after cancellation; the latest smoke
-  did not reach semantic validation because an existing-output guard stopped it.
-- Confirmed observation: jobs 1664 and 1665 were pending, never started, and
-  are now `CANCELLED by 1003`; the fresh user queue is empty.
-- Diagnosis: the direct smoke failure is confirmed; whether the existing smoke
-  payload is complete and reusable is unverified and was not investigated.
-- Chosen action: preserve the cancellation and terminal-job evidence only.
-- Automatic execution authorized: no.
-- Authorization basis: the user's explicit request to cancel the two queued
-  jobs did not authorize a fix or replacement run.
-- Stop condition: satisfied when both exact IDs were canceled and absence from
-  the fresh queue was verified.
+- Deliberation mode: fast; the user explicitly authorized the already-approved
+  online-router training and its three-family external evaluation on all eight
+  H100s.
+- Active objective and bottleneck: pass the real eight-rank semantic smoke,
+  then complete ten-epoch training and checksum-bound external evaluation.
+- Relevant failure used: smoke 1663 left only an empty output directory. Code
+  inspection and a red/green regression showed that every rank checked for the
+  directory while rank 0 created it, so late ranks mistook the new directory
+  for stale output.
+- Confirmed repair: only rank 0 now checks/creates the shared smoke directory;
+  all ranks synchronize afterward. The focused test failed before the repair,
+  then passed, and the full project suite passes 480 tests. Portable fix commit:
+  `23ed41c`.
+- Chosen action: submit a fresh fail-closed eight-H100
+  `smoke_v2 -> training_v2 -> external_v2` Slurm chain. Each downstream job
+  uses an exact `afterok` dependency; the prior empty `smoke_v1` directory and
+  historical jobs remain untouched.
+- Automatic execution authorized: yes.
+- Authorization basis: explicit user instruction on 2026-08-29 to perform the
+  training and then evaluate ChartQA, MMMU-Pro Standard/Vision, and POPE using
+  eight GPUs.
+- Stop condition: semantic smoke failure, frozen-contract mismatch, backbone
+  gradients, invalid multi-route supervision, training integrity failure, or
+  external preflight/merge failure. Resource pending alone is not a failure.
 
 ## Latest Research-Action Result
-- Operational action taken: canceled pending jobs 1664 and 1665 on the user's
-  explicit request and verified a fresh empty user queue.
-- Result: neither job started; smoke 1663 and POLAR job 1662 were already
-  terminal failures and were not canceled by this action.
-- Evidence saved: Slurm accounting, the two Slurm logs, this phase memory,
-  `workspace/workflow_state.md`, and
-  `analysis/4action_router/experiment_log.md`.
-- Failure or issue: smoke 1663 found an existing output directory before
-  semantic validation. No diagnosis beyond that direct observation is claimed.
-- Next implication: do not fix, delete/reuse the existing smoke output, or
-  relaunch any part of the chain without a new explicit request.
+- Action taken: reproduced the smoke-directory startup race with a failing
+  test, repaired rank-zero-only directory creation, passed the focused test and
+  all 480 project tests, pushed fix commit `23ed41c`, and submitted a fresh
+  eight-H100 fail-closed v2 chain.
+- Result: jobs 1684/1685/1686 are live-PENDING with exact dependencies
+  `1685=afterok:1684` and `1686=afterok:1685`. No v2 scientific output exists
+  yet; all eight H100s are currently allocated to other work.
+- Evidence saved: `reports/four_action_online_router_h100_relaunch_20260829.md`,
+  `analysis/4action_router/experiment_log.md`, the Slurm job records, and this
+  phase memory.
+- Failure or issue: none in the replacement run yet. Resource pending is
+  expected and does not relax any smoke or semantic gate.
+- Next implication: monitor smoke 1684 when allocated. Training and evaluation
+  start automatically only after their exact predecessor succeeds.

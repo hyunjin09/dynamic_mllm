@@ -32,3 +32,18 @@
 - Slurm accounting also established that separate POLAR job 1662 had already
   failed before this cancellation; it was not changed by the cancellation.
   No fix, output reuse/deletion, or relaunch is authorized.
+- 2026-08-29 authorization: the user requested the online-router training and
+  subsequent ChartQA/MMMU-Pro/POPE evaluation using all eight H100s.
+- Root-cause repair: a red/green test reproduced the DDP directory race in
+  which late ranks observed the directory just created by rank 0. Rank 0 alone
+  now checks/creates the shared smoke root before the barrier. The focused test
+  and all 480 project tests pass; fix commit `23ed41c` is pushed.
+- Fresh output roots are `smoke_v2`, `training_v2`, `external_v2`, and
+  `external_analysis_v2`. The empty historical `smoke_v1` directory was not
+  deleted, renamed, or reused.
+- Submitted all-eight-H100 job chain: smoke 1684; training 1685 with
+  `afterok:1684`; evaluation 1686 with `afterok:1685`. Direct `scontrol`
+  verification confirmed both dependency fields. Smoke is pending for
+  `AssocGrpGRES`; downstream jobs are dependency-blocked.
+- Exact launch hashes, resources, paths, and continuation commands are saved in
+  `reports/four_action_online_router_h100_relaunch_20260829.md`.
