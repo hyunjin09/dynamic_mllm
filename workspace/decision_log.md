@@ -21,17 +21,22 @@ Do not copy raw logs or provisional explanations here.
   targets, environments, or ignored payloads as portable facts. Those must be
   verified independently on each server.
 - Consequence for future actions:
-  1. Before work, fetch the shared branch and reconcile remote commits without
+  1. Whenever the user asks to follow up work from another server, first read
+     `workspace/workflow_state.md`, `workspace/decision_log.md`, the relevant
+     active file under `workspace/phase_memory/`, and the newest matching
+     phase-specific handoff or report. This four-file handoff read is required,
+     not optional context discovery.
+  2. Before work, fetch the shared branch and reconcile remote commits without
      force-pushing or discarding another server's changes.
-  2. Commit and push portable code, configs, plans, tests, compact reports,
+  3. Commit and push portable code, configs, plans, tests, compact reports,
      checksums, and updated workflow/phase state at bounded handoff points.
-  3. Record exact Git commit, config and source hashes, commands, cohort/count
+  4. Record exact Git commit, config and source hashes, commands, cohort/count
      contracts, output locations, completion boundaries, failures, and the
      scientific implication of the latest result.
-  4. Treat datasets, labels, checkpoints, raw outputs, and generated analysis
+  5. Treat datasets, labels, checkpoints, raw outputs, and generated analysis
      as separately transferred assets. Record their real paths, sizes/counts,
      and checksums; never infer their presence from Git reports.
-  5. Keep `ACCESS_POLICY.md`, `infra/`, scheduler state, and
+  6. Keep `ACCESS_POLICY.md`, `infra/`, scheduler state, and
      `workspace/env_state.md` machine-local. Record server differences and
      revalidate live GPU/scheduler state instead of reusing historical jobs.
 - Revisit condition: The user replaces the concurrent multi-server workflow

@@ -27,23 +27,34 @@
   failure and was not affected by this cancellation. Phase memory:
   `workspace/phase_memory/phase_37_online_four_action_router.md`.
 
-- Active phase (2026-08-28): four-action Image+Question POLAR training
-  preparation. Two matched ten-epoch runs are frozen: duplicated one-hot
-  action BCE and exact complete-valid-set NLL. The audited supervised
-  population is 6,811 GQA/ChartQA/TextVQA records (5,945 train / 866
-  validation) with all 248,804 replay-valid routes; 106 source records with no
-  replay-valid route are explicitly excluded and retained in the audit. The
-  model emits categorical `[B,28,4]` logits in executor order IGNORE,
-  READ_ONLY, WRITE_ONLY, FULL and consumes only Image+Question inputs. Both
-  static preflights pass and the exact 14,960-row ChartQA/MMMU-Pro/POPE
-  external population is present. Historical job 1662 completed cache
-  extraction and both matched training stages, then failed during the
-  external-evaluation preflight because the attention mask and indexed tensor
-  were on different devices in Qwen position-ID construction. It was already
-  terminal before jobs 1664/1665 were canceled and was not modified. No
-  evaluation relaunch is authorized.
-  Machine-local eight-GPU launch guidance is ignored by Git in
-  `infra/four_action_polar_runbook.md`. Phase memory:
+- Active phase (2026-08-28): four-action Image+Question POLAR training on the
+  current A6000 server. Two matched ten-epoch runs are frozen: duplicated
+  one-hot action BCE and exact complete-valid-set NLL. A deterministic
+  machine-local path rebase reproduces 6,811 GQA/ChartQA/TextVQA records
+  (5,945 train / 866 validation), 248,804 routes, 6,490 image groups, and 106
+  explicit zero-valid exclusions. Both static preflights pass against the
+  local Qwen2.5-VL/Qwen3 assets and exact 14,960-row ChartQA/MMMU-Pro/POPE
+  population. Never-started four-GPU node07 job `105063` is cancelled. The
+  supplied node03 allocation `105067` was released without project execution
+  after a device-handle failure made PyTorch report zero CUDA devices.
+  Replacement job `105068` finalized the fresh cache and completed both ten-
+  epoch training runs (470 steps each; BCE selected epoch 8, NLL epoch 6).
+  Both selected checkpoints decode the full 866-record validation set as
+  all-FULL with Hit@1 0.585450. Pipeline `105068` then exited `1` before the
+  first external preflight sample completed because Qwen2.5-VL position-ID
+  construction received CPU `mm_token_type_ids` with GPU prompt tensors. That
+  contract is now repaired with a focused regression (9/9 focused tests pass).
+  BCE evaluation-only preflight passed all six native-parity and determinism
+  fixtures. One monitor-only schema error stopped job `105448` after 32 rows
+  had been atomically saved; no evaluator fault or partial file occurred.
+  Replacement job `105451` is running on one node06 A6000 and resumed those
+  exact rows. At the 2026-08-29 Git handoff boundary, 6,240/14,960 BCE rows
+  were present exactly once; NLL follows sequentially. External
+  evaluation remains incomplete and partial outcomes must not be interpreted.
+  Other-server job `1662` independently completed its machine-local cache and
+  both training processes before the same preflight failure; it is terminal
+  historical evidence on this server and its payloads are not implied by Git.
+  Evidence: `reports/four_action_polar_tmux2_launch_20260828.md`; phase memory:
   `workspace/phase_memory/phase_36_four_action_polar_training.md`.
 
 - Active phase (2026-08-25): executing `plans/4way_labeling_3.md` over the

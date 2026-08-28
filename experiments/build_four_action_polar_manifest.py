@@ -29,6 +29,30 @@ def read_jsonl(path: Path) -> list[dict[str, Any]]:
         return [json.loads(line) for line in handle if line.strip()]
 
 
+def remap_image_paths(
+    rows: Iterable[dict[str, Any]],
+    *,
+    source_prefix: str | None,
+    target_prefix: str | None,
+) -> list[dict[str, Any]]:
+    """Rebase machine-local absolute image paths without changing sample identity."""
+    copied = [dict(row) for row in rows]
+    if source_prefix is None and target_prefix is None:
+        return copied
+    if not source_prefix or not target_prefix:
+        raise ValueError("image path remapping requires both source and target prefixes")
+    source = source_prefix.rstrip("/") + "/"
+    target = target_prefix.rstrip("/") + "/"
+    for row in copied:
+        value = str(row.get("image_path") or "")
+        if not value.startswith(source):
+            raise ValueError(
+                f"source {row.get('uid')!r} image path does not start with {source!r}"
+            )
+        row["image_path"] = target + value[len(source) :]
+    return copied
+
+
 def _verify_sidecar(path: Path) -> str:
     digest = file_sha256(path)
     sidecar = path.with_suffix(path.suffix + ".sha256")
@@ -246,14 +270,20 @@ def main() -> None:
         type=Path,
         default=Path("outputs/four_action_polar/preparation_v1"),
     )
+    parser.add_argument("--image-path-prefix-from")
+    parser.add_argument("--image-path-prefix-to")
     parser.add_argument("--resume", action="store_true")
     args = parser.parse_args()
 
-    source = [
+    source = remap_image_paths(
+        [
         row
         for row in read_jsonl(args.source_manifest)
         if str(row.get("dataset")) in TRAINING_DATASETS
-    ]
+        ],
+        source_prefix=args.image_path_prefix_from,
+        target_prefix=args.image_path_prefix_to,
+    )
     rows, audit = build_manifest_rows(source, args.records_root, layer_count=28)
     expected = {"gqa": 3333, "chartqa": 1756, "textvqa": 1722}
     if audit["dataset_counts"] != expected or audit["samples"] != 6811:
@@ -275,6 +305,14 @@ def main() -> None:
             "source_manifest": str(args.source_manifest.resolve()),
             "source_manifest_sha256": file_sha256(args.source_manifest),
             "records_root": str(args.records_root.resolve()),
+            "image_path_prefix_mapping": (
+                {
+                    "from": args.image_path_prefix_from,
+                    "to": args.image_path_prefix_to,
+                }
+                if args.image_path_prefix_from is not None
+                else None
+            ),
         }
     )
     if args.resume and manifest_path.exists() and audit_path.exists():

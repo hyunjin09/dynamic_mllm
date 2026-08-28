@@ -4,7 +4,10 @@ import json
 
 import pytest
 
-from experiments.build_four_action_polar_manifest import build_manifest_rows
+from experiments.build_four_action_polar_manifest import (
+    build_manifest_rows,
+    remap_image_paths,
+)
 from tools.research_analysis.four_action.sequential_label_jobs import (
     file_sha256,
     safe_filename,
@@ -136,3 +139,29 @@ def test_manifest_builder_accounts_for_zero_valid_current_replay_exclusions(tmp_
     assert audit["samples"] == 1
     assert audit["zero_valid_route_exclusions"] == 1
     assert audit["zero_valid_route_exclusion_uids"] == ["gqa:excluded"]
+
+
+def test_manifest_builder_remaps_machine_local_image_prefix() -> None:
+    rows = [{"uid": "gqa:one", "image_path": "/old/root/images/one.jpg"}]
+
+    mapped = remap_image_paths(
+        rows,
+        source_prefix="/old/root",
+        target_prefix="/new/root",
+    )
+
+    assert mapped[0]["image_path"] == "/new/root/images/one.jpg"
+    assert rows[0]["image_path"] == "/old/root/images/one.jpg"
+
+
+def test_manifest_builder_rejects_partial_or_mismatched_prefix_mapping() -> None:
+    rows = [{"uid": "gqa:one", "image_path": "/old/root/images/one.jpg"}]
+
+    with pytest.raises(ValueError, match="requires both"):
+        remap_image_paths(rows, source_prefix="/old/root", target_prefix=None)
+    with pytest.raises(ValueError, match="does not start"):
+        remap_image_paths(
+            rows,
+            source_prefix="/different/root",
+            target_prefix="/new/root",
+        )

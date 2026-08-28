@@ -3,7 +3,13 @@ from __future__ import annotations
 import torch
 from torch import nn
 
-from binary_policy.executor.inputs import BinaryInputs, resolve_causal_lm, scatter_streams, split_streams
+from binary_policy.executor.inputs import (
+    BinaryInputs,
+    _position_ids,
+    resolve_causal_lm,
+    scatter_streams,
+    split_streams,
+)
 from binary_policy.executor.layers import visual_off_layer, visual_on_layer
 
 
@@ -137,3 +143,28 @@ def test_native_conditional_lm_is_not_unwrapped_via_hf_base_model_property():
 
     native = Native()
     assert resolve_causal_lm(native) is native
+
+
+def test_position_ids_moves_mm_token_types_to_embedding_device():
+    class PositionRoot:
+        def compute_3d_position_ids(self, **kwargs):
+            target_device = kwargs["inputs_embeds"].device
+            assert kwargs["input_ids"].device == target_device
+            assert kwargs["attention_mask"].device == target_device
+            assert kwargs["mm_token_type_ids"].device == target_device
+            return torch.zeros(3, 1, 4, dtype=torch.long, device=target_device), None
+
+    class CausalLM:
+        model = PositionRoot()
+
+    full_embeddings = torch.empty(1, 4, 8, device="meta")
+    position_ids, rope_deltas = _position_ids(
+        CausalLM(),
+        input_ids=torch.ones(1, 4, dtype=torch.long),
+        attention_mask=torch.ones(1, 4, dtype=torch.long),
+        full_embeddings=full_embeddings,
+        inputs={"mm_token_type_ids": torch.zeros(1, 4, dtype=torch.int32)},
+    )
+
+    assert position_ids.device == full_embeddings.device
+    assert rope_deltas is None

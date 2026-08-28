@@ -113,6 +113,9 @@ def _position_ids(causal_lm, input_ids, attention_mask, full_embeddings, inputs)
             attention_mask=attention_mask.to(full_embeddings.device),
         )
     root = causal_lm.model
+    mm_token_type_ids = inputs.get("mm_token_type_ids")
+    if mm_token_type_ids is not None:
+        mm_token_type_ids = mm_token_type_ids.to(full_embeddings.device)
     result = root.compute_3d_position_ids(
         input_ids=input_ids.to(full_embeddings.device),
         image_grid_thw=inputs.get("image_grid_thw"),
@@ -121,7 +124,7 @@ def _position_ids(causal_lm, input_ids, attention_mask, full_embeddings, inputs)
         inputs_embeds=full_embeddings,
         attention_mask=attention_mask.to(full_embeddings.device),
         past_key_values=None,
-        mm_token_type_ids=inputs.get("mm_token_type_ids"),
+        mm_token_type_ids=mm_token_type_ids,
     )
     if isinstance(result, tuple):
         return result
