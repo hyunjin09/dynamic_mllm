@@ -1,0 +1,236 @@
+{
+  "action_counts": {
+    "FULL": 4332540,
+    "IGNORE": 2274293,
+    "READ_ONLY": 197467,
+    "WRITE_ONLY": 162212
+  },
+  "action_counts_by_layer": [
+    {
+      "FULL": 181047,
+      "IGNORE": 55570,
+      "READ_ONLY": 10980,
+      "WRITE_ONLY": 1207
+    },
+    {
+      "FULL": 166279,
+      "IGNORE": 70800,
+      "READ_ONLY": 9070,
+      "WRITE_ONLY": 2655
+    },
+    {
+      "FULL": 161156,
+      "IGNORE": 75778,
+      "READ_ONLY": 9965,
+      "WRITE_ONLY": 1905
+    },
+    {
+      "FULL": 151010,
+      "IGNORE": 85385,
+      "READ_ONLY": 10215,
+      "WRITE_ONLY": 2194
+    },
+    {
+      "FULL": 151670,
+      "IGNORE": 85209,
+      "READ_ONLY": 8105,
+      "WRITE_ONLY": 3820
+    },
+    {
+      "FULL": 152872,
+      "IGNORE": 83721,
+      "READ_ONLY": 8808,
+      "WRITE_ONLY": 3403
+    },
+    {
+      "FULL": 151361,
+      "IGNORE": 83172,
+      "READ_ONLY": 11569,
+      "WRITE_ONLY": 2702
+    },
+    {
+      "FULL": 152859,
+      "IGNORE": 81498,
+      "READ_ONLY": 8724,
+      "WRITE_ONLY": 5723
+    },
+    {
+      "FULL": 153016,
+      "IGNORE": 82502,
+      "READ_ONLY": 9427,
+      "WRITE_ONLY": 3859
+    },
+    {
+      "FULL": 153457,
+      "IGNORE": 82090,
+      "READ_ONLY": 8481,
+      "WRITE_ONLY": 4776
+    },
+    {
+      "FULL": 152266,
+      "IGNORE": 82437,
+      "READ_ONLY": 11487,
+      "WRITE_ONLY": 2614
+    },
+    {
+      "FULL": 151390,
+      "IGNORE": 83790,
+      "READ_ONLY": 9707,
+      "WRITE_ONLY": 3917
+    },
+    {
+      "FULL": 151111,
+      "IGNORE": 83638,
+      "READ_ONLY": 9171,
+      "WRITE_ONLY": 4884
+    },
+    {
+      "FULL": 150183,
+      "IGNORE": 84169,
+      "READ_ONLY": 10109,
+      "WRITE_ONLY": 4343
+    },
+    {
+      "FULL": 153025,
+      "IGNORE": 80915,
+      "READ_ONLY": 5223,
+      "WRITE_ONLY": 9641
+    },
+    {
+      "FULL": 151118,
+      "IGNORE": 83064,
+      "READ_ONLY": 7354,
+      "WRITE_ONLY": 7268
+    },
+    {
+      "FULL": 149631,
+      "IGNORE": 84434,
+      "READ_ONLY": 5397,
+      "WRITE_ONLY": 9342
+    },
+    {
+      "FULL": 150753,
+      "IGNORE": 85165,
+      "READ_ONLY": 6141,
+      "WRITE_ONLY": 6745
+    },
+    {
+      "FULL": 150377,
+      "IGNORE": 85714,
+      "READ_ONLY": 6531,
+      "WRITE_ONLY": 6182
+    },
+    {
+      "FULL": 152001,
+      "IGNORE": 81120,
+      "READ_ONLY": 2471,
+      "WRITE_ONLY": 13212
+    },
+    {
+      "FULL": 152401,
+      "IGNORE": 84424,
+      "READ_ONLY": 5336,
+      "WRITE_ONLY": 6643
+    },
+    {
+      "FULL": 152069,
+      "IGNORE": 84479,
+      "READ_ONLY": 5143,
+      "WRITE_ONLY": 7113
+    },
+    {
+      "FULL": 157351,
+      "IGNORE": 79305,
+      "READ_ONLY": 3167,
+      "WRITE_ONLY": 8981
+    },
+    {
+      "FULL": 156970,
+      "IGNORE": 79928,
+      "READ_ONLY": 3887,
+      "WRITE_ONLY": 8019
+    },
+    {
+      "FULL": 155315,
+      "IGNORE": 82090,
+      "READ_ONLY": 4217,
+      "WRITE_ONLY": 7182
+    },
+    {
+      "FULL": 155187,
+      "IGNORE": 83824,
+      "READ_ONLY": 4155,
+      "WRITE_ONLY": 5638
+    },
+    {
+      "FULL": 156415,
+      "IGNORE": 82317,
+      "READ_ONLY": 2627,
+      "WRITE_ONLY": 7445
+    },
+    {
+      "FULL": 160250,
+      "IGNORE": 77755,
+      "READ_ONLY": 0,
+      "WRITE_ONLY": 10799
+    }
+  ],
+  "config": "configs/four_action_online_router_v1.yaml",
+  "config_sha256": "37635f5acbd8842c387683e57de9e76d4a69dced1b23f57010f23e8ff579f21d",
+  "excluded_training_datasets": [
+    "wemath_standard",
+    "wemath_pro"
+  ],
+  "executor_contract_sha256": "d8f524b928fb30ea0bb37c6a9389893adb338d4f91992d85255fdfb9bea283cb",
+  "manifest": "outputs/four_action_polar/preparation_v1/manifest_v1.jsonl",
+  "manifest_sha256": "6a50ca1a2d5c512d7bd8cededfc4732c93258264ae471e1fd4653c6c16637c28",
+  "passed": true,
+  "router_parameters": 7621638,
+  "routes": 248804,
+  "routes_per_sample": {
+    "count": 6811,
+    "max": 103,
+    "mean": 36.529731316987224,
+    "median": 46,
+    "min": 1,
+    "p90": 53,
+    "p95": 68
+  },
+  "sample_counts": {
+    "train/chartqa/C2C": 881,
+    "train/chartqa/W2C": 652,
+    "train/gqa/C2C": 1759,
+    "train/gqa/W2C": 1147,
+    "train/textvqa/C2C": 908,
+    "train/textvqa/W2C": 598,
+    "validation/chartqa/C2C": 127,
+    "validation/chartqa/W2C": 96,
+    "validation/gqa/C2C": 252,
+    "validation/gqa/W2C": 175,
+    "validation/textvqa/C2C": 131,
+    "validation/textvqa/W2C": 85
+  },
+  "samples": 6811,
+  "schema_version": "four_action_online_router_label_trie_audit_v1",
+  "training_datasets": [
+    "gqa",
+    "chartqa",
+    "textvqa"
+  ],
+  "trie_nodes": {
+    "count": 6811,
+    "max": 1906,
+    "mean": 750.6154749669652,
+    "median": 972,
+    "min": 28,
+    "p90": 1125,
+    "p95": 1136,
+    "total": 5112442
+  },
+  "valid_action_multiplicity": {
+    "four": 2625,
+    "one": 4886909,
+    "three": 11210,
+    "two": 211698
+  }
+}

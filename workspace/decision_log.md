@@ -3,6 +3,28 @@
 Record only decisions, pivots, and lessons that should affect later phases.
 Do not copy raw logs or provisional explanations here.
 
+## 2026-08-27 — Restrict prospective 4-action POLAR external evaluation to three benchmark families
+
+- Decision or promoted lesson: For future 4-action POLAR evaluation, run only
+  ChartQA, MMMU-Pro Standard and Vision, and all three POPE splits. Do not run
+  TextVQA, DocVQA, MMStar, or base MMMU unless the user later expands the
+  scope explicitly.
+- Triggering evidence: Explicit user scope decision on 2026-08-27.
+- Evidence paths: `eval/reference/shared_prefix_eval_20260812/` retains the
+  historical seven-benchmark-family protocol; this entry defines the narrower
+  prospective 4-action POLAR evaluation scope.
+- Confidence: high.
+- Applies when: Building, launching, estimating, or reporting external
+  evaluation for the new 4-action POLAR predictor.
+- Does not apply when: Describing or reproducing the historical shared-prefix
+  evaluation bundle, whose original benchmark coverage remains unchanged.
+- Consequence for future actions: Materialize and evaluate ChartQA (2,500),
+  MMMU-Pro Standard (1,730), MMMU-Pro Vision (1,730), and POPE adversarial,
+  popular, and random (3,000 each), for 14,960 total rows. Report Core VQA,
+  multiple-choice, and POPE metrics separately rather than pooling them.
+- Revisit condition: The user explicitly approves adding or replacing an
+  evaluation benchmark.
+
 ## 2026-08-22 — Task family predicts visual-access amount more than placement
 
 - Decision or promoted lesson: Preserve task-family differences in direct
@@ -932,3 +954,75 @@ Do not copy raw logs or provisional explanations here.
   must first distinguish architecture/input capacity from optimization fit.
 - Evidence: `reports/binary_pareto_training_fit_analysis.md` and
   `outputs/binary_pareto_v1/training_fit_analysis_v1/`.
+
+## 2026-08-23 — Re-freeze runtime-defined cohort predicates after server transfer
+
+- Decision or promoted lesson: a transferred matched cache may supply candidate
+  IDs, route evidence, and historical provenance, but any cohort predicate
+  defined by current model generation/correctness must be re-evaluated and
+  frozen under the exact current executor before an intervention sweep.
+- Triggering evidence: four-action primary job `1497` encountered
+  `gqa:gqa_ge_16564303`, whose transferred FULL answer was wrong while current
+  native and unified FULL agreed on a correct answer. An all-candidate unified-
+  FULL freeze subsequently excluded 32/1,912 primary candidates and 26/2,110
+  FULL-correct-control candidates, with zero native/unified semantic issue.
+- Evidence paths:
+  `analysis/4action_answer_alignment/cohort_eligibility__unified_v1/summary.json`,
+  `logs/slurm/four-action-unified-primary-r2-20260823-1497.log`, and
+  `workspace/phase_memory/phase_31_four_action_answer_alignment.md`.
+- Applies when: a cohort definition contains a generated-answer or evaluator-
+  correctness condition and the runtime, server, model stack, or execution path
+  differs from the cache-producing environment.
+- Does not apply when: discarding historical routes or redefining continuous
+  factorial effects; those remain within the unified executor and use no drift
+  threshold.
+
+## 2026-08-24 — Treat binary route choices and visual-operation effects as context-dependent
+
+- Decision or promoted lesson: do not treat every OFF layer in a discovered
+  correcting route as individually causal, and do not expect a FULL-context
+  single-layer rescue map to recover the operations required inside a
+  successful multi-layer route. Use route-conditioned intervention when the
+  claim concerns why a cached correcting route works.
+- Triggering evidence: among 17,262 OFF positions in 1,804 current-correct
+  anchors, 9,382 (54.35%) were individually redundant, while 7,880 were
+  necessary. The earlier FULL-context discrete local-rescue map recalled only
+  575/7,880 (7.30%) route-necessary positions; 92.70% were revealed only with
+  the other anchor suppressions held fixed. Continuous FULL-versus-route effect
+  Spearman correlations were 0.357 for READ and 0.177 for WRITE.
+- Evidence paths:
+  `analysis/4action_route_conditioned/aggregate_summary.json`,
+  `analysis/4action_route_conditioned/aggregate/full_context_comparison.parquet`,
+  `analysis/4action_route_conditioned/final_integrity_audit.json`, and
+  `analysis/4action_route_conditioned/route_conditioned_decomposition_report.md`.
+- Confidence: high for the frozen A+ population, current unified executor, and
+  selected cached anchors.
+- Applies when: interpreting cached search routes, designing route-mechanism
+  studies, or deciding whether dense-context local effects explain a
+  multi-layer correction.
+- Does not apply when: claiming an operation is globally harmful, claiming the
+  selected route is globally minimal, or claiming individually valid partial
+  restorations compose into a better four-action route/router.
+- Consequence for future actions: require current-runtime anchor validation and
+  route-conditioned necessity tests; test composability separately before any
+  true four-action search/router pivot.
+
+## 2026-08-25 — Do not use an unstable bounded beam as a four-action label oracle
+
+- Decision or promoted lesson: a bounded beam may be useful for exploration,
+  but do not promote its canonical route or positive set into supervision when
+  the prospectively chosen width is materially unstable against the wider
+  validation width. Preserve executor-valid evidence separately from
+  search-policy validity.
+- Triggering evidence: among 1,417 replay-valid route conversions from 24
+  completed five-dataset pilot samples, beam 8 and beam 16 disagreed on 322
+  canonical routes; 167 positive-set Jaccards were below 0.50 and the minimum
+  was 0.0. Binary parity, evaluator correctness, C2C gain, cache, checksum, and
+  worker checks had zero failures.
+- Evidence path:
+  `analysis/three_action_answer_aligned_label_conversion/early_stop_audit.md`.
+- Confidence: high for rejecting this beam-8 label contract; this does not
+  imply a unified-executor or model failure.
+- Consequence for future actions: use an approved exact verified policy when
+  every valid branch is required, or prospectively validate a bounded policy
+  before treating it as a label generator.

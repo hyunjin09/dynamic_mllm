@@ -1,5 +1,145 @@
 # Workflow State
 
+- Active phase (2026-08-28): online state-conditioned four-action router from
+  `plans/four_action_train.md`. The checksum-bound GQA/ChartQA/TextVQA
+  population has 6,811 samples (5,945 train / 866 validation), 248,804 valid
+  routes, and 5,112,442 exact prefix-trie nodes. The 7,621,638-parameter router
+  uses actual routed text/visual states, separate READ/WRITE queries, and
+  set-valued valid-next-action supervision; Qwen remains frozen. All 476 tests
+  pass. A separate fail-closed eight-GPU chain is live in Slurm: smoke 1663,
+  ten-epoch DDP training 1664 (`afterok:1663`), and ChartQA/MMMU-Pro/POPE
+  evaluation 1665 (`afterok:1664`). Smoke 1663 is currently pending for
+  `AssocGrpGRES`; downstream jobs are pending on dependencies. The unrelated
+  existing POLAR job 1662 remains pending and unchanged. Phase memory:
+  `workspace/phase_memory/phase_37_online_four_action_router.md`.
+
+- Active phase (2026-08-28): four-action Image+Question POLAR training
+  preparation. Two matched ten-epoch runs are frozen: duplicated one-hot
+  action BCE and exact complete-valid-set NLL. The audited supervised
+  population is 6,811 GQA/ChartQA/TextVQA records (5,945 train / 866
+  validation) with all 248,804 replay-valid routes; 106 source records with no
+  replay-valid route are explicitly excluded and retained in the audit. The
+  model emits categorical `[B,28,4]` logits in executor order IGNORE,
+  READ_ONLY, WRITE_ONLY, FULL and consumes only Image+Question inputs. Both
+  static preflights pass and the exact 14,960-row ChartQA/MMMU-Pro/POPE
+  external population is present. The resumable extraction, matched training,
+  and evaluation pipeline is submitted as job 1662 and is currently pending
+  for `AssocGrpGRES`; it remains separate from the online-router chain.
+  Machine-local eight-GPU launch guidance is ignored by Git in
+  `infra/four_action_polar_runbook.md`. Phase memory:
+  `workspace/phase_memory/phase_36_four_action_polar_training.md`.
+
+- Active phase (2026-08-25): executing `plans/4way_labeling_3.md` over the
+  frozen five-dataset 12,278-sample / 545,531-route authority. The replacement
+  reuses the validated unified executor/runtime/queue but implements a new
+  exact early-to-late all-branch W2C converter and preserves C2C mechanically;
+  it contains no score calibration or beam search. Superseded job 1609 was
+  canceled after 24 pilot records proved its beam gate could not pass (322
+  canonical mismatches and 167 Jaccard failures among 1,417 comparisons), and
+  dependent job 1610 was canceled before execution. The isolated exact
+  implementation passes 432/432 active tests. Eight-H100 smoke job 1611
+  completed `0:0` and passed every semantic/integrity gate (8 samples, 61
+  routes, 56 replay-valid, five quarantined replay failures, max branch count
+  two). At the user's request, full job 1612 was paused by clean cancellation
+  on 2026-08-26 after preserving 262 atomic completed records and zero
+  failures. The user subsequently authorized resumption, then requested that
+  VQA precede WeMath. Job 1628 was cleanly canceled with the committed count
+  still 262 and zero failures. Contract-neutral launch-priority job 1629 is
+  now running GQA (3,386), TextVQA (1,746), and ChartQA (1,785) first with 16
+  workers/eight H100s and preserved 33 VQA records before a user-requested
+  three-replica test. Isolated 24-worker job 1631 loaded cleanly but delivered
+  only 0.990x matched estimated-cost throughput (5 samples / 4,151 units versus
+  5 / 4,192), so it was rejected and canceled. A subsequent isolated
+  one-replica job 1634 showed promising 2.011x partial cost throughput at 440
+  seconds but was stopped at the user's request before its 551-second gate;
+  its four records remain isolated. A fresh one-replica repeat in job 1638
+  completed the full 551-second gate but achieved only 1.021x cost throughput
+  (5 samples / 4,282 units versus 5 / 4,192), below the prospective 1.10x keep
+  threshold, with zero failures. Its seven eventual records remain isolated.
+  Job 1641 completed `0:0` in 17:32:42 with all 6,917 VQA records and zero
+  failures. Job 1642 then processed WeMath for 10:39:05 before the user
+  requested a pause. It was cleanly canceled on 2026-08-27 with 1,081/5,361
+  WeMath records complete. The accepted output now contains 7,998 atomic
+  checksum-backed records and zero failure, temporary, or zero-byte record
+  files. Work is paused pending explicit user authorization; a fresh
+  full-wrapper launch will skip completed records and reclaim the 16
+  interrupted samples.
+  The active scientific contract remains SHA-256
+  `d8f524b928fb30ea0bb37c6a9389893adb338d4f91992d85255fdfb9bea283cb`.
+  Phase memory:
+  `workspace/phase_memory/phase_35_exact_sequential_four_action_labels.md`.
+
+- Completed phase (2026-08-24): executed the route-conditioned READ/WRITE
+  decomposition in `plans/4way_2.md`. The prerequisite four-action pipeline is
+  complete. Audit, the 1,880-row deterministic candidate manifest, arbitrary-
+  route unified executor extension, resumable anchor/pilot/full runners,
+  mergers, monitor, and aggregate-analysis preparation are implemented; 84
+  focused tests pass. Initial eight-H100 anchor job `1576` failed before any
+  scientific result because the deterministic CuBLAS workspace variable was
+  missing. Resumable eight-H100 job `1578` completed `0:0`, and the local freeze
+  retained 1,804 current-correct cached anchors (GQA 1,170; TextVQA 634),
+  excluding 76 by the prespecified rule. Both matched 56-sample pilots passed
+  all gates; two replicas/GPU achieved 12.183885 valid cells/s (1.414456x one
+  replica) at 34,745 MiB peak VRAM/H100 and was selected. Full all-eight-H100
+  job `1581` completed `0:0` in 29m13s with 16 workers. The exact local merge
+  passed 1,804 samples, 17,262 anchor-OFF positions, 51,786 new cells, 69,048
+  action rows, and zero failures. Of OFF positions, 45.65% are individually
+  necessary; among those, READ-mediated/WRITE-mediated/either/both shares are
+  20.55%/42.88%/9.94%/26.64%. READ-mediated positions are 7.82 layers later on
+  average than WRITE-mediated positions (95% CI 7.31--8.31), and FULL-context
+  local rescue recalls only 7.30% of route-necessary positions. Final raw-table
+  audit and checksums pass; 90 focused tests pass. A bounded compositionality
+  pilot is proposed but not authorized or launched. Phase memory:
+  `workspace/phase_memory/phase_32_route_conditioned_four_action.md`.
+
+- Completed phase (2026-08-24): executed `plans/4way.md` with M00/M10/M01/M11
+  defined entirely inside one unified materialized-mask executor. Native FULL
+  and old binary single-OFF are external semantic/drift diagnostics only.
+  Readiness supplied 1,235 GQA and 677 TextVQA A+ candidates, 868 matched-budget
+  no-correction-found candidates, and 2,110 FULL-correct/ALL-OFF-wrong
+  candidates. A current unified-FULL eligibility freeze in completed all-eight-
+  GPU job `1505` retained 1,880 primary A+ (1,222 GQA, 658 TextVQA), all 868
+  no-correction controls, and 2,084 vision-required controls; 58 candidates
+  were excluded because current correctness no longer matched the defining
+  FULL-wrong/FULL-correct condition.
+  The executor, answer-erosion readout, population trajectory rescues, route/
+  Hamming/control analysis, and final report automation pass the focused test
+  suite. Unified preflight, 8-example smoke, and 56-example validation passed
+  all current semantic gates; one historical cached FULL token mismatch kept
+  correctness unchanged and is reported as provenance-only. Job `1497` later
+  exposed a current-runtime cohort-boundary mismatch and failed; its dead
+  dependents were cancelled. Job `1506` then completed 1,501/1,880 eligible
+  primary records before the user authorized a utilization relaunch: live
+  profiling showed only 24--30% sampled SM use and 17.5--17.9 GiB memory per
+  H100 with one CPU-saturated worker/GPU. The replacement runner uses two
+  independent replicas per H100 (16 disjoint workers), preserves all completed
+  rows, and passes 62 focused tests. The two-replica ramp passed semantic,
+  worker-layout, uniqueness, failure, and Slurm-health gates but produced only
+  14.4067 samples/minute, 0.8004x the 18.0 one-replica baseline despite about
+  99% GPU utilization. It was recoverably rejected under the prespecified
+  1.20x throughput gate after preserving 1,574/1,880 unique primary rows.
+  One-replica primary `1557` subsequently passed exact 1,880-row coverage and
+  every structural/semantic stage gate. Selection `1562` produced 10,196
+  trajectory cells. Downstream runs exposed recoverable audit boundaries:
+  11 Control A TextVQA rows have no evaluator-valid correct target and are
+  explicitly excluded, leaving 857 analyzable controls; one vision row and one
+  rescue row showed only `9.2924e-05` and `5.7618e-05` final readout/direct-
+  score drift with tokens, correctness, caches, and intervention semantics
+  intact. A `1e-4` BF16 readout-identity diagnostic tolerance and resumable
+  mergers preserve those rows. Control A repair `1565` and vision repair
+  `1567` are now complete and pass their exact stage gates. Rescue `1569`
+  preserved 5,503/10,196 cells before revealing a TextVQA target-identity gate
+  error: its fixed baseline phrase trajectory matched that phrase's endpoint
+  score exactly, but the intervention state selected a different valid phrase.
+  The repaired gate fixes target identity across FULL/suppressed trajectories,
+  retains evaluator-best state margins, and reports phrase switching. All 67
+  focused tests pass. Eight-H100 resume `1572` completed and its checksum-
+  verified 10,196-cell merge passes every coverage, worker, semantic, and
+  failure gate. Final CPU analysis/report `1573` completed with exit `0:0`,
+  all newly written checksums verify, and the final aggregate/report covers
+  all 1,880 primary A+ samples plus both controls. Phase memory:
+  `workspace/phase_memory/phase_31_four_action_answer_alignment.md`.
+
 - Completed bounded analysis (2026-08-22): `plans/motivation_check4.md` passed
   all 12,544 raw-record, checksum, anchor, trace, and route-semantics checks.
   Outcome C: matched-prefix V+ minimum ON means are 8.66 GQA, 10.74 TextVQA,

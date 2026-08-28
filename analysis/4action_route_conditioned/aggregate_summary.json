@@ -1,0 +1,196 @@
+{
+  "anchor_off_position_count": 17262,
+  "bootstrap": {
+    "cluster": "image_group_id",
+    "layer_and_route_size_replicates": 1000,
+    "overall_replicates": 2000,
+    "seed": 20260824
+  },
+  "category_depth_comparison": {
+    "gqa": {
+      "cluster_count": 987,
+      "read_mediated_count": 1134,
+      "read_mediated_mean_layer": 17.112874779541446,
+      "read_minus_write_ci_high": 7.95080700492671,
+      "read_minus_write_ci_low": 6.745587577943588,
+      "read_minus_write_mean_layer": 7.343906322593449,
+      "replicates": 2000,
+      "valid_bootstrap_replicates": 2000,
+      "write_mediated_count": 2346,
+      "write_mediated_mean_layer": 9.768968456947997
+    },
+    "joint": {
+      "cluster_count": 1485,
+      "read_mediated_count": 1619,
+      "read_mediated_mean_layer": 17.790611488573195,
+      "read_minus_write_ci_high": 8.309802800298888,
+      "read_minus_write_ci_low": 7.312131287190974,
+      "read_minus_write_mean_layer": 7.821389825359226,
+      "replicates": 2000,
+      "valid_bootstrap_replicates": 2000,
+      "write_mediated_count": 3379,
+      "write_mediated_mean_layer": 9.969221663213968
+    },
+    "textvqa": {
+      "cluster_count": 498,
+      "read_mediated_count": 485,
+      "read_mediated_mean_layer": 19.37525773195876,
+      "read_minus_write_ci_high": 9.84231414774767,
+      "read_minus_write_ci_low": 8.072924625161834,
+      "read_minus_write_mean_layer": 8.951249987525074,
+      "replicates": 2000,
+      "valid_bootstrap_replicates": 2000,
+      "write_mediated_count": 1033,
+      "write_mediated_mean_layer": 10.424007744433688
+    }
+  },
+  "context_comparison": {
+    "gqa": {
+      "discrete_context_agreement_count": 5963,
+      "discrete_context_agreement_fraction": 0.5081380485726459,
+      "full_context_local_rescue_count": 671,
+      "full_context_rescue_precision_for_route_necessity": 0.35469448584202684,
+      "full_context_rescue_route_redundant_count": 433,
+      "matched_cell_count": 11735,
+      "read_effect_pearson": 0.3497233686240493,
+      "read_effect_spearman": 0.35681090003460025,
+      "read_harm_sign_agreement_fraction": 0.6264167021729868,
+      "route_necessary_count": 5577,
+      "route_necessary_full_context_missed_count": 5339,
+      "route_necessary_full_context_missed_fraction": 0.9573247265554958,
+      "route_necessary_full_context_rescue_count": 238,
+      "route_necessity_recall_from_full_context": 0.04267527344450421,
+      "route_redundant_count": 6158,
+      "write_effect_pearson": 0.13283175950000467,
+      "write_effect_spearman": 0.1851440828939411,
+      "write_harm_sign_agreement_fraction": 0.5916489135066042
+    },
+    "joint": {
+      "discrete_context_agreement_count": 8947,
+      "discrete_context_agreement_fraction": 0.5183061058973468,
+      "full_context_local_rescue_count": 1585,
+      "full_context_rescue_precision_for_route_necessity": 0.3627760252365931,
+      "full_context_rescue_route_redundant_count": 1010,
+      "matched_cell_count": 17262,
+      "read_effect_pearson": 0.36378919375355434,
+      "read_effect_spearman": 0.3573139188307937,
+      "read_harm_sign_agreement_fraction": 0.6255937898273665,
+      "route_necessary_count": 7880,
+      "route_necessary_full_context_missed_count": 7305,
+      "route_necessary_full_context_missed_fraction": 0.9270304568527918,
+      "route_necessary_full_context_rescue_count": 575,
+      "route_necessity_recall_from_full_context": 0.07296954314720812,
+      "route_redundant_count": 9382,
+      "write_effect_pearson": 0.15432989537524597,
+      "write_effect_spearman": 0.1770908380968403,
+      "write_harm_sign_agreement_fraction": 0.5881705480245626
+    },
+    "textvqa": {
+      "discrete_context_agreement_count": 2984,
+      "discrete_context_agreement_fraction": 0.5398950606115434,
+      "full_context_local_rescue_count": 914,
+      "full_context_rescue_precision_for_route_necessity": 0.3687089715536105,
+      "full_context_rescue_route_redundant_count": 577,
+      "matched_cell_count": 5527,
+      "read_effect_pearson": 0.4019038982126577,
+      "read_effect_spearman": 0.3560632077875053,
+      "read_harm_sign_agreement_fraction": 0.6238465713768772,
+      "route_necessary_count": 2303,
+      "route_necessary_full_context_missed_count": 1966,
+      "route_necessary_full_context_missed_fraction": 0.8536691272253583,
+      "route_necessary_full_context_rescue_count": 337,
+      "route_necessity_recall_from_full_context": 0.14633087277464177,
+      "route_redundant_count": 3224,
+      "write_effect_pearson": 0.22556682233324776,
+      "write_effect_spearman": 0.15339265911733713,
+      "write_harm_sign_agreement_fraction": 0.580785236113624
+    },
+    "within_sample": {
+      "eligible_sample_count": 1804,
+      "mean_read_spearman": 0.39753414649731994,
+      "mean_write_spearman": 0.24350404496328323,
+      "median_read_spearman": 0.4424242424242424,
+      "median_write_spearman": 0.2473086376076417
+    }
+  },
+  "dataset_sample_counts": {
+    "gqa": 1170,
+    "textvqa": 634
+  },
+  "flat_action_row_count": 69048,
+  "input_hashes": {
+    "anchor_manifest": "f87911e0710200ed9ed4dd3b5631d4746e532e2807684d1de4cc3ed72cc19823",
+    "full_context_cells": "96c5f8f278640ca7341141459c9d044f2f56f49ddad0ea4772ff49663005bce5",
+    "route_conditioned_cells": "115fa56dd064a0ccb5cdc5566bc5dabfe813a7f42e3c56d61f59a18212c48224"
+  },
+  "joint_refinement_decision_pending_interpretation": true,
+  "joint_refinement_executed": false,
+  "passed": true,
+  "sample_structure_counts": {
+    "either_only_ambiguous": 69,
+    "joint_both_suppression": 19,
+    "mixed_read_write": 1203,
+    "multiple_read_mediated": 46,
+    "multiple_write_mediated": 111,
+    "no_essential_off": 195,
+    "one_dominant_operation": 161
+  },
+  "schema_version": "route_conditioned_aggregate_summary_v1",
+  "taxonomy": {
+    "both_required": {
+      "ci_high": 0.1300173542035908,
+      "ci_low": 0.11338564164954232,
+      "conditional_among_necessary_ci_high": 0.2805108886436901,
+      "conditional_among_necessary_ci_low": 0.2531782404360547,
+      "conditional_among_necessary_fraction": 0.2663705583756345,
+      "count": 2099,
+      "fraction": 0.12159657050167999
+    },
+    "either_removal_sufficient": {
+      "ci_high": 0.048668367845510825,
+      "ci_low": 0.04209359130800008,
+      "conditional_among_necessary_ci_high": 0.10713366907749018,
+      "conditional_among_necessary_ci_low": 0.09180998099741634,
+      "conditional_among_necessary_fraction": 0.09936548223350254,
+      "count": 783,
+      "fraction": 0.04535974973931178
+    },
+    "individually_necessary": {
+      "ci_high": 0.46871890184410964,
+      "ci_low": 0.4431312681244213,
+      "conditional_among_necessary_ci_high": null,
+      "conditional_among_necessary_ci_low": null,
+      "conditional_among_necessary_fraction": null,
+      "count": 7880,
+      "fraction": 0.4564940331363689
+    },
+    "read_mediated": {
+      "ci_high": 0.0994358854226785,
+      "ci_low": 0.08849503545231115,
+      "conditional_among_necessary_ci_high": 0.2165838091531189,
+      "conditional_among_necessary_ci_low": 0.19399936874967433,
+      "conditional_among_necessary_fraction": 0.20545685279187817,
+      "count": 1619,
+      "fraction": 0.09378982736646971
+    },
+    "redundant": {
+      "ci_high": 0.5568687318755787,
+      "ci_low": 0.5312810981558903,
+      "conditional_among_necessary_ci_high": null,
+      "conditional_among_necessary_ci_low": null,
+      "conditional_among_necessary_fraction": null,
+      "count": 9382,
+      "fraction": 0.5435059668636311
+    },
+    "write_mediated": {
+      "ci_high": 0.20433773506526348,
+      "ci_low": 0.18722134654242115,
+      "conditional_among_necessary_ci_high": 0.4435682707320924,
+      "conditional_among_necessary_ci_low": 0.4145126838009739,
+      "conditional_among_necessary_fraction": 0.42880710659898474,
+      "count": 3379,
+      "fraction": 0.19574788552890743
+    }
+  },
+  "validated_anchor_sample_count": 1804
+}

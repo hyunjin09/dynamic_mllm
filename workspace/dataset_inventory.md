@@ -207,3 +207,31 @@ Updated: 2026-08-11
   `/data/dataset/dynamic_mllm/binary_polar_v1/binary_polar_label_geometry_audit_v1.json`
   with SHA-256
   `48f36c9057b2a8e977720a8667b9ed854c8d95772d366cb6ea1154c66adecc63`.
+
+## Four-action label-conversion sources (current H100 server)
+
+- Allowed external root: `/data/research/datasets`; project compatibility link:
+  `datasets -> /data/research/datasets/dynamic_mllm`.
+- Frozen five-dataset source inventory:
+  `datasets/mcts_labels_4action/source_inventory_v1/source_manifest_v1.jsonl`,
+  SHA-256 `a44ca6e8684bc1a559997ce0ea52b2796f3265d19be90e22439c653741f36ed7`.
+- Population: 12,278 samples with at least one authoritative positive binary
+  label and 545,531 positive routes across GQA, TextVQA, ChartQA, WeMath2.0
+  Standard, and WeMath2.0 Pro.
+- VQA authority: current regenerated max-50 predictor view under
+  `datasets/mcts_labels/gqa_textvqa_chartqa_v1/`; `datasets/mcts_v2` is
+  explicitly excluded from this conversion.
+- WeMath Standard terminal source:
+  `datasets/math_labels/wemath20_standard_mcts_max400_latest`, a machine-local
+  link to `/data/research/datasets/Sparse_Visual_Contextualization/Qwen2.5-VL-7B-Instruct/04_MCTS/reasoning/wemath20_standard_max400_partial`.
+  It contains 5,381/5,843 same-contract terminal records. The other 462 source
+  rows have no terminal binary-label record on this server and therefore no
+  existing label to convert; they are not inferred negative or regenerated.
+- A targeted directory search of `/data/research/datasets` on 2026-08-25 found
+  no larger same-contract Standard cache. The available combined v31 bundle is
+  a different derived/runtime lineage and remains excluded.
+- WeMath Standard source/images resolve through
+  `datasets/math_labels/wemath20_standard_source_v1`; WeMath Pro labels resolve
+  through `datasets/math_labels/wemath20_pro_mcts_max400_v2` and images through
+  `datasets/WeMath2Pro/pro_images_v1`.
+- No dataset download was required for the conversion.
