@@ -7,7 +7,9 @@ then select by internal routed execution and evaluate the best checkpoint on
 ChartQA, MMMU-Pro Standard/Vision, and POPE.
 
 ## Active Constraints
-- Leave the separately authorized POLAR train/eval job 1662 pending unchanged.
+- Treat the separately authorized POLAR train/eval job 1662 as historical; it
+  had already failed before the online chain was canceled and must not be
+  relaunched implicitly.
 - Use only GQA, ChartQA, and TextVQA training labels; exclude both WeMath
   datasets from this run by explicit user instruction.
 - Use the frozen Qwen2.5-VL-7B revision and exact unified four-action executor
@@ -22,10 +24,14 @@ ChartQA, MMMU-Pro Standard/Vision, and POPE.
 - Done: architecture, checksum-frozen label/trie audit, online executor hook,
   router, exact supervision, DDP training/validation, checkpointing, external
   evaluation, reporting chain, and all 476 CPU tests.
-- Queued: smoke job 1663; training job 1664 after successful smoke; external
-  evaluation job 1665 after successful training.
-- Blocked: no implementation blocker. Smoke 1663 is live-PENDING for
-  `AssocGrpGRES` while the physical node is allocated to another user.
+- Historical runtime: smoke job 1663 failed after 39 seconds because its
+  fail-closed output guard found the existing directory
+  `outputs/four_action_online_router/smoke_v1`.
+- Canceled at the user's request on 2026-08-28: never-started training job 1664
+  and never-started external-evaluation job 1665. The fresh user queue was
+  empty immediately after cancellation.
+- Paused: no fix, replacement smoke, training, or evaluation launch is
+  authorized by the cancellation request.
 - Most recent useful observation: the existing audited VQA manifest contains
   6,811 replay-valid samples (5,945 train / 866 validation), 248,804 complete
   routes, and one executor contract across GQA, ChartQA, and TextVQA.
@@ -36,7 +42,7 @@ ChartQA, MMMU-Pro Standard/Vision, and POPE.
 | 6,811 samples and 248,804 routes with no image-group leakage | `outputs/four_action_polar/preparation_v1/manifest_audit_v1.json` | Supplies checksum-frozen VQA supervision without rebuilding labels | confirmed |
 | Executor contract `d8f524...` for every included sample | same audit and source records | Binds replay states to current unified semantics | confirmed |
 | Direct upfront predictors can fit likelihood without useful complete routes | `reports/binary_polar_full10_polar_matched_results.md` | Supports execution-based selection and the approved online architecture | confirmed |
-| Current POLAR job 1662 remains pending | live Slurm queue | The new run is separate and must not cancel or mutate it | confirmed |
+| POLAR job 1662 failed before this cancellation | Slurm accounting and `logs/slurm/four-action-polar-train-eval-v1-1662.log` | It was terminal and was not one of the canceled queue entries | confirmed |
 
 ## Failed Attempts and Lessons
 | Attempt | Observed Failure | Diagnosis | Evidence | Lesson / Next Implication | Do Not Repeat |
@@ -49,37 +55,29 @@ ChartQA, MMMU-Pro Standard/Vision, and POPE.
 | Approved online READ/WRITE router | Uses route-conditioned hidden states and function-specific features | Tests the plan's primary hypothesis | high | selected |
 
 ## Next-Step Decision
-- Deliberation mode: fast; the user explicitly approved the architecture and
-  requested training plus external evaluation.
-- Active objective and bottleneck: produce a semantically gated online router;
-  the immediate bottleneck is implementation, then queued GPU availability.
-- Relevant memory item used: route utility is context-dependent and direct
-  upfront prediction previously failed execution selection.
-- Confirmed observation: all required labels, model, evaluation data, and
-  executor code are present; another user's exclusive job currently owns the
-  server and job 1662 is already pending.
-- Unverified interpretation: physical batch one per DDP rank with 16-step
-  accumulation will fit every native visual-token geometry.
-- Diagnosis: unknown until the eight-sample real-GPU smoke.
-- Chosen action: implement the exact V1 architecture and queue a fail-closed
-  smoke -> ten-epoch train -> best-checkpoint external-eval chain using all
-  eight H100s at each GPU stage.
-- Automatic execution authorized: yes.
-- Authorization basis: the user's explicit request to follow
-  `plans/four_action_train.md`, train on the three VQA label sets, preserve the
-  current pending run, and queue this new train/eval.
-- Stop condition: smoke semantic/gradient/determinism failure, executor-contract
-  mismatch, non-reproducible sampling, backbone gradients, or invalid
-  multi-route supervision.
+- Deliberation mode: none; this was an explicit scheduler cancellation.
+- Active objective and bottleneck: paused after cancellation; the latest smoke
+  did not reach semantic validation because an existing-output guard stopped it.
+- Confirmed observation: jobs 1664 and 1665 were pending, never started, and
+  are now `CANCELLED by 1003`; the fresh user queue is empty.
+- Diagnosis: the direct smoke failure is confirmed; whether the existing smoke
+  payload is complete and reusable is unverified and was not investigated.
+- Chosen action: preserve the cancellation and terminal-job evidence only.
+- Automatic execution authorized: no.
+- Authorization basis: the user's explicit request to cancel the two queued
+  jobs did not authorize a fix or replacement run.
+- Stop condition: satisfied when both exact IDs were canceled and absence from
+  the fresh queue was verified.
 
 ## Latest Research-Action Result
-- Action taken: implemented, CPU-validated, and queued the complete online
-  smoke -> train -> external-evaluation action.
-- Result: 476 tests pass; label/trie audit passes; jobs 1663/1664/1665 are live
-  in Slurm with exact fail-closed dependencies. Existing job 1662 is unchanged.
-- Evidence saved: `analysis/4action_router/implementation_audit.md`,
-  `label_and_trie_audit.{json,md}`, `provisional_compute_estimate.md`, and
-  `experiment_log.md`.
-- Failure or issue: none.
-- Next implication: wait for scheduler allocation; inspect the real-GPU smoke
-  before interpreting or relying on the downstream training run.
+- Operational action taken: canceled pending jobs 1664 and 1665 on the user's
+  explicit request and verified a fresh empty user queue.
+- Result: neither job started; smoke 1663 and POLAR job 1662 were already
+  terminal failures and were not canceled by this action.
+- Evidence saved: Slurm accounting, the two Slurm logs, this phase memory,
+  `workspace/workflow_state.md`, and
+  `analysis/4action_router/experiment_log.md`.
+- Failure or issue: smoke 1663 found an existing output directory before
+  semantic validation. No diagnosis beyond that direct observation is claimed.
+- Next implication: do not fix, delete/reuse the existing smoke output, or
+  relaunch any part of the chain without a new explicit request.

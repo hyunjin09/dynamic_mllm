@@ -18,11 +18,13 @@
   routes, and 5,112,442 exact prefix-trie nodes. The 7,621,638-parameter router
   uses actual routed text/visual states, separate READ/WRITE queries, and
   set-valued valid-next-action supervision; Qwen remains frozen. All 476 tests
-  pass. A separate fail-closed eight-GPU chain is live in Slurm: smoke 1663,
-  ten-epoch DDP training 1664 (`afterok:1663`), and ChartQA/MMMU-Pro/POPE
-  evaluation 1665 (`afterok:1664`). Smoke 1663 is currently pending for
-  `AssocGrpGRES`; downstream jobs are pending on dependencies. The unrelated
-  existing POLAR job 1662 remains pending and unchanged. Phase memory:
+  pass. The fail-closed Slurm chain is now historical: smoke 1663 failed on
+  2026-08-28 because `outputs/four_action_online_router/smoke_v1` already
+  existed, and the user explicitly requested cancellation of never-started
+  dependent training job 1664 and evaluation job 1665 at 11:00:54 KST. The
+  fresh user queue was empty immediately afterward. No fix or relaunch is
+  authorized. The separate POLAR job 1662 had already reached a terminal
+  failure and was not affected by this cancellation. Phase memory:
   `workspace/phase_memory/phase_37_online_four_action_router.md`.
 
 - Active phase (2026-08-28): four-action Image+Question POLAR training
@@ -34,9 +36,12 @@
   model emits categorical `[B,28,4]` logits in executor order IGNORE,
   READ_ONLY, WRITE_ONLY, FULL and consumes only Image+Question inputs. Both
   static preflights pass and the exact 14,960-row ChartQA/MMMU-Pro/POPE
-  external population is present. The resumable extraction, matched training,
-  and evaluation pipeline is submitted as job 1662 and is currently pending
-  for `AssocGrpGRES`; it remains separate from the online-router chain.
+  external population is present. Historical job 1662 completed cache
+  extraction and both matched training stages, then failed during the
+  external-evaluation preflight because the attention mask and indexed tensor
+  were on different devices in Qwen position-ID construction. It was already
+  terminal before jobs 1664/1665 were canceled and was not modified. No
+  evaluation relaunch is authorized.
   Machine-local eight-GPU launch guidance is ignored by Git in
   `infra/four_action_polar_runbook.md`. Phase memory:
   `workspace/phase_memory/phase_36_four_action_polar_training.md`.

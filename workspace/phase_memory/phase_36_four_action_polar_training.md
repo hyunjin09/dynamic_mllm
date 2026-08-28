@@ -18,11 +18,11 @@ validation, and complete the prospectively restricted external evaluation.
 ## Current State
 - Done: action/model/loss/decoder/data contracts; checksum-audited training
   manifest; Qwen3/Qwen2.5 model and external-evaluation asset inventory.
-- In progress: Slurm job 1662 contains the authorized end-to-end runtime
-  execution; it is pending until the current exclusive eight-GPU job releases
-  the server. All code, configs, and CPU/static preflights are complete.
-- Bottleneck: training readiness first requires a new GPU-extracted visual
-  cache bound to the 6,811 eligible records.
+- Historical runtime: Slurm job 1662 completed visual-cache extraction and both
+  BCE/NLL training processes, then failed during external-evaluation preflight.
+- Confirmed failure: Qwen position-ID construction indexed a CPU tensor with an
+  attention mask on another device. The external evaluation did not begin.
+- Paused: no fix or evaluation relaunch is currently authorized.
 - Most recent useful observation: 106 of 6,917 source records have no
   replay-valid four-action route; all are W2C records with replay failures.
 - Latest infrastructure observation: the host scheduler reports one idle node,
@@ -50,38 +50,36 @@ validation, and complete the prospectively restricted external evaluation.
 | Exact complete-valid-set NLL | Optimizes mass over all valid routes without route duplication | Tests categorical set supervision | high | implementation in progress |
 
 ## Next-Step Decision
-- Deliberation mode: fast (the user specified the complete runtime action).
-- Active objective and bottleneck: execute both frozen training objectives and
-  their external evaluation; the fresh visual cache is the first dependency.
-- Relevant memory item used: training must remain fail-closed until the cache
-  finalizes and both config-bound full preflights pass.
-- Confirmed observation: all eight H100s are live and idle, the user queue is
-  empty, and `cache_audit_v1.json` is absent.
-- Diagnosis: supported.
-- Evidence: live `sinfo`/`squeue` on 2026-08-28 and
-  `outputs/four_action_polar/visual_features_v1/`.
-- Chosen action: submit one resumable eight-GPU pipeline that extracts/finalizes
-  the cache, gates both configs, trains BCE on GPUs 0–3 and NLL on GPUs 4–7,
-  then evaluates BCE on GPUs 0–3 and NLL on GPUs 4–7 concurrently and merges
-  the objective reports.
-- Automatic execution authorized: yes.
-- Authorization basis: the user explicitly said to start training, use four
-  GPUs per objective, run evaluation afterward, and monitor early training.
-- Stop condition: the pipeline and evaluation are complete, or an unresolved
-  semantic/runtime correctness failure makes continued execution invalid.
+- Deliberation mode: none after the terminal runtime observation.
+- Active objective and bottleneck: training completed, but external evaluation
+  is blocked by a device-placement runtime failure in its preflight.
+- Confirmed observation: job 1662 is `FAILED`/`1:0`; no external-evaluation
+  sample completed in the failing preflight shown by the Slurm log.
+- Diagnosis: the direct device mismatch is supported by the traceback; its
+  underlying code-level cause has not been diagnosed.
+- Evidence: Slurm accounting and
+  `logs/slurm/four-action-polar-train-eval-v1-1662.log`.
+- Chosen action: preserve the terminal state without a fix or relaunch.
+- Automatic execution authorized: no.
+- Authorization basis: the latest user request authorized cancellation of the
+  separate queued online jobs only.
+- Stop condition: wait for an explicit request to diagnose, fix, or resume the
+  POLAR evaluation.
 
 ## Latest Research-Action Result
-- Action taken: submitted the resumable cache/train/evaluate pipeline as Slurm
-  job 1662 after 461 project tests and shell validation passed.
-- Result: job 1662 is pending with 8 H100s, 64 CPUs, and 512 GB requested; BCE
-  and NLL use GPUs 0–3 and 4–7 respectively for both training and evaluation.
-- Evidence saved: machine-local scheduler queue, Slurm job 1662, and
-  `infra/run_four_action_polar_pipeline.sh`.
-- Failure or issue: none in this pipeline; another user's exclusive job 1654
-  currently owns the server resources.
-- Next implication: job 1662 starts automatically when the allocation becomes
-  available and performs an early three-batch liveness/loss audit for both
-  objectives before continuing through all epochs and external evaluation.
+- Action taken: historical job 1662 ran the resumable cache/train/evaluate
+  pipeline.
+- Result: cache extraction and both ten-epoch training processes reached the
+  pipeline's `training_complete` stage; the job then failed at the first
+  external-evaluation preflight and exited `1:0` at 05:02:27 KST.
+- Evidence saved: `logs/slurm/four-action-polar-train-eval-v1-1662.log` and
+  per-task logs under `logs/four_action_polar/pipeline_v1/`; these are
+  machine-local and their presence on another server must be verified.
+- Failure or issue: `RuntimeError: indices should be either on cpu or on the
+  same device as the indexed tensor (cpu)` from `build_binary_inputs` during
+  native/unified FULL parity setup.
+- Next implication: do not infer external results exist and do not relaunch or
+  fix this failed evaluation without explicit authorization.
 
 ## Preparation Result
 - The action/model/loss/data/metric interfaces, resumable cache extractor,
@@ -98,3 +96,6 @@ validation, and complete the prospectively restricted external evaluation.
 - No GPU workload was launched. The next authorized runtime action is the
   eight-shard fresh visual-feature extraction inside one Slurm allocation,
   followed by CPU finalization and both full preflights.
+- Historical note: the preceding bullets describe the preparation boundary;
+  job 1662 subsequently executed the cache and training stages as recorded in
+  `Latest Research-Action Result` above.

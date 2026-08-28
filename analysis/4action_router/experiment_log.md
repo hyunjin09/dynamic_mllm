@@ -23,3 +23,12 @@
   shards and merge/bootstrap reporting.
 - Existing upfront POLAR job 1662 remains live-PENDING/`AssocGrpGRES` and was
   not changed, canceled, or made a dependency of the online-router chain.
+- 2026-08-28 terminal update: smoke 1663 ran for 39 seconds and failed before
+  semantic validation because the fail-closed guard found the existing output
+  directory `outputs/four_action_online_router/smoke_v1`.
+- At the user's explicit request, pending never-started training job 1664 and
+  dependent evaluation job 1665 were canceled at 11:00:54 KST. A fresh
+  `squeue -u $USER` was empty immediately afterward.
+- Slurm accounting also established that separate POLAR job 1662 had already
+  failed before this cancellation; it was not changed by the cancellation.
+  No fix, output reuse/deletion, or relaunch is authorized.
