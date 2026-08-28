@@ -1,5 +1,17 @@
 # Workflow State
 
+- Operating context (2026-08-28): work may proceed concurrently on multiple
+  servers. The shared Git branch carries portable code, frozen configs/plans,
+  tests, compact reports/checksums, and current workflow/phase decisions.
+  Datasets, labels, checkpoints, raw outputs, generated analysis payloads,
+  machine-local environment/access files, symlinks, and live scheduler state
+  are not implied by Git and must be transferred or verified separately. At
+  each handoff, record the exact commit, asset hashes/counts/paths, completed
+  output boundary, live-vs-historical job status, failures, and next action in
+  the relevant phase memory and experiment log, then push the portable state
+  without force-updating shared history. Promoted rule:
+  `workspace/decision_log.md` (2026-08-28 cross-server handoff entry).
+
 - Active phase (2026-08-28): online state-conditioned four-action router from
   `plans/four_action_train.md`. The checksum-bound GQA/ChartQA/TextVQA
   population has 6,811 samples (5,945 train / 866 validation), 248,804 valid

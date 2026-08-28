@@ -3,6 +3,40 @@
 Record only decisions, pivots, and lessons that should affect later phases.
 Do not copy raw logs or provisional explanations here.
 
+## 2026-08-28 — Preserve complete cross-server handoff evidence
+
+- Decision or promoted lesson: This project is operated concurrently from
+  multiple servers. Every bounded research or implementation action must leave
+  enough tracked evidence for an agent on another server to continue without
+  relying on conversation history, local scheduler state, or inferred assets.
+- Triggering evidence: Explicit user operating instruction on 2026-08-28.
+- Evidence paths: `workspace/workflow_state.md` for the global dashboard,
+  `workspace/phase_memory/` for active phase decisions, this decision log for
+  promoted lessons, and phase-specific experiment logs/reports for execution
+  evidence.
+- Confidence: high; this is a user-defined operating constraint.
+- Applies when: Implementing, launching, monitoring, pausing, resuming,
+  interpreting, or handing off any Dynamic MLLM work.
+- Does not apply when: Treating server-local topology, live job IDs, symlink
+  targets, environments, or ignored payloads as portable facts. Those must be
+  verified independently on each server.
+- Consequence for future actions:
+  1. Before work, fetch the shared branch and reconcile remote commits without
+     force-pushing or discarding another server's changes.
+  2. Commit and push portable code, configs, plans, tests, compact reports,
+     checksums, and updated workflow/phase state at bounded handoff points.
+  3. Record exact Git commit, config and source hashes, commands, cohort/count
+     contracts, output locations, completion boundaries, failures, and the
+     scientific implication of the latest result.
+  4. Treat datasets, labels, checkpoints, raw outputs, and generated analysis
+     as separately transferred assets. Record their real paths, sizes/counts,
+     and checksums; never infer their presence from Git reports.
+  5. Keep `ACCESS_POLICY.md`, `infra/`, scheduler state, and
+     `workspace/env_state.md` machine-local. Record server differences and
+     revalidate live GPU/scheduler state instead of reusing historical jobs.
+- Revisit condition: The user replaces the concurrent multi-server workflow
+  or defines a different artifact synchronization mechanism.
+
 ## 2026-08-27 — Restrict prospective 4-action POLAR external evaluation to three benchmark families
 
 - Decision or promoted lesson: For future 4-action POLAR evaluation, run only
