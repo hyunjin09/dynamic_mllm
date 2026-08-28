@@ -318,16 +318,21 @@ def save_epoch_artifacts(
     return metadata
 
 
+def prepare_smoke_output_dir(output_dir: Path, *, rank: int) -> None:
+    """Create a fresh shared smoke directory without a cross-rank check race."""
+    if rank == 0:
+        if output_dir.exists():
+            raise FileExistsError(f"refusing to overwrite smoke output: {output_dir}")
+        output_dir.mkdir(parents=True)
+    dist.barrier()
+
+
 def run_smoke(
     *, config, config_path, output_dir, rows, sources, processor, wrapped_model,
     router, rank, world_size, device
 ) -> None:
     started = time.time()
-    if output_dir.exists():
-        raise FileExistsError(f"refusing to overwrite smoke output: {output_dir}")
-    if rank == 0:
-        output_dir.mkdir(parents=True)
-    dist.barrier()
+    prepare_smoke_output_dir(output_dir, rank=rank)
     selected = choose_smoke_indices(
         rows, records=int(config["smoke"]["records"]), seed=int(config["training"]["seed"])
     )

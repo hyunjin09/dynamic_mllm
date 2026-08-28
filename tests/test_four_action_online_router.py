@@ -219,6 +219,27 @@ def test_epoch_artifacts_commit_checkpoint_and_validation_together(tmp_path: Pat
         save_epoch_artifacts(tmp_path, 2, {}, [])
 
 
+def test_smoke_output_directory_is_created_once_by_rank_zero(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    from experiments.train_four_action_online_router import prepare_smoke_output_dir
+
+    barriers = []
+    monkeypatch.setattr(
+        "experiments.train_four_action_online_router.dist.barrier",
+        lambda: barriers.append("barrier"),
+    )
+    output_dir = tmp_path / "smoke"
+
+    prepare_smoke_output_dir(output_dir, rank=0)
+    prepare_smoke_output_dir(output_dir, rank=1)
+
+    assert output_dir.is_dir()
+    assert barriers == ["barrier", "barrier"]
+    with pytest.raises(FileExistsError, match="refusing to overwrite"):
+        prepare_smoke_output_dir(output_dir, rank=0)
+
+
 def test_structured_logits_use_ignore_read_write_full_action_order() -> None:
     read = torch.tensor([2.0])
     write = torch.tensor([3.0])
