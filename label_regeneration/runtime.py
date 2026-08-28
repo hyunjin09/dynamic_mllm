@@ -21,6 +21,33 @@ class ScoringTimeoutError(BaseException):
     """Escape third-party graders that catch ordinary Exception subclasses."""
 
 
+def _open_frozen_image(
+    image_path: Path,
+    expected_content_sha256: str | None,
+):
+    """Open a provenance-verified oversized image under its source contract."""
+    try:
+        return Image.open(image_path)
+    except Image.DecompressionBombError as exc:
+        if not expected_content_sha256:
+            raise ValueError(
+                "oversized image retry requires a frozen content SHA-256"
+            ) from exc
+        actual_content_sha256 = sha256(image_path.read_bytes()).hexdigest()
+        if actual_content_sha256 != expected_content_sha256:
+            raise ValueError(
+                "oversized image content SHA-256 does not match the frozen source"
+            ) from exc
+        previous_limit = Image.MAX_IMAGE_PIXELS
+        try:
+            # Conversion workers are single-threaded. Restore Pillow's global
+            # guard immediately after the verified image header is accepted.
+            Image.MAX_IMAGE_PIXELS = None
+            return Image.open(image_path)
+        finally:
+            Image.MAX_IMAGE_PIXELS = previous_limit
+
+
 def score_prediction_with_timeout(
     metric_name: str,
     prediction: str,
@@ -67,7 +94,10 @@ def build_native_processor_inputs(processor, sample: dict, device: torch.device)
         tokenize=False,
         add_generation_prompt=True,
     )
-    with Image.open(image_path) as raw_image:
+    with _open_frozen_image(
+        image_path,
+        sample.get("image_content_sha256"),
+    ) as raw_image:
         original_dimensions = [int(raw_image.width), int(raw_image.height)]
         image = raw_image.convert("RGB")
         batch = processor(

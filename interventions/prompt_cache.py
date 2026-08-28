@@ -3,10 +3,43 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 import torch
-from transformers.cache_utils import DynamicCache
+from transformers.cache_utils import DynamicCache, DynamicLayer
 
 from interventions.four_state import LayerContext, _write_state
 from interventions.read_path import ReadDecomposition, ReadInterventionCache, ReadPathController
+
+
+def _layer_tensors(cache: DynamicCache, layer_index: int) -> tuple[torch.Tensor, torch.Tensor]:
+    if hasattr(cache, "layers"):
+        layer = cache.layers[layer_index]
+        if not layer.is_initialized:
+            return torch.tensor([]), torch.tensor([])
+        return layer.keys, layer.values
+    return cache.key_cache[layer_index], cache.value_cache[layer_index]
+
+
+def _layer_count(cache: DynamicCache) -> int:
+    return len(cache.layers) if hasattr(cache, "layers") else len(cache.key_cache)
+
+
+def _append_empty_layer(cache: DynamicCache) -> None:
+    if hasattr(cache, "layers"):
+        cache.layers.append(DynamicLayer())
+    else:
+        cache.key_cache.append(torch.tensor([]))
+        cache.value_cache.append(torch.tensor([]))
+
+
+# Transformers 5 moved DynamicCache storage from key_cache/value_cache lists to
+# DynamicLayer objects. Preserve the repository's read-only compatibility
+# surface while the implementation below uses the version-neutral helpers.
+if not hasattr(DynamicCache, "key_cache"):
+    DynamicCache.key_cache = property(  # type: ignore[attr-defined]
+        lambda cache: [_layer_tensors(cache, index)[0] for index in range(_layer_count(cache))]
+    )
+    DynamicCache.value_cache = property(  # type: ignore[attr-defined]
+        lambda cache: [_layer_tensors(cache, index)[1] for index in range(_layer_count(cache))]
+    )
 
 
 @dataclass
@@ -24,19 +57,18 @@ class PromptStateResult:
 def clone_dynamic_cache(
     source: DynamicCache, through_layer_exclusive: int | None = None
 ) -> DynamicCache:
-    stop = len(source.key_cache) if through_layer_exclusive is None else through_layer_exclusive
-    if stop < 0 or stop > len(source.key_cache):
+    source_layers = _layer_count(source)
+    stop = source_layers if through_layer_exclusive is None else through_layer_exclusive
+    if stop < 0 or stop > source_layers:
         raise ValueError("Invalid cache layer boundary")
     cloned = DynamicCache()
     for layer_index in range(stop):
-        key = source.key_cache[layer_index]
-        value = source.value_cache[layer_index]
+        key, value = _layer_tensors(source, layer_index)
         if key.numel():
             cloned.update(key.detach().clone(), value.detach().clone(), layer_index)
         else:
-            while len(cloned.key_cache) <= layer_index:
-                cloned.key_cache.append(torch.tensor([]))
-                cloned.value_cache.append(torch.tensor([]))
+            while _layer_count(cloned) <= layer_index:
+                _append_empty_layer(cloned)
     return cloned
 
 
@@ -51,11 +83,11 @@ def truncate_dynamic_cache(source: DynamicCache, sequence_length: int) -> Dynami
     if sequence_length < 1:
         raise ValueError("sequence_length must be positive")
     truncated = DynamicCache()
-    for layer_index, (key, value) in enumerate(zip(source.key_cache, source.value_cache)):
+    for layer_index in range(_layer_count(source)):
+        key, value = _layer_tensors(source, layer_index)
         if key.numel() == 0:
-            while len(truncated.key_cache) <= layer_index:
-                truncated.key_cache.append(torch.tensor([]))
-                truncated.value_cache.append(torch.tensor([]))
+            while _layer_count(truncated) <= layer_index:
+                _append_empty_layer(truncated)
             continue
         if key.shape[-2] < sequence_length or value.shape[-2] < sequence_length:
             raise ValueError("Cannot truncate cache beyond its sequence length")

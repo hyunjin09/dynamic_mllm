@@ -1,0 +1,36 @@
+schema_version: four_action_route_conditioned_config_v1
+model:
+  id: Qwen/Qwen2.5-VL-7B-Instruct
+  revision: cc594898137f460bfe9f0759e9844b3ce807cfb5
+  snapshot_path: eval/reference/shared_prefix_eval_20260812/model/Qwen2.5-VL-7B-Instruct_cc594898137f460bfe9f0759e9844b3ce807cfb5
+  dtype: bfloat16
+  attention_implementation: sdpa
+  local_files_only: true
+source_cohort_manifest: analysis/4action_answer_alignment/cohort/cohort_manifest_v1.jsonl
+source_eligibility_manifest: analysis/4action_answer_alignment/cohort_eligibility__unified_v1/merged_results.jsonl
+source_full_context_cells: analysis/4action_answer_alignment/per_sample_layer_actions.parquet
+output_root: analysis/4action_route_conditioned
+candidate_manifest: analysis/4action_route_conditioned/anchor_candidates.jsonl
+anchor_validation_root: analysis/4action_route_conditioned/anchor_validation
+anchor_manifest: analysis/4action_route_conditioned/anchor_route_manifest.jsonl
+pilot_root: analysis/4action_route_conditioned/pilot
+full_root: analysis/4action_route_conditioned/full
+pilot_count: 56
+work_unit_count: 32
+seed: 20260824
+factorial_executor: unified_materialized_route_v1
+anchor_branch_margin_atol: 0.0001
+visual_bypass_atol: 0.0
+generation:
+  do_sample: false
+  exhaustive: true
+scoring:
+  quantity: length_normalized_teacher_forced_log_probability
+  correct_target_rule: maximum mean log probability over evaluator-valid reference-normalization classes
+  wrong_target_rule: frozen original FULL generated answer string
+  margin: S_correct_minus_S_original_FULL_wrong
+anchor_selection:
+  primary: ascending Hamming distance from FULL
+  secondary: descending cached evaluator score
+  tertiary: ascending route ID then mask key
+  fallback: first current-unified-executor correct cached candidate

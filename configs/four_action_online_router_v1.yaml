@@ -1,0 +1,99 @@
+protocol_version: four_action_online_router_v1
+source_plan: plans/four_action_train.md
+scope:
+  training_datasets: [gqa, chartqa, textvqa]
+  excluded_training_datasets: [wemath_standard, wemath_pro]
+base_model:
+  model_id: Qwen/Qwen2.5-VL-7B-Instruct
+  revision: cc594898137f460bfe9f0759e9844b3ce807cfb5
+  path: eval/reference/shared_prefix_eval_20260812/model/Qwen2.5-VL-7B-Instruct_cc594898137f460bfe9f0759e9844b3ce807cfb5
+  precision: bfloat16
+  frozen: true
+executor:
+  implementation: unified_four_action
+  contract_sha256: d8f524b928fb30ea0bb37c6a9389893adb338d4f91992d85255fdfb9bea283cb
+  action_order: [IGNORE, READ_ONLY, WRITE_ONLY, FULL]
+  query_state: final_valid_compact_text_control_row_before_each_layer
+data:
+  manifest: outputs/four_action_polar/preparation_v1/manifest_v1.jsonl
+  manifest_sha256: 6a50ca1a2d5c512d7bd8cededfc4732c93258264ae471e1fd4653c6c16637c28
+  manifest_audit: outputs/four_action_polar/preparation_v1/manifest_audit_v1.json
+  manifest_audit_sha256: 8740c87b900d3413e5aebfec4a35cf0f6ddfcebf8ebdfde80e5d06e1191a8823
+  source_manifest: datasets/mcts_labels_4action/source_inventory_v1/source_manifest_v1.jsonl
+  source_manifest_sha256: a44ca6e8684bc1a559997ce0ea52b2796f3265d19be90e22439c653741f36ed7
+  records: 6811
+  train_records: 5945
+  validation_records: 866
+  valid_routes: 248804
+  unique_image_groups: 6490
+  zero_valid_route_exclusions: 106
+  route_sampling: deterministic_one_valid_route_per_sample_per_epoch
+  supervision: exact_prefix_trie_set_valued_next_action
+  sample_balance: equal_w2c_c2c_and_equal_gqa_chartqa_textvqa
+router:
+  architecture: online_function_specific_read_write_v1
+  hidden_size: 3584
+  num_layers: 28
+  num_actions: 4
+  d_router: 256
+  num_heads: 4
+  mlp_hidden_size: 512
+  dropout: 0.1
+  interaction_scale: 0.1
+  read_visual_query: current_final_text_control_state_plus_read_layer_query
+  write_visual_query: write_layer_query_only
+  write_text_conditioning: post_visual_pooling
+  layer_specific_parameters: [read_layer_queries, write_layer_queries]
+  decision_head: read_unary_plus_write_unary_plus_scaled_four_way_interaction
+training:
+  seed: 20260809
+  epochs: 10
+  distributed_backend: nccl
+  world_size: 8
+  per_gpu_physical_batch_size: 1
+  gradient_accumulation_steps: 16
+  effective_sample_batch_size: 128
+  balanced_samples_per_epoch: 6144
+  optimizer_steps_per_epoch: 48
+  total_optimizer_steps: 480
+  optimizer: AdamW
+  learning_rate: 0.0005
+  weight_decay: 0.01
+  scheduler: cosine
+  warmup_steps: 10
+  gradient_clip_norm: 1.0
+  precision: bfloat16
+  deterministic_algorithms: true
+  no_early_stopping: true
+  save_every_epoch: true
+  resume_boundary: completed_epoch
+smoke:
+  records: 8
+  optimization_repeats: 4
+  require_datasets: [gqa, chartqa, textvqa]
+  require_route_types: [W2C, C2C]
+validation:
+  every_epoch: true
+  expected_records: 866
+  node_metrics_teacher_route_seed: 20260819
+  primary_checkpoint_score: 0.5_w2c_rescue_plus_0.5_c2c_preservation
+  tie_break: [overall_routed_accuracy, fewer_c2c_regressions, fewer_full_actions, earlier_epoch]
+  execution_is_primary: true
+external_evaluation:
+  protocol: eval/reference/shared_prefix_eval_20260812
+  data_root: datasets/eval/data
+  expected_records: 14960
+  benchmark_counts:
+    chartqa: 2500
+    mmmu_pro_standard_test: 1730
+    mmmu_pro_vision_test: 1730
+    pope_adversarial: 3000
+    pope_popular: 3000
+    pope_random: 3000
+  exclude_benchmarks: [docvqa, textvqa, mmstar_val, mmmu_val]
+  executor: online_unified_four_action
+  baseline: live_unified_full
+  eos_token_ids: [151645]
+  repetition_penalty: 1.05
+  bootstrap_draws: 5000
+  bootstrap_seed: 20260813

@@ -22,6 +22,11 @@
 /infra/README.md
 /infra/gpu_policy.md
 /infra/gpu_scheduler.py
+/infra/four_action_polar_runbook.md
+/infra/run_four_action_polar_pipeline.sh
+/infra/run_four_action_online_router_smoke.sh
+/infra/run_four_action_online_router_train.sh
+/infra/run_four_action_online_router_eval.sh
 /tests/test_gpu_scheduler_pending.py
 /workspace/env_state.md
 
@@ -29,6 +34,7 @@
 /datasets
 
 # Generated scientific artifacts, checkpoints, and execution logs
+/analysis/
 /artifacts/
 /archives/
 /outputs/

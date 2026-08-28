@@ -1,0 +1,30 @@
+schema_version: four_action_label_conversion_config_v1
+model:
+  id: Qwen/Qwen2.5-VL-7B-Instruct
+  revision: cc594898137f460bfe9f0759e9844b3ce807cfb5
+  snapshot_path: eval/reference/shared_prefix_eval_20260812/model/Qwen2.5-VL-7B-Instruct_cc594898137f460bfe9f0759e9844b3ce807cfb5
+  dtype: bfloat16
+  attention_implementation: sdpa
+  local_files_only: true
+source_manifest: datasets/mcts_labels_4action/source_inventory_v1/source_manifest_v1.jsonl
+source_summary: datasets/mcts_labels_4action/source_inventory_v1/source_inventory_summary_v1.json
+output_root: datasets/mcts_labels_4action/conversion_v1
+analysis_root: analysis/4action_label_conversion
+layer_count: 28
+beam_width: 8
+pilot_count: 56
+worker_count: 16
+gpu_count: 8
+workers_per_gpu: 2
+seed: 20260825
+scoring_timeout_seconds: 5.0
+generation:
+  do_sample: false
+  use_cache: true
+source_replay:
+  current_executor: unified_complete_four_action_route_v1
+  binary_on_mapping: FULL
+  binary_off_mapping: IGNORE
+training_view:
+  route_cap: 50
+  diversity_seed: 20260825

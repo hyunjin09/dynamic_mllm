@@ -9,3 +9,4 @@ mathruler==0.1.0
 pylatexenc==2.10
 qwen-vl-utils==0.0.14
 av==17.0.1
+matplotlib==3.10.9

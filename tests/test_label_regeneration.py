@@ -1,15 +1,17 @@
 from __future__ import annotations
 
+from hashlib import sha256
 from pathlib import Path
 import tempfile
 import unittest
+from unittest.mock import patch
 
 from PIL import Image
 import torch
 
 from label_regeneration.data import deterministic_smoke_records
 from label_regeneration.mcts import GraphMCTS, MCTSConfig
-from label_regeneration.runtime import build_native_processor_inputs
+from label_regeneration.runtime import _open_frozen_image, build_native_processor_inputs
 from label_regeneration.wemath import build_wemath_record, technical_invalid_reasons
 from experiments.run_label_regeneration import find_completed_record, index_existing_records
 from reference.dvr_qwen.eval_metrics import score_prediction
@@ -145,6 +147,42 @@ class LabelRegenerationContractTest(unittest.TestCase):
         )
         self.assertIsNone(metadata["custom_max_image_tokens"])
         self.assertEqual(metadata["original_image_dimensions"], [32, 24])
+
+    def test_oversized_frozen_image_retries_only_after_content_hash_verification(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            image_path = Path(temporary) / "fixture.png"
+            Image.new("RGB", (32, 24)).save(image_path)
+            expected_sha256 = sha256(image_path.read_bytes()).hexdigest()
+            real_open = Image.open
+            limits_at_open = []
+
+            def simulated_pillow_open(path):
+                limits_at_open.append(Image.MAX_IMAGE_PIXELS)
+                if len(limits_at_open) == 1:
+                    raise Image.DecompressionBombError("simulated oversized image")
+                return real_open(path)
+
+            original_limit = Image.MAX_IMAGE_PIXELS
+            with patch(
+                "label_regeneration.runtime.Image.open",
+                side_effect=simulated_pillow_open,
+            ):
+                with _open_frozen_image(image_path, expected_sha256) as image:
+                    self.assertEqual(image.size, (32, 24))
+
+        self.assertEqual(limits_at_open, [original_limit, None])
+        self.assertEqual(Image.MAX_IMAGE_PIXELS, original_limit)
+
+    def test_oversized_image_retry_rejects_a_content_hash_mismatch(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            image_path = Path(temporary) / "fixture.png"
+            Image.new("RGB", (32, 24)).save(image_path)
+            with patch(
+                "label_regeneration.runtime.Image.open",
+                side_effect=Image.DecompressionBombError("simulated oversized image"),
+            ):
+                with self.assertRaisesRegex(ValueError, "content SHA-256"):
+                    _open_frozen_image(image_path, "0" * 64)
 
     def test_smoke_selection_is_balanced_and_deterministic(self):
         rows = [
