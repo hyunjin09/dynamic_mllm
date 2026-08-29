@@ -1122,3 +1122,23 @@ Do not copy raw logs or provisional explanations here.
 - Revisit condition: an explicitly covered boundary-capacity pilot fails to
   fit or free-run its fixed W2C subset, which would shift attention to router
   state features, action-head capacity, or gradient allocation.
+
+## 2026-08-29 — Exact boundary exposure establishes online-router pilot capacity
+
+- Decision or promoted lesson: do not attribute the prior online all-FULL
+  collapse to an immediate inability of the existing state-conditioned
+  architecture or head to represent corrective actions. Test population-level
+  generalization with the same architecture and guaranteed boundary exposure
+  before redesigning it.
+- Triggering evidence: the prospectively frozen 96-W2C/24-C2C pilot passed all
+  gates at epoch 30: boundary Valid-Action@1/non-FULL recall 0.9583/0.9583,
+  singleton IGNORE/READ/WRITE recall 0.9583/1.0000/0.9167, all-FULL departure
+  1.0000, W2C rescue 0.8958, and C2C preservation 0.9167.
+- Evidence paths: `analysis/4action_collapse/mandatory_boundary_overfit_report.md`,
+  `analysis/4action_collapse/mandatory_boundary_overfit_history.jsonl`, and
+  `outputs/four_action_collapse/mandatory_boundary_overfit_v1/training_summary.json`.
+- Confidence: high for local capacity on the fixed pilot; unresolved for
+  held-out generalization and for whether one scheduled exposure per full-data
+  W2C sample is sufficient.
+- Consequence for future actions: run the matched A2 schedule before action
+  weighting, on-policy data, DAgger, or architecture redesign.

@@ -25,6 +25,7 @@
 /infra/four_action_polar_runbook.md
 /infra/run_four_action_polar_pipeline.sh
 /infra/run_four_action_online_router_*.sh
+/infra/run_four_action_online_boundary_*.sh
 /infra/run_four_action_boundary_pilot_*.sh
 /tests/test_gpu_scheduler_pending.py
 /workspace/env_state.md

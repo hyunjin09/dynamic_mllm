@@ -13,12 +13,12 @@
 - [x] Guarantee exact boundary-reaching trajectories for every selected W2C.
 - [x] Preserve unchanged architecture, loss, optimizer, labels, and executor.
 - [x] Save frequent checkpoints and all required boundary/free-rollout metrics.
-- [ ] Apply the prospective pass/fail gate without outcome-dependent tuning.
+- [x] Apply the prospective pass/fail gate without outcome-dependent tuning.
 
 ## A2 — Conditional full online retrain
 
-- [ ] If A1 passes, guarantee at least one boundary visit per W2C over 10 epochs.
-- [ ] Preserve ordinary valid-route sampling for remaining visits.
+- [x] If A1 passes, guarantee at least one boundary visit per W2C over 10 epochs.
+- [x] Preserve ordinary valid-route sampling for remaining visits.
 - [ ] Report internal routed behavior and do not start external evaluation.
 
 ## B1 — Upfront POLAR ablation

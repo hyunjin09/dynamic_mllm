@@ -10,17 +10,19 @@
   pilot's prospective behavioral criteria. Track B separately retains C2C but
   removes its exact all-FULL route, excludes the 35 route-empty cases, and runs
   a matched ten-epoch upfront POLAR exact-set-NLL ablation. A matched
-  initial-input versus current-state boundary probe follows. Readiness is
-  verified at commit `2144c38`; all required local assets are present, the
-  project environment is healthy, the eight H100s are idle, and the user queue
-  is empty. Phase memory:
+  initial-input versus current-state boundary probe follows. All required local
+  assets are present and the project environment is healthy. Phase memory:
   `workspace/phase_memory/phase_38_four_action_collapse.md`.
   A0 is now complete: all 2,397 W2C train records pass the exact boundary
   invariants, and the frozen 96-W2C/24-C2C pilot spans layers 0–27 with balanced
-  singleton minority actions. The A1 trainer is parent-config/executor bound,
-  Slurm-only, checksum/RNG-resumable, and protected from concurrent writers;
-  three adversarial review cycles were reconciled and all 491 project tests
-  pass. No A1 GPU job has started yet.
+  singleton minority actions. A1 Slurm job `1700` completed in 2:43 and passed
+  every frozen gate at epoch 30: boundary Valid-Action@1/non-FULL recall
+  0.9583/0.9583, free-rollout departure from all-FULL 1.0000, W2C rescue
+  0.8958, and C2C preservation 0.9167. This is Outcome B and authorizes A2.
+  The deterministic A2 schedule preserves the original 61,440 balanced visits,
+  marks exactly one mandatory-boundary visit for each of 2,397 W2C samples,
+  and retains ordinary route sampling for the other 59,043 visits. External
+  evaluation remains outside this phase.
 
 - Operating context (2026-08-28): work may proceed concurrently on multiple
   servers. The shared Git branch carries portable code, frozen configs/plans,

@@ -131,6 +131,91 @@ def balanced_epoch_indices(
     return selected
 
 
+def guaranteed_boundary_epoch_schedule(
+    rows: Sequence[dict[str, Any]],
+    *,
+    samples_per_epoch: int,
+    seed: int,
+    epochs: int,
+    world_size: int,
+) -> list[list[dict[str, Any]]]:
+    """Preserve balanced sampling while marking one exact boundary visit per W2C.
+
+    The ordinary balanced sampler remains the source of every visit. If its
+    finite schedule happens to omit a W2C row, one repeated W2C visit from the
+    same dataset cell is replaced deterministically. Exactly the first scheduled
+    visit for each W2C UID is then marked for mandatory-boundary supervision;
+    every later visit keeps ordinary valid-route sampling.
+    """
+
+    if epochs < 1:
+        raise ValueError("epochs must be positive")
+    schedule = [
+        [
+            {"row_index": int(index), "mandatory_boundary": False}
+            for index in balanced_epoch_indices(
+                rows,
+                samples_per_epoch=samples_per_epoch,
+                seed=seed,
+                epoch=epoch,
+                world_size=world_size,
+            )
+        ]
+        for epoch in range(1, epochs + 1)
+    ]
+    w2c_by_dataset: dict[str, list[int]] = defaultdict(list)
+    visit_positions: dict[str, list[tuple[int, int]]] = defaultdict(list)
+    for index, row in enumerate(rows):
+        if row.get("route_type") == "W2C":
+            w2c_by_dataset[str(row.get("dataset"))].append(index)
+    for epoch_index, visits in enumerate(schedule):
+        for position, visit in enumerate(visits):
+            row = rows[int(visit["row_index"])]
+            if row.get("route_type") == "W2C":
+                visit_positions[str(row["uid"])].append((epoch_index, position))
+
+    for dataset, pool in sorted(w2c_by_dataset.items()):
+        missing = sorted(
+            (index for index in pool if not visit_positions[str(rows[index]["uid"])]),
+            key=lambda index: _seed_value(seed, "boundary-missing", rows[index]["uid"]),
+        )
+        for missing_index in missing:
+            candidates = []
+            for uid, positions in visit_positions.items():
+                if len(positions) <= 1:
+                    continue
+                candidate_row = rows[int(schedule[positions[-1][0]][positions[-1][1]]["row_index"])]
+                if candidate_row.get("route_type") == "W2C" and str(
+                    candidate_row.get("dataset")
+                ) == dataset:
+                    candidates.append((positions[-1], uid))
+            if not candidates:
+                raise ValueError(
+                    f"schedule has insufficient W2C visits to cover dataset {dataset}"
+                )
+            (epoch_index, position), replaced_uid = max(candidates)
+            visit_positions[replaced_uid].remove((epoch_index, position))
+            schedule[epoch_index][position]["row_index"] = int(missing_index)
+            visit_positions[str(rows[missing_index]["uid"])].append(
+                (epoch_index, position)
+            )
+
+    marked: set[str] = set()
+    for visits in schedule:
+        for visit in visits:
+            row = rows[int(visit["row_index"])]
+            uid = str(row["uid"])
+            if row.get("route_type") == "W2C" and uid not in marked:
+                visit["mandatory_boundary"] = True
+                marked.add(uid)
+    expected = {
+        str(row["uid"]) for row in rows if row.get("route_type") == "W2C"
+    }
+    if marked != expected:
+        raise RuntimeError("mandatory-boundary schedule did not cover every W2C UID")
+    return schedule
+
+
 def deterministic_route_index(*, uid: str, route_count: int, seed: int, epoch: int) -> int:
     if route_count < 1:
         raise ValueError("route_count must be positive")

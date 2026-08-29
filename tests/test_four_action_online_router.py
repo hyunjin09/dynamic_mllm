@@ -28,6 +28,7 @@ from four_action_online_router.runtime import select_last_text_state
 from four_action_online_router.supervision import (
     PrefixTrie,
     balanced_epoch_indices,
+    guaranteed_boundary_epoch_schedule,
     set_valued_action_loss,
 )
 
@@ -102,6 +103,52 @@ def test_balanced_epoch_sampler_is_type_dataset_balanced_and_reproducible() -> N
     counts = Counter((rows[index]["route_type"], rows[index]["dataset"]) for index in first)
     assert set(counts.values()) == {4}
     assert all(len(first[rank::4]) == 6 for rank in range(4))
+
+
+def test_guaranteed_boundary_schedule_preserves_sampling_and_covers_every_w2c() -> None:
+    rows = []
+    for route_type in ("W2C", "C2C"):
+        for dataset in ("gqa", "chartqa", "textvqa"):
+            for index in range(5):
+                rows.append(
+                    {
+                        "uid": f"{route_type}:{dataset}:{index}",
+                        "route_type": route_type,
+                        "dataset": dataset,
+                    }
+                )
+
+    schedule = guaranteed_boundary_epoch_schedule(
+        rows,
+        samples_per_epoch=36,
+        seed=17,
+        epochs=3,
+        world_size=4,
+    )
+    repeated = guaranteed_boundary_epoch_schedule(
+        rows,
+        samples_per_epoch=36,
+        seed=17,
+        epochs=3,
+        world_size=4,
+    )
+
+    assert schedule == repeated
+    assert len(schedule) == 3
+    marked = Counter()
+    for epoch, visits in enumerate(schedule, start=1):
+        assert [visit["row_index"] for visit in visits] == balanced_epoch_indices(
+            rows, samples_per_epoch=36, seed=17, epoch=epoch, world_size=4
+        )
+        assert all(len(visits[rank::4]) == 9 for rank in range(4))
+        for visit in visits:
+            row = rows[visit["row_index"]]
+            if visit["mandatory_boundary"]:
+                assert row["route_type"] == "W2C"
+                marked[row["uid"]] += 1
+    assert marked == Counter(
+        {row["uid"]: 1 for row in rows if row["route_type"] == "W2C"}
+    )
 
 
 def test_router_emits_structured_joint_logits_and_separate_visual_queries() -> None:
