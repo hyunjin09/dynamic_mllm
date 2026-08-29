@@ -29,6 +29,8 @@
 
 ## Cross-track probe and decision
 
+- [x] Freeze a balanced split/dataset/layer-matched boundary cohort and an
+      identical-capacity upfront/online probe contract.
 - [ ] Compare matched-capacity upfront and current-state boundary probes.
 - [ ] Save all required reports under `analysis/4action_collapse/`.
 - [ ] Update phase memory, workflow state, decision log as warranted, and push

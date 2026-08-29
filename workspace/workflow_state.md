@@ -28,6 +28,16 @@
   routes are removed, 35 route-empty train samples are explicitly excluded,
   validation remains 866 unchanged records, and the 6,776-record derived
   manifest reuses checksum-bound visual tensors without copying them.
+  POLAR B1 job `1729` is queued with `afterok:1725`. The cross-track probe is
+  also frozen before outcomes: 2,584 positive/negative pairs are matched
+  exactly within split, dataset, and target layer (5,168 records, 664
+  validation; 169 unmatched positive boundaries explicitly excluded). It uses
+  identical-capacity probes over unified-FULL layer-0 versus current pre-layer
+  text/visual states. Probe job `1749` is queued with `afterok:1729`; the frozen
+  primary decision rule is whether the UID-group bootstrap lower 95% bound for
+  online-minus-upfront AUROC exceeds zero. Portable implementation/config/
+  cohort evidence is pushed at commit `f3279ac`; external evaluation remains
+  outside this phase.
 
 - Operating context (2026-08-28): work may proceed concurrently on multiple
   servers. The shared Git branch carries portable code, frozen configs/plans,

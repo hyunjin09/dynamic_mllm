@@ -29,7 +29,9 @@ and the upfront POLAR router with only the C2C exact all-FULL route removed.
 - Done: A1 Slurm job `1700` passed every frozen behavioral gate at epoch 30.
 - In progress: A2 job `1725` is pending with live reason `AssocGrpGRES` behind
   another user's eight-GPU allocation. B1 data/cache preparation and static
-  preflight pass; its training/execution job will be dependency-queued after A2.
+  preflight pass; training plus internal execution job `1729` is queued with
+  `afterok:1725`. Matched boundary-probe job `1749` is queued with
+  `afterok:1729`.
 - Blocked: none.
 - Most recent useful observation: the old sampler never reaches the latest
   all-FULL-prefix boundary for 1,045/2,397 W2C train samples, while both prior
@@ -48,7 +50,8 @@ and the upfront POLAR router with only the C2C exact all-FULL route removed.
 | A1 passes all prospective gates at epoch 30 | `analysis/4action_collapse/mandatory_boundary_overfit_report.md` | Establishes local discrimination and free-rollout capacity without an architecture change | confirmed |
 | B1 changes only train-C2C exact all-FULL labels | `analysis/4action_collapse/polar_c2c_no_allfull_manifest_audit.json` | Freezes 3,501 route removals, 35 explicit exclusions, and unchanged validation/W2C labels | confirmed |
 | B1 static/cache preflight passes | `analysis/4action_collapse/polar_c2c_no_allfull_preflight.json` | Binds 6,776 records, 245,303 routes, model/embedding assets, and reused visual cache | confirmed |
-| Full project suite passes after three adversarial review cycles | `PYTHONPATH=/home/hyunjin/projects/dynamic_mllm .venv/bin/pytest -q tests` | Verifies A0/A1 helpers, metrics, provenance, resume, locking, and existing behavior | confirmed (491 passed) |
+| Matched probe cohort is frozen before results | `analysis/4action_collapse/upfront_vs_online_boundary_probe_manifest_audit.json` | Binds 2,584 balanced pairs within split, dataset, and target layer; terminal unmatched boundaries are excluded explicitly | confirmed |
+| Full project suite passes | `PYTHONPATH=/home/hyunjin/projects/dynamic_mllm .venv/bin/pytest -q tests` | Verifies A0/A1/A2/B1/probe helpers, metrics, provenance, resume, locking, and existing behavior | confirmed (499 passed) |
 
 ## Failed Attempts and Lessons
 | Attempt | Observed Failure | Diagnosis | Evidence | Lesson / Next Implication | Do Not Repeat |
@@ -60,9 +63,9 @@ and the upfront POLAR router with only the C2C exact all-FULL route removed.
 | Candidate | Why Plausible | What It Resolves | Cost | Status |
 |---|---|---|---|---|
 | A1 fixed mandatory-boundary overfit pilot | Tests the measured coverage defect without changing architecture/loss | Whether current online states/head can learn when FULL must stop | medium | passed at epoch 30 |
-| A2 guaranteed-coverage full online retrain | Directly repairs the measured schedule defect | Whether boundary exposure produces population W2C rescue | high | authorized; launching |
-| B1 C2C-no-all-FULL POLAR exact-NLL | Removes the dominant upfront complete-route shortcut only | Whether that shortcut causes upfront collapse | medium | prepared; training pending |
-| Matched upfront-vs-online boundary probe | Compares initial and current-state separability | Which architecture family has the more informative state | medium | pending |
+| A2 guaranteed-coverage full online retrain | Directly repairs the measured schedule defect | Whether boundary exposure produces population W2C rescue | high | job `1725` pending |
+| B1 C2C-no-all-FULL POLAR exact-NLL | Removes the dominant upfront complete-route shortcut only | Whether that shortcut causes upfront collapse | medium | job `1729` dependency-queued |
+| Matched upfront-vs-online boundary probe | Compares initial and current-state separability | Which architecture family has the more informative state | medium | 2,584 pairs frozen; job `1749` dependency-queued |
 
 ## Next-Step Decision
 - Deliberation mode: deep.
@@ -82,10 +85,12 @@ and the upfront POLAR router with only the C2C exact all-FULL route removed.
 - Viable alternatives considered: stop at the pilot, change architecture, or
   run the plan's matched full-data exposure test. A2 is the only authorized
   option that tests generalization without bundling another mechanism.
-- Chosen action: run the matched ten-epoch A2 comparison. Across the unchanged
-  61,440-visit schedule, mark the first visit for each of 2,397 W2C UIDs as its
-  exact boundary route; retain ordinary deterministic valid-route sampling for
-  every remaining visit.
+- Chosen action: complete the causally ordered queue: matched ten-epoch A2,
+  separate ten-epoch B1 plus internal execution, then the frozen matched
+  upfront-vs-online boundary probe. Across A2's unchanged 61,440-visit
+  schedule, mark the first visit for each of 2,397 W2C UIDs as its exact
+  boundary route; retain ordinary deterministic valid-route sampling for every
+  remaining visit.
 - Strongest objection: most guaranteed visits occur early (2,274 in epoch 1),
   so one exposure may not be retained through the full schedule. That timing is
   frozen by the plan's minimal one-visit intervention and is not outcome-tuned.
@@ -94,8 +99,9 @@ and the upfront POLAR router with only the C2C exact all-FULL route removed.
 - Automatic execution authorized: yes.
 - Authorization basis: the user explicitly requested execution of
   `plans/four_action_collapse.md` and testing/training both architecture tracks.
-- Stop condition: complete all ten A2 epochs and internal routed validations;
-  do not launch external evaluation. Run B1 separately, then the matched probe.
+- Stop condition: complete A2, B1 internal routed execution, the matched probe,
+  and the four-question decision summary; do not launch external evaluation or
+  an additional remedy experiment.
 
 ## Latest Research-Action Result
 - Action taken: ran the frozen A1 pilot without outcome-dependent tuning.
