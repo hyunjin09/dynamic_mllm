@@ -1,0 +1,279 @@
+{
+  "dataset_counts": {
+    "chartqa": 1732,
+    "gqa": 3330,
+    "textvqa": 1714
+  },
+  "excluded_train_c2c_records": 35,
+  "excluded_uids": [
+    "chartqa:chartqa_train_00326327000592_d8a3c4bd3c",
+    "chartqa:chartqa_train_08022138014425_4d07543be6",
+    "chartqa:chartqa_train_10523_18a042f854",
+    "chartqa:chartqa_train_11758_06c0c149db",
+    "chartqa:chartqa_train_12020_95cab94c75",
+    "chartqa:chartqa_train_12050363007984_075530de3d",
+    "chartqa:chartqa_train_12050363007984_ea562d3f34",
+    "chartqa:chartqa_train_13694_225fa24eca",
+    "chartqa:chartqa_train_14452_9534a08c87",
+    "chartqa:chartqa_train_16287_96018a105e",
+    "chartqa:chartqa_train_1694_89c39b4b8d",
+    "chartqa:chartqa_train_17245998006022_e8c0ee5ce8",
+    "chartqa:chartqa_train_20827112002803_d5b41bd23a",
+    "chartqa:chartqa_train_3715_bd9ea0978c",
+    "chartqa:chartqa_train_3730_214cfd760f",
+    "chartqa:chartqa_train_38656412008715_ae61403a09",
+    "chartqa:chartqa_train_39826106007477_0b4b613d70",
+    "chartqa:chartqa_train_50801995006087_fd88de893f",
+    "chartqa:chartqa_train_59955425009335_e4a5bdc888",
+    "chartqa:chartqa_train_6881_dccdb1dde8",
+    "chartqa:chartqa_train_74596034005236_89376da89a",
+    "chartqa:chartqa_train_78337933005631_864726176d",
+    "chartqa:chartqa_train_multi_col_271_f27f190a91",
+    "chartqa:chartqa_train_multi_col_40370_1bf86026d8",
+    "gqa:gqa_ge_051018329",
+    "gqa:gqa_ge_05475513",
+    "gqa:gqa_gh_19176055",
+    "textvqa:textvqa_train_1036",
+    "textvqa:textvqa_train_1060",
+    "textvqa:textvqa_train_1244",
+    "textvqa:textvqa_train_1267",
+    "textvqa:textvqa_train_1358",
+    "textvqa:textvqa_train_1625",
+    "textvqa:textvqa_train_2250",
+    "textvqa:textvqa_train_6262"
+  ],
+  "exclusion_records": [
+    {
+      "dataset": "chartqa",
+      "reason": "train_c2c_only_exact_all_full_route",
+      "split": "train",
+      "uid": "chartqa:chartqa_train_00326327000592_d8a3c4bd3c"
+    },
+    {
+      "dataset": "chartqa",
+      "reason": "train_c2c_only_exact_all_full_route",
+      "split": "train",
+      "uid": "chartqa:chartqa_train_08022138014425_4d07543be6"
+    },
+    {
+      "dataset": "chartqa",
+      "reason": "train_c2c_only_exact_all_full_route",
+      "split": "train",
+      "uid": "chartqa:chartqa_train_10523_18a042f854"
+    },
+    {
+      "dataset": "chartqa",
+      "reason": "train_c2c_only_exact_all_full_route",
+      "split": "train",
+      "uid": "chartqa:chartqa_train_11758_06c0c149db"
+    },
+    {
+      "dataset": "chartqa",
+      "reason": "train_c2c_only_exact_all_full_route",
+      "split": "train",
+      "uid": "chartqa:chartqa_train_12020_95cab94c75"
+    },
+    {
+      "dataset": "chartqa",
+      "reason": "train_c2c_only_exact_all_full_route",
+      "split": "train",
+      "uid": "chartqa:chartqa_train_12050363007984_075530de3d"
+    },
+    {
+      "dataset": "chartqa",
+      "reason": "train_c2c_only_exact_all_full_route",
+      "split": "train",
+      "uid": "chartqa:chartqa_train_12050363007984_ea562d3f34"
+    },
+    {
+      "dataset": "chartqa",
+      "reason": "train_c2c_only_exact_all_full_route",
+      "split": "train",
+      "uid": "chartqa:chartqa_train_13694_225fa24eca"
+    },
+    {
+      "dataset": "chartqa",
+      "reason": "train_c2c_only_exact_all_full_route",
+      "split": "train",
+      "uid": "chartqa:chartqa_train_14452_9534a08c87"
+    },
+    {
+      "dataset": "chartqa",
+      "reason": "train_c2c_only_exact_all_full_route",
+      "split": "train",
+      "uid": "chartqa:chartqa_train_16287_96018a105e"
+    },
+    {
+      "dataset": "chartqa",
+      "reason": "train_c2c_only_exact_all_full_route",
+      "split": "train",
+      "uid": "chartqa:chartqa_train_1694_89c39b4b8d"
+    },
+    {
+      "dataset": "chartqa",
+      "reason": "train_c2c_only_exact_all_full_route",
+      "split": "train",
+      "uid": "chartqa:chartqa_train_17245998006022_e8c0ee5ce8"
+    },
+    {
+      "dataset": "chartqa",
+      "reason": "train_c2c_only_exact_all_full_route",
+      "split": "train",
+      "uid": "chartqa:chartqa_train_20827112002803_d5b41bd23a"
+    },
+    {
+      "dataset": "chartqa",
+      "reason": "train_c2c_only_exact_all_full_route",
+      "split": "train",
+      "uid": "chartqa:chartqa_train_3715_bd9ea0978c"
+    },
+    {
+      "dataset": "chartqa",
+      "reason": "train_c2c_only_exact_all_full_route",
+      "split": "train",
+      "uid": "chartqa:chartqa_train_3730_214cfd760f"
+    },
+    {
+      "dataset": "chartqa",
+      "reason": "train_c2c_only_exact_all_full_route",
+      "split": "train",
+      "uid": "chartqa:chartqa_train_38656412008715_ae61403a09"
+    },
+    {
+      "dataset": "chartqa",
+      "reason": "train_c2c_only_exact_all_full_route",
+      "split": "train",
+      "uid": "chartqa:chartqa_train_39826106007477_0b4b613d70"
+    },
+    {
+      "dataset": "chartqa",
+      "reason": "train_c2c_only_exact_all_full_route",
+      "split": "train",
+      "uid": "chartqa:chartqa_train_50801995006087_fd88de893f"
+    },
+    {
+      "dataset": "chartqa",
+      "reason": "train_c2c_only_exact_all_full_route",
+      "split": "train",
+      "uid": "chartqa:chartqa_train_59955425009335_e4a5bdc888"
+    },
+    {
+      "dataset": "chartqa",
+      "reason": "train_c2c_only_exact_all_full_route",
+      "split": "train",
+      "uid": "chartqa:chartqa_train_6881_dccdb1dde8"
+    },
+    {
+      "dataset": "chartqa",
+      "reason": "train_c2c_only_exact_all_full_route",
+      "split": "train",
+      "uid": "chartqa:chartqa_train_74596034005236_89376da89a"
+    },
+    {
+      "dataset": "chartqa",
+      "reason": "train_c2c_only_exact_all_full_route",
+      "split": "train",
+      "uid": "chartqa:chartqa_train_78337933005631_864726176d"
+    },
+    {
+      "dataset": "chartqa",
+      "reason": "train_c2c_only_exact_all_full_route",
+      "split": "train",
+      "uid": "chartqa:chartqa_train_multi_col_271_f27f190a91"
+    },
+    {
+      "dataset": "chartqa",
+      "reason": "train_c2c_only_exact_all_full_route",
+      "split": "train",
+      "uid": "chartqa:chartqa_train_multi_col_40370_1bf86026d8"
+    },
+    {
+      "dataset": "gqa",
+      "reason": "train_c2c_only_exact_all_full_route",
+      "split": "train",
+      "uid": "gqa:gqa_ge_051018329"
+    },
+    {
+      "dataset": "gqa",
+      "reason": "train_c2c_only_exact_all_full_route",
+      "split": "train",
+      "uid": "gqa:gqa_ge_05475513"
+    },
+    {
+      "dataset": "gqa",
+      "reason": "train_c2c_only_exact_all_full_route",
+      "split": "train",
+      "uid": "gqa:gqa_gh_19176055"
+    },
+    {
+      "dataset": "textvqa",
+      "reason": "train_c2c_only_exact_all_full_route",
+      "split": "train",
+      "uid": "textvqa:textvqa_train_1036"
+    },
+    {
+      "dataset": "textvqa",
+      "reason": "train_c2c_only_exact_all_full_route",
+      "split": "train",
+      "uid": "textvqa:textvqa_train_1060"
+    },
+    {
+      "dataset": "textvqa",
+      "reason": "train_c2c_only_exact_all_full_route",
+      "split": "train",
+      "uid": "textvqa:textvqa_train_1244"
+    },
+    {
+      "dataset": "textvqa",
+      "reason": "train_c2c_only_exact_all_full_route",
+      "split": "train",
+      "uid": "textvqa:textvqa_train_1267"
+    },
+    {
+      "dataset": "textvqa",
+      "reason": "train_c2c_only_exact_all_full_route",
+      "split": "train",
+      "uid": "textvqa:textvqa_train_1358"
+    },
+    {
+      "dataset": "textvqa",
+      "reason": "train_c2c_only_exact_all_full_route",
+      "split": "train",
+      "uid": "textvqa:textvqa_train_1625"
+    },
+    {
+      "dataset": "textvqa",
+      "reason": "train_c2c_only_exact_all_full_route",
+      "split": "train",
+      "uid": "textvqa:textvqa_train_2250"
+    },
+    {
+      "dataset": "textvqa",
+      "reason": "train_c2c_only_exact_all_full_route",
+      "split": "train",
+      "uid": "textvqa:textvqa_train_6262"
+    }
+  ],
+  "passed": true,
+  "records": 6776,
+  "removed_train_c2c_allfull_routes": 3501,
+  "route_type_counts": {
+    "C2C": 4023,
+    "W2C": 2753
+  },
+  "routes": 245303,
+  "schema_version": "four_action_polar_c2c_no_allfull_audit_v1",
+  "source_manifest": "outputs/four_action_polar/preparation_v1/manifest_v1.jsonl",
+  "source_manifest_sha256": "6a50ca1a2d5c512d7bd8cededfc4732c93258264ae471e1fd4653c6c16637c28",
+  "source_plan": "plans/four_action_collapse.md",
+  "source_plan_sha256": "f61f7476ff9a5872f823c7df837e1a2ba21774c83e4efc88f152d2b77d5aceb9",
+  "source_records": 6811,
+  "source_routes": 248804,
+  "split_counts": {
+    "train": 5910,
+    "validation": 866
+  },
+  "unique_image_groups": 6459,
+  "validation_rows_changed": 0,
+  "w2c_rows_changed": 0
+}

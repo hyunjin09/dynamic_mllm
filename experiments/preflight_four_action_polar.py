@@ -164,11 +164,27 @@ def main() -> None:
         observed_feature_sha = file_sha256(feature_manifest)
         if observed_feature_sha != cache_audit.get("manifest_sha256"):
             raise RuntimeError("visual cache audit does not bind the feature manifest")
+        reused_without_copy = bool(cache_audit.get("tensor_files_reused_without_copy"))
+        if reused_without_copy:
+            source_audit_path = Path(cache_audit["source_feature_audit"])
+            source_manifest_path = Path(cache_audit["source_feature_manifest"])
+            source_audit = read_json(source_audit_path)
+            if (
+                file_sha256(source_audit_path)
+                != cache_audit["source_feature_audit_sha256"]
+                or file_sha256(source_manifest_path)
+                != cache_audit["source_feature_manifest_sha256"]
+                or source_audit.get("passed") is not True
+                or source_audit.get("manifest_sha256")
+                != cache_audit["source_feature_manifest_sha256"]
+            ):
+                raise RuntimeError("reused visual tensors lack valid parent cache provenance")
         load_verified_feature_index(
             feature_manifest,
             manifest_sha256=observed_feature_sha,
             expected_uids={str(row["uid"]) for row in manifest.rows},
             expected_feature_width=int(config["visual_features"]["feature_width"]),
+            verify_tensors=not reused_without_copy,
         )
         cache_status = {
             "present": True,

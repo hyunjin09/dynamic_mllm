@@ -24,6 +24,7 @@
 /infra/gpu_scheduler.py
 /infra/four_action_polar_runbook.md
 /infra/run_four_action_polar_pipeline.sh
+/infra/run_four_action_polar_c2c_ablation_*.sh
 /infra/run_four_action_online_router_*.sh
 /infra/run_four_action_online_boundary_*.sh
 /infra/run_four_action_boundary_pilot_*.sh

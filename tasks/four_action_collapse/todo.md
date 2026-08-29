@@ -23,8 +23,8 @@
 
 ## B1 — Upfront POLAR ablation
 
-- [ ] Remove only exact C2C all-FULL routes in a derived frozen manifest.
-- [ ] Exclude and report the 35 resulting route-empty C2C samples.
+- [x] Remove only exact C2C all-FULL routes in a derived frozen manifest.
+- [x] Exclude and report the 35 resulting route-empty C2C samples.
 - [ ] Run matched ten-epoch exact-set NLL and internal routed execution.
 
 ## Cross-track probe and decision

@@ -133,6 +133,7 @@ def make_set_collator(
             "route_weights": weights,
             "uids": [str(row["uid"]) for row in rows],
             "benchmarks": [str(row.get("benchmark", row["dataset"])) for row in rows],
+            "route_types": [str(row.get("route_type") or "") for row in rows],
             "unique_examples": len(rows),
         }
 
@@ -173,6 +174,7 @@ def make_duplicated_action_collator(
             "uids": route_uids,
             "unique_uids": [str(row["uid"]) for row in rows],
             "benchmarks": [str(row.get("benchmark", row["dataset"])) for row in rows],
+            "route_types": [str(row.get("route_type") or "") for row in rows],
             "unique_examples": len(rows),
         }
 

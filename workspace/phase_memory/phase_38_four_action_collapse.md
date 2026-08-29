@@ -27,8 +27,9 @@ and the upfront POLAR router with only the C2C exact all-FULL route removed.
   were reverified at commit `2144c38fc2f294473f2e770b2e272e2f961b4c10`.
   A0 now freezes all 2,397 W2C boundaries and the 96-W2C/24-C2C pilot.
 - Done: A1 Slurm job `1700` passed every frozen behavioral gate at epoch 30.
-- In progress: launch the matched ten-epoch A2 run with exactly one guaranteed
-  mandatory-boundary visit per W2C sample and ordinary sampling elsewhere.
+- In progress: A2 job `1725` is pending with live reason `AssocGrpGRES` behind
+  another user's eight-GPU allocation. B1 data/cache preparation and static
+  preflight pass; its training/execution job will be dependency-queued after A2.
 - Blocked: none.
 - Most recent useful observation: the old sampler never reaches the latest
   all-FULL-prefix boundary for 1,045/2,397 W2C train samples, while both prior
@@ -45,6 +46,8 @@ and the upfront POLAR router with only the C2C exact all-FULL route removed.
 | Fixed pilot spans layers 0–27 with balanced singleton actions | `analysis/4action_collapse/pilot_subset.json` (SHA-256 `85235eab3f61405fbc2d213cb5ae9e4390f9b231ad4ce122d830dd9a5c70b734`) | Prevents outcome-dependent pilot selection | confirmed |
 | A1 config is parent-bound and prospectively gated | `analysis/4action_collapse/mandatory_boundary_overfit_config.yaml` (SHA-256 `0ccf117c902283714156aa01976ef26b64521eeeb4a50423989dc0df9d98ff5b`) | Freezes 4-GPU/50-epoch maximum, five-epoch validation, and six behavioral gates | confirmed |
 | A1 passes all prospective gates at epoch 30 | `analysis/4action_collapse/mandatory_boundary_overfit_report.md` | Establishes local discrimination and free-rollout capacity without an architecture change | confirmed |
+| B1 changes only train-C2C exact all-FULL labels | `analysis/4action_collapse/polar_c2c_no_allfull_manifest_audit.json` | Freezes 3,501 route removals, 35 explicit exclusions, and unchanged validation/W2C labels | confirmed |
+| B1 static/cache preflight passes | `analysis/4action_collapse/polar_c2c_no_allfull_preflight.json` | Binds 6,776 records, 245,303 routes, model/embedding assets, and reused visual cache | confirmed |
 | Full project suite passes after three adversarial review cycles | `PYTHONPATH=/home/hyunjin/projects/dynamic_mllm .venv/bin/pytest -q tests` | Verifies A0/A1 helpers, metrics, provenance, resume, locking, and existing behavior | confirmed (491 passed) |
 
 ## Failed Attempts and Lessons
@@ -58,7 +61,7 @@ and the upfront POLAR router with only the C2C exact all-FULL route removed.
 |---|---|---|---|---|
 | A1 fixed mandatory-boundary overfit pilot | Tests the measured coverage defect without changing architecture/loss | Whether current online states/head can learn when FULL must stop | medium | passed at epoch 30 |
 | A2 guaranteed-coverage full online retrain | Directly repairs the measured schedule defect | Whether boundary exposure produces population W2C rescue | high | authorized; launching |
-| B1 C2C-no-all-FULL POLAR exact-NLL | Removes the dominant upfront complete-route shortcut only | Whether that shortcut causes upfront collapse | medium | pending |
+| B1 C2C-no-all-FULL POLAR exact-NLL | Removes the dominant upfront complete-route shortcut only | Whether that shortcut causes upfront collapse | medium | prepared; training pending |
 | Matched upfront-vs-online boundary probe | Compares initial and current-state separability | Which architecture family has the more informative state | medium | pending |
 
 ## Next-Step Decision

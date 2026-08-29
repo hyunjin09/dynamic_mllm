@@ -1,0 +1,24 @@
+{
+  "cache_contract": {
+    "dtype": "bfloat16",
+    "feature_source": "projected_visual_rows_entering_decoder_layer_0",
+    "feature_width": 3584,
+    "model_revision": "cc594898137f460bfe9f0759e9844b3ce807cfb5",
+    "predictor_manifest_sha256": "67d8e32cfced500d3c208dc43a52030dd88a263c1f98268c98217439c095313e",
+    "records": 6776,
+    "schema_version": "four_action_polar_visual_cache_contract_v1",
+    "sha256": "644e8638d5ef3d1010c0b98b533087bd76c256a5408f38f57964b42e7a108acc",
+    "unique_image_groups": 6459,
+    "unpooled": true
+  },
+  "manifest": "analysis/4action_collapse/polar_c2c_no_allfull_feature_manifest.jsonl",
+  "manifest_sha256": "d0712f40b96840f4514c7949aa01ea4fe96a0413bd5b38ea72b68022cb4292fd",
+  "passed": true,
+  "records": 6776,
+  "schema_version": "four_action_polar_c2c_no_allfull_feature_audit_v1",
+  "source_feature_audit": "outputs/four_action_polar/visual_features_v1/cache_audit_v1.json",
+  "source_feature_audit_sha256": "6e0701aa3c3366236295e31a729b2e93a82b7ba1262e63d310dc2f71776ca785",
+  "source_feature_manifest": "outputs/four_action_polar/visual_features_v1/feature_manifest_v1.jsonl",
+  "source_feature_manifest_sha256": "5fa49d855a7f8277d6e53c8fa95eac00c8a46792592da26b460c990584ba2cff",
+  "tensor_files_reused_without_copy": true
+}

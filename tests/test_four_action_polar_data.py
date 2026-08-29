@@ -38,6 +38,7 @@ def row(uid: str, group: str, split: str, routes: list[dict]) -> dict:
         "image_path": f"/images/{uid}.jpg",
         "split_group": group,
         "split": split,
+        "route_type": "W2C",
         "valid_routes": routes,
     }
 
@@ -84,6 +85,7 @@ def test_set_collator_preserves_all_routes_and_pads_categorical_indices() -> Non
     assert torch.allclose(
         batch["route_weights"], torch.tensor([[0.5, 0.5], [1.0, 0.0]])
     )
+    assert batch["route_types"] == ["W2C", "W2C"]
 
 
 def test_duplicated_collator_encodes_unique_input_once_and_expands_routes() -> None:

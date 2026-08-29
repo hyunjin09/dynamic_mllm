@@ -8,6 +8,10 @@ from experiments.build_four_action_polar_manifest import (
     build_manifest_rows,
     remap_image_paths,
 )
+from experiments.prepare_four_action_polar_c2c_ablation import (
+    build_c2c_no_allfull_manifest,
+    filter_feature_rows,
+)
 from tools.research_analysis.four_action.sequential_label_jobs import (
     file_sha256,
     safe_filename,
@@ -165,3 +169,58 @@ def test_manifest_builder_rejects_partial_or_mismatched_prefix_mapping() -> None
             source_prefix="/different/root",
             target_prefix="/new/root",
         )
+
+
+def test_c2c_no_allfull_ablation_changes_only_train_c2c_and_excludes_empty() -> None:
+    full = {"route_key": "full", "actions": ["FULL", "FULL"]}
+    read = {"route_key": "read", "actions": ["FULL", "READ_ONLY"]}
+    rows = [
+        {
+            "uid": "train-empty", "split": "train", "route_type": "C2C",
+            "dataset": "gqa", "split_group": "a", "valid_routes": [full],
+            "valid_route_count": 1,
+        },
+        {
+            "uid": "train-mixed", "split": "train", "route_type": "C2C",
+            "dataset": "chartqa", "split_group": "b", "valid_routes": [full, read],
+            "valid_route_count": 2,
+        },
+        {
+            "uid": "validation-full", "split": "validation", "route_type": "C2C",
+            "dataset": "textvqa", "split_group": "c", "valid_routes": [full],
+            "valid_route_count": 1,
+        },
+        {
+            "uid": "train-w2c", "split": "train", "route_type": "W2C",
+            "dataset": "gqa", "split_group": "d", "valid_routes": [read],
+            "valid_route_count": 1,
+        },
+    ]
+
+    derived, audit = build_c2c_no_allfull_manifest(rows, num_layers=2)
+
+    assert [row["uid"] for row in derived] == [
+        "train-mixed", "validation-full", "train-w2c"
+    ]
+    assert derived[0]["valid_routes"] == [read]
+    assert derived[0]["valid_route_count"] == 1
+    assert derived[1]["valid_routes"] == [full]
+    assert audit["removed_train_c2c_allfull_routes"] == 2
+    assert audit["source_routes"] == 5
+    assert audit["routes"] == 3
+    assert audit["excluded_train_c2c_records"] == 1
+    assert audit["excluded_uids"] == ["train-empty"]
+    assert audit["validation_rows_changed"] == 0
+    assert audit["w2c_rows_changed"] == 0
+
+
+def test_c2c_ablation_feature_filter_reuses_only_retained_uid_rows() -> None:
+    rows = [
+        {"uid": "a", "path": "shared.pt", "sha256": "x"},
+        {"uid": "b", "path": "shared.pt", "sha256": "x"},
+        {"uid": "c", "path": "other.pt", "sha256": "y"},
+    ]
+
+    assert filter_feature_rows(rows, {"a", "c"}) == [rows[0], rows[2]]
+    with pytest.raises(RuntimeError, match="coverage"):
+        filter_feature_rows(rows, {"a", "missing"})

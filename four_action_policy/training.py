@@ -195,6 +195,7 @@ def validate_epoch(
     predictor.eval()
     encoder.eval()
     accumulators = {"overall": FourActionMetricAccumulator(top_k=top_k)}
+    route_type_accumulators: dict[str, FourActionMetricAccumulator] = {}
     for raw_batch in loader:
         batch = move_batch(raw_batch, device)
         question = encoder(batch["input_ids"], batch["attention_mask"])
@@ -225,12 +226,35 @@ def validate_epoch(
                 batch["valid_mask"].index_select(0, indices),
                 batch["route_weights"].index_select(0, indices),
             )
+        for route_type in sorted(set(batch.get("route_types", [])) - {""}):
+            indices = torch.tensor(
+                [
+                    index
+                    for index, value in enumerate(batch["route_types"])
+                    if value == route_type
+                ],
+                dtype=torch.long,
+                device=device,
+            )
+            accumulator = route_type_accumulators.setdefault(
+                route_type, FourActionMetricAccumulator(top_k=top_k)
+            )
+            accumulator.update(
+                logits.index_select(0, indices),
+                batch["valid_routes"].index_select(0, indices),
+                batch["valid_mask"].index_select(0, indices),
+                batch["route_weights"].index_select(0, indices),
+            )
     return {
         "overall": accumulators["overall"].finalize(objective=objective),
         "by_benchmark": {
             benchmark: accumulator.finalize(objective=objective)
             for benchmark, accumulator in accumulators.items()
             if benchmark != "overall"
+        },
+        "by_route_type": {
+            route_type: accumulator.finalize(objective=objective)
+            for route_type, accumulator in route_type_accumulators.items()
         },
     }
 

@@ -10,6 +10,7 @@ import os
 from pathlib import Path
 import random
 import sys
+from typing import Any
 
 os.environ.setdefault("CUBLAS_WORKSPACE_CONFIG", ":4096:8")
 
@@ -45,6 +46,98 @@ def optimizer_steps_per_epoch(samples: int, batch: int, accumulation: int) -> in
     return math.ceil(math.ceil(samples / batch) / accumulation)
 
 
+def write_jsonl(path: Path, rows: list[dict[str, Any]]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    temporary = path.with_suffix(path.suffix + ".tmp")
+    with temporary.open("w", encoding="utf-8") as handle:
+        for row in rows:
+            handle.write(json.dumps(row, sort_keys=True) + "\n")
+    temporary.replace(path)
+
+
+def verify_c2c_ablation_contract(
+    config: dict[str, Any], config_path: Path, output_dir: Path
+) -> None:
+    if config.get("protocol_version") != "four_action_polar_c2c_no_allfull_v1":
+        return
+    if not os.environ.get("SLURM_JOB_ID"):
+        raise RuntimeError("POLAR C2C ablation GPU training requires Slurm")
+    plan_path = Path(config["source_plan"])
+    parent_path = Path(config["matched_parent_config"])
+    if file_sha256(plan_path) != config["source_plan_sha256"]:
+        raise RuntimeError("collapse plan checksum mismatch")
+    if file_sha256(parent_path) != config["matched_parent_config_sha256"]:
+        raise RuntimeError("matched POLAR parent config checksum mismatch")
+    parent = yaml.safe_load(parent_path.read_text(encoding="utf-8"))
+    for section in (
+        "modality", "base_model", "policy", "predictor", "training",
+        "validation", "external_evaluation",
+    ):
+        if config[section] != parent[section]:
+            raise RuntimeError(f"POLAR matched parent section differs: {section}")
+    for key in (
+        "source_records", "zero_valid_route_exclusions", "route_cap",
+        "route_weighting", "max_question_tokens",
+    ):
+        if config["data"][key] != parent["data"][key]:
+            raise RuntimeError(f"POLAR matched parent data field differs: {key}")
+    for key in ("root", "source", "feature_width", "dtype", "unpooled"):
+        if config["visual_features"][key] != parent["visual_features"][key]:
+            raise RuntimeError(f"POLAR matched visual field differs: {key}")
+    if config["training"]["objective"] != "exact_set_nll":
+        raise RuntimeError("POLAR C2C ablation must use exact-set NLL")
+    if int(config["data"]["c2c_exact_allfull_route_empty_exclusions"]) != 35:
+        raise RuntimeError("POLAR C2C route-empty exclusion count differs from plan")
+    if output_dir.resolve() != Path(config["reporting"]["output_dir"]).resolve():
+        raise RuntimeError("POLAR C2C ablation must use its canonical output directory")
+    if not config_path.is_file():
+        raise RuntimeError("POLAR C2C ablation config is missing")
+
+
+def render_c2c_ablation_report(
+    *, config_path: Path, output_dir: Path, best: dict[str, Any]
+) -> str:
+    validation = best["validation"]
+    overall = validation["overall"]
+    by_type = validation.get("by_route_type", {})
+    lines = [
+        "# POLAR C2C Exact-All-FULL Removal Ablation",
+        "",
+        f"- Config: `{config_path}`",
+        f"- Config SHA-256: `{file_sha256(config_path)}`",
+        f"- Output: `{output_dir}`",
+        f"- Selected epoch: {best['epoch']}",
+        "- Objective: exact-set NLL",
+        "- Removed exact all-FULL routes from training C2C only: 3,501",
+        "- Excluded route-empty training C2C samples: 35",
+        "- Validation labels changed: 0/866",
+        "",
+        "## Route prediction",
+        "",
+        f"- Overall top-1 valid-route coverage: {overall['top1_valid_route_coverage']:.6f}",
+        f"- Overall top-5 valid-route coverage: {overall['topk_valid_route_coverage']:.6f}",
+        f"- Nearest-valid Hamming distance: {overall['nearest_valid_hamming']:.6f}",
+        f"- Predicted exact all-FULL fraction: {overall['fraction_top1_all_full']:.6f}",
+        f"- Unique predicted routes: {overall['unique_top1_routes']}",
+    ]
+    for route_type in ("W2C", "C2C"):
+        values = by_type.get(route_type)
+        if values:
+            lines.append(
+                f"- {route_type} top-1 valid-route coverage: "
+                f"{values['top1_valid_route_coverage']:.6f}"
+            )
+    lines.extend(
+        [
+            "",
+            "Actual unified-executor routed accuracy is reported separately after",
+            "executing the validation-selected checkpoint.",
+            "",
+        ]
+    )
+    return "\n".join(lines)
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--config", required=True)
@@ -76,6 +169,8 @@ def main() -> None:
     if config.get("modality") != "image_question":
         raise RuntimeError("only Image+Question training is authorized")
     preflight_path = Path(args.preflight)
+    output_dir = Path(args.output_dir)
+    verify_c2c_ablation_contract(config, config_path, output_dir)
     preflight = json.loads(preflight_path.read_text(encoding="utf-8"))
     if (
         preflight.get("passed") is not True
@@ -185,7 +280,6 @@ def main() -> None:
         num_warmup_steps=int(config["training"]["warmup_steps"]),
         num_training_steps=total_steps,
     )
-    output_dir = Path(args.output_dir)
     if output_dir.exists() and not args.resume:
         raise FileExistsError(f"refusing to overwrite training output: {output_dir}")
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -331,6 +425,8 @@ def main() -> None:
         history_path.write_text(
             json.dumps(history, indent=2, sort_keys=True) + "\n", encoding="utf-8"
         )
+        if config.get("reporting", {}).get("history"):
+            write_jsonl(Path(config["reporting"]["history"]), history)
         print(json.dumps(row, sort_keys=True), flush=True)
     if global_step != total_steps:
         raise RuntimeError(f"optimizer-step mismatch: {global_step} != {total_steps}")
@@ -372,6 +468,15 @@ def main() -> None:
     summary_path.with_suffix(".json.sha256").write_text(
         f"{file_sha256(summary_path)}  {summary_path.name}\n", encoding="utf-8"
     )
+    if config.get("reporting", {}).get("report"):
+        report_path = Path(config["reporting"]["report"])
+        report_path.parent.mkdir(parents=True, exist_ok=True)
+        report_path.write_text(
+            render_c2c_ablation_report(
+                config_path=config_path, output_dir=output_dir, best=best
+            ),
+            encoding="utf-8",
+        )
 
 
 if __name__ == "__main__":

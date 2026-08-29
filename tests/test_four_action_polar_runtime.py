@@ -13,7 +13,7 @@ from four_action_policy.evaluation import (
     checkpoint_key,
 )
 from four_action_policy.feature_cache import load_verified_feature_index
-from four_action_policy.training import train_epoch
+from four_action_policy.training import train_epoch, validate_epoch
 
 
 def test_four_action_metrics_use_exact_top_routes_and_nearest_hamming() -> None:
@@ -234,3 +234,60 @@ def test_train_epoch_emits_machine_readable_early_batch_progress(capsys) -> None
     assert progress["optimizer_step"] is True
     assert progress["global_step"] == 8
     assert progress["mean_loss_so_far"] > 0
+
+
+def test_validation_reports_w2c_and_c2c_route_coverage_separately() -> None:
+    encoder = _FrozenEncoder()
+    predictor = _TinyPredictor()
+    batch = {
+        "input_ids": torch.tensor([[1, 2], [3, 4]]),
+        "attention_mask": torch.ones(2, 2, dtype=torch.long),
+        "image_features": torch.ones(2, 1, 3),
+        "image_attention_mask": torch.ones(2, 1, dtype=torch.bool),
+        "unique_examples": 2,
+        "valid_routes": torch.tensor([[[0, 1]], [[3, 2]]]),
+        "valid_mask": torch.ones(2, 1, dtype=torch.bool),
+        "route_weights": torch.ones(2, 1),
+        "benchmarks": ["gqa", "gqa"],
+        "route_types": ["W2C", "C2C"],
+    }
+
+    metrics = validate_epoch(
+        predictor,
+        encoder,
+        [batch],
+        device=torch.device("cpu"),
+        objective="exact_set_nll",
+        top_k=5,
+        amp_dtype=None,
+    )
+
+    assert metrics["overall"]["examples"] == 2
+    assert metrics["by_route_type"]["W2C"]["examples"] == 1
+    assert metrics["by_route_type"]["C2C"]["examples"] == 1
+
+
+def test_internal_execution_summary_reports_behavior_and_route_diversity() -> None:
+    from experiments.evaluate_four_action_polar_internal import (
+        augment_execution_summary,
+    )
+
+    full = ["FULL"] * 28
+    mixed = ["FULL"] * 27 + ["READ_ONLY"]
+    rows = [
+        {
+            "uid": "w", "dataset": "gqa", "route_type": "W2C",
+            "correct": True, "actions": mixed, "route_key": "|".join(mixed),
+        },
+        {
+            "uid": "c", "dataset": "chartqa", "route_type": "C2C",
+            "correct": True, "actions": full, "route_key": "|".join(full),
+        },
+    ]
+
+    summary = augment_execution_summary(rows)
+
+    assert summary["w2c_rescue_rate"] == 1.0
+    assert summary["c2c_preservation_rate"] == 1.0
+    assert summary["all_full_rate"] == 0.5
+    assert summary["unique_routes"] == 2

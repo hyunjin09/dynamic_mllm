@@ -22,7 +22,12 @@
   The deterministic A2 schedule preserves the original 61,440 balanced visits,
   marks exactly one mandatory-boundary visit for each of 2,397 W2C samples,
   and retains ordinary route sampling for the other 59,043 visits. External
-  evaluation remains outside this phase.
+  evaluation remains outside this phase. A2 job `1725` is pending behind
+  another user's eight-GPU allocation with reason `AssocGrpGRES`; it has not
+  started. POLAR B1 preparation also passes: 3,501 exact all-FULL training-C2C
+  routes are removed, 35 route-empty train samples are explicitly excluded,
+  validation remains 866 unchanged records, and the 6,776-record derived
+  manifest reuses checksum-bound visual tensors without copying them.
 
 - Operating context (2026-08-28): work may proceed concurrently on multiple
   servers. The shared Git branch carries portable code, frozen configs/plans,
