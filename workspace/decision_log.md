@@ -1142,3 +1142,31 @@ Do not copy raw logs or provisional explanations here.
   W2C sample is sufficient.
 - Consequence for future actions: run the matched A2 schedule before action
   weighting, on-policy data, DAgger, or architecture redesign.
+
+## 2026-08-29 — Isolated coverage and shortcut fixes do not select a four-action architecture
+
+- Decision or promoted lesson: do not select either the online state-conditioned
+  router or the upfront POLAR router from the current recipes, and do not treat
+  a small-subset overfit result as population-level rescue. One scheduled
+  boundary visit per W2C sample and removal of the exact C2C all-FULL route are
+  each insufficient to break held-out all-FULL collapse.
+- Triggering evidence: A2 activated exactly 2,397/2,397 mandatory-boundary
+  visits but had zero validation boundary Valid@1 and zero W2C rescue at every
+  epoch. B1 removed 3,501 exact all-FULL train-C2C routes yet its selected
+  checkpoint executed all-FULL on 866/866 with zero W2C rescue. The matched
+  probe found upfront/online AUROC 0.5764/0.5751 and online-minus-upfront 95%
+  CI [-0.0548, 0.0534], so it supplies no evidence for an online-state
+  advantage.
+- Evidence paths: `analysis/4action_collapse/online_boundary_coverage_v2_report.md`,
+  `analysis/4action_collapse/polar_c2c_no_allfull_report.md`,
+  `analysis/4action_collapse/upfront_vs_online_boundary_probe_report.md`, and
+  `analysis/4action_collapse/decision_summary.md`.
+- Confidence: high that both isolated interventions are insufficient and
+  medium that neither substrate should currently be prioritized; richer state
+  summaries and persistent targeted supervision remain untested.
+- Consequence for future actions: do not rerun A2 or B1 unchanged and do not
+  start external evaluation from their selected checkpoints. A future
+  comparison, if explicitly authorized, should match persistent targeted
+  W2C/non-FULL supervision mass across both substrates and select on held-out
+  W2C rescue plus C2C preservation rather than C2C-dominated overall route
+  membership.

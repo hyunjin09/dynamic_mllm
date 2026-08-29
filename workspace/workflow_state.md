@@ -1,43 +1,26 @@
 # Workflow State
 
-- Active phase (2026-08-29): execute the user-authored collapse-isolation plan
-  in `plans/four_action_collapse.md` (SHA-256
+- Completed phase (2026-08-29): `plans/four_action_collapse.md` (SHA-256
   `f61f7476ff9a5872f823c7df837e1a2ba21774c83e4efc88f152d2b77d5aceb9`).
-  Track A first builds exact W2C mandatory-boundary metadata and runs a fixed
-  96-W2C plus 24-C2C overfit pilot with the unchanged online architecture,
-  loss, optimizer, labels, backbone, and executor; only boundary-reaching
-  trajectory exposure changes. Full ten-epoch online training is gated on that
-  pilot's prospective behavioral criteria. Track B separately retains C2C but
-  removes its exact all-FULL route, excludes the 35 route-empty cases, and runs
-  a matched ten-epoch upfront POLAR exact-set-NLL ablation. A matched
-  initial-input versus current-state boundary probe follows. All required local
-  assets are present and the project environment is healthy. Phase memory:
+  A0 froze all 2,397 W2C mandatory boundaries. A1 job `1700` established local
+  online capacity on the fixed overfit pilot (boundary Valid@1 0.9583, W2C
+  rescue 0.8958). The full isolated tests then completed in dependency order:
+  A2 online job `1725` (`1:06:35`, `0:0`), B1 POLAR training/internal-execution
+  job `1729` (`0:14:13`, `0:0`), and matched probe job `1749` (`0:02:17`,
+  `0:0`). A2 activated exactly one mandatory-boundary visit for every W2C
+  train sample but had zero validation boundary Valid@1 and zero W2C rescue at
+  all ten epochs. B1 removed 3,501 exact all-FULL train-C2C routes, excluded 35
+  newly empty train samples, and left validation unchanged; its selected epoch
+  still predicted/executed all-FULL on 866/866, with zero W2C rescue. The
+  2,584-pair matched probe found upfront/online AUROC 0.5764/0.5751 and online
+  minus upfront -0.0013 (UID-bootstrap 95% CI [-0.0548, 0.0534]). Thus neither
+  isolated fix breaks collapse and current state has no measured advantage;
+  neither architecture is selected as final. If newly authorized, the smallest
+  discriminator is a matched low-budget persistent targeted-W2C/non-FULL
+  supervision comparison across both substrates. External evaluation and any
+  additional remedy were not run. Evidence:
+  `analysis/4action_collapse/decision_summary.md`; phase memory:
   `workspace/phase_memory/phase_38_four_action_collapse.md`.
-  A0 is now complete: all 2,397 W2C train records pass the exact boundary
-  invariants, and the frozen 96-W2C/24-C2C pilot spans layers 0–27 with balanced
-  singleton minority actions. A1 Slurm job `1700` completed in 2:43 and passed
-  every frozen gate at epoch 30: boundary Valid-Action@1/non-FULL recall
-  0.9583/0.9583, free-rollout departure from all-FULL 1.0000, W2C rescue
-  0.8958, and C2C preservation 0.9167. This is Outcome B and authorizes A2.
-  The deterministic A2 schedule preserves the original 61,440 balanced visits,
-  marks exactly one mandatory-boundary visit for each of 2,397 W2C samples,
-  and retains ordinary route sampling for the other 59,043 visits. External
-  evaluation remains outside this phase. A2 job `1725` is pending behind
-  another user's eight-GPU allocation with reason `AssocGrpGRES`; it has not
-  started. POLAR B1 preparation also passes: 3,501 exact all-FULL training-C2C
-  routes are removed, 35 route-empty train samples are explicitly excluded,
-  validation remains 866 unchanged records, and the 6,776-record derived
-  manifest reuses checksum-bound visual tensors without copying them.
-  POLAR B1 job `1729` is queued with `afterok:1725`. The cross-track probe is
-  also frozen before outcomes: 2,584 positive/negative pairs are matched
-  exactly within split, dataset, and target layer (5,168 records, 664
-  validation; 169 unmatched positive boundaries explicitly excluded). It uses
-  identical-capacity probes over unified-FULL layer-0 versus current pre-layer
-  text/visual states. Probe job `1749` is queued with `afterok:1729`; the frozen
-  primary decision rule is whether the UID-group bootstrap lower 95% bound for
-  online-minus-upfront AUROC exceeds zero. Portable implementation/config/
-  cohort evidence is pushed at commit `f3279ac`; external evaluation remains
-  outside this phase.
 
 - Operating context (2026-08-28): work may proceed concurrently on multiple
   servers. The shared Git branch carries portable code, frozen configs/plans,

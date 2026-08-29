@@ -1,0 +1,82 @@
+{
+  "action_counts": {
+    "FULL": 24248,
+    "IGNORE": 0,
+    "READ_ONLY": 0,
+    "WRITE_ONLY": 0
+  },
+  "all_full_rate": 1.0,
+  "balanced_execution_score": 0.5,
+  "best_epoch": 4,
+  "by_dataset": {
+    "chartqa": {
+      "action_counts": {
+        "FULL": 6244,
+        "IGNORE": 0,
+        "READ_ONLY": 0,
+        "WRITE_ONLY": 0
+      },
+      "mean_action_layers": {
+        "FULL": 28.0,
+        "IGNORE": 0.0,
+        "READ_ONLY": 0.0,
+        "WRITE_ONLY": 0.0
+      },
+      "records": 223,
+      "routed_accuracy": 0.5695067264573991
+    },
+    "gqa": {
+      "action_counts": {
+        "FULL": 11956,
+        "IGNORE": 0,
+        "READ_ONLY": 0,
+        "WRITE_ONLY": 0
+      },
+      "mean_action_layers": {
+        "FULL": 28.0,
+        "IGNORE": 0.0,
+        "READ_ONLY": 0.0,
+        "WRITE_ONLY": 0.0
+      },
+      "records": 427,
+      "routed_accuracy": 0.5901639344262295
+    },
+    "textvqa": {
+      "action_counts": {
+        "FULL": 6048,
+        "IGNORE": 0,
+        "READ_ONLY": 0,
+        "WRITE_ONLY": 0
+      },
+      "mean_action_layers": {
+        "FULL": 28.0,
+        "IGNORE": 0.0,
+        "READ_ONLY": 0.0,
+        "WRITE_ONLY": 0.0
+      },
+      "records": 216,
+      "routed_accuracy": 0.6064814814814815
+    }
+  },
+  "c2c_preservation_rate": 1.0,
+  "c2c_preserved": 510,
+  "c2c_records": 510,
+  "c2c_regressions": 0,
+  "checkpoint": "outputs/four_action_collapse/polar_c2c_no_allfull_v1/epoch_04/checkpoint.pt",
+  "checkpoint_sha256": "2121cf2720a1a53bbb02bece095142234905a7d17f967bf6b0c1087ad451b6f1",
+  "config_sha256": "3b210ae321ba3ca384a5a9b9511d1a3753d543467b9905a0d586daf9885bcbc4",
+  "mean_action_layers": {
+    "FULL": 28.0,
+    "IGNORE": 0.0,
+    "READ_ONLY": 0.0,
+    "WRITE_ONLY": 0.0
+  },
+  "overall_routed_accuracy": 0.5889145496535797,
+  "records": 866,
+  "schema_version": "four_action_polar_internal_execution_v1",
+  "selection_sha256": "68f93f31d903abaff1ecda2e6d0edabacd59a79702675653dba11177beab2f1c",
+  "unique_routes": 1,
+  "w2c_records": 356,
+  "w2c_rescue_rate": 0.0,
+  "w2c_rescues": 0
+}

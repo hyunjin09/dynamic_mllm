@@ -19,19 +19,19 @@
 
 - [x] If A1 passes, guarantee at least one boundary visit per W2C over 10 epochs.
 - [x] Preserve ordinary valid-route sampling for remaining visits.
-- [ ] Report internal routed behavior and do not start external evaluation.
+- [x] Report internal routed behavior and do not start external evaluation.
 
 ## B1 — Upfront POLAR ablation
 
 - [x] Remove only exact C2C all-FULL routes in a derived frozen manifest.
 - [x] Exclude and report the 35 resulting route-empty C2C samples.
-- [ ] Run matched ten-epoch exact-set NLL and internal routed execution.
+- [x] Run matched ten-epoch exact-set NLL and internal routed execution.
 
 ## Cross-track probe and decision
 
 - [x] Freeze a balanced split/dataset/layer-matched boundary cohort and an
       identical-capacity upfront/online probe contract.
-- [ ] Compare matched-capacity upfront and current-state boundary probes.
-- [ ] Save all required reports under `analysis/4action_collapse/`.
-- [ ] Update phase memory, workflow state, decision log as warranted, and push
+- [x] Compare matched-capacity upfront and current-state boundary probes.
+- [x] Save all required reports under `analysis/4action_collapse/`.
+- [x] Update phase memory, workflow state, decision log as warranted, and push
       portable handoff evidence.
