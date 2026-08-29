@@ -12,7 +12,7 @@
   without force-updating shared history. Promoted rule:
   `workspace/decision_log.md` (2026-08-28 cross-server handoff entry).
 
-- Active phase (2026-08-28): online state-conditioned four-action router from
+- Completed/stopped phase (2026-08-29): online state-conditioned four-action router from
   `plans/four_action_train.md`. The checksum-bound GQA/ChartQA/TextVQA
   population has 6,811 samples (5,945 train / 866 validation), 248,804 valid
   routes, and 5,112,442 exact prefix-trie nodes. The 7,621,638-parameter router
@@ -34,14 +34,17 @@
   the optimizer/scheduler construction; the full project suite passes 481
   tests and portable fix commit `f6a0c42` is pushed. Dead dependents 1685/1686
   were canceled. Fresh eight-H100 smoke 1690 passed every gate with mean loss
-  1.414473 -> 0.980423, and ten-epoch training 1691 is running from exact
-  commit `f6a0c42`; all eight ranks have emitted finite samples through global
-  step 3. Evaluation 1692 remains correctly blocked by `afterok:1691`. Fresh
-  roots are `smoke_v3`, `training_v3`, `external_v3`, and
-  `external_analysis_v3`; all earlier smoke evidence remains untouched. The
-  separate POLAR job 1662 had already reached a terminal failure and was not
-  affected. Latest handoff:
-  `reports/four_action_online_router_h100_v3_launch_20260829.md`. Phase memory:
+  1.414473 -> 0.980423. Training 1691 then completed nine atomic epochs and
+  validations. Every epoch had zero W2C rescues; epochs 2--8 executed exactly
+  all-FULL, and epoch 9 differed by one IGNORE while preserving C2C at 1.0.
+  Training loss improved to 0.571311 and node Valid-Action@1 reached 0.724555,
+  but neither produced useful routed behavior. At the user's explicit request,
+  jobs 1691 and 1692 were canceled at 14:19:22 KST while epoch 10 was at step
+  478/480. Nine checksum-valid checkpoints and 7,794 unique validation rows are
+  preserved; epoch 10 left no partial checkpoint, external evaluation never
+  started, and `external_v3` is absent. The cause of collapse remains unknown.
+  Final report: `reports/four_action_online_router_early_stop_20260829.md`.
+  Phase memory:
   `workspace/phase_memory/phase_37_online_four_action_router.md`.
 
 - Completed phase (2026-08-29): four-action Image+Question POLAR training on the

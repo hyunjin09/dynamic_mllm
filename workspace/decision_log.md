@@ -3,6 +3,36 @@
 Record only decisions, pivots, and lessons that should affect later phases.
 Do not copy raw logs or provisional explanations here.
 
+## 2026-08-29 — Require internal routed benefit before external router evaluation
+
+- Decision or promoted lesson: Do not spend the restricted external-evaluation
+  budget on a router checkpoint family that repeatedly provides no internal
+  W2C rescue and deploys an effectively all-FULL route. Preserve the validated
+  negative result and stop before external outcomes are opened.
+- Triggering evidence: The online four-action router completed nine atomic
+  866-record routed validations. Every epoch had zero W2C rescues; epochs 2--8
+  selected FULL for all 24,248 layer decisions, and epoch 9 selected 24,247
+  FULL plus one IGNORE. C2C preservation was 1.0 from epoch 2 onward. This
+  occurred after a real semantic smoke passed and training loss improved, so it
+  is not explained by the earlier smoke-scheduler defect.
+- Evidence paths: `outputs/four_action_online_router/training_v3/history.json`,
+  `reports/four_action_online_router_early_stop_20260829.md`, and
+  `workspace/phase_memory/phase_37_online_four_action_router.md`.
+- Confidence: high for stopping this checkpoint family; unknown for why the
+  learned policy collapsed.
+- Applies when: Deciding whether to open ChartQA/MMMU-Pro/POPE external
+  outcomes for this online-router run or a later run with the same repeated
+  internal all-FULL/zero-rescue behavior.
+- Does not apply when: Claiming every online router or every alternative
+  supervision/architecture must collapse, or diagnosing the cause without a
+  separate controlled action.
+- Consequence for future actions: Internal routed execution must show a
+  decision-relevant non-FULL policy and W2C benefit before external evaluation.
+  Lower training loss or higher node Valid-Action@1 alone is insufficient.
+- Revisit condition: A prospectively specified router produces reproducible
+  internal rescue/preservation evidence under the same executor and frozen
+  validation contract.
+
 ## 2026-08-28 — Preserve complete cross-server handoff evidence
 
 - Decision or promoted lesson: This project is operated concurrently from

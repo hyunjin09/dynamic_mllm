@@ -79,3 +79,23 @@
   GPUs (2.81 wall-hours / 22.47 allocated GPU-hours combined), with documented
   generation/backward-overhead caveats in
   `analysis/4action_router/calibrated_compute_estimate_v3.json`.
+- 2026-08-29 early-stop boundary: nine complete epochs each passed checkpoint-
+  hash and exact 866-UID validation audits. Training mean loss improved from
+  1.031217 at epoch 1 to 0.571311 at epoch 9, and node Valid-Action@1 improved
+  from 0.690902 to 0.724555. Actual routed execution did not improve the
+  primary objective: W2C rescue remained 0.0 at every epoch; epochs 2--8 were
+  exactly all-FULL across 24,248 decisions, and epoch 9 had 24,247 FULL plus
+  one IGNORE. C2C preservation was 1.0 from epoch 2 onward.
+- Standard research-control comparison considered immediate stop, completing
+  epoch 10 only, and full external evaluation. The user explicitly authorized
+  immediate stop. The repeated internal result made external evaluation non-
+  decision-relevant; the final near-zero-LR tail was not expected to reverse
+  nine epochs of behavior.
+- `scancel 1691 1692` was issued at 14:19:22 KST. Training 1691 is terminal
+  `CANCELLED` after 1:11:23; evaluation 1692 is terminal `CANCELLED` with zero
+  runtime. The preserved boundary is epochs 1--9 (7,794 validation rows), no
+  epoch-10 checkpoint, no `best_checkpoint.json`, no `training_summary.json`,
+  no temp/zero-byte artifacts, and no `external_v3` directory.
+- Preserved history SHA-256:
+  `a1b9961e5040789174519a9ab9df41eb05baaa43d5f1868cee391caedc6f72c8`.
+  Final stop report: `reports/four_action_online_router_early_stop_20260829.md`.

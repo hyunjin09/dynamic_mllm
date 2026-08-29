@@ -38,13 +38,22 @@ ChartQA, MMMU-Pro Standard/Vision, and POPE.
   `1.5e-4` for its first four steps). Shared optimizer/scheduler construction
   now enforces the frozen training contract in both modes. Regression and full
   suite pass; portable fix commit `f6a0c42` is pushed.
-- Current runtime: eight-H100 smoke 1690 completed `0:0` in 42 seconds and
-  passed every semantic/gradient/checkpoint gate with mean loss
-  1.414473 -> 0.980423. Ten-epoch job 1691 is running on all eight H100s from
-  exact commit `f6a0c42`; all ranks emitted finite samples through global step
-  3. Evaluation 1692 is pending on exact dependency `afterok:1691`.
-- Current bottleneck: complete ten atomically saved epochs and routed
-  validation before opening external outcomes. No completed epoch exists yet.
+- Final v3 runtime: eight-H100 smoke 1690 completed `0:0` and passed every
+  semantic/gradient/checkpoint gate. Training job 1691 then completed nine
+  atomic epochs/validations before the user authorized early stopping at epoch
+  10 step 478/480. Jobs 1691 and 1692 were canceled at 14:19:22 KST; external
+  evaluation never started and `external_v3` remains absent.
+- Preserved boundary: epochs 1--9 each contain a checksum-valid checkpoint and
+  exactly 866 unique validation outputs; there are no temporary or zero-byte
+  files. No official `best_checkpoint.json` or `training_summary.json` exists
+  because the ten-epoch transaction intentionally did not complete.
+- Final behavioral observation: every completed epoch has zero W2C rescues.
+  Epochs 2--8 execute exactly all-FULL for all 24,248 validation layer
+  decisions; epoch 9 has 24,247 FULL and one IGNORE. C2C preservation is 1.0
+  from epoch 2 onward. The cause of policy collapse remains unknown.
+- Current bottleneck: none. Phase 37 is stopped with a preserved negative
+  internal-validation result; no external evaluation or replacement method is
+  authorized.
 
 ## Evidence That Matters
 | Evidence | Source / Path | Why It Matters | Status |
@@ -53,6 +62,7 @@ ChartQA, MMMU-Pro Standard/Vision, and POPE.
 | Executor contract `d8f524...` for every included sample | same audit and source records | Binds replay states to current unified semantics | confirmed |
 | Direct upfront predictors can fit likelihood without useful complete routes | `reports/binary_polar_full10_polar_matched_results.md` | Supports execution-based selection and the approved online architecture | confirmed |
 | POLAR job 1662 failed before this cancellation | Slurm accounting and `logs/slurm/four-action-polar-train-eval-v1-1662.log` | It was terminal and was not one of the canceled queue entries | confirmed |
+| Nine complete online-router validation histories | `outputs/four_action_online_router/training_v3/history.json` (SHA-256 `a1b9961e...`) | Establishes repeated zero-rescue/all-FULL behavior before early stop | confirmed |
 
 ## Failed Attempts and Lessons
 | Attempt | Observed Failure | Diagnosis | Evidence | Lesson / Next Implication | Do Not Repeat |
@@ -63,46 +73,50 @@ ChartQA, MMMU-Pro Standard/Vision, and POPE.
 ## Open Candidates
 | Candidate | Why Plausible | What It Resolves | Cost | Status |
 |---|---|---|---|---|
-| Approved online READ/WRITE router | Uses route-conditioned hidden states and function-specific features | Tests the plan's primary hypothesis | high | selected |
+| Approved online READ/WRITE router | Uses route-conditioned hidden states and function-specific features | Tests the plan's primary hypothesis | high | stopped after nine zero-rescue validations |
 
 ## Next-Step Decision
-- Deliberation mode: fast; the user explicitly authorized the already-approved
-  online-router training and its three-family external evaluation on all eight
-  H100s.
-- Active objective and bottleneck: allow validated ten-epoch training 1691 to
-  finish every epoch/checkpoint/validation transaction, then run the already-
-  queued restricted external evaluation 1692.
-- Relevant failure used: the v2 loss gate caught a smoke-only optimization
-  mismatch; preserving the gate distinguished a scheduler defect from a
-  semantic/executor failure.
-- Confirmed repair: smoke and training share one optimizer/scheduler builder;
-  the focused regression and all 481 tests pass. Real v3 smoke 1690 then
-  passed every gate with a 30.7% mean-loss reduction.
-- Chosen action: monitor job 1691 for finite routed samples and the first
-  atomic epoch boundary. Evaluation 1692 starts only through `afterok:1691`.
-- Automatic execution authorized: yes.
-- Authorization basis: explicit user instruction on 2026-08-29 to perform the
-  training and then evaluate ChartQA, MMMU-Pro Standard/Vision, and POPE using
-  eight GPUs.
-- Stop condition: frozen-contract mismatch, backbone gradients, invalid multi-
-  route supervision, non-finite training, epoch transaction failure, or
-  external preflight/merge failure. Resource pending alone is not a failure.
+- Deliberation mode: standard; the user proposed stopping the near-complete
+  training and canceling external evaluation after repeated all-FULL behavior.
+- Active objective and bottleneck: determine whether any remaining compute can
+  change the primary internal routed-execution decision.
+- Confirmed observation: nine atomic epochs pass runtime/integrity checks, but
+  every epoch has zero W2C rescues. Epochs 2--8 execute exactly all-FULL over
+  all 24,248 validation layer decisions; epoch 9 differs by one IGNORE. C2C
+  preservation is 1.0 from epoch 2 onward. At the decision boundary epoch 10
+  had reached step 478/480 but had no atomic checkpoint or validation result.
+- Unverified interpretation: why the online router converged to FULL remains
+  unknown. The repeated behavior is sufficient to reject this run's primary
+  rescue objective without diagnosing the cause.
+- Viable alternatives considered: finish epoch 10 then stop; cancel training
+  and evaluation immediately; or complete external evaluation. Finishing
+  external evaluation is not decision-relevant after nine zero-rescue internal
+  validations. Completing epoch 10 would preserve the planned schedule but is
+  unlikely to reverse nine epochs during the near-zero-LR tail.
+- Chosen action and strongest objection: cancel jobs 1691 and 1692 now,
+  preserve nine complete checkpoints/validations, and do not run external
+  evaluation. The strongest objection is losing the final atomic epoch, but it
+  does not justify continued eight-GPU use given the repeated result.
+- How this differs from failed attempts: this stops on repeated valid execution
+  evidence rather than bypassing a semantic gate or modifying the objective.
+- Authorization and stop condition: explicitly authorized by the user's
+  2026-08-29 stop request. Stop when both jobs are terminal and the nine-epoch
+  artifact boundary is verified intact.
 
 ## Latest Research-Action Result
-- Action taken: diagnosed the v2 smoke loss failure, added a red/green schedule-
-  contract regression, shared optimizer/scheduler construction across smoke
-  and training, passed 481 tests, pushed commit `f6a0c42`, canceled dead jobs
-  1685/1686, and launched the fresh v3 chain 1690/1691/1692.
-- Result: smoke 1690 passed in 42 seconds with exact checkpoint roundtrip,
-  multi-valid supervision, routed-state conditioning, nonzero READ/WRITE query
-  gradients, zero backbone gradients, and loss 1.414473 -> 0.980423. Training
-  1691 is live-RUNNING; all eight ranks have emitted finite samples through
-  global step 3. Evaluation 1692 is dependency-blocked as intended.
-- Evidence saved: `outputs/four_action_online_router/smoke_v3/smoke_report.json`,
-  `analysis/4action_router/calibrated_compute_estimate_v3.json`,
-  `reports/four_action_online_router_h100_v3_launch_20260829.md`, Slurm logs,
-  and this phase memory.
-- Failure or issue: no current training failure. No completed epoch exists yet,
-  so validation behavior and checkpoint quality remain unknown.
-- Next implication: continue job 1691; inspect only atomic epoch artifacts and
-  do not interpret partial training samples as scientific results.
+- Action taken: after nine repeated zero-rescue validations, compared immediate
+  stop, finishing epoch 10 only, and full external evaluation. The user-
+  authorized immediate stop was selected; jobs 1691 and 1692 were canceled.
+- Result: job 1691 is terminal `CANCELLED` after 1:11:23 and job 1692 is
+  terminal `CANCELLED` without starting. Nine checkpoints and 7,794 validation
+  rows are intact and checksum/UID audits pass. Epoch 10 produced no partial
+  checkpoint, and no external row was generated.
+- Evidence saved: `outputs/four_action_online_router/training_v3/history.json`,
+  nine epoch metadata/checkpoint/validation triplets, Slurm accounting/logs,
+  `reports/four_action_online_router_early_stop_20260829.md`, and this memory.
+- Failure or issue: the implementation and optimization ran correctly, but the
+  deployed validation policy was essentially all-FULL and achieved zero W2C
+  rescue at every completed epoch. Why it collapsed is not diagnosed.
+- Next implication: preserve the negative result and stop. Any objective,
+  architecture, weighting, or supervision change is a new research action and
+  requires explicit approval.
