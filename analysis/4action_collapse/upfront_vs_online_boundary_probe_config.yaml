@@ -1,0 +1,68 @@
+protocol_version: upfront_vs_online_boundary_probe_v1
+source_plan: plans/four_action_collapse.md
+source_plan_sha256: f61f7476ff9a5872f823c7df837e1a2ba21774c83e4efc88f152d2b77d5aceb9
+source_config: configs/four_action_online_router_v1.yaml
+source_config_sha256: 37635f5acbd8842c387683e57de9e76d4a69dced1b23f57010f23e8ff579f21d
+base_model:
+  model_id: Qwen/Qwen2.5-VL-7B-Instruct
+  revision: cc594898137f460bfe9f0759e9844b3ce807cfb5
+  path: eval/reference/shared_prefix_eval_20260812/model/Qwen2.5-VL-7B-Instruct_cc594898137f460bfe9f0759e9844b3ce807cfb5
+  precision: bfloat16
+  frozen: true
+executor:
+  implementation: unified_four_action
+  contract_sha256: d8f524b928fb30ea0bb37c6a9389893adb338d4f91992d85255fdfb9bea283cb
+  action_order:
+  - IGNORE
+  - READ_ONLY
+  - WRITE_ONLY
+  - FULL
+  query_state: final_valid_compact_text_control_row_before_each_layer
+data:
+  manifest: analysis/4action_collapse/upfront_vs_online_boundary_probe_manifest.jsonl
+  manifest_sha256: 2d01e7601464c305803ba9158385480dab0e200662bbc7154ce3302e0dfc7dd8
+  manifest_audit: analysis/4action_collapse/upfront_vs_online_boundary_probe_manifest_audit.json
+  manifest_audit_sha256: 254f92734f582a4920ad3400a5d1d30790a7a3cda94a5521a2836db2df0cdde8
+  records: 5168
+  pairs: 2584
+  feature_uids: 2746
+  split_counts:
+    train: 4504
+    validation: 664
+  matching: exact_split_dataset_target_layer_without_replacement
+  excluded_positive_boundary_records: 169
+features:
+  upfront: unified_full_pre_layer_0_final_text_plus_mean_visual
+  online: unified_full_pre_target_layer_final_text_plus_mean_visual
+  layer_identity: true
+  hidden_width: 3584
+  dtype: bfloat16
+probe:
+  architecture: matched_two_branch_mlp_v1
+  branch_width: 128
+  layer_embedding_width: 32
+  classifier_hidden_width: 128
+  dropout: 0.1
+training:
+  seed: 20260829
+  epochs: 30
+  batch_size: 128
+  optimizer: AdamW
+  learning_rate: 0.001
+  weight_decay: 0.01
+  validation_every_epoch: true
+  checkpoint_metric: validation_auroc
+analysis:
+  metrics:
+  - auroc
+  - accuracy
+  - f1
+  bootstrap_method: paired_uid_group_resampling
+  bootstrap_draws: 2000
+  confidence: 0.95
+  online_advantage_rule: lower_95ci_of_auroc_difference_greater_than_zero
+reporting:
+  feature_root: outputs/four_action_collapse/boundary_probe_features_v1
+  output_dir: outputs/four_action_collapse/upfront_vs_online_boundary_probe_v1
+  report: analysis/4action_collapse/upfront_vs_online_boundary_probe_report.md
+  summary: analysis/4action_collapse/upfront_vs_online_boundary_probe_summary.json

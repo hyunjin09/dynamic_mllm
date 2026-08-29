@@ -1,0 +1,1244 @@
+{
+  "balanced": true,
+  "dataset_counts": {
+    "chartqa": 1448,
+    "gqa": 2536,
+    "textvqa": 1184
+  },
+  "excluded_positive_boundary_records": 169,
+  "excluded_positive_records": [
+    {
+      "boundary_layer": 27,
+      "dataset": "chartqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "chartqa:chartqa_train_12511766009780_d1867490da"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "chartqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "chartqa:chartqa_train_16071612007363_8ad372a502"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "chartqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "chartqa:chartqa_train_18238548005367_6a3688427e"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "chartqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "chartqa:chartqa_train_44512429001571_51456b1065"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "chartqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "chartqa:chartqa_train_8149_2e432fd209"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "chartqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "chartqa:chartqa_train_99686349003275_f776680b0c"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "chartqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "chartqa:chartqa_train_multi_col_20017_ea6644335b"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "chartqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "chartqa:chartqa_train_multi_col_324_8a998218df"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "chartqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "chartqa:chartqa_train_two_col_100687_4f072ad9b4"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "chartqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "chartqa:chartqa_train_two_col_1622_c75c9e3959"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "chartqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "chartqa:chartqa_train_two_col_23369_0e8713f1e5"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "chartqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "chartqa:chartqa_train_two_col_23933_2ebe5b017c"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "chartqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "chartqa:chartqa_train_two_col_24049_dafe9529c3"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "chartqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "chartqa:chartqa_train_two_col_347_9565c867d2"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "chartqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "chartqa:chartqa_train_two_col_3573_bbb9252dd5"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "chartqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "chartqa:chartqa_train_two_col_60475_4472b3bcd0"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "chartqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "chartqa:chartqa_train_two_col_62884_40baa50bb2"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "chartqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "chartqa:chartqa_train_two_col_82641_7dfa46aa74"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "chartqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "chartqa:chartqa_train_two_col_83266_373bc06110"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "chartqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "chartqa:chartqa_train_two_col_83430_971d22f659"
+    },
+    {
+      "boundary_layer": 26,
+      "dataset": "gqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "gqa:gqa_gh_00918581"
+    },
+    {
+      "boundary_layer": 26,
+      "dataset": "gqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "gqa:gqa_gh_02201590"
+    },
+    {
+      "boundary_layer": 26,
+      "dataset": "gqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "gqa:gqa_gh_02292640"
+    },
+    {
+      "boundary_layer": 26,
+      "dataset": "gqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "gqa:gqa_gh_02905015"
+    },
+    {
+      "boundary_layer": 26,
+      "dataset": "gqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "gqa:gqa_gh_03617044"
+    },
+    {
+      "boundary_layer": 26,
+      "dataset": "gqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "gqa:gqa_gh_04457874"
+    },
+    {
+      "boundary_layer": 26,
+      "dataset": "gqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "gqa:gqa_gh_0460427"
+    },
+    {
+      "boundary_layer": 26,
+      "dataset": "gqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "gqa:gqa_gh_05945918"
+    },
+    {
+      "boundary_layer": 26,
+      "dataset": "gqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "gqa:gqa_gh_06193297"
+    },
+    {
+      "boundary_layer": 26,
+      "dataset": "gqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "gqa:gqa_gh_07326756"
+    },
+    {
+      "boundary_layer": 26,
+      "dataset": "gqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "gqa:gqa_gh_07377055"
+    },
+    {
+      "boundary_layer": 26,
+      "dataset": "gqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "gqa:gqa_gh_07526375"
+    },
+    {
+      "boundary_layer": 26,
+      "dataset": "gqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "gqa:gqa_gh_08202287"
+    },
+    {
+      "boundary_layer": 26,
+      "dataset": "gqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "gqa:gqa_gh_0950718"
+    },
+    {
+      "boundary_layer": 26,
+      "dataset": "gqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "gqa:gqa_gh_1278876"
+    },
+    {
+      "boundary_layer": 26,
+      "dataset": "gqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "gqa:gqa_gh_14444511"
+    },
+    {
+      "boundary_layer": 26,
+      "dataset": "gqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "gqa:gqa_gh_14865107"
+    },
+    {
+      "boundary_layer": 26,
+      "dataset": "gqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "gqa:gqa_gh_16207254"
+    },
+    {
+      "boundary_layer": 26,
+      "dataset": "gqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "gqa:gqa_gh_16965705"
+    },
+    {
+      "boundary_layer": 26,
+      "dataset": "gqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "gqa:gqa_gh_19188672"
+    },
+    {
+      "boundary_layer": 26,
+      "dataset": "gqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "gqa:gqa_gh_19625547"
+    },
+    {
+      "boundary_layer": 26,
+      "dataset": "gqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "gqa:gqa_gh_19715062"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "gqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "gqa:gqa_gh_00331937"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "gqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "gqa:gqa_gh_00648314"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "gqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "gqa:gqa_gh_018033"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "gqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "gqa:gqa_gh_0397188"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "gqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "gqa:gqa_gh_04193695"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "gqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "gqa:gqa_gh_0488212"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "gqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "gqa:gqa_gh_0513221"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "gqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "gqa:gqa_gh_05911952"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "gqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "gqa:gqa_gh_061047036"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "gqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "gqa:gqa_gh_06306632"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "gqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "gqa:gqa_gh_06423346"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "gqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "gqa:gqa_gh_06880992"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "gqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "gqa:gqa_gh_07512382"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "gqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "gqa:gqa_gh_08516530"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "gqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "gqa:gqa_gh_11369699"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "gqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "gqa:gqa_gh_12100890"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "gqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "gqa:gqa_gh_12532416"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "gqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "gqa:gqa_gh_16671327"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "gqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "gqa:gqa_gh_17291611"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "gqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "gqa:gqa_gh_17719170"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "gqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "gqa:gqa_gh_18306788"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "gqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "gqa:gqa_gh_18865395"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "gqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "gqa:gqa_gh_18899666"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "gqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "gqa:gqa_gh_18914229"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "textvqa:textvqa_20466"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "textvqa:textvqa_20799"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "textvqa:textvqa_20870"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "textvqa:textvqa_20985"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "textvqa:textvqa_22988"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "textvqa:textvqa_24153"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "textvqa:textvqa_27051"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "textvqa:textvqa_29940"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "textvqa:textvqa_31881"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "textvqa:textvqa_31898"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "textvqa:textvqa_32921"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "textvqa:textvqa_train_10113"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "textvqa:textvqa_train_11129"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "textvqa:textvqa_train_11950"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "textvqa:textvqa_train_12029"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "textvqa:textvqa_train_12361"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "textvqa:textvqa_train_12953"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "textvqa:textvqa_train_13364"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "textvqa:textvqa_train_1357"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "textvqa:textvqa_train_13588"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "textvqa:textvqa_train_1364"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "textvqa:textvqa_train_1366"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "textvqa:textvqa_train_14113"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "textvqa:textvqa_train_14615"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "textvqa:textvqa_train_14695"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "textvqa:textvqa_train_15451"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "textvqa:textvqa_train_16082"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "textvqa:textvqa_train_17015"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "textvqa:textvqa_train_17116"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "textvqa:textvqa_train_17416"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "textvqa:textvqa_train_17905"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "textvqa:textvqa_train_1800"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "textvqa:textvqa_train_18068"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "textvqa:textvqa_train_18183"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "textvqa:textvqa_train_18576"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "textvqa:textvqa_train_18655"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "textvqa:textvqa_train_18798"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "textvqa:textvqa_train_18875"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "textvqa:textvqa_train_19050"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "textvqa:textvqa_train_19157"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "textvqa:textvqa_train_19408"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "textvqa:textvqa_train_20196"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "textvqa:textvqa_train_20913"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "textvqa:textvqa_train_21183"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "textvqa:textvqa_train_2133"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "textvqa:textvqa_train_215"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "textvqa:textvqa_train_2151"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "textvqa:textvqa_train_22108"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "textvqa:textvqa_train_22112"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "textvqa:textvqa_train_22165"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "textvqa:textvqa_train_2412"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "textvqa:textvqa_train_2413"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "textvqa:textvqa_train_2883"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "textvqa:textvqa_train_2956"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "textvqa:textvqa_train_31"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "textvqa:textvqa_train_3642"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "textvqa:textvqa_train_391"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "textvqa:textvqa_train_4002"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "textvqa:textvqa_train_4853"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "textvqa:textvqa_train_5056"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "textvqa:textvqa_train_5129"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "textvqa:textvqa_train_5296"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "textvqa:textvqa_train_5440"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "textvqa:textvqa_train_5583"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "textvqa:textvqa_train_6133"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "textvqa:textvqa_train_6365"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "textvqa:textvqa_train_6698"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "textvqa:textvqa_train_7094"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "textvqa:textvqa_train_7686"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "textvqa:textvqa_train_7987"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "textvqa:textvqa_train_8063"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "textvqa:textvqa_train_8084"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "textvqa:textvqa_train_8113"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "textvqa:textvqa_train_8394"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "textvqa:textvqa_train_8474"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "textvqa:textvqa_train_913"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "textvqa:textvqa_train_9138"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "textvqa:textvqa_train_9336"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "train",
+      "uid": "textvqa:textvqa_train_9388"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "chartqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "validation",
+      "uid": "chartqa:chartqa_train_13747582003601_714d084a77"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "chartqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "validation",
+      "uid": "chartqa:chartqa_train_two_col_24461_6725b7f212"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "chartqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "validation",
+      "uid": "chartqa:chartqa_train_two_col_3462_cd9f9f5d75"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "chartqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "validation",
+      "uid": "chartqa:chartqa_train_two_col_41857_8a224291f7"
+    },
+    {
+      "boundary_layer": 25,
+      "dataset": "gqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "validation",
+      "uid": "gqa:gqa_gh_08274007"
+    },
+    {
+      "boundary_layer": 25,
+      "dataset": "gqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "validation",
+      "uid": "gqa:gqa_gh_10672712"
+    },
+    {
+      "boundary_layer": 25,
+      "dataset": "gqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "validation",
+      "uid": "gqa:gqa_gh_17438194"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "gqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "validation",
+      "uid": "gqa:gqa_gh_02101894"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "gqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "validation",
+      "uid": "gqa:gqa_gh_06145869"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "gqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "validation",
+      "uid": "gqa:gqa_gh_08974494"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "gqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "validation",
+      "uid": "gqa:gqa_gh_1040155"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "gqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "validation",
+      "uid": "gqa:gqa_gh_18696705"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "validation",
+      "uid": "textvqa:textvqa_25894"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "validation",
+      "uid": "textvqa:textvqa_33566"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "validation",
+      "uid": "textvqa:textvqa_train_1012"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "validation",
+      "uid": "textvqa:textvqa_train_10994"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "validation",
+      "uid": "textvqa:textvqa_train_11100"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "validation",
+      "uid": "textvqa:textvqa_train_1294"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "validation",
+      "uid": "textvqa:textvqa_train_14811"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "validation",
+      "uid": "textvqa:textvqa_train_1487"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "validation",
+      "uid": "textvqa:textvqa_train_2128"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "validation",
+      "uid": "textvqa:textvqa_train_22114"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "validation",
+      "uid": "textvqa:textvqa_train_4108"
+    },
+    {
+      "boundary_layer": 27,
+      "dataset": "textvqa",
+      "reason": "no_unique_same_split_dataset_layer_safe_full_match",
+      "split": "validation",
+      "uid": "textvqa:textvqa_train_973"
+    }
+  ],
+  "feature_uids": 2746,
+  "label_counts": {
+    "0": 2584,
+    "1": 2584
+  },
+  "max_target_layer": 26,
+  "min_target_layer": 0,
+  "pairs": 2584,
+  "passed": true,
+  "records": 5168,
+  "schema_version": "four_action_boundary_probe_manifest_audit_v1",
+  "source_config": "configs/four_action_online_router_v1.yaml",
+  "source_config_sha256": "37635f5acbd8842c387683e57de9e76d4a69dced1b23f57010f23e8ff579f21d",
+  "source_manifest": "outputs/four_action_polar/preparation_v1/manifest_v1.jsonl",
+  "source_manifest_sha256": "6a50ca1a2d5c512d7bd8cededfc4732c93258264ae471e1fd4653c6c16637c28",
+  "source_plan": "plans/four_action_collapse.md",
+  "source_plan_sha256": "f61f7476ff9a5872f823c7df837e1a2ba21774c83e4efc88f152d2b77d5aceb9",
+  "split_counts": {
+    "train": 4504,
+    "validation": 664
+  },
+  "target_layer_counts": {
+    "0": 306,
+    "1": 206,
+    "2": 116,
+    "3": 134,
+    "4": 126,
+    "5": 114,
+    "6": 190,
+    "7": 206,
+    "8": 136,
+    "9": 184,
+    "10": 142,
+    "11": 114,
+    "12": 158,
+    "13": 166,
+    "14": 282,
+    "15": 206,
+    "16": 244,
+    "17": 134,
+    "18": 166,
+    "19": 270,
+    "20": 126,
+    "21": 172,
+    "22": 286,
+    "23": 292,
+    "24": 258,
+    "25": 208,
+    "26": 226
+  }
+}
