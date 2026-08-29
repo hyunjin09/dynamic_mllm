@@ -26,17 +26,25 @@
   authorized the main training and restricted external evaluation. A focused
   red/green regression proved and repaired the DDP smoke-directory race; all
   480 project tests pass and portable fix commit `23ed41c` is pushed. A fresh
-  eight-H100 v2 chain is queued: semantic smoke 1684, ten-epoch training 1685
-  (`afterok:1684`), and ChartQA/MMMU-Pro/POPE evaluation 1686
-  (`afterok:1685`). Smoke is pending for `AssocGrpGRES` while all eight H100s
-  are occupied; downstream jobs are dependency-blocked. Fresh roots are
-  `smoke_v2`, `training_v2`, and `external_v2`; historical `smoke_v1` is
-  untouched. The separate POLAR job 1662 had already reached a terminal
-  failure and was not affected. Handoff:
-  `reports/four_action_online_router_h100_relaunch_20260829.md`. Phase memory:
+  v2 chain was then submitted. Smoke 1684 ran and failed the unchanged loss-
+  decrease gate: mean loss rose from 1.414473 to 1.457190. Direct code/runtime
+  evidence showed that smoke skipped the frozen training warmup/cosine
+  scheduler and instead applied the full `5e-4` learning rate on all four tiny-
+  batch steps. A red/green regression now requires smoke and training to share
+  the optimizer/scheduler construction; the full project suite passes 481
+  tests and portable fix commit `f6a0c42` is pushed. Dead dependents 1685/1686
+  were canceled. Fresh eight-H100 smoke 1690 passed every gate with mean loss
+  1.414473 -> 0.980423, and ten-epoch training 1691 is running from exact
+  commit `f6a0c42`; all eight ranks have emitted finite samples through global
+  step 3. Evaluation 1692 remains correctly blocked by `afterok:1691`. Fresh
+  roots are `smoke_v3`, `training_v3`, `external_v3`, and
+  `external_analysis_v3`; all earlier smoke evidence remains untouched. The
+  separate POLAR job 1662 had already reached a terminal failure and was not
+  affected. Latest handoff:
+  `reports/four_action_online_router_h100_v3_launch_20260829.md`. Phase memory:
   `workspace/phase_memory/phase_37_online_four_action_router.md`.
 
-- Active phase (2026-08-28): four-action Image+Question POLAR training on the
+- Completed phase (2026-08-29): four-action Image+Question POLAR training on the
   current A6000 server. Two matched ten-epoch runs are frozen: duplicated
   one-hot action BCE and exact complete-valid-set NLL. A deterministic
   machine-local path rebase reproduces 6,811 GQA/ChartQA/TextVQA records

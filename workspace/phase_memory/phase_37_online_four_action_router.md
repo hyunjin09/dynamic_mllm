@@ -23,22 +23,28 @@ ChartQA, MMMU-Pro Standard/Vision, and POPE.
 ## Current State
 - Done: architecture, checksum-frozen label/trie audit, online executor hook,
   router, exact supervision, DDP training/validation, checkpointing, external
-  evaluation, reporting chain, and all 476 CPU tests.
+  evaluation, reporting chain, smoke-scheduler repair, and all 481 CPU tests.
 - Historical runtime: smoke job 1663 failed after 39 seconds because its
   fail-closed output guard found the existing directory
   `outputs/four_action_online_router/smoke_v1`.
 - Canceled at the user's request on 2026-08-28: never-started training job 1664
   and never-started external-evaluation job 1665. The fresh user queue was
   empty immediately after cancellation.
-- Authorized and queued on 2026-08-29: fresh semantic smoke 1684, ten-epoch
-  training 1685 after successful smoke, and external evaluation 1686 after
-  successful training. Every job requests all eight H100s.
-- Current bottleneck: smoke 1684 is pending for `AssocGrpGRES`; training and
-  evaluation are dependency-blocked. No output exists under the fresh v2
-  roots yet.
-- Most recent useful observation: the existing audited VQA manifest contains
-  6,811 replay-valid samples (5,945 train / 866 validation), 248,804 complete
-  routes, and one executor contract across GQA, ChartQA, and TextVQA.
+- Historical v2 runtime: smoke 1684 ran for 42 seconds and failed only the
+  repeated-tiny-batch loss-decrease gate (1.414473 -> 1.457190). It preserved
+  a complete report and checkpoint. Dead dependents 1685/1686 were canceled.
+- Supported diagnosis and repair: smoke had used full LR `5e-4` for all four
+  updates while main training uses cosine warmup (LRs 0, `5e-5`, `1e-4`,
+  `1.5e-4` for its first four steps). Shared optimizer/scheduler construction
+  now enforces the frozen training contract in both modes. Regression and full
+  suite pass; portable fix commit `f6a0c42` is pushed.
+- Current runtime: eight-H100 smoke 1690 completed `0:0` in 42 seconds and
+  passed every semantic/gradient/checkpoint gate with mean loss
+  1.414473 -> 0.980423. Ten-epoch job 1691 is running on all eight H100s from
+  exact commit `f6a0c42`; all ranks emitted finite samples through global step
+  3. Evaluation 1692 is pending on exact dependency `afterok:1691`.
+- Current bottleneck: complete ten atomically saved epochs and routed
+  validation before opening external outcomes. No completed epoch exists yet.
 
 ## Evidence That Matters
 | Evidence | Source / Path | Why It Matters | Status |
@@ -52,6 +58,7 @@ ChartQA, MMMU-Pro Standard/Vision, and POPE.
 | Attempt | Observed Failure | Diagnosis | Evidence | Lesson / Next Implication | Do Not Repeat |
 |---|---|---|---|---|---|
 | Direct upfront factorized binary prediction | Best internal checkpoint remained effectively ALL-ON with no frozen-60 rescue | supported architecture/objective limitation for that run | binary full10 report | Select the online router by actual routed execution, not node likelihood alone | Do not reuse upfront POLAR states as online training states |
+| V2 eight-rank online smoke | Mean loss increased 1.414473 -> 1.457190 despite finite gradients and valid semantics | supported: smoke skipped the main warmup/cosine schedule and applied full LR `5e-4` four times | `smoke_v2/smoke_report.json`, source comparison, local LR probe | Share optimizer/scheduler construction; preserve the strict loss gate | Do not weaken the loss gate or repeat full-LR tiny-batch smoke |
 
 ## Open Candidates
 | Candidate | Why Plausible | What It Resolves | Cost | Status |
@@ -62,40 +69,40 @@ ChartQA, MMMU-Pro Standard/Vision, and POPE.
 - Deliberation mode: fast; the user explicitly authorized the already-approved
   online-router training and its three-family external evaluation on all eight
   H100s.
-- Active objective and bottleneck: pass the real eight-rank semantic smoke,
-  then complete ten-epoch training and checksum-bound external evaluation.
-- Relevant failure used: smoke 1663 left only an empty output directory. Code
-  inspection and a red/green regression showed that every rank checked for the
-  directory while rank 0 created it, so late ranks mistook the new directory
-  for stale output.
-- Confirmed repair: only rank 0 now checks/creates the shared smoke directory;
-  all ranks synchronize afterward. The focused test failed before the repair,
-  then passed, and the full project suite passes 480 tests. Portable fix commit:
-  `23ed41c`.
-- Chosen action: submit a fresh fail-closed eight-H100
-  `smoke_v2 -> training_v2 -> external_v2` Slurm chain. Each downstream job
-  uses an exact `afterok` dependency; the prior empty `smoke_v1` directory and
-  historical jobs remain untouched.
+- Active objective and bottleneck: allow validated ten-epoch training 1691 to
+  finish every epoch/checkpoint/validation transaction, then run the already-
+  queued restricted external evaluation 1692.
+- Relevant failure used: the v2 loss gate caught a smoke-only optimization
+  mismatch; preserving the gate distinguished a scheduler defect from a
+  semantic/executor failure.
+- Confirmed repair: smoke and training share one optimizer/scheduler builder;
+  the focused regression and all 481 tests pass. Real v3 smoke 1690 then
+  passed every gate with a 30.7% mean-loss reduction.
+- Chosen action: monitor job 1691 for finite routed samples and the first
+  atomic epoch boundary. Evaluation 1692 starts only through `afterok:1691`.
 - Automatic execution authorized: yes.
 - Authorization basis: explicit user instruction on 2026-08-29 to perform the
   training and then evaluate ChartQA, MMMU-Pro Standard/Vision, and POPE using
   eight GPUs.
-- Stop condition: semantic smoke failure, frozen-contract mismatch, backbone
-  gradients, invalid multi-route supervision, training integrity failure, or
+- Stop condition: frozen-contract mismatch, backbone gradients, invalid multi-
+  route supervision, non-finite training, epoch transaction failure, or
   external preflight/merge failure. Resource pending alone is not a failure.
 
 ## Latest Research-Action Result
-- Action taken: reproduced the smoke-directory startup race with a failing
-  test, repaired rank-zero-only directory creation, passed the focused test and
-  all 480 project tests, pushed fix commit `23ed41c`, and submitted a fresh
-  eight-H100 fail-closed v2 chain.
-- Result: jobs 1684/1685/1686 are live-PENDING with exact dependencies
-  `1685=afterok:1684` and `1686=afterok:1685`. No v2 scientific output exists
-  yet; all eight H100s are currently allocated to other work.
-- Evidence saved: `reports/four_action_online_router_h100_relaunch_20260829.md`,
-  `analysis/4action_router/experiment_log.md`, the Slurm job records, and this
-  phase memory.
-- Failure or issue: none in the replacement run yet. Resource pending is
-  expected and does not relax any smoke or semantic gate.
-- Next implication: monitor smoke 1684 when allocated. Training and evaluation
-  start automatically only after their exact predecessor succeeds.
+- Action taken: diagnosed the v2 smoke loss failure, added a red/green schedule-
+  contract regression, shared optimizer/scheduler construction across smoke
+  and training, passed 481 tests, pushed commit `f6a0c42`, canceled dead jobs
+  1685/1686, and launched the fresh v3 chain 1690/1691/1692.
+- Result: smoke 1690 passed in 42 seconds with exact checkpoint roundtrip,
+  multi-valid supervision, routed-state conditioning, nonzero READ/WRITE query
+  gradients, zero backbone gradients, and loss 1.414473 -> 0.980423. Training
+  1691 is live-RUNNING; all eight ranks have emitted finite samples through
+  global step 3. Evaluation 1692 is dependency-blocked as intended.
+- Evidence saved: `outputs/four_action_online_router/smoke_v3/smoke_report.json`,
+  `analysis/4action_router/calibrated_compute_estimate_v3.json`,
+  `reports/four_action_online_router_h100_v3_launch_20260829.md`, Slurm logs,
+  and this phase memory.
+- Failure or issue: no current training failure. No completed epoch exists yet,
+  so validation behavior and checkpoint quality remain unknown.
+- Next implication: continue job 1691; inspect only atomic epoch artifacts and
+  do not interpret partial training samples as scientific results.

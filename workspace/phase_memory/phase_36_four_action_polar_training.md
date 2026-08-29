@@ -37,23 +37,21 @@ evaluation.
 
 ## Current State
 - Done: action/model/loss/decoder/data contracts; checksum-audited training
-  manifest; Qwen3/Qwen2.5 model and external-evaluation asset inventory.
-- Historical other-server runtime: Slurm job `1662` completed visual-cache
-  extraction and both BCE/NLL training processes, then failed during external-
-  evaluation preflight. It is terminal and is not a live job on this server.
-- Current-server runtime: job `105068` independently completed the fresh cache
-  and both matched ten-epoch training runs, then reproduced the same device-
-  placement failure before external outcomes were opened.
-- Active current-server action: the executor-input repair is validated and
-  evaluation-only job `105451` is running BCE then NLL on one node06 A6000.
-- Bottleneck: complete and checksum-merge both frozen 14,960-record external
-  evaluations. Do not interpret partial rows.
-- Most recent useful observation: 106 of 6,917 source records have no
-  replay-valid four-action route; all are W2C records with replay failures.
-- Latest infrastructure observation: supplied node03 allocation `105067` was
-  unusable because one allocated device had a device-handle failure and
-  PyTorch could not initialize CUDA. It was released. Replacement job `105068`
-  excludes node03 and runs on node06 with the required safeguards.
+  manifest; both ten-epoch BCE/NLL runs; checkpoint selection; both complete
+  14,960-record external evaluations; checksum-bound merges; and deterministic
+  action-collapse audit.
+- Final result: BCE epoch 8 and NLL epoch 6 both select all-FULL on every one of
+  866 internal-validation records and every one of 14,960 external records.
+  Each external output contains 418,880/418,880 FULL layer decisions, one
+  unique mask, zero non-FULL decisions, and zero corrections or regressions.
+- Interpretation: top-1 policy collapse is confirmed. The cause remains
+  `unknown`; this result does not prove that non-argmax logits or internal
+  features are input-independent.
+- Cross-server boundary: the merged per-record outputs and checkpoints remain
+  machine-local to the A6000 server. They are not present on this H100 server
+  merely because their reports and checksums are tracked in Git.
+- Bottleneck: none for the authorized Phase 36 run. No new training,
+  architecture change, or diagnostic experiment is selected.
 
 ## Evidence That Matters
 | Evidence | Source / Path | Why It Matters | Status |
@@ -76,47 +74,29 @@ evaluation.
 | Exact complete-valid-set NLL | Optimizes mass over all valid routes without route duplication | Tests categorical set supervision | high | training complete; external evaluation waits behind BCE here |
 
 ## Next-Step Decision
-- Deliberation mode: fast (the user specified the complete runtime action).
-- Active objective and bottleneck: finish the frozen BCE and NLL external
-  evaluations without rerunning or changing training.
-- Relevant memory item used: both independent server executions failed at the
-  same position-ID device contract before scientific evaluation; the repair
-  must pass native parity and determinism before full rows are accepted.
-- Confirmed observation: the repair passes the focused regression and real BCE
-  preflight. At the Git handoff boundary, job `105451` had atomically committed
-  6,240/14,960 BCE rows exactly once; NLL had not started.
-- Diagnosis: supported.
-- Evidence: `reports/four_action_polar_tmux2_launch_20260828.md`, Slurm job
-  `105451`, and `runs/four_action_polar_eval_node06_20260828/`.
-- Chosen action: allow the resumable evaluation-only job to finish BCE, then
-  NLL, then checksum-bound merges and objective comparison.
-- Automatic execution authorized: yes.
-- Authorization basis: the user explicitly requested one node06 GPU for the
-  evaluation and required startup monitoring.
-- Stop condition: both 14,960-record evaluations and merges complete, or a new
-  integrity/runtime failure invalidates continuation.
+- Deliberation mode: none; the authorized action is complete.
+- Confirmed observation: both objectives collapse to all-FULL on the complete
+  internal-validation and external populations, with positive FULL-versus-
+  runner-up margins at every external sample-layer decision.
+- Evidence: `reports/four_action_polar_action_collapse_audit_20260829.md`,
+  `reports/four_action_polar_node07_bce_external.md`, and
+  `reports/four_action_polar_node07_nll_external.md`.
+- Chosen action: stop Phase 36 after preserving the negative result. Do not
+  infer a cause or launch another predictor change without a separate bounded
+  decision and explicit authorization.
 
 ## Latest Research-Action Result
-- Action taken: current-server job `105068` completed both ten-epoch training
-  runs (470 optimizer steps each), then exited `1` during the first BCE
-  external-preflight sample. The minimal device-alignment repair and regression
-  were implemented, and evaluation-only job `105451` was launched on node06.
-- Result: the real BCE preflight passes 6/6 native token/prediction/evaluator
-  parity fixtures and 6/6 deterministic repeated executions. The first atomic
-  32-row chunk passed UID/schema/finite-score monitoring, and resumable BCE
-  execution is in progress.
-  BCE selected epoch 8 and NLL epoch 6. Both selected checkpoints have
-  validation Hit@1 0.585450 and decode all 866 validation samples as all-FULL.
-- Evidence saved: `reports/four_action_polar_tmux2_launch_20260828.md`,
-  `runs/four_action_polar_tmux2_20260828/`, and
-  `runs/four_action_polar_eval_node06_20260828/`.
-- Failure or issue: external evaluation remains incomplete; partial BCE rows
-  are execution evidence only and must not be scientifically interpreted.
-- Cross-server history: remote job `1662` independently completed its local
-  cache and both training processes before the same preflight failure. Its logs
-  and artifacts remain machine-local to that server.
-- Next implication: finish the current resumable evaluation and inspect only
-  the complete checksum-bound merged outputs.
+- Action taken: A6000 job `105451` completed both frozen external evaluations,
+  exact shard merges, integrity checks, and deterministic action parsing.
+- Result: both BCE and NLL are all-FULL for all 14,960 records. Predicted and
+  unified-FULL accuracy are therefore identical mechanically for ChartQA,
+  MMMU-Pro Standard/Vision, and all POPE splits.
+- Evidence saved: `reports/four_action_polar_action_collapse_audit_20260829.md`
+  plus the two objective-specific external reports and checksum sidecars.
+- Failure or issue: none in final integrity. The scientific outcome is a
+  negative routing result: no conditional non-FULL policy behavior appeared.
+- Next implication: preserve the result and stop; the separate online-router
+  Phase 37 remains the currently running architecture experiment.
 
 ## Current-Server Launch Result (2026-08-28)
 

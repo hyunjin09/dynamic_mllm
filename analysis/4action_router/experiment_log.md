@@ -47,3 +47,35 @@
   `AssocGrpGRES`; downstream jobs are dependency-blocked.
 - Exact launch hashes, resources, paths, and continuation commands are saved in
   `reports/four_action_online_router_h100_relaunch_20260829.md`.
+- 2026-08-29 v2 runtime update: smoke 1684 started on all eight H100s and
+  preserved a complete report/checkpoint, but failed the unchanged loss-
+  decrease gate after mean loss rose `1.41447294 -> 1.45719039`. All semantic,
+  gradient, frozen-backbone, deterministic-route, and checkpoint-roundtrip
+  evidence remained healthy. Training 1685 became dependency-never-satisfied;
+  evaluation 1686 remained blocked.
+- Supported diagnosis: smoke constructed AdamW directly at full LR `5e-4`,
+  while main training's cosine-with-warmup scheduler initializes LR at zero and
+  uses `0`, `5e-5`, `1e-4`, and `1.5e-4` over the first four steps. Thus the
+  smoke did not test the frozen training optimization contract.
+- Repair: shared optimizer/scheduler construction is now used by smoke and
+  training. A regression failed before the helper existed and passes after the
+  repair; the online-router file passes 16/16 and the full project suite passes
+  481/481. Portable commit `f6a0c42` is pushed.
+- Dead jobs 1685/1686 were canceled. Fresh v3 roots were verified absent and
+  machine-local wrappers pass `bash -n`.
+- Submitted fresh all-eight-H100 chain at 2026-08-29 13:07:17 KST: smoke 1690,
+  training 1691 with `afterok:1690`, and evaluation 1692 with `afterok:1691`.
+- Smoke 1690 completed `0:0` in 42 seconds and passed all gates. Mean loss fell
+  `1.41447294 -> 0.98042297`; exact checkpoint roundtrip, multi-valid
+  supervision, routed-state conditioning, nonzero READ/WRITE query gradients,
+  and zero backbone gradients all pass. Smoke report SHA-256:
+  `b0a08073dbac9b4e2d8a17c165bcbdad7275cb5ff897b81037e4ec0b60ce6a61`.
+- Training 1691 started automatically from exact Git commit `f6a0c42`. All
+  eight ranks emitted finite teacher-forced losses through global step 3;
+  evaluation 1692 remains dependency-blocked. Partial sample losses are runtime
+  health evidence only, not a scientific result.
+- Smoke-calibrated estimate is 1.59 wall-hours for teacher replay, 0.45 hours
+  for ten epoch-validations, and 0.77 hours for external evaluation on eight
+  GPUs (2.81 wall-hours / 22.47 allocated GPU-hours combined), with documented
+  generation/backward-overhead caveats in
+  `analysis/4action_router/calibrated_compute_estimate_v3.json`.
