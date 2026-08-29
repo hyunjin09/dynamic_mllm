@@ -240,6 +240,33 @@ def test_smoke_output_directory_is_created_once_by_rank_zero(
         prepare_smoke_output_dir(output_dir, rank=0)
 
 
+def test_smoke_and_training_share_the_warmup_scheduler_contract() -> None:
+    from experiments.train_four_action_online_router import (
+        build_training_optimizer_and_scheduler,
+    )
+
+    parameter = torch.nn.Parameter(torch.tensor(1.0))
+    optimizer, scheduler = build_training_optimizer_and_scheduler(
+        [parameter],
+        {
+            "learning_rate": 5e-4,
+            "weight_decay": 0.01,
+            "warmup_steps": 10,
+            "total_optimizer_steps": 480,
+        },
+    )
+
+    learning_rates = []
+    for _ in range(4):
+        learning_rates.append(optimizer.param_groups[0]["lr"])
+        optimizer.zero_grad(set_to_none=True)
+        parameter.grad = torch.ones_like(parameter)
+        optimizer.step()
+        scheduler.step()
+
+    assert learning_rates == pytest.approx([0.0, 5e-5, 1e-4, 1.5e-4])
+
+
 def test_structured_logits_use_ignore_read_write_full_action_order() -> None:
     read = torch.tensor([2.0])
     write = torch.tensor([3.0])

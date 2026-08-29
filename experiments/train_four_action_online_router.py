@@ -327,6 +327,20 @@ def prepare_smoke_output_dir(output_dir: Path, *, rank: int) -> None:
     dist.barrier()
 
 
+def build_training_optimizer_and_scheduler(parameters, training):
+    optimizer = torch.optim.AdamW(
+        parameters,
+        lr=float(training["learning_rate"]),
+        weight_decay=float(training["weight_decay"]),
+    )
+    scheduler = get_cosine_schedule_with_warmup(
+        optimizer,
+        num_warmup_steps=int(training["warmup_steps"]),
+        num_training_steps=int(training["total_optimizer_steps"]),
+    )
+    return optimizer, scheduler
+
+
 def run_smoke(
     *, config, config_path, output_dir, rows, sources, processor, wrapped_model,
     router, rank, world_size, device
@@ -364,10 +378,8 @@ def run_smoke(
             routed_differs = True
             break
 
-    optimizer = torch.optim.AdamW(
-        router.parameters(),
-        lr=float(config["training"]["learning_rate"]),
-        weight_decay=float(config["training"]["weight_decay"]),
+    optimizer, scheduler = build_training_optimizer_and_scheduler(
+        router.parameters(), config["training"]
     )
     router.eval()
     with torch.no_grad(), torch.autocast(device_type="cuda", dtype=torch.bfloat16):
@@ -397,6 +409,7 @@ def run_smoke(
         )
         torch.nn.utils.clip_grad_norm_(router.parameters(), float(config["training"]["gradient_clip_norm"]))
         optimizer.step()
+        scheduler.step()
     router.eval()
     with torch.no_grad(), torch.autocast(device_type="cuda", dtype=torch.bfloat16):
         final_loss = set_valued_action_loss(
@@ -503,15 +516,10 @@ def run_training(
     if rank == 0:
         output_dir.mkdir(parents=True, exist_ok=True)
     dist.barrier()
-    optimizer = torch.optim.AdamW(
-        router.parameters(), lr=float(training["learning_rate"]),
-        weight_decay=float(training["weight_decay"])
+    optimizer, scheduler = build_training_optimizer_and_scheduler(
+        router.parameters(), training
     )
     total_steps = int(training["total_optimizer_steps"])
-    scheduler = get_cosine_schedule_with_warmup(
-        optimizer, num_warmup_steps=int(training["warmup_steps"]),
-        num_training_steps=total_steps
-    )
     history_path = output_dir / "history.json"
     history: list[dict[str, Any]] = []
     checkpoints: list[dict[str, Any]] = []
