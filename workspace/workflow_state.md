@@ -56,14 +56,18 @@
   BCE evaluation-only preflight passed all six native-parity and determinism
   fixtures. One monitor-only schema error stopped job `105448` after 32 rows
   had been atomically saved; no evaluator fault or partial file occurred.
-  Replacement job `105451` is running on one node06 A6000 and resumed those
-  exact rows. At the 2026-08-29 Git handoff boundary, 6,240/14,960 BCE rows
-  were present exactly once; NLL follows sequentially. External
-  evaluation remains incomplete and partial outcomes must not be interpreted.
+  Replacement job `105451` completed both 14,960-record evaluations and both
+  merged integrity manifests pass. Direct result parsing shows complete top-1
+  collapse for both objectives: one unique all-FULL mask, 418,880/418,880 FULL
+  layer decisions, and zero non-FULL decisions. Thus predicted accuracy equals
+  unified-FULL accuracy mechanically, with zero corrections or regressions.
+  This supports policy collapse but does not by itself identify why training
+  produced FULL dominance.
   Other-server job `1662` independently completed its machine-local cache and
   both training processes before the same preflight failure; it is terminal
   historical evidence on this server and its payloads are not implied by Git.
-  Evidence: `reports/four_action_polar_tmux2_launch_20260828.md`; phase memory:
+  Evidence: `reports/four_action_polar_tmux2_launch_20260828.md` and
+  `reports/four_action_polar_action_collapse_audit_20260829.md`; phase memory:
   `workspace/phase_memory/phase_36_four_action_polar_training.md`.
 
 - Active phase (2026-08-25): executing `plans/4way_labeling_3.md` over the

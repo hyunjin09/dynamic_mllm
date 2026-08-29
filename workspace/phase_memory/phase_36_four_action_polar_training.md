@@ -188,3 +188,28 @@ evaluation.
   `outputs/four_action_polar/node07_20260828/eval_bce/`.
 - Next implication: allow job `105451` to finish BCE and NLL, then inspect only
   checksum-bound merged reports. Do not interpret the partial rows.
+
+## Completed External Evaluation and Collapse Audit (2026-08-29)
+
+- Completion: BCE and NLL each completed all 14,960 prospectively selected
+  records exactly once; both merged integrity manifests report `PASS`.
+- Confirmed observation: both objectives selected the all-FULL 28-layer mask
+  for every external record. Each has one unique top-1 mask, 418,880 FULL
+  layer decisions, zero non-FULL decisions, and zero samples with any non-FULL
+  action.
+- Confidence: high. This is direct parsing of both merged per-record outputs,
+  and every FULL-versus-runner-up logit margin is positive.
+- Margin evidence: duplicated BCE minimum/median/mean FULL margin is
+  0.12549/0.59766/1.09239; exact set NLL is
+  0.36719/4.52734/4.43887.
+- Behavioral implication: predicted and baseline accuracy are identical by
+  construction because every predicted route is the baseline FULL route;
+  W-to-C and C-to-W counts must both be zero.
+- Interpretation: supported top-1 policy collapse. It is not yet evidence that
+  every internal feature or non-argmax logit is input-independent. The cause of
+  FULL dominance remains `unknown`.
+- Evidence: `reports/four_action_polar_action_collapse_audit_20260829.md` and
+  both merged `external_results_v1.jsonl` files.
+- Next-step decision: none selected in this result-interpretation action. Do
+  not start another training or architecture change without a separate bounded
+  decision.
