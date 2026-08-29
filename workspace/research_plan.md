@@ -1,5 +1,20 @@
 # Operational Research Plan: Binary Route Label Regeneration
 
+## Active four-action collapse isolation (2026-08-29)
+
+The user authorized `plans/four_action_collapse.md` to compare both candidate
+router families without bundling mechanisms. First test the unchanged online
+router on exact mandatory W2C all-FULL-prefix boundary states; launch the full
+ten-epoch guaranteed-coverage online comparison only if the fixed pilot passes
+its prospective behavioral gate. Independently run a matched upfront POLAR
+exact-set-NLL ablation that removes only C2C's exact all-FULL route and records
+the 35 route-empty exclusions. Then compare matched-capacity initial-input and
+current-state boundary probes. Internal routed execution, not teacher loss, is
+the decision criterion; external evaluation is deferred until a later explicit
+decision under the promoted internal-benefit rule. Evidence is written under
+`analysis/4action_collapse/`; phase memory is
+`workspace/phase_memory/phase_38_four_action_collapse.md`.
+
 ## Completed cross-dataset visual-access analysis (2026-08-22)
 
 The user authorized `plans/motivation_check4.md` as one bounded read-only

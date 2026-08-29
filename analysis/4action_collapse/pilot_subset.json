@@ -1,0 +1,3828 @@
+{
+  "c2c_per_dataset": 8,
+  "c2c_records": [
+    {
+      "uid": "gqa:gqa_ge_09526484"
+    },
+    {
+      "uid": "gqa:gqa_ge_11689818"
+    },
+    {
+      "uid": "gqa:gqa_gh_09286680"
+    },
+    {
+      "uid": "gqa:gqa_gh_03608642"
+    },
+    {
+      "uid": "gqa:gqa_gh_14311893"
+    },
+    {
+      "uid": "gqa:gqa_gh_07272075"
+    },
+    {
+      "uid": "gqa:gqa_gh_15650223"
+    },
+    {
+      "uid": "gqa:gqa_gh_09869984"
+    },
+    {
+      "uid": "chartqa:chartqa_train_86276368010166_335bd154cd"
+    },
+    {
+      "uid": "chartqa:chartqa_train_30774726003553_9b1fa4d2d5"
+    },
+    {
+      "uid": "chartqa:chartqa_train_16823767005326_dc33f902a8"
+    },
+    {
+      "uid": "chartqa:chartqa_train_10452_b8b8cbc1ef"
+    },
+    {
+      "uid": "chartqa:chartqa_train_9310_268dd9149c"
+    },
+    {
+      "uid": "chartqa:chartqa_train_6758_c9be01c60d"
+    },
+    {
+      "uid": "chartqa:chartqa_train_11233_3330e54f97"
+    },
+    {
+      "uid": "chartqa:chartqa_train_75118786021156_5b268554cd"
+    },
+    {
+      "uid": "textvqa:textvqa_train_838"
+    },
+    {
+      "uid": "textvqa:textvqa_train_122"
+    },
+    {
+      "uid": "textvqa:textvqa_train_1553"
+    },
+    {
+      "uid": "textvqa:textvqa_train_1661"
+    },
+    {
+      "uid": "textvqa:textvqa_train_778"
+    },
+    {
+      "uid": "textvqa:textvqa_train_1215"
+    },
+    {
+      "uid": "textvqa:textvqa_train_992"
+    },
+    {
+      "uid": "textvqa:textvqa_train_1354"
+    }
+  ],
+  "counts_by_dataset": {
+    "chartqa": {
+      "C2C": 8,
+      "W2C": 32
+    },
+    "gqa": {
+      "C2C": 8,
+      "W2C": 32
+    },
+    "textvqa": {
+      "C2C": 8,
+      "W2C": 32
+    }
+  },
+  "git_commit": "2144c38fc2f294473f2e770b2e272e2f961b4c10",
+  "plan": "plans/four_action_collapse.md",
+  "plan_sha256": "f61f7476ff9a5872f823c7df837e1a2ba21774c83e4efc88f152d2b77d5aceb9",
+  "schema_version": "four_action_mandatory_boundary_pilot_v1",
+  "selection_seed": 20260829,
+  "source_manifest": "outputs/four_action_polar/preparation_v1/manifest_v1.jsonl",
+  "source_manifest_sha256": "6a50ca1a2d5c512d7bd8cededfc4732c93258264ae471e1fd4653c6c16637c28",
+  "w2c_per_dataset": 32,
+  "w2c_records": [
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 4,
+      "boundary_layer": 4,
+      "boundary_route_indices": [
+        0
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|IGNORE|FULL|FULL|IGNORE|READ_ONLY|FULL|FULL|IGNORE|FULL|READ_ONLY|FULL|IGNORE|FULL|WRITE_ONLY|FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|FULL|FULL|FULL"
+      ],
+      "dataset": "gqa",
+      "singleton": true,
+      "source_binary_route_ids": [
+        "gqa:gqa_ge_19436236::route_0054_1101011000000010101110000101"
+      ],
+      "teacher_route_index": 0,
+      "uid": "gqa:gqa_ge_19436236",
+      "valid_nonfull_actions": [
+        "IGNORE"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 6,
+      "boundary_layer": 6,
+      "boundary_route_indices": [
+        0
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|FULL|FULL|IGNORE|FULL|READ_ONLY|READ_ONLY|FULL|FULL|READ_ONLY|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|FULL|WRITE_ONLY|FULL|FULL|FULL|FULL"
+      ],
+      "dataset": "gqa",
+      "singleton": true,
+      "source_binary_route_ids": [
+        "gqa:gqa_gh_02991702::route_0112_1111000110000110011110001011"
+      ],
+      "teacher_route_index": 0,
+      "uid": "gqa:gqa_gh_02991702",
+      "valid_nonfull_actions": [
+        "READ_ONLY"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 4,
+      "boundary_layer": 4,
+      "boundary_route_indices": [
+        0
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|WRITE_ONLY|FULL|READ_ONLY|IGNORE|FULL|IGNORE|IGNORE|IGNORE|IGNORE|FULL|FULL|WRITE_ONLY|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL"
+      ],
+      "dataset": "gqa",
+      "singleton": true,
+      "source_binary_route_ids": [
+        "gqa:gqa_ge_01969262::route_0163_1111010010000110011110110000"
+      ],
+      "teacher_route_index": 0,
+      "uid": "gqa:gqa_ge_01969262",
+      "valid_nonfull_actions": [
+        "WRITE_ONLY"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 4,
+      "boundary_layer": 4,
+      "boundary_route_indices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|READ_ONLY|IGNORE|FULL|FULL|FULL|FULL|READ_ONLY|FULL|READ_ONLY|IGNORE|FULL|FULL|WRITE_ONLY|READ_ONLY|READ_ONLY|IGNORE|FULL|FULL|IGNORE|IGNORE|FULL|IGNORE|IGNORE|FULL",
+        "FULL|FULL|FULL|FULL|READ_ONLY|IGNORE|FULL|WRITE_ONLY|FULL|IGNORE|FULL|FULL|IGNORE|IGNORE|FULL|FULL|WRITE_ONLY|READ_ONLY|READ_ONLY|READ_ONLY|FULL|IGNORE|FULL|FULL|IGNORE|FULL|IGNORE|FULL",
+        "FULL|FULL|FULL|FULL|READ_ONLY|IGNORE|FULL|WRITE_ONLY|FULL|IGNORE|FULL|FULL|IGNORE|IGNORE|FULL|FULL|WRITE_ONLY|READ_ONLY|READ_ONLY|WRITE_ONLY|FULL|IGNORE|FULL|FULL|READ_ONLY|FULL|IGNORE|FULL",
+        "FULL|FULL|FULL|FULL|WRITE_ONLY|IGNORE|FULL|WRITE_ONLY|FULL|IGNORE|FULL|IGNORE|IGNORE|IGNORE|FULL|FULL|IGNORE|READ_ONLY|FULL|IGNORE|FULL|WRITE_ONLY|FULL|FULL|FULL|FULL|FULL|FULL"
+      ],
+      "dataset": "gqa",
+      "singleton": false,
+      "source_binary_route_ids": [
+        "gqa:gqa_gh_18596416::route_0090_1110001111010011000011001001",
+        "gqa:gqa_gh_18596416::route_0358_1111001010100011000010110101"
+      ],
+      "teacher_route_index": 0,
+      "uid": "gqa:gqa_gh_18596416",
+      "valid_nonfull_actions": [
+        "READ_ONLY",
+        "WRITE_ONLY"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 8,
+      "boundary_layer": 8,
+      "boundary_route_indices": [
+        0
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|IGNORE|IGNORE|IGNORE|IGNORE|IGNORE|IGNORE|IGNORE|FULL|FULL|FULL|IGNORE|WRITE_ONLY|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|FULL|FULL"
+      ],
+      "dataset": "gqa",
+      "singleton": true,
+      "source_binary_route_ids": [
+        "gqa:gqa_gh_1567787::route_0327_0110100000000001110011111011"
+      ],
+      "teacher_route_index": 0,
+      "uid": "gqa:gqa_gh_1567787",
+      "valid_nonfull_actions": [
+        "IGNORE"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 13,
+      "boundary_layer": 13,
+      "boundary_route_indices": [
+        0
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|IGNORE|FULL|FULL|FULL|FULL|WRITE_ONLY|FULL|WRITE_ONLY|WRITE_ONLY|FULL|FULL|READ_ONLY|IGNORE|FULL"
+      ],
+      "dataset": "gqa",
+      "singleton": true,
+      "source_binary_route_ids": [
+        "gqa:gqa_gh_0980114::route_0174_1100110001111001011010011001"
+      ],
+      "teacher_route_index": 0,
+      "uid": "gqa:gqa_gh_0980114",
+      "valid_nonfull_actions": [
+        "READ_ONLY"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 12,
+      "boundary_layer": 12,
+      "boundary_route_indices": [
+        0
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|FULL|WRITE_ONLY|FULL|WRITE_ONLY|FULL|READ_ONLY|WRITE_ONLY|FULL|FULL|FULL|IGNORE|READ_ONLY|IGNORE|FULL|FULL"
+      ],
+      "dataset": "gqa",
+      "singleton": true,
+      "source_binary_route_ids": [
+        "gqa:gqa_gh_09235614::route_0183_0110001111110101010011100010"
+      ],
+      "teacher_route_index": 0,
+      "uid": "gqa:gqa_gh_09235614",
+      "valid_nonfull_actions": [
+        "WRITE_ONLY"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 7,
+      "boundary_layer": 7,
+      "boundary_route_indices": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|IGNORE|FULL|READ_ONLY|FULL|FULL|FULL|FULL|READ_ONLY|IGNORE|FULL|IGNORE|FULL|FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|IGNORE|FULL",
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|IGNORE|FULL|READ_ONLY|FULL|FULL|FULL|FULL|WRITE_ONLY|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL",
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|READ_ONLY|READ_ONLY|FULL|READ_ONLY|FULL|FULL|READ_ONLY|FULL|FULL|WRITE_ONLY|FULL|FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|IGNORE|FULL",
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|READ_ONLY|READ_ONLY|FULL|READ_ONLY|FULL|FULL|WRITE_ONLY|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|IGNORE|IGNORE|IGNORE|FULL",
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|READ_ONLY|READ_ONLY|FULL|WRITE_ONLY|FULL|FULL|WRITE_ONLY|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL"
+      ],
+      "dataset": "gqa",
+      "singleton": false,
+      "source_binary_route_ids": [
+        "gqa:gqa_gh_02862306::route_0067_0101111000111100101110010001",
+        "gqa:gqa_gh_02862306::route_0364_1001010000101100001101000001"
+      ],
+      "teacher_route_index": 0,
+      "uid": "gqa:gqa_gh_02862306",
+      "valid_nonfull_actions": [
+        "IGNORE",
+        "WRITE_ONLY"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 16,
+      "boundary_layer": 16,
+      "boundary_route_indices": [
+        0
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|IGNORE|FULL|FULL|WRITE_ONLY|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL"
+      ],
+      "dataset": "gqa",
+      "singleton": true,
+      "source_binary_route_ids": [
+        "gqa:gqa_ge_1451805::route_0247_0111011111111111011001011100"
+      ],
+      "teacher_route_index": 0,
+      "uid": "gqa:gqa_ge_1451805",
+      "valid_nonfull_actions": [
+        "IGNORE"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 18,
+      "boundary_layer": 18,
+      "boundary_route_indices": [
+        0
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|FULL|FULL|IGNORE|FULL|READ_ONLY|READ_ONLY|READ_ONLY|IGNORE|FULL"
+      ],
+      "dataset": "gqa",
+      "singleton": true,
+      "source_binary_route_ids": [
+        "gqa:gqa_gh_11133431::route_0344_1110011101010111110100100001"
+      ],
+      "teacher_route_index": 0,
+      "uid": "gqa:gqa_gh_11133431",
+      "valid_nonfull_actions": [
+        "READ_ONLY"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 16,
+      "boundary_layer": 16,
+      "boundary_route_indices": [
+        0
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|IGNORE|FULL|WRITE_ONLY|FULL|FULL|WRITE_ONLY|FULL|WRITE_ONLY|FULL|WRITE_ONLY|WRITE_ONLY"
+      ],
+      "dataset": "gqa",
+      "singleton": true,
+      "source_binary_route_ids": [
+        "gqa:gqa_gh_14110124::route_0189_1101010100111110001011010100"
+      ],
+      "teacher_route_index": 0,
+      "uid": "gqa:gqa_gh_14110124",
+      "valid_nonfull_actions": [
+        "WRITE_ONLY"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 19,
+      "boundary_layer": 19,
+      "boundary_route_indices": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|IGNORE|FULL|READ_ONLY|READ_ONLY|IGNORE|FULL|FULL|WRITE_ONLY",
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|IGNORE|FULL|READ_ONLY|FULL|WRITE_ONLY|FULL|FULL|WRITE_ONLY",
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|IGNORE|FULL|WRITE_ONLY|FULL|FULL|FULL|FULL|WRITE_ONLY",
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|WRITE_ONLY|FULL|WRITE_ONLY|FULL|READ_ONLY|FULL|FULL|FULL",
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|WRITE_ONLY|FULL|WRITE_ONLY|FULL|WRITE_ONLY|FULL|FULL|WRITE_ONLY"
+      ],
+      "dataset": "gqa",
+      "singleton": false,
+      "source_binary_route_ids": [
+        "gqa:gqa_gh_16711416::route_0113_1100010000101111000001000100",
+        "gqa:gqa_gh_16711416::route_0332_0100011101111111011001010110"
+      ],
+      "teacher_route_index": 0,
+      "uid": "gqa:gqa_gh_16711416",
+      "valid_nonfull_actions": [
+        "READ_ONLY",
+        "WRITE_ONLY"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 23,
+      "boundary_layer": 23,
+      "boundary_route_indices": [
+        0
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|IGNORE|IGNORE|FULL|WRITE_ONLY|WRITE_ONLY"
+      ],
+      "dataset": "gqa",
+      "singleton": true,
+      "source_binary_route_ids": [
+        "gqa:gqa_gh_01613634::route_0076_1111010100101011010101100100",
+        "gqa:gqa_gh_01613634::route_0178_0110011111111000001011100100",
+        "gqa:gqa_gh_01613634::route_0301_0111101111001101111101000100",
+        "gqa:gqa_gh_01613634::route_0317_1011011110110001111111100100",
+        "gqa:gqa_gh_01613634::route_0319_0010101111011010110101000100"
+      ],
+      "teacher_route_index": 0,
+      "uid": "gqa:gqa_gh_01613634",
+      "valid_nonfull_actions": [
+        "IGNORE"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 25,
+      "boundary_layer": 25,
+      "boundary_route_indices": [
+        0
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|IGNORE|FULL"
+      ],
+      "dataset": "gqa",
+      "singleton": true,
+      "source_binary_route_ids": [
+        "gqa:gqa_gh_05630981::route_0274_1010001010101011001001101001"
+      ],
+      "teacher_route_index": 0,
+      "uid": "gqa:gqa_gh_05630981",
+      "valid_nonfull_actions": [
+        "READ_ONLY"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 21,
+      "boundary_layer": 21,
+      "boundary_route_indices": [
+        0
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|FULL|WRITE_ONLY|FULL|WRITE_ONLY|FULL|FULL"
+      ],
+      "dataset": "gqa",
+      "singleton": true,
+      "source_binary_route_ids": [
+        "gqa:gqa_gh_09408485::route_0374_1110001011101011110000100000"
+      ],
+      "teacher_route_index": 0,
+      "uid": "gqa:gqa_gh_09408485",
+      "valid_nonfull_actions": [
+        "WRITE_ONLY"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 26,
+      "boundary_layer": 26,
+      "boundary_route_indices": [
+        0,
+        1
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|FULL",
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|FULL"
+      ],
+      "dataset": "gqa",
+      "singleton": false,
+      "source_binary_route_ids": [
+        "gqa:gqa_gh_08202287::route_0305_0110100001110111101110011101"
+      ],
+      "teacher_route_index": 0,
+      "uid": "gqa:gqa_gh_08202287",
+      "valid_nonfull_actions": [
+        "READ_ONLY",
+        "WRITE_ONLY"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 2,
+      "boundary_layer": 2,
+      "boundary_route_indices": [
+        0
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|IGNORE|FULL|FULL|FULL|FULL|IGNORE|IGNORE|FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|FULL|FULL|READ_ONLY|WRITE_ONLY|IGNORE|IGNORE|IGNORE|IGNORE|FULL|IGNORE|FULL|FULL"
+      ],
+      "dataset": "gqa",
+      "singleton": true,
+      "source_binary_route_ids": [
+        "gqa:gqa_gh_18160689::route_0556_1101010001010100010000001011"
+      ],
+      "teacher_route_index": 0,
+      "uid": "gqa:gqa_gh_18160689",
+      "valid_nonfull_actions": [
+        "IGNORE"
+      ]
+    },
+    {
+      "all_full_prefix": [],
+      "all_full_prefix_length": 0,
+      "boundary_layer": 0,
+      "boundary_route_indices": [
+        0,
+        1,
+        2
+      ],
+      "boundary_route_keys": [
+        "READ_ONLY|FULL|FULL|READ_ONLY|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|FULL|FULL|FULL|FULL|FULL|FULL|FULL",
+        "READ_ONLY|READ_ONLY|FULL|IGNORE|WRITE_ONLY|IGNORE|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|IGNORE|FULL|IGNORE|IGNORE|FULL|WRITE_ONLY|WRITE_ONLY|WRITE_ONLY|WRITE_ONLY",
+        "READ_ONLY|READ_ONLY|FULL|IGNORE|WRITE_ONLY|IGNORE|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|WRITE_ONLY|FULL|IGNORE|WRITE_ONLY|FULL|WRITE_ONLY|WRITE_ONLY|FULL|WRITE_ONLY"
+      ],
+      "dataset": "gqa",
+      "singleton": true,
+      "source_binary_route_ids": [
+        "gqa:gqa_gh_19754648::route_0113_0110011110011111111101111110",
+        "gqa:gqa_gh_19754648::route_0170_0010001110101011100010010000"
+      ],
+      "teacher_route_index": 0,
+      "uid": "gqa:gqa_gh_19754648",
+      "valid_nonfull_actions": [
+        "READ_ONLY"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL"
+      ],
+      "all_full_prefix_length": 1,
+      "boundary_layer": 1,
+      "boundary_route_indices": [
+        0
+      ],
+      "boundary_route_keys": [
+        "FULL|WRITE_ONLY|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|FULL|IGNORE|IGNORE|FULL|WRITE_ONLY|FULL|FULL|FULL"
+      ],
+      "dataset": "gqa",
+      "singleton": true,
+      "source_binary_route_ids": [
+        "gqa:gqa_gh_16748920::route_0302_1000110101011111111010010111"
+      ],
+      "teacher_route_index": 0,
+      "uid": "gqa:gqa_gh_16748920",
+      "valid_nonfull_actions": [
+        "WRITE_ONLY"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL"
+      ],
+      "all_full_prefix_length": 1,
+      "boundary_layer": 1,
+      "boundary_route_indices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "boundary_route_keys": [
+        "FULL|IGNORE|IGNORE|FULL|FULL|FULL|FULL|IGNORE|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|WRITE_ONLY|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL",
+        "FULL|IGNORE|IGNORE|FULL|FULL|FULL|READ_ONLY|FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|FULL|FULL|WRITE_ONLY|FULL|READ_ONLY|READ_ONLY|READ_ONLY|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|WRITE_ONLY",
+        "FULL|IGNORE|IGNORE|FULL|FULL|FULL|READ_ONLY|FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|FULL|FULL|WRITE_ONLY|FULL|WRITE_ONLY|WRITE_ONLY|FULL|FULL|IGNORE|FULL|FULL|FULL|WRITE_ONLY|WRITE_ONLY",
+        "FULL|READ_ONLY|READ_ONLY|READ_ONLY|FULL|FULL|FULL|IGNORE|FULL|READ_ONLY|FULL|FULL|FULL|FULL|WRITE_ONLY|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|FULL|IGNORE|FULL|FULL|FULL|FULL"
+      ],
+      "dataset": "gqa",
+      "singleton": false,
+      "source_binary_route_ids": [
+        "gqa:gqa_ge_18476739::route_0386_1001111011110001110000101001",
+        "gqa:gqa_ge_18476739::route_0153_1001010111011011000001011100",
+        "gqa:gqa_ge_18476739::route_0375_1000111010110101100100100110"
+      ],
+      "teacher_route_index": 0,
+      "uid": "gqa:gqa_ge_18476739",
+      "valid_nonfull_actions": [
+        "IGNORE",
+        "READ_ONLY"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 10,
+      "boundary_layer": 10,
+      "boundary_route_indices": [
+        0
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|IGNORE|IGNORE|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|IGNORE|FULL"
+      ],
+      "dataset": "gqa",
+      "singleton": true,
+      "source_binary_route_ids": [
+        "gqa:gqa_gh_131038079::route_0228_1011111111001110011101001001"
+      ],
+      "teacher_route_index": 0,
+      "uid": "gqa:gqa_gh_131038079",
+      "valid_nonfull_actions": [
+        "IGNORE"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 8,
+      "boundary_layer": 8,
+      "boundary_route_indices": [
+        0
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|FULL|READ_ONLY|FULL|READ_ONLY|IGNORE|FULL|FULL|FULL|WRITE_ONLY|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|IGNORE|FULL"
+      ],
+      "dataset": "gqa",
+      "singleton": true,
+      "source_binary_route_ids": [
+        "gqa:gqa_gh_18993440::route_0304_0111111101010011100100101001"
+      ],
+      "teacher_route_index": 0,
+      "uid": "gqa:gqa_gh_18993440",
+      "valid_nonfull_actions": [
+        "READ_ONLY"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 11,
+      "boundary_layer": 11,
+      "boundary_route_indices": [
+        0
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|FULL|WRITE_ONLY|WRITE_ONLY|WRITE_ONLY|WRITE_ONLY|WRITE_ONLY|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL"
+      ],
+      "dataset": "gqa",
+      "singleton": true,
+      "source_binary_route_ids": [
+        "gqa:gqa_ge_17546509::route_0001_0000000000000000000000000000",
+        "gqa:gqa_ge_17546509::route_0044_1110111111100000000000111010"
+      ],
+      "teacher_route_index": 0,
+      "uid": "gqa:gqa_ge_17546509",
+      "valid_nonfull_actions": [
+        "WRITE_ONLY"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 12,
+      "boundary_layer": 12,
+      "boundary_route_indices": [
+        0,
+        1
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|FULL|FULL|READ_ONLY|FULL|FULL|IGNORE|IGNORE|FULL|IGNORE|IGNORE|IGNORE|READ_ONLY|FULL|FULL|FULL",
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|FULL|FULL|IGNORE|FULL|FULL|IGNORE|IGNORE|READ_ONLY|IGNORE|IGNORE|IGNORE|READ_ONLY|FULL|FULL|FULL"
+      ],
+      "dataset": "gqa",
+      "singleton": false,
+      "source_binary_route_ids": [
+        "gqa:gqa_ge_03807342::route_0327_0110111110000010110000000101"
+      ],
+      "teacher_route_index": 0,
+      "uid": "gqa:gqa_ge_03807342",
+      "valid_nonfull_actions": [
+        "READ_ONLY",
+        "WRITE_ONLY"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 15,
+      "boundary_layer": 15,
+      "boundary_route_indices": [
+        0,
+        1
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|IGNORE|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|FULL|FULL|FULL|FULL|READ_ONLY|FULL",
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|IGNORE|FULL|FULL|READ_ONLY|IGNORE|WRITE_ONLY|IGNORE|FULL|FULL|FULL|FULL|FULL|FULL"
+      ],
+      "dataset": "gqa",
+      "singleton": true,
+      "source_binary_route_ids": [
+        "gqa:gqa_gh_10348717::route_0245_1111111100100100111110111101",
+        "gqa:gqa_gh_10348717::route_0070_1111011101111100110000100001"
+      ],
+      "teacher_route_index": 0,
+      "uid": "gqa:gqa_gh_10348717",
+      "valid_nonfull_actions": [
+        "IGNORE"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 16,
+      "boundary_layer": 16,
+      "boundary_route_indices": [
+        0,
+        1
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|IGNORE|FULL|IGNORE|FULL",
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|WRITE_ONLY|FULL|FULL|FULL"
+      ],
+      "dataset": "gqa",
+      "singleton": true,
+      "source_binary_route_ids": [
+        "gqa:gqa_gh_09792088::route_0065_1010110100001101011110100101"
+      ],
+      "teacher_route_index": 0,
+      "uid": "gqa:gqa_gh_09792088",
+      "valid_nonfull_actions": [
+        "READ_ONLY"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 19,
+      "boundary_layer": 19,
+      "boundary_route_indices": [
+        0
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|WRITE_ONLY|IGNORE|FULL|READ_ONLY|FULL|READ_ONLY|READ_ONLY|FULL"
+      ],
+      "dataset": "gqa",
+      "singleton": true,
+      "source_binary_route_ids": [
+        "gqa:gqa_gh_16352656::route_0351_1110010110001000100000101001"
+      ],
+      "teacher_route_index": 0,
+      "uid": "gqa:gqa_gh_16352656",
+      "valid_nonfull_actions": [
+        "WRITE_ONLY"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 18,
+      "boundary_layer": 18,
+      "boundary_route_indices": [
+        0,
+        1,
+        2
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|IGNORE|IGNORE|FULL|FULL|FULL|READ_ONLY|READ_ONLY|IGNORE|FULL|FULL",
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|WRITE_ONLY|WRITE_ONLY|READ_ONLY|FULL|FULL|FULL|WRITE_ONLY|FULL|FULL",
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|WRITE_ONLY|WRITE_ONLY|WRITE_ONLY|FULL|FULL|FULL|WRITE_ONLY|FULL|WRITE_ONLY"
+      ],
+      "dataset": "gqa",
+      "singleton": false,
+      "source_binary_route_ids": [
+        "gqa:gqa_gh_13894178::route_0219_0100011110100110010011000011",
+        "gqa:gqa_gh_13894178::route_0124_0001000100100101000000010010"
+      ],
+      "teacher_route_index": 0,
+      "uid": "gqa:gqa_gh_13894178",
+      "valid_nonfull_actions": [
+        "IGNORE",
+        "WRITE_ONLY"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 25,
+      "boundary_layer": 25,
+      "boundary_route_indices": [
+        0
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|IGNORE|FULL|FULL"
+      ],
+      "dataset": "gqa",
+      "singleton": true,
+      "source_binary_route_ids": [
+        "gqa:gqa_gh_136717::route_0128_1101010100010101011111101011",
+        "gqa:gqa_gh_136717::route_0258_1111001001001110101011101011"
+      ],
+      "teacher_route_index": 0,
+      "uid": "gqa:gqa_gh_136717",
+      "valid_nonfull_actions": [
+        "IGNORE"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 25,
+      "boundary_layer": 25,
+      "boundary_route_indices": [
+        0
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|FULL|FULL"
+      ],
+      "dataset": "gqa",
+      "singleton": true,
+      "source_binary_route_ids": [
+        "gqa:gqa_gh_18419248::route_0096_1010100001100111011000110011",
+        "gqa:gqa_gh_18419248::route_0147_1001111100101010111111111010",
+        "gqa:gqa_gh_18419248::route_0224_1011001001110010110101100011",
+        "gqa:gqa_gh_18419248::route_0229_1110010001111010010110111011",
+        "gqa:gqa_gh_18419248::route_0353_1000000110101101010001010010",
+        "gqa:gqa_gh_18419248::route_0381_1100110111111011010101110010"
+      ],
+      "teacher_route_index": 0,
+      "uid": "gqa:gqa_gh_18419248",
+      "valid_nonfull_actions": [
+        "READ_ONLY"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 27,
+      "boundary_layer": 27,
+      "boundary_route_indices": [
+        0
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY"
+      ],
+      "dataset": "gqa",
+      "singleton": true,
+      "source_binary_route_ids": [
+        "gqa:gqa_gh_17719170::route_0023_0100100011010010101101101100",
+        "gqa:gqa_gh_17719170::route_0036_1001110111010010110111111000",
+        "gqa:gqa_gh_17719170::route_0066_1001010101100010000100010000",
+        "gqa:gqa_gh_17719170::route_0146_0111000101001011010010000000",
+        "gqa:gqa_gh_17719170::route_0148_1011000101010101100001011000",
+        "gqa:gqa_gh_17719170::route_0185_1101101100010110001100000000",
+        "gqa:gqa_gh_17719170::route_0264_1010111010011100000000011110",
+        "gqa:gqa_gh_17719170::route_0297_1110011100100101111101111100",
+        "gqa:gqa_gh_17719170::route_0311_1011111001110011101010101000",
+        "gqa:gqa_gh_17719170::route_0360_1011111101101110011111010110",
+        "gqa:gqa_gh_17719170::route_0385_1100110000110111011001010100"
+      ],
+      "teacher_route_index": 0,
+      "uid": "gqa:gqa_gh_17719170",
+      "valid_nonfull_actions": [
+        "WRITE_ONLY"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 25,
+      "boundary_layer": 25,
+      "boundary_route_indices": [
+        0,
+        1
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|FULL|FULL",
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|FULL|WRITE_ONLY"
+      ],
+      "dataset": "gqa",
+      "singleton": false,
+      "source_binary_route_ids": [
+        "gqa:gqa_gh_04900103::route_0040_0111011110101111110011000011",
+        "gqa:gqa_gh_04900103::route_0120_1001101110100011111011001010",
+        "gqa:gqa_gh_04900103::route_0240_0100100011111010111000110010",
+        "gqa:gqa_gh_04900103::route_0259_1010111101110111111110110011"
+      ],
+      "teacher_route_index": 0,
+      "uid": "gqa:gqa_gh_04900103",
+      "valid_nonfull_actions": [
+        "READ_ONLY",
+        "WRITE_ONLY"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 4,
+      "boundary_layer": 4,
+      "boundary_route_indices": [
+        0
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|IGNORE|IGNORE|FULL|FULL|IGNORE|FULL|FULL|READ_ONLY|FULL|FULL|FULL|IGNORE|FULL|IGNORE|IGNORE|IGNORE|FULL|FULL|IGNORE|IGNORE|FULL|FULL|FULL|FULL"
+      ],
+      "dataset": "chartqa",
+      "singleton": true,
+      "source_binary_route_ids": [
+        "chartqa:chartqa_train_two_col_22550_8ebf064c83::route_0154_1111001101101110100011001010"
+      ],
+      "teacher_route_index": 0,
+      "uid": "chartqa:chartqa_train_two_col_22550_8ebf064c83",
+      "valid_nonfull_actions": [
+        "IGNORE"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 6,
+      "boundary_layer": 6,
+      "boundary_route_indices": [
+        0,
+        1
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|READ_ONLY|FULL|FULL|FULL|FULL|FULL|FULL|IGNORE|IGNORE|FULL|FULL|FULL|IGNORE|FULL|FULL|WRITE_ONLY|FULL|FULL|FULL|FULL|FULL",
+        "FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|WRITE_ONLY|FULL|FULL|FULL|FULL|FULL|READ_ONLY|IGNORE|IGNORE|FULL|FULL|FULL|IGNORE|FULL|FULL|IGNORE|FULL|FULL|FULL|FULL|FULL"
+      ],
+      "dataset": "chartqa",
+      "singleton": true,
+      "source_binary_route_ids": [
+        "chartqa:chartqa_train_two_col_1094_9a3ecd43bc::route_0108_1111110011111000111011010000"
+      ],
+      "teacher_route_index": 0,
+      "uid": "chartqa:chartqa_train_two_col_1094_9a3ecd43bc",
+      "valid_nonfull_actions": [
+        "READ_ONLY"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 3,
+      "boundary_layer": 3,
+      "boundary_route_indices": [
+        0,
+        1,
+        2
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|WRITE_ONLY|FULL|IGNORE|FULL|FULL|READ_ONLY|FULL|FULL|READ_ONLY|FULL|FULL|IGNORE|FULL|FULL|FULL|WRITE_ONLY|FULL|READ_ONLY|IGNORE|FULL|FULL|FULL|FULL|FULL|FULL",
+        "FULL|FULL|FULL|WRITE_ONLY|FULL|IGNORE|FULL|FULL|READ_ONLY|FULL|FULL|READ_ONLY|FULL|FULL|IGNORE|FULL|FULL|FULL|WRITE_ONLY|FULL|WRITE_ONLY|IGNORE|FULL|FULL|FULL|FULL|FULL|FULL",
+        "FULL|FULL|FULL|WRITE_ONLY|FULL|IGNORE|FULL|FULL|WRITE_ONLY|FULL|FULL|IGNORE|FULL|FULL|WRITE_ONLY|FULL|FULL|READ_ONLY|FULL|FULL|READ_ONLY|IGNORE|FULL|FULL|FULL|FULL|FULL|FULL"
+      ],
+      "dataset": "chartqa",
+      "singleton": true,
+      "source_binary_route_ids": [
+        "chartqa:chartqa_train_53615198003108_dfcaccb20d::route_0499_1010100101101101100100111010"
+      ],
+      "teacher_route_index": 0,
+      "uid": "chartqa:chartqa_train_53615198003108_dfcaccb20d",
+      "valid_nonfull_actions": [
+        "WRITE_ONLY"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 3,
+      "boundary_layer": 3,
+      "boundary_route_indices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|READ_ONLY|READ_ONLY|IGNORE|FULL|READ_ONLY|IGNORE|FULL|FULL|READ_ONLY|FULL|READ_ONLY|IGNORE|FULL|IGNORE|READ_ONLY|FULL|IGNORE|FULL|IGNORE|FULL|FULL|READ_ONLY|FULL|FULL|FULL",
+        "FULL|FULL|FULL|READ_ONLY|READ_ONLY|IGNORE|FULL|READ_ONLY|IGNORE|FULL|FULL|READ_ONLY|FULL|READ_ONLY|IGNORE|FULL|IGNORE|READ_ONLY|FULL|IGNORE|FULL|IGNORE|FULL|FULL|WRITE_ONLY|READ_ONLY|FULL|FULL",
+        "FULL|FULL|FULL|READ_ONLY|READ_ONLY|IGNORE|FULL|READ_ONLY|IGNORE|FULL|FULL|READ_ONLY|FULL|READ_ONLY|IGNORE|FULL|IGNORE|READ_ONLY|FULL|IGNORE|FULL|IGNORE|FULL|FULL|WRITE_ONLY|WRITE_ONLY|FULL|FULL",
+        "FULL|FULL|FULL|WRITE_ONLY|IGNORE|IGNORE|FULL|IGNORE|IGNORE|FULL|FULL|READ_ONLY|FULL|READ_ONLY|IGNORE|FULL|READ_ONLY|IGNORE|FULL|IGNORE|FULL|IGNORE|FULL|FULL|IGNORE|IGNORE|FULL|FULL"
+      ],
+      "dataset": "chartqa",
+      "singleton": false,
+      "source_binary_route_ids": [
+        "chartqa:chartqa_train_two_col_21373_517946748c::route_0064_1110001001101001001010110010"
+      ],
+      "teacher_route_index": 0,
+      "uid": "chartqa:chartqa_train_two_col_21373_517946748c",
+      "valid_nonfull_actions": [
+        "READ_ONLY",
+        "WRITE_ONLY"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 8,
+      "boundary_layer": 8,
+      "boundary_route_indices": [
+        0,
+        1
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|IGNORE|IGNORE|FULL|FULL|IGNORE|IGNORE|IGNORE|FULL|IGNORE|IGNORE|READ_ONLY|FULL|READ_ONLY|IGNORE|FULL|FULL|WRITE_ONLY|READ_ONLY|READ_ONLY|FULL",
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|IGNORE|IGNORE|FULL|FULL|IGNORE|IGNORE|IGNORE|FULL|IGNORE|IGNORE|READ_ONLY|FULL|READ_ONLY|IGNORE|FULL|FULL|WRITE_ONLY|WRITE_ONLY|READ_ONLY|FULL"
+      ],
+      "dataset": "chartqa",
+      "singleton": true,
+      "source_binary_route_ids": [
+        "chartqa:chartqa_train_two_col_4243_5c3b62e849::route_0260_1011101100100001000100110001"
+      ],
+      "teacher_route_index": 0,
+      "uid": "chartqa:chartqa_train_two_col_4243_5c3b62e849",
+      "valid_nonfull_actions": [
+        "IGNORE"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 11,
+      "boundary_layer": 11,
+      "boundary_route_indices": [
+        0
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|FULL|IGNORE|IGNORE|FULL|IGNORE|FULL|WRITE_ONLY|FULL|FULL|FULL|FULL|WRITE_ONLY|FULL|FULL|FULL|FULL"
+      ],
+      "dataset": "chartqa",
+      "singleton": true,
+      "source_binary_route_ids": [
+        "chartqa:chartqa_train_multi_col_100259_8bddf8ee56::route_0018_1110111111001001010110101101"
+      ],
+      "teacher_route_index": 0,
+      "uid": "chartqa:chartqa_train_multi_col_100259_8bddf8ee56",
+      "valid_nonfull_actions": [
+        "READ_ONLY"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 11,
+      "boundary_layer": 11,
+      "boundary_route_indices": [
+        0
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|FULL|WRITE_ONLY|FULL|FULL|FULL|WRITE_ONLY|FULL|FULL|FULL|FULL|WRITE_ONLY|IGNORE|FULL|IGNORE|FULL|FULL"
+      ],
+      "dataset": "chartqa",
+      "singleton": true,
+      "source_binary_route_ids": [
+        "chartqa:chartqa_train_multi_col_20954_b4e59f2a1e::route_0031_1110100111101001100001001010"
+      ],
+      "teacher_route_index": 0,
+      "uid": "chartqa:chartqa_train_multi_col_20954_b4e59f2a1e",
+      "valid_nonfull_actions": [
+        "WRITE_ONLY"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 12,
+      "boundary_layer": 12,
+      "boundary_route_indices": [
+        0,
+        1
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|IGNORE|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL",
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|WRITE_ONLY|FULL|IGNORE|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL"
+      ],
+      "dataset": "chartqa",
+      "singleton": false,
+      "source_binary_route_ids": [
+        "chartqa:chartqa_train_29537859004102_a602900ada::route_0057_0100000100110010010101101010"
+      ],
+      "teacher_route_index": 0,
+      "uid": "chartqa:chartqa_train_29537859004102_a602900ada",
+      "valid_nonfull_actions": [
+        "READ_ONLY",
+        "WRITE_ONLY"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 17,
+      "boundary_layer": 17,
+      "boundary_route_indices": [
+        0
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|IGNORE|FULL|WRITE_ONLY|FULL|FULL|FULL|READ_ONLY|FULL|FULL|WRITE_ONLY|FULL"
+      ],
+      "dataset": "chartqa",
+      "singleton": true,
+      "source_binary_route_ids": [
+        "chartqa:chartqa_train_two_col_4232_59f044b6a9::route_0369_1101111111001111001001101100"
+      ],
+      "teacher_route_index": 0,
+      "uid": "chartqa:chartqa_train_two_col_4232_59f044b6a9",
+      "valid_nonfull_actions": [
+        "IGNORE"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 20,
+      "boundary_layer": 20,
+      "boundary_route_indices": [
+        0
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|FULL|FULL|FULL|FULL|FULL|FULL|FULL"
+      ],
+      "dataset": "chartqa",
+      "singleton": true,
+      "source_binary_route_ids": [
+        "chartqa:chartqa_train_two_col_58_7bb3d291cf::route_0148_1111011111110111111001111000"
+      ],
+      "teacher_route_index": 0,
+      "uid": "chartqa:chartqa_train_two_col_58_7bb3d291cf",
+      "valid_nonfull_actions": [
+        "READ_ONLY"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 16,
+      "boundary_layer": 16,
+      "boundary_route_indices": [
+        0
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL"
+      ],
+      "dataset": "chartqa",
+      "singleton": true,
+      "source_binary_route_ids": [
+        "chartqa:chartqa_train_47960336001937_585a47d0ea::route_0013_1100101101001110011100110011",
+        "chartqa:chartqa_train_47960336001937_585a47d0ea::route_0044_1111010010111010001011100000",
+        "chartqa:chartqa_train_47960336001937_585a47d0ea::route_0067_1111010011001110010110010010",
+        "chartqa:chartqa_train_47960336001937_585a47d0ea::route_0090_0101011101001010001000001000",
+        "chartqa:chartqa_train_47960336001937_585a47d0ea::route_0158_1111000111101110000111100010",
+        "chartqa:chartqa_train_47960336001937_585a47d0ea::route_0166_1110111111011111001000010100",
+        "chartqa:chartqa_train_47960336001937_585a47d0ea::route_0224_1101111011011111010101110111",
+        "chartqa:chartqa_train_47960336001937_585a47d0ea::route_0319_1011111111101110010101010110",
+        "chartqa:chartqa_train_47960336001937_585a47d0ea::route_0347_1111110111101110010110010110",
+        "chartqa:chartqa_train_47960336001937_585a47d0ea::route_0351_1101111001111111011100010111"
+      ],
+      "teacher_route_index": 0,
+      "uid": "chartqa:chartqa_train_47960336001937_585a47d0ea",
+      "valid_nonfull_actions": [
+        "WRITE_ONLY"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 16,
+      "boundary_layer": 16,
+      "boundary_route_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|IGNORE|IGNORE|IGNORE|FULL|IGNORE|IGNORE|FULL|FULL|FULL|FULL|FULL",
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|FULL|FULL|WRITE_ONLY|IGNORE|FULL|WRITE_ONLY|FULL|FULL|IGNORE|FULL|FULL",
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|FULL|WRITE_ONLY|IGNORE|FULL|WRITE_ONLY|IGNORE|FULL|FULL|FULL|WRITE_ONLY|FULL",
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|WRITE_ONLY|FULL|FULL|WRITE_ONLY|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|FULL",
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|WRITE_ONLY|READ_ONLY|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL",
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|WRITE_ONLY|WRITE_ONLY|FULL|FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|FULL",
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|WRITE_ONLY|WRITE_ONLY|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|FULL"
+      ],
+      "dataset": "chartqa",
+      "singleton": false,
+      "source_binary_route_ids": [
+        "chartqa:chartqa_train_multi_col_100842_0399622167::route_0301_1011110001011011000010011100",
+        "chartqa:chartqa_train_multi_col_100842_0399622167::route_0331_0110010101111101001001011011",
+        "chartqa:chartqa_train_multi_col_100842_0399622167::route_0060_1110101001110011001001011100",
+        "chartqa:chartqa_train_multi_col_100842_0399622167::route_0092_0101000111101010000111111001"
+      ],
+      "teacher_route_index": 0,
+      "uid": "chartqa:chartqa_train_multi_col_100842_0399622167",
+      "valid_nonfull_actions": [
+        "READ_ONLY",
+        "WRITE_ONLY"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 21,
+      "boundary_layer": 21,
+      "boundary_route_indices": [
+        0
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|IGNORE|READ_ONLY|FULL|IGNORE|FULL|FULL|WRITE_ONLY"
+      ],
+      "dataset": "chartqa",
+      "singleton": true,
+      "source_binary_route_ids": [
+        "chartqa:chartqa_train_1224_ce28b85d54::route_0082_1111000111001111000110010110"
+      ],
+      "teacher_route_index": 0,
+      "uid": "chartqa:chartqa_train_1224_ce28b85d54",
+      "valid_nonfull_actions": [
+        "IGNORE"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 25,
+      "boundary_layer": 25,
+      "boundary_route_indices": [
+        0
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|IGNORE|FULL"
+      ],
+      "dataset": "chartqa",
+      "singleton": true,
+      "source_binary_route_ids": [
+        "chartqa:chartqa_train_two_col_840_411d876504::route_0062_1111000101010111101111010001",
+        "chartqa:chartqa_train_two_col_840_411d876504::route_0227_0111111101111011011000111001",
+        "chartqa:chartqa_train_two_col_840_411d876504::route_0234_1110111101011100100110100001"
+      ],
+      "teacher_route_index": 0,
+      "uid": "chartqa:chartqa_train_two_col_840_411d876504",
+      "valid_nonfull_actions": [
+        "READ_ONLY"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 23,
+      "boundary_layer": 23,
+      "boundary_route_indices": [
+        0,
+        1
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|FULL|FULL|READ_ONLY|FULL",
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|FULL|FULL|WRITE_ONLY|FULL"
+      ],
+      "dataset": "chartqa",
+      "singleton": true,
+      "source_binary_route_ids": [
+        "chartqa:chartqa_train_two_col_61461_f29810b778::route_0298_1111000111011011011111000101"
+      ],
+      "teacher_route_index": 0,
+      "uid": "chartqa:chartqa_train_two_col_61461_f29810b778",
+      "valid_nonfull_actions": [
+        "WRITE_ONLY"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 25,
+      "boundary_layer": 25,
+      "boundary_route_indices": [
+        0,
+        1
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|READ_ONLY|FULL",
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|IGNORE|FULL"
+      ],
+      "dataset": "chartqa",
+      "singleton": false,
+      "source_binary_route_ids": [
+        "chartqa:chartqa_train_two_col_1534_d5c84dc0f0::route_0051_1011011101111111111111000001"
+      ],
+      "teacher_route_index": 0,
+      "uid": "chartqa:chartqa_train_two_col_1534_d5c84dc0f0",
+      "valid_nonfull_actions": [
+        "READ_ONLY",
+        "WRITE_ONLY"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 2,
+      "boundary_layer": 2,
+      "boundary_route_indices": [
+        0,
+        1
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|IGNORE|READ_ONLY|FULL|READ_ONLY|FULL|FULL|IGNORE|FULL|READ_ONLY|FULL|READ_ONLY|READ_ONLY|FULL|IGNORE|IGNORE|FULL|FULL|FULL|READ_ONLY|READ_ONLY|FULL|IGNORE|READ_ONLY|FULL|FULL|FULL",
+        "FULL|FULL|IGNORE|READ_ONLY|FULL|READ_ONLY|FULL|FULL|IGNORE|FULL|READ_ONLY|FULL|READ_ONLY|READ_ONLY|FULL|IGNORE|IGNORE|FULL|FULL|FULL|READ_ONLY|READ_ONLY|FULL|IGNORE|WRITE_ONLY|FULL|WRITE_ONLY|FULL"
+      ],
+      "dataset": "chartqa",
+      "singleton": true,
+      "source_binary_route_ids": [
+        "chartqa:chartqa_train_two_col_81778_377280f626::route_0065_1100101101010010011100100100"
+      ],
+      "teacher_route_index": 0,
+      "uid": "chartqa:chartqa_train_two_col_81778_377280f626",
+      "valid_nonfull_actions": [
+        "IGNORE"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 4,
+      "boundary_layer": 4,
+      "boundary_route_indices": [
+        0
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|READ_ONLY|IGNORE|READ_ONLY|FULL|FULL|IGNORE|FULL|IGNORE|IGNORE|FULL|FULL|FULL|FULL|IGNORE|READ_ONLY|IGNORE|FULL|FULL|FULL|FULL|IGNORE|IGNORE|FULL|FULL"
+      ],
+      "dataset": "chartqa",
+      "singleton": true,
+      "source_binary_route_ids": [
+        "chartqa:chartqa_train_multi_col_100029_248bd076cd::route_0125_1110000110000111100011110001"
+      ],
+      "teacher_route_index": 0,
+      "uid": "chartqa:chartqa_train_multi_col_100029_248bd076cd",
+      "valid_nonfull_actions": [
+        "READ_ONLY"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 4,
+      "boundary_layer": 4,
+      "boundary_route_indices": [
+        0,
+        1
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|WRITE_ONLY|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|FULL|FULL",
+        "FULL|FULL|FULL|FULL|WRITE_ONLY|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|FULL|FULL"
+      ],
+      "dataset": "chartqa",
+      "singleton": true,
+      "source_binary_route_ids": [
+        "chartqa:chartqa_train_multi_col_80519_88d72718c9::route_0086_1011001100101010000110110011"
+      ],
+      "teacher_route_index": 0,
+      "uid": "chartqa:chartqa_train_multi_col_80519_88d72718c9",
+      "valid_nonfull_actions": [
+        "WRITE_ONLY"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 3,
+      "boundary_layer": 3,
+      "boundary_route_indices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|READ_ONLY|FULL|FULL|IGNORE|IGNORE|FULL|FULL|READ_ONLY|FULL|FULL|FULL|IGNORE|IGNORE|FULL|WRITE_ONLY|IGNORE|FULL|FULL|FULL|FULL|FULL|READ_ONLY|FULL|WRITE_ONLY|FULL",
+        "FULL|FULL|FULL|READ_ONLY|FULL|FULL|IGNORE|IGNORE|FULL|FULL|READ_ONLY|FULL|FULL|FULL|IGNORE|IGNORE|FULL|WRITE_ONLY|IGNORE|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|FULL|FULL|WRITE_ONLY",
+        "FULL|FULL|FULL|WRITE_ONLY|FULL|FULL|FULL|IGNORE|IGNORE|FULL|FULL|FULL|FULL|WRITE_ONLY|FULL|FULL|FULL|FULL|WRITE_ONLY|WRITE_ONLY|IGNORE|FULL|IGNORE|FULL|FULL|FULL|WRITE_ONLY|WRITE_ONLY",
+        "FULL|FULL|FULL|WRITE_ONLY|FULL|FULL|READ_ONLY|IGNORE|FULL|FULL|READ_ONLY|READ_ONLY|FULL|FULL|WRITE_ONLY|READ_ONLY|FULL|IGNORE|IGNORE|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY"
+      ],
+      "dataset": "chartqa",
+      "singleton": false,
+      "source_binary_route_ids": [
+        "chartqa:chartqa_train_6078_c8c3071cf3::route_0238_1100110011001100100111010100",
+        "chartqa:chartqa_train_6078_c8c3071cf3::route_0365_1010110001111001010001011100"
+      ],
+      "teacher_route_index": 0,
+      "uid": "chartqa:chartqa_train_6078_c8c3071cf3",
+      "valid_nonfull_actions": [
+        "READ_ONLY",
+        "WRITE_ONLY"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 13,
+      "boundary_layer": 13,
+      "boundary_route_indices": [
+        0
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|IGNORE|IGNORE|WRITE_ONLY|WRITE_ONLY|IGNORE|IGNORE|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL"
+      ],
+      "dataset": "chartqa",
+      "singleton": true,
+      "source_binary_route_ids": [
+        "chartqa:chartqa_train_two_col_42731_538c942c1a::route_0131_1100111001110000000111111111"
+      ],
+      "teacher_route_index": 0,
+      "uid": "chartqa:chartqa_train_two_col_42731_538c942c1a",
+      "valid_nonfull_actions": [
+        "IGNORE"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 11,
+      "boundary_layer": 11,
+      "boundary_route_indices": [
+        0
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|FULL|FULL|WRITE_ONLY|WRITE_ONLY|WRITE_ONLY|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL"
+      ],
+      "dataset": "chartqa",
+      "singleton": true,
+      "source_binary_route_ids": [
+        "chartqa:chartqa_train_two_col_104093_502e64e858::route_0335_1101011111001100010100010000"
+      ],
+      "teacher_route_index": 0,
+      "uid": "chartqa:chartqa_train_two_col_104093_502e64e858",
+      "valid_nonfull_actions": [
+        "READ_ONLY"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 12,
+      "boundary_layer": 12,
+      "boundary_route_indices": [
+        0
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|READ_ONLY|FULL|FULL|IGNORE|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL"
+      ],
+      "dataset": "chartqa",
+      "singleton": true,
+      "source_binary_route_ids": [
+        "chartqa:chartqa_train_two_col_42888_f645b96ec2::route_0281_1111111011100011000101111110"
+      ],
+      "teacher_route_index": 0,
+      "uid": "chartqa:chartqa_train_two_col_42888_f645b96ec2",
+      "valid_nonfull_actions": [
+        "WRITE_ONLY"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 12,
+      "boundary_layer": 12,
+      "boundary_route_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|FULL|IGNORE|FULL|READ_ONLY|FULL|READ_ONLY|FULL|FULL|IGNORE|IGNORE|WRITE_ONLY|WRITE_ONLY|IGNORE|FULL|FULL",
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|FULL|IGNORE|FULL|WRITE_ONLY|FULL|FULL|FULL|FULL|IGNORE|IGNORE|WRITE_ONLY|IGNORE|IGNORE|FULL|FULL",
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|READ_ONLY|IGNORE|FULL|FULL|FULL|IGNORE|IGNORE|IGNORE|FULL|FULL|FULL|IGNORE|IGNORE|FULL|FULL",
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|WRITE_ONLY|IGNORE|FULL|FULL|FULL|IGNORE|IGNORE|IGNORE|FULL|FULL|FULL|IGNORE|READ_ONLY|FULL|WRITE_ONLY",
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|FULL|IGNORE|FULL|FULL|FULL|IGNORE|IGNORE|IGNORE|FULL|FULL|FULL|WRITE_ONLY|READ_ONLY|FULL|WRITE_ONLY",
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|FULL|WRITE_ONLY|FULL|IGNORE|FULL|FULL|FULL|FULL|IGNORE|IGNORE|WRITE_ONLY|IGNORE|IGNORE|FULL|FULL"
+      ],
+      "dataset": "chartqa",
+      "singleton": false,
+      "source_binary_route_ids": [
+        "chartqa:chartqa_train_two_col_100122_219ad07a4d::route_0287_1101100100010101010110000011",
+        "chartqa:chartqa_train_two_col_100122_219ad07a4d::route_0207_1010000111010001110001110010"
+      ],
+      "teacher_route_index": 0,
+      "uid": "chartqa:chartqa_train_two_col_100122_219ad07a4d",
+      "valid_nonfull_actions": [
+        "READ_ONLY",
+        "WRITE_ONLY"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 17,
+      "boundary_layer": 17,
+      "boundary_route_indices": [
+        0
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|IGNORE|WRITE_ONLY|IGNORE|FULL|IGNORE|IGNORE|FULL|FULL|FULL|FULL|FULL"
+      ],
+      "dataset": "chartqa",
+      "singleton": true,
+      "source_binary_route_ids": [
+        "chartqa:chartqa_train_multi_col_661_56222b3bf1::route_0400_1011111111011001100010011100"
+      ],
+      "teacher_route_index": 0,
+      "uid": "chartqa:chartqa_train_multi_col_661_56222b3bf1",
+      "valid_nonfull_actions": [
+        "IGNORE"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 15,
+      "boundary_layer": 15,
+      "boundary_route_indices": [
+        0
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|IGNORE|IGNORE|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|FULL|FULL|FULL|FULL"
+      ],
+      "dataset": "chartqa",
+      "singleton": true,
+      "source_binary_route_ids": [
+        "chartqa:chartqa_train_multi_col_80046_e09c67616e::route_0116_1110111111101110000101101000"
+      ],
+      "teacher_route_index": 0,
+      "uid": "chartqa:chartqa_train_multi_col_80046_e09c67616e",
+      "valid_nonfull_actions": [
+        "READ_ONLY"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 16,
+      "boundary_layer": 16,
+      "boundary_route_indices": [
+        0
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|FULL|IGNORE|IGNORE|WRITE_ONLY|FULL|FULL|WRITE_ONLY|READ_ONLY|FULL|FULL|FULL"
+      ],
+      "dataset": "chartqa",
+      "singleton": true,
+      "source_binary_route_ids": [
+        "chartqa:chartqa_train_two_col_20661_603ad91eb7::route_0086_1001100101011110010001100111"
+      ],
+      "teacher_route_index": 0,
+      "uid": "chartqa:chartqa_train_two_col_20661_603ad91eb7",
+      "valid_nonfull_actions": [
+        "WRITE_ONLY"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 14,
+      "boundary_layer": 14,
+      "boundary_route_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|IGNORE|IGNORE|FULL|IGNORE|FULL|FULL|FULL|FULL|READ_ONLY|FULL|FULL|FULL|FULL",
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|IGNORE|IGNORE|FULL|IGNORE|FULL|FULL|FULL|FULL|WRITE_ONLY|FULL|FULL|FULL|FULL",
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|IGNORE|IGNORE|FULL|READ_ONLY|FULL|FULL|FULL|FULL|WRITE_ONLY|FULL|FULL|FULL|FULL",
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|READ_ONLY|IGNORE|FULL|READ_ONLY|FULL|FULL|FULL|FULL|IGNORE|FULL|FULL|FULL|FULL",
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|WRITE_ONLY|IGNORE|FULL|IGNORE|FULL|FULL|WRITE_ONLY|FULL|FULL|FULL|FULL|FULL|FULL",
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|WRITE_ONLY|IGNORE|FULL|WRITE_ONLY|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL",
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|WRITE_ONLY|WRITE_ONLY|FULL|IGNORE|FULL|FULL|FULL|FULL|IGNORE|READ_ONLY|FULL|FULL|FULL",
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|WRITE_ONLY|WRITE_ONLY|FULL|IGNORE|FULL|FULL|FULL|FULL|IGNORE|WRITE_ONLY|FULL|FULL|FULL",
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|WRITE_ONLY|WRITE_ONLY|FULL|IGNORE|FULL|WRITE_ONLY|FULL|FULL|WRITE_ONLY|FULL|FULL|FULL|FULL"
+      ],
+      "dataset": "chartqa",
+      "singleton": false,
+      "source_binary_route_ids": [
+        "chartqa:chartqa_train_two_col_1243_998fd72258::route_0253_1000110100111100010111001101",
+        "chartqa:chartqa_train_two_col_1243_998fd72258::route_0104_1110110110011000010101100110",
+        "chartqa:chartqa_train_two_col_1243_998fd72258::route_0398_1010001111010000010100100111",
+        "chartqa:chartqa_train_two_col_1243_998fd72258::route_0183_1111111010111000010110011001"
+      ],
+      "teacher_route_index": 0,
+      "uid": "chartqa:chartqa_train_two_col_1243_998fd72258",
+      "valid_nonfull_actions": [
+        "READ_ONLY",
+        "WRITE_ONLY"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 24,
+      "boundary_layer": 24,
+      "boundary_route_indices": [
+        0
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|IGNORE|READ_ONLY|FULL|WRITE_ONLY"
+      ],
+      "dataset": "chartqa",
+      "singleton": true,
+      "source_binary_route_ids": [
+        "chartqa:chartqa_train_two_col_5275_22696cb377::route_0239_1110111110010100111100100010"
+      ],
+      "teacher_route_index": 0,
+      "uid": "chartqa:chartqa_train_two_col_5275_22696cb377",
+      "valid_nonfull_actions": [
+        "IGNORE"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 26,
+      "boundary_layer": 26,
+      "boundary_route_indices": [
+        0
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|FULL"
+      ],
+      "dataset": "chartqa",
+      "singleton": true,
+      "source_binary_route_ids": [
+        "chartqa:chartqa_train_multi_col_40166_4a72fc2360::route_0139_1010011101011011001111010001",
+        "chartqa:chartqa_train_multi_col_40166_4a72fc2360::route_0173_1010110011100001111110100001",
+        "chartqa:chartqa_train_multi_col_40166_4a72fc2360::route_0183_1111101100011111001010110001",
+        "chartqa:chartqa_train_multi_col_40166_4a72fc2360::route_0219_1011101011110110110111101001",
+        "chartqa:chartqa_train_multi_col_40166_4a72fc2360::route_0268_1010001101111100111110010001",
+        "chartqa:chartqa_train_multi_col_40166_4a72fc2360::route_0301_1110101111001011101010000001",
+        "chartqa:chartqa_train_multi_col_40166_4a72fc2360::route_0338_1110011111110010100111100001"
+      ],
+      "teacher_route_index": 0,
+      "uid": "chartqa:chartqa_train_multi_col_40166_4a72fc2360",
+      "valid_nonfull_actions": [
+        "READ_ONLY"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 23,
+      "boundary_layer": 23,
+      "boundary_route_indices": [
+        0
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|FULL|FULL|FULL|FULL"
+      ],
+      "dataset": "chartqa",
+      "singleton": true,
+      "source_binary_route_ids": [
+        "chartqa:chartqa_train_two_col_41927_4425538bd1::route_0161_1111111111101010000111000111"
+      ],
+      "teacher_route_index": 0,
+      "uid": "chartqa:chartqa_train_two_col_41927_4425538bd1",
+      "valid_nonfull_actions": [
+        "WRITE_ONLY"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 25,
+      "boundary_layer": 25,
+      "boundary_route_indices": [
+        0,
+        1
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|FULL|FULL",
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|FULL|FULL"
+      ],
+      "dataset": "chartqa",
+      "singleton": false,
+      "source_binary_route_ids": [
+        "chartqa:chartqa_train_multi_col_21059_0b9dd82155::route_0023_1001010100111100001111100010",
+        "chartqa:chartqa_train_multi_col_21059_0b9dd82155::route_0025_0111111010110111101101000010",
+        "chartqa:chartqa_train_multi_col_21059_0b9dd82155::route_0070_0110001101011111110101111010",
+        "chartqa:chartqa_train_multi_col_21059_0b9dd82155::route_0168_1010111011000111000000000010",
+        "chartqa:chartqa_train_multi_col_21059_0b9dd82155::route_0194_1101101001001001110010101010",
+        "chartqa:chartqa_train_multi_col_21059_0b9dd82155::route_0336_0100011101010000000011001010",
+        "chartqa:chartqa_train_multi_col_21059_0b9dd82155::route_0341_0100010100011101011000000011",
+        "chartqa:chartqa_train_multi_col_21059_0b9dd82155::route_0398_0100001010001000001001001011",
+        "chartqa:chartqa_train_multi_col_21059_0b9dd82155::route_0092_1101010010111011011101001000",
+        "chartqa:chartqa_train_multi_col_21059_0b9dd82155::route_0329_1010100101111001011000011000"
+      ],
+      "teacher_route_index": 0,
+      "uid": "chartqa:chartqa_train_multi_col_21059_0b9dd82155",
+      "valid_nonfull_actions": [
+        "READ_ONLY",
+        "WRITE_ONLY"
+      ]
+    },
+    {
+      "all_full_prefix": [],
+      "all_full_prefix_length": 0,
+      "boundary_layer": 0,
+      "boundary_route_indices": [
+        0,
+        1
+      ],
+      "boundary_route_keys": [
+        "IGNORE|IGNORE|IGNORE|FULL|IGNORE|IGNORE|IGNORE|IGNORE|READ_ONLY|IGNORE|FULL|FULL|IGNORE|FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|FULL|FULL|IGNORE|FULL|FULL|FULL|READ_ONLY|FULL",
+        "IGNORE|IGNORE|IGNORE|FULL|IGNORE|IGNORE|IGNORE|IGNORE|READ_ONLY|IGNORE|FULL|FULL|IGNORE|FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|FULL|FULL|IGNORE|FULL|FULL|FULL|WRITE_ONLY|FULL"
+      ],
+      "dataset": "textvqa",
+      "singleton": true,
+      "source_binary_route_ids": [
+        "textvqa:textvqa_train_21490::route_0143_0001000000110111101011011001"
+      ],
+      "teacher_route_index": 0,
+      "uid": "textvqa:textvqa_train_21490",
+      "valid_nonfull_actions": [
+        "IGNORE"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 4,
+      "boundary_layer": 4,
+      "boundary_route_indices": [
+        0
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|READ_ONLY|FULL|FULL|FULL|READ_ONLY|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL"
+      ],
+      "dataset": "textvqa",
+      "singleton": true,
+      "source_binary_route_ids": [
+        "textvqa:textvqa_21754::route_0150_1011010101101111101110011011"
+      ],
+      "teacher_route_index": 0,
+      "uid": "textvqa:textvqa_21754",
+      "valid_nonfull_actions": [
+        "READ_ONLY"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 4,
+      "boundary_layer": 4,
+      "boundary_route_indices": [
+        0
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|WRITE_ONLY|FULL|FULL|FULL|FULL|FULL|READ_ONLY|FULL|FULL|WRITE_ONLY|IGNORE|FULL|IGNORE|READ_ONLY|FULL|IGNORE|FULL|FULL|IGNORE|FULL|FULL|FULL|FULL|FULL"
+      ],
+      "dataset": "textvqa",
+      "singleton": true,
+      "source_binary_route_ids": [
+        "textvqa:textvqa_train_12736::route_0348_1011001110011001001011000111"
+      ],
+      "teacher_route_index": 0,
+      "uid": "textvqa:textvqa_train_12736",
+      "valid_nonfull_actions": [
+        "WRITE_ONLY"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 6,
+      "boundary_layer": 6,
+      "boundary_route_indices": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|FULL|FULL|IGNORE|READ_ONLY|FULL|FULL|READ_ONLY|IGNORE|READ_ONLY|READ_ONLY|IGNORE|FULL|FULL|FULL|FULL|FULL|FULL|FULL|IGNORE|IGNORE|WRITE_ONLY|FULL|FULL|FULL",
+        "FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|FULL|READ_ONLY|FULL|IGNORE|FULL|FULL|WRITE_ONLY|WRITE_ONLY|IGNORE|WRITE_ONLY|FULL|READ_ONLY|FULL|IGNORE|FULL|WRITE_ONLY|WRITE_ONLY|WRITE_ONLY|FULL|FULL|FULL",
+        "FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|FULL|WRITE_ONLY|IGNORE|IGNORE|FULL|FULL|WRITE_ONLY|WRITE_ONLY|IGNORE|READ_ONLY|FULL|IGNORE|FULL|WRITE_ONLY|FULL|IGNORE|WRITE_ONLY|WRITE_ONLY|FULL|WRITE_ONLY|FULL",
+        "FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|FULL|WRITE_ONLY|IGNORE|IGNORE|FULL|FULL|WRITE_ONLY|WRITE_ONLY|IGNORE|WRITE_ONLY|FULL|READ_ONLY|FULL|FULL|FULL|IGNORE|WRITE_ONLY|WRITE_ONLY|FULL|READ_ONLY|FULL",
+        "FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|FULL|WRITE_ONLY|IGNORE|IGNORE|FULL|FULL|WRITE_ONLY|WRITE_ONLY|IGNORE|WRITE_ONLY|FULL|READ_ONLY|FULL|FULL|FULL|IGNORE|WRITE_ONLY|WRITE_ONLY|FULL|WRITE_ONLY|FULL"
+      ],
+      "dataset": "textvqa",
+      "singleton": false,
+      "source_binary_route_ids": [
+        "textvqa:textvqa_train_14801::route_0324_1001000010000000011110000110",
+        "textvqa:textvqa_train_14801::route_0174_1100010100011000010101000101"
+      ],
+      "teacher_route_index": 0,
+      "uid": "textvqa:textvqa_train_14801",
+      "valid_nonfull_actions": [
+        "IGNORE",
+        "READ_ONLY"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 10,
+      "boundary_layer": 10,
+      "boundary_route_indices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|IGNORE|FULL|FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|FULL|FULL|READ_ONLY|FULL|IGNORE|FULL|FULL|FULL|FULL",
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|IGNORE|FULL|FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|FULL|FULL|WRITE_ONLY|FULL|IGNORE|IGNORE|FULL|FULL|FULL",
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|IGNORE|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|FULL|FULL|READ_ONLY|FULL|IGNORE|FULL|FULL|WRITE_ONLY|FULL",
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|IGNORE|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|FULL|FULL|WRITE_ONLY|FULL|IGNORE|IGNORE|FULL|FULL|FULL"
+      ],
+      "dataset": "textvqa",
+      "singleton": true,
+      "source_binary_route_ids": [
+        "textvqa:textvqa_train_9859::route_0295_1100100111011011010010100101"
+      ],
+      "teacher_route_index": 0,
+      "uid": "textvqa:textvqa_train_9859",
+      "valid_nonfull_actions": [
+        "IGNORE"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 9,
+      "boundary_layer": 9,
+      "boundary_route_indices": [
+        0
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|IGNORE|FULL|FULL|WRITE_ONLY|IGNORE|IGNORE|IGNORE|READ_ONLY|IGNORE|FULL|FULL|FULL|IGNORE|FULL|FULL|READ_ONLY|FULL|WRITE_ONLY"
+      ],
+      "dataset": "textvqa",
+      "singleton": true,
+      "source_binary_route_ids": [
+        "textvqa:textvqa_29402::route_0076_1100101110011000000011010010"
+      ],
+      "teacher_route_index": 0,
+      "uid": "textvqa:textvqa_29402",
+      "valid_nonfull_actions": [
+        "READ_ONLY"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 9,
+      "boundary_layer": 9,
+      "boundary_route_indices": [
+        0
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|IGNORE|FULL|FULL|IGNORE|FULL|READ_ONLY|IGNORE|FULL|READ_ONLY|FULL|FULL|FULL|WRITE_ONLY|WRITE_ONLY|WRITE_ONLY|FULL|WRITE_ONLY|WRITE_ONLY"
+      ],
+      "dataset": "textvqa",
+      "singleton": true,
+      "source_binary_route_ids": [
+        "textvqa:textvqa_train_21631::route_0117_1011011110011010000110000000"
+      ],
+      "teacher_route_index": 0,
+      "uid": "textvqa:textvqa_train_21631",
+      "valid_nonfull_actions": [
+        "WRITE_ONLY"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 12,
+      "boundary_layer": 12,
+      "boundary_route_indices": [
+        0,
+        1
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|FULL|FULL|FULL|FULL|READ_ONLY|FULL|READ_ONLY|IGNORE|FULL|FULL|FULL|FULL|FULL|FULL|FULL",
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|FULL|FULL|FULL|FULL|READ_ONLY|FULL|FULL|IGNORE|FULL|FULL|FULL|FULL|FULL|FULL|FULL"
+      ],
+      "dataset": "textvqa",
+      "singleton": false,
+      "source_binary_route_ids": [
+        "textvqa:textvqa_train_15444::route_0329_1101101111010011101001111011"
+      ],
+      "teacher_route_index": 0,
+      "uid": "textvqa:textvqa_train_15444",
+      "valid_nonfull_actions": [
+        "READ_ONLY",
+        "WRITE_ONLY"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 14,
+      "boundary_layer": 14,
+      "boundary_route_indices": [
+        0
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|IGNORE|FULL|FULL|FULL|FULL|WRITE_ONLY|FULL|WRITE_ONLY|FULL|FULL|FULL|FULL|FULL|FULL"
+      ],
+      "dataset": "textvqa",
+      "singleton": true,
+      "source_binary_route_ids": [
+        "textvqa:textvqa_train_3894::route_0334_1111110110001101111000110101"
+      ],
+      "teacher_route_index": 0,
+      "uid": "textvqa:textvqa_train_3894",
+      "valid_nonfull_actions": [
+        "IGNORE"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 20,
+      "boundary_layer": 20,
+      "boundary_route_indices": [
+        0
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|FULL|FULL|FULL|FULL|FULL|FULL|FULL"
+      ],
+      "dataset": "textvqa",
+      "singleton": true,
+      "source_binary_route_ids": [
+        "textvqa:textvqa_train_22377::route_0051_1011101110100111111001111011"
+      ],
+      "teacher_route_index": 0,
+      "uid": "textvqa:textvqa_train_22377",
+      "valid_nonfull_actions": [
+        "READ_ONLY"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 19,
+      "boundary_layer": 19,
+      "boundary_route_indices": [
+        0,
+        1
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL",
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|FULL|FULL|READ_ONLY|FULL|FULL|READ_ONLY|FULL|FULL"
+      ],
+      "dataset": "textvqa",
+      "singleton": true,
+      "source_binary_route_ids": [
+        "textvqa:textvqa_train_2029::route_0076_1101011001111001010011111111",
+        "textvqa:textvqa_train_2029::route_0242_1001001100000011110011011111",
+        "textvqa:textvqa_train_2029::route_0296_1101011111110011010011101111",
+        "textvqa:textvqa_train_2029::route_0377_1010100011100110001011011010",
+        "textvqa:textvqa_train_2029::route_0382_1110001001001110001011011010"
+      ],
+      "teacher_route_index": 0,
+      "uid": "textvqa:textvqa_train_2029",
+      "valid_nonfull_actions": [
+        "WRITE_ONLY"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 15,
+      "boundary_layer": 15,
+      "boundary_route_indices": [
+        0,
+        1
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|READ_ONLY|FULL|READ_ONLY|FULL|WRITE_ONLY|FULL|IGNORE|IGNORE|IGNORE|FULL|FULL|FULL",
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|FULL|FULL|IGNORE|FULL|IGNORE|FULL|IGNORE|IGNORE|IGNORE|FULL|FULL|FULL"
+      ],
+      "dataset": "textvqa",
+      "singleton": false,
+      "source_binary_route_ids": [
+        "textvqa:textvqa_train_6138::route_0318_1110111101111010000101000100"
+      ],
+      "teacher_route_index": 0,
+      "uid": "textvqa:textvqa_train_6138",
+      "valid_nonfull_actions": [
+        "READ_ONLY",
+        "WRITE_ONLY"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 26,
+      "boundary_layer": 26,
+      "boundary_route_indices": [
+        0
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|IGNORE|FULL"
+      ],
+      "dataset": "textvqa",
+      "singleton": true,
+      "source_binary_route_ids": [
+        "textvqa:textvqa_train_19631::route_0180_1011111101110101001110110101",
+        "textvqa:textvqa_train_19631::route_0307_0100000100111001011110110101",
+        "textvqa:textvqa_train_19631::route_0309_1000111011110110111010111101"
+      ],
+      "teacher_route_index": 0,
+      "uid": "textvqa:textvqa_train_19631",
+      "valid_nonfull_actions": [
+        "IGNORE"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 24,
+      "boundary_layer": 24,
+      "boundary_route_indices": [
+        0
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|FULL|WRITE_ONLY|WRITE_ONLY"
+      ],
+      "dataset": "textvqa",
+      "singleton": true,
+      "source_binary_route_ids": [
+        "textvqa:textvqa_train_694::route_0089_1110101101000100000111100100",
+        "textvqa:textvqa_train_694::route_0138_1101001111001111111001100100"
+      ],
+      "teacher_route_index": 0,
+      "uid": "textvqa:textvqa_train_694",
+      "valid_nonfull_actions": [
+        "READ_ONLY"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 26,
+      "boundary_layer": 26,
+      "boundary_route_indices": [
+        0
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|FULL"
+      ],
+      "dataset": "textvqa",
+      "singleton": true,
+      "source_binary_route_ids": [
+        "textvqa:textvqa_train_1228::route_0014_1101110001011011100011111101",
+        "textvqa:textvqa_train_1228::route_0066_1101011110001010010111010101",
+        "textvqa:textvqa_train_1228::route_0188_0111001110101010001101010101",
+        "textvqa:textvqa_train_1228::route_0261_1111011111101101000011100001",
+        "textvqa:textvqa_train_1228::route_0338_1110011100011000100111010101"
+      ],
+      "teacher_route_index": 0,
+      "uid": "textvqa:textvqa_train_1228",
+      "valid_nonfull_actions": [
+        "WRITE_ONLY"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 24,
+      "boundary_layer": 24,
+      "boundary_route_indices": [
+        0,
+        1
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|FULL|WRITE_ONLY|FULL",
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|IGNORE|IGNORE|FULL"
+      ],
+      "dataset": "textvqa",
+      "singleton": false,
+      "source_binary_route_ids": [
+        "textvqa:textvqa_train_11736::route_0099_1100001001000011110001110101",
+        "textvqa:textvqa_train_11736::route_0203_1011000100001011101101110101",
+        "textvqa:textvqa_train_11736::route_0108_1010110010110001000101110001",
+        "textvqa:textvqa_train_11736::route_0153_1101110111000101001111100001",
+        "textvqa:textvqa_train_11736::route_0262_1010100100110011010011010001"
+      ],
+      "teacher_route_index": 0,
+      "uid": "textvqa:textvqa_train_11736",
+      "valid_nonfull_actions": [
+        "READ_ONLY",
+        "WRITE_ONLY"
+      ]
+    },
+    {
+      "all_full_prefix": [],
+      "all_full_prefix_length": 0,
+      "boundary_layer": 0,
+      "boundary_route_indices": [
+        0
+      ],
+      "boundary_route_keys": [
+        "IGNORE|FULL|READ_ONLY|FULL|FULL|IGNORE|FULL|FULL|FULL|FULL|IGNORE|FULL|IGNORE|FULL|FULL|FULL|READ_ONLY|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|IGNORE|FULL|FULL"
+      ],
+      "dataset": "textvqa",
+      "singleton": true,
+      "source_binary_route_ids": [
+        "textvqa:textvqa_29004::route_0042_0101101101010111011101110011"
+      ],
+      "teacher_route_index": 0,
+      "uid": "textvqa:textvqa_29004",
+      "valid_nonfull_actions": [
+        "IGNORE"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 3,
+      "boundary_layer": 3,
+      "boundary_route_indices": [
+        0
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|READ_ONLY|FULL|FULL|FULL|FULL|FULL|READ_ONLY|READ_ONLY|IGNORE|IGNORE|IGNORE|WRITE_ONLY|WRITE_ONLY|FULL|FULL|FULL|FULL|READ_ONLY|WRITE_ONLY|FULL|FULL|FULL|FULL|WRITE_ONLY|WRITE_ONLY"
+      ],
+      "dataset": "textvqa",
+      "singleton": true,
+      "source_binary_route_ids": [
+        "textvqa:textvqa_train_6569::route_0303_0000001110000000111100011100"
+      ],
+      "teacher_route_index": 0,
+      "uid": "textvqa:textvqa_train_6569",
+      "valid_nonfull_actions": [
+        "READ_ONLY"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 4,
+      "boundary_layer": 4,
+      "boundary_route_indices": [
+        0
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|WRITE_ONLY|FULL|FULL|FULL|FULL|FULL|READ_ONLY|FULL|FULL|FULL|IGNORE|FULL|FULL|FULL|FULL|FULL|FULL|FULL|IGNORE|FULL|WRITE_ONLY|FULL|FULL|WRITE_ONLY"
+      ],
+      "dataset": "textvqa",
+      "singleton": true,
+      "source_binary_route_ids": [
+        "textvqa:textvqa_24375::route_0436_1110011111011101010011010010"
+      ],
+      "teacher_route_index": 0,
+      "uid": "textvqa:textvqa_24375",
+      "valid_nonfull_actions": [
+        "WRITE_ONLY"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 2,
+      "boundary_layer": 2,
+      "boundary_route_indices": [
+        0,
+        1
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|READ_ONLY|FULL|READ_ONLY|FULL|FULL|WRITE_ONLY|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL",
+        "FULL|FULL|WRITE_ONLY|FULL|FULL|FULL|FULL|IGNORE|FULL|FULL|FULL|FULL|READ_ONLY|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL"
+      ],
+      "dataset": "textvqa",
+      "singleton": false,
+      "source_binary_route_ids": [
+        "textvqa:textvqa_train_4149::route_0251_1100011010100111101110011001"
+      ],
+      "teacher_route_index": 0,
+      "uid": "textvqa:textvqa_train_4149",
+      "valid_nonfull_actions": [
+        "READ_ONLY",
+        "WRITE_ONLY"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 11,
+      "boundary_layer": 11,
+      "boundary_route_indices": [
+        0,
+        1
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|IGNORE|FULL|FULL|WRITE_ONLY|WRITE_ONLY|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL",
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|IGNORE|READ_ONLY|FULL|FULL|WRITE_ONLY|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL"
+      ],
+      "dataset": "textvqa",
+      "singleton": true,
+      "source_binary_route_ids": [
+        "textvqa:textvqa_33609::route_0197_0110000011001100000001001111",
+        "textvqa:textvqa_33609::route_0267_1111011111000010010100100011"
+      ],
+      "teacher_route_index": 0,
+      "uid": "textvqa:textvqa_33609",
+      "valid_nonfull_actions": [
+        "IGNORE"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 8,
+      "boundary_layer": 8,
+      "boundary_route_indices": [
+        0,
+        1
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|READ_ONLY|READ_ONLY|FULL|FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|WRITE_ONLY|FULL",
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|WRITE_ONLY|READ_ONLY|FULL|FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|WRITE_ONLY"
+      ],
+      "dataset": "textvqa",
+      "singleton": true,
+      "source_binary_route_ids": [
+        "textvqa:textvqa_31407::route_0102_0100011100010111110111111000"
+      ],
+      "teacher_route_index": 0,
+      "uid": "textvqa:textvqa_31407",
+      "valid_nonfull_actions": [
+        "READ_ONLY"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 11,
+      "boundary_layer": 11,
+      "boundary_route_indices": [
+        0
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|WRITE_ONLY|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|FULL|FULL|READ_ONLY|FULL|FULL|WRITE_ONLY"
+      ],
+      "dataset": "textvqa",
+      "singleton": true,
+      "source_binary_route_ids": [
+        "textvqa:textvqa_18903::route_0181_1111011110100110011110110100"
+      ],
+      "teacher_route_index": 0,
+      "uid": "textvqa:textvqa_18903",
+      "valid_nonfull_actions": [
+        "WRITE_ONLY"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 13,
+      "boundary_layer": 13,
+      "boundary_route_indices": [
+        0,
+        1,
+        2
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|FULL",
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|FULL|FULL|FULL|READ_ONLY|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|FULL",
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|FULL|FULL|FULL|WRITE_ONLY|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|IGNORE|FULL"
+      ],
+      "dataset": "textvqa",
+      "singleton": false,
+      "source_binary_route_ids": [
+        "textvqa:textvqa_train_4210::route_0223_1111111111101010001011110001"
+      ],
+      "teacher_route_index": 0,
+      "uid": "textvqa:textvqa_train_4210",
+      "valid_nonfull_actions": [
+        "READ_ONLY",
+        "WRITE_ONLY"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 18,
+      "boundary_layer": 18,
+      "boundary_route_indices": [
+        0
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|IGNORE|FULL|FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|FULL"
+      ],
+      "dataset": "textvqa",
+      "singleton": true,
+      "source_binary_route_ids": [
+        "textvqa:textvqa_train_10171::route_0128_1111111100100001000101100101"
+      ],
+      "teacher_route_index": 0,
+      "uid": "textvqa:textvqa_train_10171",
+      "valid_nonfull_actions": [
+        "IGNORE"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 17,
+      "boundary_layer": 17,
+      "boundary_route_indices": [
+        0
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY"
+      ],
+      "dataset": "textvqa",
+      "singleton": true,
+      "source_binary_route_ids": [
+        "textvqa:textvqa_train_13410::route_0100_0111101111010011100111110110"
+      ],
+      "teacher_route_index": 0,
+      "uid": "textvqa:textvqa_train_13410",
+      "valid_nonfull_actions": [
+        "READ_ONLY"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 20,
+      "boundary_layer": 20,
+      "boundary_route_indices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|FULL|FULL|FULL|FULL|WRITE_ONLY|FULL|FULL",
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|FULL|IGNORE|FULL|FULL|FULL|WRITE_ONLY|FULL",
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|FULL|READ_ONLY|FULL|FULL|WRITE_ONLY|READ_ONLY|FULL",
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|READ_ONLY|IGNORE|FULL|FULL|FULL|FULL|FULL"
+      ],
+      "dataset": "textvqa",
+      "singleton": true,
+      "source_binary_route_ids": [
+        "textvqa:textvqa_21718::route_0268_1111110110100000000100011001",
+        "textvqa:textvqa_21718::route_0393_1111001001001110000100010101",
+        "textvqa:textvqa_21718::route_0215_1110100110101001101101010001",
+        "textvqa:textvqa_21718::route_0346_1110101100110101100000010011"
+      ],
+      "teacher_route_index": 0,
+      "uid": "textvqa:textvqa_21718",
+      "valid_nonfull_actions": [
+        "WRITE_ONLY"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 19,
+      "boundary_layer": 19,
+      "boundary_route_indices": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|IGNORE|FULL|IGNORE|FULL|FULL|FULL|FULL|FULL|FULL",
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|IGNORE|WRITE_ONLY|FULL|READ_ONLY|FULL|FULL|FULL|FULL|FULL",
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|IGNORE|WRITE_ONLY|FULL|FULL|FULL|FULL|FULL|FULL",
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|READ_ONLY|IGNORE|FULL|READ_ONLY|FULL|FULL|FULL|FULL",
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|WRITE_ONLY|IGNORE|FULL|FULL|FULL|FULL|FULL|FULL"
+      ],
+      "dataset": "textvqa",
+      "singleton": false,
+      "source_binary_route_ids": [
+        "textvqa:textvqa_train_3318::route_0305_1100010101010000100010101010",
+        "textvqa:textvqa_train_3318::route_0051_1111111100010100000001010110",
+        "textvqa:textvqa_train_3318::route_0119_1101001100110101101000100010",
+        "textvqa:textvqa_train_3318::route_0140_1011111111111110110000101011"
+      ],
+      "teacher_route_index": 0,
+      "uid": "textvqa:textvqa_train_3318",
+      "valid_nonfull_actions": [
+        "IGNORE",
+        "WRITE_ONLY"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 23,
+      "boundary_layer": 23,
+      "boundary_route_indices": [
+        0
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|IGNORE|READ_ONLY|FULL|FULL|FULL"
+      ],
+      "dataset": "textvqa",
+      "singleton": true,
+      "source_binary_route_ids": [
+        "textvqa:textvqa_19593::route_0069_1110101111111110010101100111"
+      ],
+      "teacher_route_index": 0,
+      "uid": "textvqa:textvqa_19593",
+      "valid_nonfull_actions": [
+        "IGNORE"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 25,
+      "boundary_layer": 25,
+      "boundary_route_indices": [
+        0
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|FULL|FULL"
+      ],
+      "dataset": "textvqa",
+      "singleton": true,
+      "source_binary_route_ids": [
+        "textvqa:textvqa_train_2664::route_0398_1110110101001111100101110011"
+      ],
+      "teacher_route_index": 0,
+      "uid": "textvqa:textvqa_train_2664",
+      "valid_nonfull_actions": [
+        "READ_ONLY"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 27,
+      "boundary_layer": 27,
+      "boundary_route_indices": [
+        0
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY"
+      ],
+      "dataset": "textvqa",
+      "singleton": true,
+      "source_binary_route_ids": [
+        "textvqa:textvqa_train_5296::route_0088_0100111111010011111111001000",
+        "textvqa:textvqa_train_5296::route_0132_1100100010000010010111111010",
+        "textvqa:textvqa_train_5296::route_0141_1010010110010011011001111010",
+        "textvqa:textvqa_train_5296::route_0166_1100101100000000101010111110",
+        "textvqa:textvqa_train_5296::route_0180_1110100110110110000100101100",
+        "textvqa:textvqa_train_5296::route_0294_0000010010110010100100110010",
+        "textvqa:textvqa_train_5296::route_0295_0101001010110100011100111100",
+        "textvqa:textvqa_train_5296::route_0300_1111111001101101100111111100",
+        "textvqa:textvqa_train_5296::route_0311_1110001001010000001101101000",
+        "textvqa:textvqa_train_5296::route_0315_1111001001100111011110010010",
+        "textvqa:textvqa_train_5296::route_0316_0000001001100001010110011010",
+        "textvqa:textvqa_train_5296::route_0319_1111011011011100111111101010",
+        "textvqa:textvqa_train_5296::route_0326_0100110011101101100001100010",
+        "textvqa:textvqa_train_5296::route_0367_1111110110101101101111011010",
+        "textvqa:textvqa_train_5296::route_0381_1101100001110110101100011110"
+      ],
+      "teacher_route_index": 0,
+      "uid": "textvqa:textvqa_train_5296",
+      "valid_nonfull_actions": [
+        "WRITE_ONLY"
+      ]
+    },
+    {
+      "all_full_prefix": [
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL",
+        "FULL"
+      ],
+      "all_full_prefix_length": 22,
+      "boundary_layer": 22,
+      "boundary_route_indices": [
+        0,
+        1
+      ],
+      "boundary_route_keys": [
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|FULL|FULL|FULL|WRITE_ONLY|WRITE_ONLY",
+        "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|FULL|FULL|FULL|FULL|FULL"
+      ],
+      "dataset": "textvqa",
+      "singleton": false,
+      "source_binary_route_ids": [
+        "textvqa:textvqa_21568::route_0031_1010111111011111000101011100",
+        "textvqa:textvqa_21568::route_0187_1011111110100111001011011011"
+      ],
+      "teacher_route_index": 0,
+      "uid": "textvqa:textvqa_21568",
+      "valid_nonfull_actions": [
+        "READ_ONLY",
+        "WRITE_ONLY"
+      ]
+    }
+  ]
+}

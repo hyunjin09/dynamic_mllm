@@ -1095,3 +1095,30 @@ Do not copy raw logs or provisional explanations here.
 - Consequence for future actions: use an approved exact verified policy when
   every valid branch is required, or prospectively validate a bounded policy
   before treating it as a label generator.
+
+## 2026-08-29 — Sample balance does not prevent four-action FULL collapse
+
+- Decision or promoted lesson: do not treat 50:50 W2C:C2C sampling as balanced
+  four-action supervision, and do not retry the online router without directly
+  covering the mandatory departure from its deployed all-FULL prefix.
+- Triggering evidence: under the exact planned ten-epoch sampler, combined
+  teacher actions are 66.735% FULL, 25.335% IGNORE, 4.795% READ_ONLY, and
+  3.136% WRITE_ONLY. FULL is uniquely valid at 55.360% of sampled prefix nodes,
+  versus 3.107%/2.216% singleton READ/WRITE. The sampler never visits the
+  latest valid all-FULL-prefix deviation boundary for 1,045/2,397 W2C samples,
+  although READ/WRITE are valid at 43.388%/52.733% of those boundaries.
+- C2C qualification: the exact all-FULL route is present for 3,501/3,548 C2C
+  train samples and is a plausible shared-route shortcut, but removing it does
+  not change the measured W2C boundary-coverage defect. C2C labels also contain
+  no READ_ONLY or WRITE_ONLY positives by construction.
+- Evidence path:
+  `reports/four_action_router_collapse_label_audit_20260829.md`.
+- Confidence: high for the label/sampler geometry and the next diagnostic;
+  unresolved for the sole cause of learned collapse or the final remedy.
+- Consequence for future actions: first test isolated W2C mandatory-boundary
+  coverage with the unchanged router, loss, and C2C population. Keep C2C
+  all-FULL removal, action weighting, and on-policy exposure as separate
+  prospectively defined ablations rather than bundling them into one retry.
+- Revisit condition: an explicitly covered boundary-capacity pilot fails to
+  fit or free-run its fixed W2C subset, which would shift attention to router
+  state features, action-head capacity, or gradient allocation.

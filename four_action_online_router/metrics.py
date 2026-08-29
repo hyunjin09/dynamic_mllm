@@ -119,3 +119,135 @@ def execution_checkpoint_key(epoch_row: dict[str, Any]) -> tuple[float, float, i
         -float(metrics["mean_action_layers"]["FULL"]),
         -int(epoch_row["epoch"]),
     )
+
+
+def _boundary_population(rows: Sequence[dict[str, Any]]) -> dict[str, Any]:
+    records = len(rows)
+    valid = sum(
+        str(row["predicted_boundary_action"]) in row["valid_nonfull_actions"]
+        for row in rows
+    )
+    nonfull = sum(str(row["predicted_boundary_action"]) != "FULL" for row in rows)
+    return {
+        "records": records,
+        "valid_action_at_1": valid / records if records else None,
+        "nonfull_recall": nonfull / records if records else None,
+    }
+
+
+def mandatory_boundary_metrics(
+    rows: Sequence[dict[str, Any]], *, num_layers: int
+) -> dict[str, Any]:
+    """Summarize exact-boundary predictions and free-rollout deviation timing."""
+
+    if not rows:
+        raise ValueError("mandatory-boundary metrics require records")
+    if len({str(row["uid"]) for row in rows}) != len(rows):
+        raise ValueError("mandatory-boundary metric UIDs must be unique")
+    for row in rows:
+        if "FULL" in row["valid_nonfull_actions"] or not row["valid_nonfull_actions"]:
+            raise ValueError("boundary valid actions must be nonempty and exclude FULL")
+        if not 0 <= int(row["boundary_layer"]) < num_layers:
+            raise ValueError("boundary layer lies outside the decoder")
+
+    singleton = [row for row in rows if bool(row["singleton"])]
+    multi = [row for row in rows if not bool(row["singleton"])]
+    action_records = {}
+    action_recall = {}
+    for action in ("IGNORE", "READ_ONLY", "WRITE_ONLY"):
+        selected = [
+            row for row in singleton if row["valid_nonfull_actions"] == [action]
+        ]
+        action_records[action] = len(selected)
+        action_recall[action] = (
+            sum(row["predicted_boundary_action"] == action for row in selected)
+            / len(selected)
+            if selected else None
+        )
+
+    deltas: list[int] = []
+    left_full = 0
+    exact = 0
+    within_one = 0
+    within_two = 0
+    early = 0
+    late_or_none = 0
+    for row in rows:
+        actions = list(row["actions"])
+        if len(actions) != num_layers:
+            raise ValueError("free-rollout action route has the wrong width")
+        predicted_layer = next(
+            (index for index, action in enumerate(actions) if action != "FULL"), None
+        )
+        if predicted_layer is None:
+            late_or_none += 1
+            continue
+        left_full += 1
+        delta = predicted_layer - int(row["boundary_layer"])
+        deltas.append(delta)
+        exact += delta == 0
+        within_one += abs(delta) <= 1
+        within_two += abs(delta) <= 2
+        early += delta < 0
+        late_or_none += delta > 0
+
+    overall = _boundary_population(rows)
+    return {
+        **overall,
+        "by_dataset": {
+            dataset: _boundary_population(
+                [row for row in rows if row["dataset"] == dataset]
+            )
+            for dataset in ("gqa", "chartqa", "textvqa")
+        },
+        "by_valid_action": {
+            action: _boundary_population(
+                [row for row in rows if action in row["valid_nonfull_actions"]]
+            )
+            for action in ("IGNORE", "READ_ONLY", "WRITE_ONLY")
+        },
+        "singleton": _boundary_population(singleton),
+        "multi_valid": _boundary_population(multi),
+        "singleton_action_records": action_records,
+        "singleton_action_recall": action_recall,
+        "free_rollout": {
+            "left_all_full_fraction": left_full / len(rows),
+            "exact_boundary_fraction": exact / len(rows),
+            "within_1_fraction": within_one / len(rows),
+            "within_2_fraction": within_two / len(rows),
+            "early_fraction": early / len(rows),
+            "late_or_no_deviation_fraction": late_or_none / len(rows),
+            "observed_delta_count": len(deltas),
+            "mean_delta_when_observed": sum(deltas) / len(deltas) if deltas else None,
+        },
+    }
+
+
+def mandatory_boundary_pilot_gate(
+    metrics: dict[str, Any], gates: dict[str, Any]
+) -> dict[str, Any]:
+    """Apply the frozen A1 behavioral gate without inspecting later outcomes."""
+
+    boundary = metrics["boundary"]
+    execution = metrics["execution"]
+    checks = {
+        "boundary_valid_action_at_1": boundary["valid_action_at_1"]
+        >= float(gates["boundary_valid_action_at_1"]),
+        "boundary_nonfull_recall": boundary["nonfull_recall"]
+        >= float(gates["boundary_nonfull_recall"]),
+        "free_rollout_leave_full": boundary["free_rollout"]["left_all_full_fraction"]
+        >= float(gates["free_rollout_leave_full"]),
+        "w2c_rescue_rate": execution["w2c_rescue_rate"]
+        >= float(gates["w2c_rescue_rate"]),
+        "c2c_preservation_rate": execution["c2c_preservation_rate"]
+        >= float(gates["c2c_preservation_rate"]),
+    }
+    minimum = int(gates["singleton_min_records"])
+    for action in ("IGNORE", "READ_ONLY", "WRITE_ONLY"):
+        records = int(boundary["singleton_action_records"][action])
+        recall = boundary["singleton_action_recall"][action]
+        if records >= minimum:
+            checks[f"singleton_{action}_recall"] = recall >= float(
+                gates["singleton_action_recall"]
+            )
+    return {"passed": all(checks.values()), "checks": checks, "thresholds": gates}

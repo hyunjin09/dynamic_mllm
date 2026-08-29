@@ -1,5 +1,27 @@
 # Workflow State
 
+- Active phase (2026-08-29): execute the user-authored collapse-isolation plan
+  in `plans/four_action_collapse.md` (SHA-256
+  `f61f7476ff9a5872f823c7df837e1a2ba21774c83e4efc88f152d2b77d5aceb9`).
+  Track A first builds exact W2C mandatory-boundary metadata and runs a fixed
+  96-W2C plus 24-C2C overfit pilot with the unchanged online architecture,
+  loss, optimizer, labels, backbone, and executor; only boundary-reaching
+  trajectory exposure changes. Full ten-epoch online training is gated on that
+  pilot's prospective behavioral criteria. Track B separately retains C2C but
+  removes its exact all-FULL route, excludes the 35 route-empty cases, and runs
+  a matched ten-epoch upfront POLAR exact-set-NLL ablation. A matched
+  initial-input versus current-state boundary probe follows. Readiness is
+  verified at commit `2144c38`; all required local assets are present, the
+  project environment is healthy, the eight H100s are idle, and the user queue
+  is empty. Phase memory:
+  `workspace/phase_memory/phase_38_four_action_collapse.md`.
+  A0 is now complete: all 2,397 W2C train records pass the exact boundary
+  invariants, and the frozen 96-W2C/24-C2C pilot spans layers 0–27 with balanced
+  singleton minority actions. The A1 trainer is parent-config/executor bound,
+  Slurm-only, checksum/RNG-resumable, and protected from concurrent writers;
+  three adversarial review cycles were reconciled and all 491 project tests
+  pass. No A1 GPU job has started yet.
+
 - Operating context (2026-08-28): work may proceed concurrently on multiple
   servers. The shared Git branch carries portable code, frozen configs/plans,
   tests, compact reports/checksums, and current workflow/phase decisions.
@@ -42,8 +64,15 @@
   jobs 1691 and 1692 were canceled at 14:19:22 KST while epoch 10 was at step
   478/480. Nine checksum-valid checkpoints and 7,794 unique validation rows are
   preserved; epoch 10 left no partial checkpoint, external evaluation never
-  started, and `external_v3` is absent. The cause of collapse remains unknown.
-  Final report: `reports/four_action_online_router_early_stop_20260829.md`.
+  started, and `external_v3` is absent. A deterministic follow-up label/sampler
+  audit supports severe action/prefix imbalance and missing all-FULL-prefix
+  boundary exposure as contributors: the exact sampler never visits the latest
+  mandatory deviation boundary for 1,045/2,397 W2C samples. The exact all-FULL
+  route is also present in 3,501/3,548 C2C train samples, but removing it alone
+  would not repair W2C coverage. No sole cause is established and no new pilot
+  is authorized. Final reports:
+  `reports/four_action_online_router_early_stop_20260829.md` and
+  `reports/four_action_router_collapse_label_audit_20260829.md`.
   Phase memory:
   `workspace/phase_memory/phase_37_online_four_action_router.md`.
 

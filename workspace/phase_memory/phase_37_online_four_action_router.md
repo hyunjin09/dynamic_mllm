@@ -50,10 +50,14 @@ ChartQA, MMMU-Pro Standard/Vision, and POPE.
 - Final behavioral observation: every completed epoch has zero W2C rescues.
   Epochs 2--8 execute exactly all-FULL for all 24,248 validation layer
   decisions; epoch 9 has 24,247 FULL and one IGNORE. C2C preservation is 1.0
-  from epoch 2 onward. The cause of policy collapse remains unknown.
-- Current bottleneck: none. Phase 37 is stopped with a preserved negative
-  internal-validation result; no external evaluation or replacement method is
-  authorized.
+  from epoch 2 onward. A subsequent deterministic label/sampler audit supports
+  action/prefix imbalance and teacher-forcing coverage as contributors, while
+  the exact C2C all-FULL route remains a plausible additional shortcut; no
+  single sole cause is established.
+- Current bottleneck: the unchanged sampler never trains the latest valid
+  all-FULL-prefix deviation boundary for 1,045/2,397 W2C samples. A small
+  isolated mandatory-boundary coverage/capacity pilot is the recommended next
+  diagnostic, but no new training or replacement method is authorized.
 
 ## Evidence That Matters
 | Evidence | Source / Path | Why It Matters | Status |
@@ -63,6 +67,7 @@ ChartQA, MMMU-Pro Standard/Vision, and POPE.
 | Direct upfront predictors can fit likelihood without useful complete routes | `reports/binary_polar_full10_polar_matched_results.md` | Supports execution-based selection and the approved online architecture | confirmed |
 | POLAR job 1662 failed before this cancellation | Slurm accounting and `logs/slurm/four-action-polar-train-eval-v1-1662.log` | It was terminal and was not one of the canceled queue entries | confirmed |
 | Nine complete online-router validation histories | `outputs/four_action_online_router/training_v3/history.json` (SHA-256 `a1b9961e...`) | Establishes repeated zero-rescue/all-FULL behavior before early stop | confirmed |
+| Deterministic collapse label/sampler audit | `reports/four_action_router_collapse_label_audit_20260829.md` | Distinguishes C2C route shortcut, action imbalance, and missing W2C boundary exposure | confirmed |
 
 ## Failed Attempts and Lessons
 | Attempt | Observed Failure | Diagnosis | Evidence | Lesson / Next Implication | Do Not Repeat |
@@ -76,47 +81,62 @@ ChartQA, MMMU-Pro Standard/Vision, and POPE.
 | Approved online READ/WRITE router | Uses route-conditioned hidden states and function-specific features | Tests the plan's primary hypothesis | high | stopped after nine zero-rescue validations |
 
 ## Next-Step Decision
-- Deliberation mode: standard; the user proposed stopping the near-complete
-  training and canceling external evaluation after repeated all-FULL behavior.
-- Active objective and bottleneck: determine whether any remaining compute can
-  change the primary internal routed-execution decision.
-- Confirmed observation: nine atomic epochs pass runtime/integrity checks, but
-  every epoch has zero W2C rescues. Epochs 2--8 execute exactly all-FULL over
-  all 24,248 validation layer decisions; epoch 9 differs by one IGNORE. C2C
-  preservation is 1.0 from epoch 2 onward. At the decision boundary epoch 10
-  had reached step 478/480 but had no atomic checkpoint or validation result.
-- Unverified interpretation: why the online router converged to FULL remains
-  unknown. The repeated behavior is sufficient to reject this run's primary
-  rescue objective without diagnosing the cause.
-- Viable alternatives considered: finish epoch 10 then stop; cancel training
-  and evaluation immediately; or complete external evaluation. Finishing
-  external evaluation is not decision-relevant after nine zero-rescue internal
-  validations. Completing epoch 10 would preserve the planned schedule but is
-  unlikely to reverse nine epochs during the near-zero-LR tail.
-- Chosen action and strongest objection: cancel jobs 1691 and 1692 now,
-  preserve nine complete checkpoints/validations, and do not run external
-  evaluation. The strongest objection is losing the final atomic epoch, but it
-  does not justify continued eight-GPU use given the repeated result.
-- How this differs from failed attempts: this stops on repeated valid execution
-  evidence rather than bypassing a semantic gate or modifying the objective.
-- Authorization and stop condition: explicitly authorized by the user's
-  2026-08-29 stop request. Stop when both jobs are terminal and the nine-epoch
-  artifact boundary is verified intact.
+- Deliberation mode: deep. Both the upfront POLAR objectives and the online
+  state-conditioned router converged to essentially all-FULL, so this is a
+  repeated outcome across two architectures and the proposed remedies alter
+  the training population or supervision.
+- Active objective and bottleneck: distinguish the user's proposed C2C
+  universal-FULL shortcut from broader label geometry, especially whether W2C
+  prefixes and sampled teacher routes are themselves overwhelmingly FULL.
+- Confirmed observation: the online run produced zero W2C rescues for nine
+  completed epochs and was exactly all-FULL in epochs 2--8. Both completed
+  upfront four-action POLAR variants also selected all-FULL everywhere.
+- Unverified interpretations: C2C may dominate because all-FULL is a valid
+  route for every C2C sample; alternatively, rare W2C deviation points,
+  route/action imbalance, per-layer factorization, teacher-forcing exposure,
+  or greedy 28-step decoding may independently make FULL the easiest policy.
+- Chosen action and strongest objection: perform one bounded, CPU-only audit of
+  the existing manifest and the exact epoch sampler. Quantify all-FULL route
+  prevalence, non-FULL alternatives, complete-route action frequencies, and
+  prefix-level valid-action masks separately for W2C and C2C, including
+  counterfactual W2C-only and C2C-without-all-FULL label views. The strongest
+  objection is that label statistics cannot prove an optimization mechanism,
+  but they can decide whether removing C2C or only its trivial route is a
+  coherent next experiment before spending GPUs.
+- How this differs from failed attempts: this does not retrain a renamed
+  variant; it tests a concrete supervision-level explanation using the frozen
+  labels and exact sampler that produced the failed run.
+- Review and final ranking: an independent read-only review revised the
+  provisional bundled pilot. The clean next diagnostic is to retain C2C and
+  the unchanged loss while guaranteeing one visit to every W2C latest
+  all-FULL-prefix mandatory-deviation node. Removing only the C2C all-FULL
+  route is the next separate ablation; dropping C2C is not recommended. Do not
+  bundle boundary coverage, class weighting, and on-policy exposure in the
+  first retry because the result would be causally ambiguous.
+- Authorization and stop condition: authorized by the user's request to analyze
+  the collapse and identify what to check. The label/sampler audit is complete.
+  Do not launch the recommended pilot without explicit authorization.
 
 ## Latest Research-Action Result
-- Action taken: after nine repeated zero-rescue validations, compared immediate
-  stop, finishing epoch 10 only, and full external evaluation. The user-
-  authorized immediate stop was selected; jobs 1691 and 1692 were canceled.
-- Result: job 1691 is terminal `CANCELLED` after 1:11:23 and job 1692 is
-  terminal `CANCELLED` without starting. Nine checkpoints and 7,794 validation
-  rows are intact and checksum/UID audits pass. Epoch 10 produced no partial
-  checkpoint, and no external row was generated.
-- Evidence saved: `outputs/four_action_online_router/training_v3/history.json`,
-  nine epoch metadata/checkpoint/validation triplets, Slurm accounting/logs,
-  `reports/four_action_online_router_early_stop_20260829.md`, and this memory.
-- Failure or issue: the implementation and optimization ran correctly, but the
-  deployed validation policy was essentially all-FULL and achieved zero W2C
-  rescue at every completed epoch. Why it collapsed is not diagnosed.
-- Next implication: preserve the negative result and stop. Any objective,
-  architecture, weighting, or supervision change is a new research action and
-  requires explicit approval.
+- Action taken: deterministically audited the frozen train/validation manifest,
+  the exact ten-epoch online sampler, prefix-trie valid-action masks, upfront
+  objective geometry, and deployed versus teacher-forced action behavior. No
+  inference, training, or label mutation was run.
+- Result: 98.675% of C2C train samples contain all-FULL, but W2C sampled teacher
+  actions are themselves 76.782% FULL. Under exact 50:50 sampling, FULL is
+  valid at 72.880% and uniquely valid at 55.360% of nodes, versus singleton
+  READ/WRITE rates of 3.107%/2.216%. The ten-epoch sampler never visits the
+  latest all-FULL-prefix deviation boundary for 1,045/2,397 W2C samples. At
+  those boundaries FULL is invalid, while READ/WRITE are valid for
+  43.388%/52.733% of samples.
+- Diagnosis: supported contributors are action/prefix imbalance, zero C2C
+  READ/WRITE positives, teacher-forcing/free-rollout exposure, and upfront
+  checkpoint/objective geometry. Whether the state features/head can fit the
+  explicitly covered boundaries remains unknown.
+- Evidence saved: `reports/four_action_router_collapse_label_audit_20260829.md`,
+  the frozen manifest/configs, upfront histories, online history, and this
+  memory.
+- Next implication: do not remove C2C wholesale and do not assume deleting its
+  all-FULL route is sufficient. Pending explicit authorization, first isolate
+  W2C mandatory-boundary coverage with the unchanged router/loss/C2C set, then
+  test C2C all-FULL removal separately if the capacity/coverage gate passes.

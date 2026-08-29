@@ -4,13 +4,22 @@ from collections import Counter
 import json
 import math
 from pathlib import Path
+import random
 
 import pytest
 import torch
 
 from four_action_online_router.model import OnlineFourActionRouter
-from four_action_online_router.data import choose_smoke_indices, manifest_route_tensor
+from four_action_online_router.data import (
+    boundary_teacher_route,
+    choose_smoke_indices,
+    mandatory_boundary_record,
+    manifest_route_tensor,
+    select_boundary_pilot,
+)
 from four_action_online_router.metrics import (
+    mandatory_boundary_metrics,
+    mandatory_boundary_pilot_gate,
     execution_checkpoint_key,
     summarize_execution_rows,
     summarize_node_predictions,
@@ -403,3 +412,339 @@ def test_online_data_helpers_encode_routes_and_choose_balanced_smoke() -> None:
     chosen = [rows[index] for index in selected]
     assert {row["dataset"] for row in chosen} == {"gqa", "chartqa", "textvqa"}
     assert {row["route_type"] for row in chosen} == {"W2C", "C2C"}
+
+
+def test_mandatory_boundary_uses_latest_reachable_all_full_prefix() -> None:
+    row = {
+        "uid": "gqa:boundary",
+        "dataset": "gqa",
+        "split": "train",
+        "route_type": "W2C",
+        "valid_routes": [
+            {
+                "route_key": "short",
+                "source_binary_route_ids": ["binary:short"],
+                "actions": ["FULL", "READ_ONLY", "FULL", "FULL"],
+            },
+            {
+                "route_key": "latest-read",
+                "source_binary_route_ids": ["binary:read"],
+                "actions": ["FULL", "FULL", "READ_ONLY", "IGNORE"],
+            },
+            {
+                "route_key": "latest-write",
+                "source_binary_route_ids": ["binary:write"],
+                "actions": ["FULL", "FULL", "WRITE_ONLY", "FULL"],
+            },
+        ],
+    }
+
+    boundary = mandatory_boundary_record(row, num_layers=4)
+
+    assert boundary == {
+        "uid": "gqa:boundary",
+        "dataset": "gqa",
+        "boundary_layer": 2,
+        "all_full_prefix_length": 2,
+        "all_full_prefix": ["FULL", "FULL"],
+        "valid_nonfull_actions": ["READ_ONLY", "WRITE_ONLY"],
+        "boundary_route_indices": [1, 2],
+        "boundary_route_keys": ["latest-read", "latest-write"],
+        "source_binary_route_ids": ["binary:read", "binary:write"],
+        "singleton": False,
+    }
+
+
+def test_mandatory_boundary_rejects_an_all_full_w2c_route() -> None:
+    row = {
+        "uid": "gqa:invalid",
+        "dataset": "gqa",
+        "split": "train",
+        "route_type": "W2C",
+        "valid_routes": [
+            {"route_key": "all-full", "actions": ["FULL", "FULL"]},
+        ],
+    }
+
+    with pytest.raises(ValueError, match="all-FULL route"):
+        mandatory_boundary_record(row, num_layers=2)
+
+
+def test_boundary_teacher_route_reaches_the_exact_frozen_boundary() -> None:
+    row = {
+        "uid": "gqa:teacher",
+        "route_type": "W2C",
+        "valid_routes": [
+            {"actions": ["FULL", "IGNORE", "FULL"]},
+            {"actions": ["FULL", "FULL", "WRITE_ONLY"]},
+        ],
+    }
+    boundary = {
+        "uid": "gqa:teacher",
+        "boundary_layer": 2,
+        "valid_nonfull_actions": ["WRITE_ONLY"],
+        "boundary_route_indices": [1],
+        "teacher_route_index": 1,
+    }
+
+    route = boundary_teacher_route(row, boundary, num_layers=3)
+
+    assert route.tolist() == [3, 3, 2]
+
+
+def test_boundary_pilot_selection_is_fixed_balanced_and_route_compatible() -> None:
+    boundary_rows = []
+    manifest_rows = []
+    actions = ("IGNORE", "READ_ONLY", "WRITE_ONLY")
+    for dataset in ("gqa", "chartqa", "textvqa"):
+        for index in range(12):
+            uid = f"{dataset}:w{index:02d}"
+            action = actions[index % len(actions)]
+            boundary_rows.append(
+                {
+                    "uid": uid,
+                    "dataset": dataset,
+                    "boundary_layer": index % 8,
+                    "valid_nonfull_actions": [action],
+                    "singleton": True,
+                }
+            )
+            manifest_rows.append(
+                {"uid": uid, "dataset": dataset, "route_type": "W2C"}
+            )
+        for index in range(5):
+            uid = f"{dataset}:c{index:02d}"
+            manifest_rows.append(
+                {
+                    "uid": uid,
+                    "dataset": dataset,
+                    "route_type": "C2C",
+                    "valid_routes": [
+                        {"actions": ["FULL", "FULL"]},
+                        {"actions": ["FULL", "IGNORE"]},
+                    ],
+                }
+            )
+
+    selected = select_boundary_pilot(
+        manifest_rows,
+        boundary_rows,
+        w2c_per_dataset=6,
+        c2c_per_dataset=3,
+        seed=17,
+        num_layers=2,
+    )
+    repeated = select_boundary_pilot(
+        manifest_rows,
+        boundary_rows,
+        w2c_per_dataset=6,
+        c2c_per_dataset=3,
+        seed=17,
+        num_layers=2,
+    )
+
+    assert selected == repeated
+    assert len(selected["w2c_uids"]) == 18
+    assert len(selected["c2c_uids"]) == 9
+    assert len(set(selected["w2c_uids"] + selected["c2c_uids"])) == 27
+    for dataset in ("gqa", "chartqa", "textvqa"):
+        assert selected["counts_by_dataset"][dataset] == {"W2C": 6, "C2C": 3}
+        chosen = [
+            row for row in boundary_rows if row["uid"] in selected["w2c_uids"]
+            and row["dataset"] == dataset
+        ]
+        assert {row["valid_nonfull_actions"][0] for row in chosen} == set(actions)
+
+
+def test_mandatory_boundary_metrics_include_timing_and_singleton_recall() -> None:
+    rows = [
+        {
+            "uid": "gqa:a",
+            "dataset": "gqa",
+            "boundary_layer": 2,
+            "valid_nonfull_actions": ["READ_ONLY"],
+            "singleton": True,
+            "predicted_boundary_action": "READ_ONLY",
+            "actions": ["FULL", "FULL", "READ_ONLY", "FULL"],
+            "correct": True,
+        },
+        {
+            "uid": "chartqa:b",
+            "dataset": "chartqa",
+            "boundary_layer": 1,
+            "valid_nonfull_actions": ["WRITE_ONLY"],
+            "singleton": True,
+            "predicted_boundary_action": "FULL",
+            "actions": ["FULL", "FULL", "FULL", "FULL"],
+            "correct": False,
+        },
+        {
+            "uid": "textvqa:c",
+            "dataset": "textvqa",
+            "boundary_layer": 3,
+            "valid_nonfull_actions": ["IGNORE", "WRITE_ONLY"],
+            "singleton": False,
+            "predicted_boundary_action": "IGNORE",
+            "actions": ["FULL", "FULL", "IGNORE", "FULL"],
+            "correct": False,
+        },
+    ]
+
+    metrics = mandatory_boundary_metrics(rows, num_layers=4)
+
+    assert metrics["records"] == 3
+    assert metrics["valid_action_at_1"] == pytest.approx(2 / 3)
+    assert metrics["nonfull_recall"] == pytest.approx(2 / 3)
+    assert metrics["singleton"]["valid_action_at_1"] == pytest.approx(0.5)
+    assert metrics["singleton_action_recall"]["READ_ONLY"] == pytest.approx(1.0)
+    assert metrics["singleton_action_recall"]["WRITE_ONLY"] == pytest.approx(0.0)
+    assert metrics["free_rollout"]["left_all_full_fraction"] == pytest.approx(2 / 3)
+    assert metrics["free_rollout"]["exact_boundary_fraction"] == pytest.approx(1 / 3)
+    assert metrics["free_rollout"]["within_2_fraction"] == pytest.approx(2 / 3)
+    assert metrics["free_rollout"]["early_fraction"] == pytest.approx(1 / 3)
+    assert metrics["free_rollout"]["late_or_no_deviation_fraction"] == pytest.approx(1 / 3)
+
+
+def test_mandatory_boundary_pilot_gate_is_prospective_and_action_aware() -> None:
+    metrics = {
+        "boundary": {
+            "valid_action_at_1": 0.96,
+            "nonfull_recall": 0.97,
+            "singleton_action_records": {"IGNORE": 8, "READ_ONLY": 8, "WRITE_ONLY": 8},
+            "singleton_action_recall": {"IGNORE": 0.875, "READ_ONLY": 1.0, "WRITE_ONLY": 0.75},
+            "free_rollout": {"left_all_full_fraction": 0.95},
+        },
+        "execution": {"w2c_rescue_rate": 0.30, "c2c_preservation_rate": 0.95},
+    }
+    gates = {
+        "boundary_valid_action_at_1": 0.95,
+        "boundary_nonfull_recall": 0.95,
+        "singleton_action_recall": 0.80,
+        "singleton_min_records": 5,
+        "free_rollout_leave_full": 0.90,
+        "w2c_rescue_rate": 0.25,
+        "c2c_preservation_rate": 0.90,
+    }
+
+    result = mandatory_boundary_pilot_gate(metrics, gates)
+
+    assert result["passed"] is False
+    assert result["checks"]["singleton_WRITE_ONLY_recall"] is False
+    metrics["boundary"]["singleton_action_recall"]["WRITE_ONLY"] = 0.875
+    assert mandatory_boundary_pilot_gate(metrics, gates)["passed"] is True
+
+
+def test_boundary_pilot_parent_contract_rejects_a_second_scientific_change() -> None:
+    from experiments.train_four_action_boundary_pilot import verify_parent_contract
+
+    parent = {
+        "base_model": {"path": "model", "revision": "rev", "frozen": True},
+        "executor": {"implementation": "unified", "contract_sha256": "contract"},
+        "data": {
+            "manifest": "manifest", "manifest_sha256": "manifest-sha",
+            "source_manifest": "source", "source_manifest_sha256": "source-sha",
+            "supervision": "set-valued", "route_sampling": "deterministic",
+        },
+        "router": {"architecture": "same", "dropout": 0.1},
+        "training": {
+            "optimizer": "AdamW", "learning_rate": 5e-4, "weight_decay": 0.01,
+            "scheduler": "cosine", "warmup_steps": 10,
+            "gradient_clip_norm": 1.0, "precision": "bfloat16",
+            "deterministic_algorithms": True,
+        },
+    }
+    pilot = json.loads(json.dumps(parent))
+    pilot["data"]["c2c_route_sampling"] = "deterministic"
+
+    verify_parent_contract(pilot, parent)
+    pilot["router"]["dropout"] = 0.0
+
+    with pytest.raises(RuntimeError, match="matched parent field"):
+        verify_parent_contract(pilot, parent)
+
+
+def test_boundary_pilot_resume_verifies_checksum_and_preserves_passed_gate(
+    tmp_path: Path,
+) -> None:
+    from experiments.train_four_action_boundary_pilot import load_resume_payload
+
+    checkpoint = tmp_path / "checkpoint.pt"
+    torch.save(
+        {
+            "config_sha256": "config",
+            "epoch": 5,
+            "global_step": 30,
+            "metrics": {"validation": {"gate": {"passed": True}}},
+            "rng_states": [
+                {
+                    "python": random.getstate(),
+                    "torch_cpu": torch.get_rng_state(),
+                    "torch_cuda": torch.get_rng_state(),
+                }
+            ],
+        },
+        checkpoint,
+    )
+    epoch_dir = tmp_path / "epoch_05"
+    epoch_dir.mkdir()
+    metadata = epoch_dir / "metadata.json"
+    metadata.write_text(
+        json.dumps(
+            {
+                "checkpoint": str(checkpoint),
+                "checkpoint_sha256": _sha256(checkpoint),
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    payload = load_resume_payload(metadata, config_sha256="config", world_size=1)
+
+    assert payload["metrics"]["validation"]["gate"]["passed"] is True
+    with checkpoint.open("ab") as handle:
+        handle.write(b"modified")
+    with pytest.raises(RuntimeError, match="checksum mismatch"):
+        load_resume_payload(metadata, config_sha256="config", world_size=1)
+
+
+def test_boundary_pilot_requires_slurm_and_canonical_output(tmp_path: Path) -> None:
+    from experiments.train_four_action_boundary_pilot import (
+        acquire_run_lock,
+        latest_resume_metadata,
+        require_slurm_environment,
+        release_run_lock,
+        verify_output_contract,
+    )
+
+    with pytest.raises(RuntimeError, match="Slurm allocation"):
+        require_slurm_environment({})
+    require_slurm_environment({"SLURM_JOB_ID": "17"})
+
+    configured = tmp_path / "pilot"
+    verify_output_contract(configured, configured)
+    with pytest.raises(RuntimeError, match="canonical output"):
+        verify_output_contract(tmp_path / "other", configured)
+
+    first = acquire_run_lock(configured, resume=False)
+    with pytest.raises(RuntimeError, match="already active"):
+        acquire_run_lock(configured, resume=True)
+    release_run_lock(first)
+    resumed = acquire_run_lock(configured, resume=True)
+    release_run_lock(resumed)
+    assert latest_resume_metadata(configured) is None
+
+
+def test_boundary_artifact_freeze_is_idempotent_and_exclusive(tmp_path: Path) -> None:
+    from experiments.prepare_four_action_collapse import write_frozen
+
+    artifact = tmp_path / "boundary.jsonl"
+    write_frozen(artifact, "first\n")
+    write_frozen(artifact, "first\n")
+    assert artifact.read_text(encoding="utf-8") == "first\n"
+    with pytest.raises(FileExistsError, match="different artifact"):
+        write_frozen(artifact, "second\n")
+
+    locked = tmp_path / "pilot.json"
+    locked.with_suffix(".json.lock").touch()
+    with pytest.raises(FileExistsError, match="lock already exists"):
+        write_frozen(locked, "{}\n")

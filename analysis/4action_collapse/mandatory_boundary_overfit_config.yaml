@@ -1,0 +1,83 @@
+protocol_version: four_action_mandatory_boundary_overfit_v1
+source_plan: plans/four_action_collapse.md
+source_plan_sha256: f61f7476ff9a5872f823c7df837e1a2ba21774c83e4efc88f152d2b77d5aceb9
+matched_parent_config: configs/four_action_online_router_v1.yaml
+matched_parent_config_sha256: 37635f5acbd8842c387683e57de9e76d4a69dced1b23f57010f23e8ff579f21d
+base_model:
+  model_id: Qwen/Qwen2.5-VL-7B-Instruct
+  revision: cc594898137f460bfe9f0759e9844b3ce807cfb5
+  path: eval/reference/shared_prefix_eval_20260812/model/Qwen2.5-VL-7B-Instruct_cc594898137f460bfe9f0759e9844b3ce807cfb5
+  precision: bfloat16
+  frozen: true
+executor:
+  implementation: unified_four_action
+  contract_sha256: d8f524b928fb30ea0bb37c6a9389893adb338d4f91992d85255fdfb9bea283cb
+  action_order: [IGNORE, READ_ONLY, WRITE_ONLY, FULL]
+  query_state: final_valid_compact_text_control_row_before_each_layer
+data:
+  manifest: outputs/four_action_polar/preparation_v1/manifest_v1.jsonl
+  manifest_sha256: 6a50ca1a2d5c512d7bd8cededfc4732c93258264ae471e1fd4653c6c16637c28
+  source_manifest: datasets/mcts_labels_4action/source_inventory_v1/source_manifest_v1.jsonl
+  source_manifest_sha256: a44ca6e8684bc1a559997ce0ea52b2796f3265d19be90e22439c653741f36ed7
+  boundary_manifest: analysis/4action_collapse/boundary_manifest.jsonl
+  boundary_manifest_sha256: 0e11651beee39a0723fd9a973e5ae70e34314b89ac9684ba83507e74e5becd47
+  pilot_subset: analysis/4action_collapse/pilot_subset.json
+  pilot_subset_sha256: 85235eab3f61405fbc2d213cb5ae9e4390f9b231ad4ce122d830dd9a5c70b734
+  w2c_records: 96
+  c2c_records: 24
+  records: 120
+  supervision: exact_prefix_trie_set_valued_next_action
+  c2c_route_sampling: deterministic_one_valid_route_per_sample_per_epoch
+  intervention: guaranteed_exact_latest_all_full_prefix_boundary_route_for_w2c
+  c2c_labels: unchanged
+router:
+  architecture: online_function_specific_read_write_v1
+  hidden_size: 3584
+  num_layers: 28
+  num_actions: 4
+  d_router: 256
+  num_heads: 4
+  mlp_hidden_size: 512
+  dropout: 0.1
+  interaction_scale: 0.1
+  read_visual_query: current_final_text_control_state_plus_read_layer_query
+  write_visual_query: write_layer_query_only
+  write_text_conditioning: post_visual_pooling
+  layer_specific_parameters: [read_layer_queries, write_layer_queries]
+  decision_head: read_unary_plus_write_unary_plus_scaled_four_way_interaction
+training:
+  seed: 20260809
+  epochs: 50
+  validation_every_epochs: 5
+  distributed_backend: nccl
+  world_size: 4
+  per_gpu_samples: 30
+  gradient_accumulation_steps: 5
+  effective_sample_batch_size: 20
+  optimizer_steps_per_epoch: 6
+  total_optimizer_steps: 300
+  optimizer: AdamW
+  learning_rate: 0.0005
+  weight_decay: 0.01
+  scheduler: cosine
+  warmup_steps: 10
+  gradient_clip_norm: 1.0
+  precision: bfloat16
+  deterministic_algorithms: true
+  cache_frozen_w2c_teacher_trajectories: true
+  save_every_validation: true
+gates:
+  boundary_valid_action_at_1: 0.95
+  boundary_nonfull_recall: 0.95
+  singleton_action_recall: 0.80
+  singleton_min_records: 5
+  free_rollout_leave_full: 0.90
+  w2c_rescue_rate: 0.25
+  c2c_preservation_rate: 0.90
+external_evaluation:
+  eos_token_ids: [151645]
+  repetition_penalty: 1.05
+reporting:
+  history: analysis/4action_collapse/mandatory_boundary_overfit_history.jsonl
+  report: analysis/4action_collapse/mandatory_boundary_overfit_report.md
+  output_dir: outputs/four_action_collapse/mandatory_boundary_overfit_v1
