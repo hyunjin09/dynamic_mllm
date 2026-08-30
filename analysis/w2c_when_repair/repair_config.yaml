@@ -1,0 +1,84 @@
+protocol_version: w2c_when_repair_v1
+source_plan: plans/w2c_when_label_repair_plan.md
+source_plan_sha256: 19d750c7acca5caaf37a85438f432e566dd980cbc29ddb1e6cf7d3c8e0c23e88
+parent_online_config:
+  path: analysis/persistent_corrective_supervision/online_config.yaml
+  sha256: e535873878ae3bdfcc8bdaf4c7580be674ede73e871c7f379a505870b16b69f0
+data:
+  source_label_root: datasets/mcts_labels_4action/sequential_branching_v1/full/records
+  source_manifest: analysis/persistent_corrective_supervision/training_manifest.jsonl
+  source_manifest_sha256: 05716064b11703a339a1bc3f59a54d0e54a50b5490a5748acebbd8f2e91c1583
+  boundary_manifest: analysis/persistent_corrective_supervision/boundary_manifest.jsonl
+  boundary_manifest_sha256: 868bd1981a69e579e5c9cf671d8b36e3f3165ff0066cc1ff609002e851f887fb
+  source_metadata_manifest: datasets/mcts_labels_4action/source_inventory_v1/source_manifest_v1.jsonl
+  source_metadata_manifest_sha256: a44ca6e8684bc1a559997ce0ea52b2796f3265d19be90e22439c653741f36ed7
+  prior_audit_subset: analysis/selective_continue_deviate/when_full_insertion_subset.json
+  prior_audit_subset_sha256: 4e8677ad39bccd30ca805a868e607be310481130936a9112ec913daf945ba3e4
+  prior_audit_results: analysis/selective_continue_deviate/when_label_completeness_results.json
+  prior_audit_results_sha256: fa717c672935b9699de6c8ea03478cd0c499e110d9a2971ce06e5a4f35644343
+  smoke_manifest: analysis/w2c_when_repair/smoke/smoke_manifest.json
+  smoke_manifest_sha256: 51e193fa5340cc626b1460c11fa973c2c6640adf25a7c07103a2a5e4bcfcc172
+  repair_manifest: analysis/w2c_when_repair/repair_manifest.json
+  repair_manifest_sha256: 6cea3b37a52a89e9376dde3f5aa98dd8b46d22ad84772a77a36a735c05242254
+  pre_repair_audit: analysis/w2c_when_repair/pre_repair_audit.json
+  pre_repair_audit_sha256: bbd3d814398e51084d285e59387c3037fcde6d8c9e4e940da277181f5e2fcf30
+  w2c_samples: 640
+  train_w2c: 512
+  validation_w2c: 128
+executor_contract:
+  git_commit: 4a700e8c34fa9b7e82980aa63bfc848527d89390
+  code_sha256:
+    experiments/run_w2c_when_repair.py: fa43875fc77476350b47942c220bc5bea687b721f1e918d3eb4880bd0cd1029b
+    four_action_policy/when_repair.py: 7f69e1dbad49dba2cdc824c5cb11dd1848ba8189bf14ea743718b96d97b0b872
+    experiments/evaluate_four_action_polar_external.py: 1f00226cf5e9836a9e58960f0857186c774ab7c940f08f4378faed464af5b3e6
+    experiments/train_four_action_online_router.py: cf7bbd84f81d0b8262e7299097a29232bc9729b5071c9c282dd443768106695a
+    four_action_online_router/data.py: fb1b86c711a8c965998ed202b9132eddb0a2cb72d9ef0b0df07efc481b825219
+    label_regeneration/runtime.py: 1739b9d0f696ee3da3f601849f54c4d3f2077aa3cb72dea544f11b2ff796f201
+    binary_policy/executor/cache.py: 363faeb4e76932816f4e6784bf4acf803c5f3d46d72561587b0afe0482609b93
+    binary_policy/executor/four_action.py: 7f8a076289ef3cc0d09dea09e5c8a5a2606bc758f3ce60eea75928b810759037
+    binary_policy/executor/generation.py: 8fa73ab035dc3655dae396c48674f5e2be052a9d41999b92d9fd075ebb7dfe96
+    binary_policy/executor/inputs.py: b0fa74da3ab134e5e08ae3e36877b64d59d42ff5b50f01cf01914f2daa137716
+    binary_policy/executor/layers.py: 4aba5c8d61f76925b758889b738e665b019d3324d5380808c625ee45de8f1b71
+    binary_policy/executor/masks.py: e0059b2e6755384cbb9cf019f4fdb21555d5a6d10c9ba6d8c9edc361fe99c8f8
+    binary_policy/executor/model.py: 432d4898ef438db1150521d1dd330ed324c9ae96898934793ff151f80c82318a
+    reference/dvr_qwen/eval_metrics.py: c2ce4974fb03110841d55af61d26307a1b8cde31cd214906e2b5bafc5ed5373e
+  parent_executor_contract_sha256: d8f524b928fb30ea0bb37c6a9389893adb338d4f91992d85255fdfb9bea283cb
+  implementation: unified_complete_four_action_route_v1
+  model_revision: cc594898137f460bfe9f0759e9844b3ce807cfb5
+  model_path: eval/reference/shared_prefix_eval_20260812/model/Qwen2.5-VL-7B-Instruct_cc594898137f460bfe9f0759e9844b3ce807cfb5
+  evaluator_contract: source_metric_answer_norms_threshold_v1
+  eos_token_ids:
+  - 151645
+  repetition_penalty: 1.05
+search:
+  strategy: known_suffix_then_stratified_one_edit_suffix_variants
+  seed: 20260830
+  per_state_variant_budget: 96
+  mutation_distance: 1
+  mutation_positions: strictly_after_candidate_boundary
+  selection: round_robin_by_stable_hashed_layer_then_stable_hashed_route
+  max_boundary_advances: 28
+  two_edit_search: false
+  mcts: false
+execution:
+  seed: 20260830
+  world_size: 4
+  workers_per_gpu: 1
+  scheduler: direct_no_slurm
+  raw_output_root: /mnt/hyemin/qwen_train_eval/outputs/w2c_when_repair_v1
+  record_cache_key: uid_route_model_revision_executor_contract
+smoke:
+  records: 12
+  require_all_old_route_replays_correct: true
+  require_zero_quarantine: true
+  require_resume_checksum_stability: true
+  require_all_plan_checks: true
+post_repair:
+  minimum_train_deviate_candidates: 512
+  minimum_validation_deviate_candidates: 128
+  bootstrap_draws: 10000
+  bootstrap_seed: 20260831
+  audit_contract: identical_cached_known_suffix_and_one_edit_budget
+reporting:
+  analysis_dir: analysis/w2c_when_repair
+  decision_summary: analysis/w2c_when_repair/decision_summary.md

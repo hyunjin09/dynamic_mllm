@@ -1,0 +1,39 @@
+{
+  "affected_samples": 10,
+  "affected_samples_by_dataset": {
+    "chartqa": 3,
+    "gqa": 3,
+    "textvqa": 4
+  },
+  "config_sha256": "71d77506817bce724528b04aae3874d7515f6b966736a05750b1a987d7d35506",
+  "current_code_sha256": {
+    "binary_policy/executor/four_action.py": "7f8a076289ef3cc0d09dea09e5c8a5a2606bc758f3ce60eea75928b810759037",
+    "binary_policy/executor/inputs.py": "b0fa74da3ab134e5e08ae3e36877b64d59d42ff5b50f01cf01914f2daa137716"
+  },
+  "diagnostic_current_matches_original": 0,
+  "diagnostic_current_repeat_exact": 4,
+  "diagnostic_records": 4,
+  "failed_route_replays": 37,
+  "failed_routes_by_dataset": {
+    "chartqa": 3,
+    "gqa": 26,
+    "textvqa": 8
+  },
+  "interpretation": "supported reproducible current-runtime cache drift; root cause unknown",
+  "original_label_code_sha256": {
+    "binary_policy/executor/four_action.py": "e8c503618998946b4411fb7beb43c42d1be9f8954527064597b1c34ed2571868",
+    "binary_policy/executor/inputs.py": "0e22848f56aaaec1c510958eee37e407d0dc51726dc60e5a69a3eea54091d465"
+  },
+  "passed_route_replays": 275,
+  "raw_diagnostic_record_sha256": {
+    "rank_0.json": "9829da43c48f0eafa708b07e03d941299e8ebdc1985844d8cc31c9f649d122c1",
+    "rank_1.json": "40b4c63a3db2dcef55c118ff2dbcdcc42595373cfa3913251f302b96e2fd446e",
+    "rank_2.json": "93ee3bbe96f198ccde590548f07e4cd2da12f70943e1d522512fa4bb66beea2a",
+    "rank_3.json": "297c226a0c4113aabce2c56a91e0c98066cb9777d35e12f1a9ff95366fd4fbea",
+    "summary.json": "345e1929516f429c224de349638b340eeebddfe41449a25eb5d075c433ba5650"
+  },
+  "raw_diagnostic_root": "/mnt/hyemin/qwen_train_eval/outputs/w2c_when_repair_v1/smoke_replay_diagnostic",
+  "route_replays": 312,
+  "schema_version": "w2c_when_repair_replay_failure_diagnostic_v1",
+  "smoke_samples": 12
+}

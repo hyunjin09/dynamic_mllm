@@ -1,0 +1,342 @@
+[
+  {
+    "boundary_route_keys": [
+      "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|IGNORE|FULL|IGNORE|FULL|FULL|FULL|READ_ONLY|FULL|FULL|FULL|FULL|IGNORE|READ_ONLY|READ_ONLY|FULL|FULL",
+      "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|IGNORE|FULL|IGNORE|FULL|FULL|FULL|WRITE_ONLY|FULL|FULL|FULL|FULL|FULL|READ_ONLY|READ_ONLY|FULL|FULL",
+      "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|IGNORE|FULL|WRITE_ONLY|READ_ONLY|FULL|FULL|READ_ONLY|FULL|FULL|FULL|FULL|FULL|READ_ONLY|FULL|FULL|FULL",
+      "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|IGNORE|FULL|WRITE_ONLY|READ_ONLY|FULL|FULL|READ_ONLY|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|FULL|FULL|FULL",
+      "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|IGNORE|FULL|WRITE_ONLY|READ_ONLY|FULL|FULL|WRITE_ONLY|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL",
+      "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|READ_ONLY|IGNORE|IGNORE|FULL|FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|IGNORE|IGNORE|FULL|FULL",
+      "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|READ_ONLY|IGNORE|IGNORE|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|READ_ONLY|WRITE_ONLY|FULL|FULL",
+      "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|IGNORE|FULL|IGNORE|WRITE_ONLY|FULL|READ_ONLY|FULL|FULL|WRITE_ONLY|FULL|FULL|FULL|READ_ONLY|FULL|FULL",
+      "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|IGNORE|FULL|IGNORE|WRITE_ONLY|FULL|READ_ONLY|FULL|FULL|WRITE_ONLY|FULL|FULL|FULL|WRITE_ONLY|FULL|FULL",
+      "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|IGNORE|FULL|IGNORE|WRITE_ONLY|FULL|WRITE_ONLY|FULL|FULL|WRITE_ONLY|FULL|FULL|FULL|READ_ONLY|FULL|FULL",
+      "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|IGNORE|FULL|IGNORE|WRITE_ONLY|FULL|WRITE_ONLY|FULL|FULL|WRITE_ONLY|FULL|FULL|FULL|WRITE_ONLY|FULL|FULL",
+      "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|READ_ONLY|IGNORE|IGNORE|FULL|FULL|FULL|FULL|FULL|IGNORE|FULL|IGNORE|READ_ONLY|READ_ONLY|FULL|FULL"
+    ],
+    "compatible_suffix_count": 12,
+    "dataset": "gqa",
+    "estimated_cost": 201,
+    "initial_known_candidates": 12,
+    "initial_one_edit_available": 515,
+    "initial_one_edit_selected": 96,
+    "old_boundary": 12,
+    "old_depth_bin": "middle",
+    "old_mechanism": "MULTI",
+    "prior_status": "FULL-cache-incomplete",
+    "rank": 0,
+    "sample_id": "gqa_gh_06576145",
+    "source_binary_route_ids": [
+      "gqa:gqa_gh_06576145::route_0392_0100001110010101110110100010",
+      "gqa:gqa_gh_06576145::route_0368_1101100101110100110110110110",
+      "gqa:gqa_gh_06576145::route_0061_1111111101100000101110100011",
+      "gqa:gqa_gh_06576145::route_0305_0011000010110010000110111011"
+    ],
+    "source_record": "datasets/mcts_labels_4action/sequential_branching_v1/full/records/gqa__gqa_gh_06576145_e75f868bee.json",
+    "source_record_sha256": "be4d4f89df9da18fb8b93e9eaadbf46c02282a5fcd4d047f37c2dedc5f27db0c",
+    "split": "validation",
+    "suffix_class": "multi",
+    "uid": "gqa:gqa_gh_06576145",
+    "valid_route_count": 93
+  },
+  {
+    "boundary_route_keys": [
+      "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|IGNORE|READ_ONLY|FULL"
+    ],
+    "compatible_suffix_count": 1,
+    "dataset": "gqa",
+    "estimated_cost": 78,
+    "initial_known_candidates": 1,
+    "initial_one_edit_available": 6,
+    "initial_one_edit_selected": 6,
+    "old_boundary": 25,
+    "old_depth_bin": "late",
+    "old_mechanism": "IGNORE",
+    "prior_status": "FULL-confirmed-invalid",
+    "rank": 0,
+    "sample_id": "gqa_gh_11130463",
+    "source_binary_route_ids": [
+      "gqa:gqa_gh_11130463::route_0369_0110100101100001111010111001"
+    ],
+    "source_record": "datasets/mcts_labels_4action/sequential_branching_v1/full/records/gqa__gqa_gh_11130463_5d2aa21fef.json",
+    "source_record_sha256": "6cd9e8b66edbb7c1ae7d52caa89450dd6759ca22eb1f8967f3098047b8d082ae",
+    "split": "validation",
+    "suffix_class": "single",
+    "uid": "gqa:gqa_gh_11130463",
+    "valid_route_count": 71
+  },
+  {
+    "boundary_route_keys": [
+      "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|WRITE_ONLY"
+    ],
+    "compatible_suffix_count": 1,
+    "dataset": "chartqa",
+    "estimated_cost": 13,
+    "initial_known_candidates": 1,
+    "initial_one_edit_available": 3,
+    "initial_one_edit_selected": 3,
+    "old_boundary": 26,
+    "old_depth_bin": "late",
+    "old_mechanism": "WRITE_ONLY",
+    "prior_status": "FULL-confirmed-invalid",
+    "rank": 0,
+    "sample_id": "chartqa_train_multi_col_80943_3bd5a29766",
+    "source_binary_route_ids": [
+      "chartqa:chartqa_train_multi_col_80943_3bd5a29766::route_0283_1111011011000111010111110100"
+    ],
+    "source_record": "datasets/mcts_labels_4action/sequential_branching_v1/full/records/chartqa__chartqa_train_multi_col_80943_3bd5a29766_1d1f6bbe3d.json",
+    "source_record_sha256": "26cb482946574a1a038b3030c92b58596e8332984cc1032b34811e6bceb45a0a",
+    "split": "validation",
+    "suffix_class": "single",
+    "uid": "chartqa:chartqa_train_multi_col_80943_3bd5a29766",
+    "valid_route_count": 9
+  },
+  {
+    "boundary_route_keys": [
+      "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|FULL|FULL|WRITE_ONLY|WRITE_ONLY|FULL|FULL|FULL",
+      "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|FULL|FULL|WRITE_ONLY|FULL|FULL|FULL|FULL",
+      "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|FULL|FULL|READ_ONLY|FULL|FULL|FULL|READ_ONLY|FULL|FULL|READ_ONLY|IGNORE|FULL|FULL|FULL",
+      "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|FULL|FULL|READ_ONLY|FULL|FULL|FULL|READ_ONLY|FULL|FULL|WRITE_ONLY|WRITE_ONLY|FULL|FULL|FULL",
+      "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|FULL|FULL|READ_ONLY|FULL|FULL|FULL|WRITE_ONLY|FULL|FULL|WRITE_ONLY|FULL|FULL|READ_ONLY|FULL"
+    ],
+    "compatible_suffix_count": 5,
+    "dataset": "textvqa",
+    "estimated_cost": 119,
+    "initial_known_candidates": 5,
+    "initial_one_edit_available": 200,
+    "initial_one_edit_selected": 96,
+    "old_boundary": 13,
+    "old_depth_bin": "middle",
+    "old_mechanism": "MULTI",
+    "prior_status": "FULL-cache-incomplete",
+    "rank": 1,
+    "sample_id": "textvqa_train_19648",
+    "source_binary_route_ids": [
+      "textvqa:textvqa_train_19648::route_0267_0100011011111011011101100101"
+    ],
+    "source_record": "datasets/mcts_labels_4action/sequential_branching_v1/full/records/textvqa__textvqa_train_19648_039c7a8446.json",
+    "source_record_sha256": "fcf6bdc89a37924d4103a2a852691674737187c5fd75e8ef6bbdbaed49aecad4",
+    "split": "validation",
+    "suffix_class": "multi",
+    "uid": "textvqa:textvqa_train_19648",
+    "valid_route_count": 18
+  },
+  {
+    "boundary_route_keys": [
+      "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL"
+    ],
+    "compatible_suffix_count": 1,
+    "dataset": "textvqa",
+    "estimated_cost": 100,
+    "initial_known_candidates": 1,
+    "initial_one_edit_available": 24,
+    "initial_one_edit_selected": 24,
+    "old_boundary": 19,
+    "old_depth_bin": "late",
+    "old_mechanism": "WRITE_ONLY",
+    "prior_status": "FULL-confirmed-invalid",
+    "rank": 1,
+    "sample_id": "textvqa_train_1062",
+    "source_binary_route_ids": [
+      "textvqa:textvqa_train_1062::route_0314_0100011011111101101011111110",
+      "textvqa:textvqa_train_1062::route_0343_1110101110000011111001110000"
+    ],
+    "source_record": "datasets/mcts_labels_4action/sequential_branching_v1/full/records/textvqa__textvqa_train_1062_8fa502c0ab.json",
+    "source_record_sha256": "6205f425a9e26514339af82d75f56cce13c5d0d16a514a5adb01fc7d0ea04729",
+    "split": "validation",
+    "suffix_class": "single",
+    "uid": "textvqa:textvqa_train_1062",
+    "valid_route_count": 75
+  },
+  {
+    "boundary_route_keys": [
+      "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|IGNORE|FULL|WRITE_ONLY|FULL|READ_ONLY|FULL|WRITE_ONLY|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL"
+    ],
+    "compatible_suffix_count": 1,
+    "dataset": "textvqa",
+    "estimated_cost": 63,
+    "initial_known_candidates": 1,
+    "initial_one_edit_available": 57,
+    "initial_one_edit_selected": 57,
+    "old_boundary": 8,
+    "old_depth_bin": "early",
+    "old_mechanism": "READ_ONLY",
+    "prior_status": "FULL-cache-incomplete",
+    "rank": 1,
+    "sample_id": "textvqa_train_22087",
+    "source_binary_route_ids": [
+      "textvqa:textvqa_train_22087::route_0394_1101010100101010010010000001"
+    ],
+    "source_record": "datasets/mcts_labels_4action/sequential_branching_v1/full/records/textvqa__textvqa_train_22087_50f4b406b1.json",
+    "source_record_sha256": "cfad40d49b636d8c1ff166baf6cc9d51354a021da4b808420002221cd2b612f5",
+    "split": "validation",
+    "suffix_class": "single",
+    "uid": "textvqa:textvqa_train_22087",
+    "valid_route_count": 5
+  },
+  {
+    "boundary_route_keys": [
+      "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|FULL|READ_ONLY|FULL|FULL|WRITE_ONLY|READ_ONLY|FULL|FULL|WRITE_ONLY|READ_ONLY|FULL|WRITE_ONLY",
+      "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|FULL|READ_ONLY|FULL|FULL|WRITE_ONLY|WRITE_ONLY|FULL|FULL|READ_ONLY|IGNORE|FULL|WRITE_ONLY",
+      "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|FULL|READ_ONLY|FULL|FULL|WRITE_ONLY|WRITE_ONLY|FULL|FULL|WRITE_ONLY|IGNORE|FULL|WRITE_ONLY",
+      "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|FULL|READ_ONLY|READ_ONLY|FULL|WRITE_ONLY|FULL|FULL|FULL|FULL|READ_ONLY|FULL|WRITE_ONLY",
+      "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|FULL|READ_ONLY|WRITE_ONLY|FULL|WRITE_ONLY|FULL|FULL|FULL|FULL|READ_ONLY|FULL|WRITE_ONLY"
+    ],
+    "compatible_suffix_count": 5,
+    "dataset": "chartqa",
+    "estimated_cost": 111,
+    "initial_known_candidates": 5,
+    "initial_one_edit_available": 170,
+    "initial_one_edit_selected": 96,
+    "old_boundary": 15,
+    "old_depth_bin": "middle",
+    "old_mechanism": "MULTI",
+    "prior_status": "FULL-cache-incomplete",
+    "rank": 2,
+    "sample_id": "chartqa_train_two_col_80772_f4e1dfd629_dup1_row12116",
+    "source_binary_route_ids": [
+      "chartqa:chartqa_train_two_col_80772_f4e1dfd629_dup1_row12116::route_0131_1101010011101010000100110010"
+    ],
+    "source_record": "datasets/mcts_labels_4action/sequential_branching_v1/full/records/chartqa__chartqa_train_two_col_80772_f4e1dfd629_dup1_row12116_920a424235.json",
+    "source_record_sha256": "dd1ce141feb3515156e5f659d2e0af479160339e86d4c3f326828fb33679fa6d",
+    "split": "validation",
+    "suffix_class": "multi",
+    "uid": "chartqa:chartqa_train_two_col_80772_f4e1dfd629_dup1_row12116",
+    "valid_route_count": 10
+  },
+  {
+    "boundary_route_keys": [
+      "IGNORE|IGNORE|READ_ONLY|READ_ONLY|FULL|IGNORE|FULL|FULL|FULL|FULL|FULL|FULL|IGNORE|FULL|READ_ONLY|READ_ONLY|FULL|FULL|WRITE_ONLY|FULL|FULL|FULL|FULL|WRITE_ONLY|FULL|FULL|FULL|FULL",
+      "IGNORE|IGNORE|READ_ONLY|READ_ONLY|FULL|IGNORE|FULL|FULL|FULL|FULL|FULL|FULL|IGNORE|FULL|WRITE_ONLY|FULL|FULL|FULL|WRITE_ONLY|WRITE_ONLY|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL"
+    ],
+    "compatible_suffix_count": 2,
+    "dataset": "gqa",
+    "estimated_cost": 100,
+    "initial_known_candidates": 2,
+    "initial_one_edit_available": 162,
+    "initial_one_edit_selected": 96,
+    "old_boundary": 0,
+    "old_depth_bin": "early",
+    "old_mechanism": "IGNORE",
+    "prior_status": "FULL-confirmed-invalid",
+    "rank": 2,
+    "sample_id": "gqa_gh_06832107",
+    "source_binary_route_ids": [
+      "gqa:gqa_gh_06832107::route_0260_0000101011110100110011001110"
+    ],
+    "source_record": "datasets/mcts_labels_4action/sequential_branching_v1/full/records/gqa__gqa_gh_06832107_1b98048610.json",
+    "source_record_sha256": "98de9b1b7c5e4a489c924e1e6669dad0bcdd1601c06c253a213865ef979df9ab",
+    "split": "validation",
+    "suffix_class": "multi",
+    "uid": "gqa:gqa_gh_06832107",
+    "valid_route_count": 2
+  },
+  {
+    "boundary_route_keys": [
+      "FULL|FULL|FULL|FULL|FULL|IGNORE|IGNORE|FULL|IGNORE|FULL|IGNORE|IGNORE|IGNORE|FULL|FULL|WRITE_ONLY|IGNORE|FULL|FULL|WRITE_ONLY|WRITE_ONLY|FULL|IGNORE|FULL|FULL|FULL|WRITE_ONLY|FULL"
+    ],
+    "compatible_suffix_count": 1,
+    "dataset": "chartqa",
+    "estimated_cost": 68,
+    "initial_known_candidates": 1,
+    "initial_one_edit_available": 66,
+    "initial_one_edit_selected": 66,
+    "old_boundary": 5,
+    "old_depth_bin": "early",
+    "old_mechanism": "IGNORE",
+    "prior_status": "FULL-cache-incomplete",
+    "rank": 2,
+    "sample_id": "chartqa_train_multi_col_20224_214c688b44",
+    "source_binary_route_ids": [
+      "chartqa:chartqa_train_multi_col_20224_214c688b44::route_0158_1110100101000110011001011001"
+    ],
+    "source_record": "datasets/mcts_labels_4action/sequential_branching_v1/full/records/chartqa__chartqa_train_multi_col_20224_214c688b44_b5504f7a2b.json",
+    "source_record_sha256": "d66e6ce68ad6f9d5950855771a344b47863ce996641d73b7dce4dac48325746a",
+    "split": "validation",
+    "suffix_class": "single",
+    "uid": "chartqa:chartqa_train_multi_col_20224_214c688b44",
+    "valid_route_count": 1
+  },
+  {
+    "boundary_route_keys": [
+      "FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|FULL|READ_ONLY|FULL|READ_ONLY|FULL|READ_ONLY|FULL|READ_ONLY|IGNORE|IGNORE|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|FULL|FULL|FULL|FULL|FULL",
+      "FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|FULL|READ_ONLY|FULL|WRITE_ONLY|IGNORE|FULL|FULL|FULL|IGNORE|IGNORE|FULL|FULL|FULL|FULL|WRITE_ONLY|WRITE_ONLY|FULL|READ_ONLY|FULL|FULL|FULL",
+      "FULL|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|FULL|READ_ONLY|FULL|READ_ONLY|FULL|IGNORE|FULL|IGNORE|READ_ONLY|IGNORE|FULL|FULL|FULL|FULL|FULL|WRITE_ONLY|FULL|FULL|FULL|WRITE_ONLY|WRITE_ONLY"
+    ],
+    "compatible_suffix_count": 3,
+    "dataset": "chartqa",
+    "estimated_cost": 105,
+    "initial_known_candidates": 3,
+    "initial_one_edit_available": 189,
+    "initial_one_edit_selected": 96,
+    "old_boundary": 6,
+    "old_depth_bin": "early",
+    "old_mechanism": "MULTI",
+    "prior_status": "FULL-confirmed-invalid",
+    "rank": 3,
+    "sample_id": "chartqa_train_two_col_102131_ad3d344d01",
+    "source_binary_route_ids": [
+      "chartqa:chartqa_train_two_col_102131_ad3d344d01::route_0078_1011100101000100011110010100"
+    ],
+    "source_record": "datasets/mcts_labels_4action/sequential_branching_v1/full/records/chartqa__chartqa_train_two_col_102131_ad3d344d01_9d72683d29.json",
+    "source_record_sha256": "c986bda92b011ab4eac54dacf670f00e41848b71be05a779141b70bce77b86dd",
+    "split": "validation",
+    "suffix_class": "multi",
+    "uid": "chartqa:chartqa_train_two_col_102131_ad3d344d01",
+    "valid_route_count": 6
+  },
+  {
+    "boundary_route_keys": [
+      "FULL|FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|FULL|READ_ONLY|FULL|FULL|FULL|FULL|IGNORE|FULL|FULL|FULL|READ_ONLY|FULL|FULL|READ_ONLY|FULL|FULL|FULL|READ_ONLY|FULL|FULL",
+      "FULL|FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|FULL|READ_ONLY|FULL|FULL|FULL|FULL|IGNORE|FULL|FULL|FULL|READ_ONLY|FULL|FULL|READ_ONLY|FULL|FULL|FULL|WRITE_ONLY|FULL|FULL",
+      "FULL|FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|FULL|WRITE_ONLY|FULL|READ_ONLY|FULL|FULL|IGNORE|FULL|FULL|FULL|READ_ONLY|FULL|FULL|READ_ONLY|FULL|FULL|FULL|FULL|FULL|FULL"
+    ],
+    "compatible_suffix_count": 3,
+    "dataset": "textvqa",
+    "estimated_cost": 103,
+    "initial_known_candidates": 3,
+    "initial_one_edit_available": 176,
+    "initial_one_edit_selected": 96,
+    "old_boundary": 7,
+    "old_depth_bin": "early",
+    "old_mechanism": "READ_ONLY",
+    "prior_status": "FULL-confirmed-invalid",
+    "rank": 3,
+    "sample_id": "textvqa_train_14317",
+    "source_binary_route_ids": [
+      "textvqa:textvqa_train_14317::route_0243_1101101010101101110110111010"
+    ],
+    "source_record": "datasets/mcts_labels_4action/sequential_branching_v1/full/records/textvqa__textvqa_train_14317_53e5147cc2.json",
+    "source_record_sha256": "6898f19f9bd9e460346c067b7ef3675e3d50f5e73b01eb467bf270ac68f48da6",
+    "split": "validation",
+    "suffix_class": "multi",
+    "uid": "textvqa:textvqa_train_14317",
+    "valid_route_count": 4
+  },
+  {
+    "boundary_route_keys": [
+      "FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|READ_ONLY|FULL|READ_ONLY|FULL|READ_ONLY|FULL|FULL|READ_ONLY|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL|FULL"
+    ],
+    "compatible_suffix_count": 1,
+    "dataset": "gqa",
+    "estimated_cost": 76,
+    "initial_known_candidates": 1,
+    "initial_one_edit_available": 57,
+    "initial_one_edit_selected": 57,
+    "old_boundary": 8,
+    "old_depth_bin": "early",
+    "old_mechanism": "READ_ONLY",
+    "prior_status": "FULL-cache-incomplete",
+    "rank": 3,
+    "sample_id": "gqa_gh_01907496",
+    "source_binary_route_ids": [
+      "gqa:gqa_gh_01907496::route_0130_1111111101010110101101001101"
+    ],
+    "source_record": "datasets/mcts_labels_4action/sequential_branching_v1/full/records/gqa__gqa_gh_01907496_c864670650.json",
+    "source_record_sha256": "03527b5637f9ac79471593965dcb53896182afaacc4a49eafa34e0a77d01c448",
+    "split": "validation",
+    "suffix_class": "single",
+    "uid": "gqa:gqa_gh_01907496",
+    "valid_route_count": 18
+  }
+]

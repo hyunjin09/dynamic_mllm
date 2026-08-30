@@ -1,16 +1,18 @@
 # Workflow State
 
-- Active phase (2026-08-30):
+- Stopped phase (2026-08-30):
   `plans/w2c_when_label_repair_plan.md` (SHA-256
   `19d750c7acca5caaf37a85438f432e566dd980cbc29ddb1e6cf7d3c8e0c23e88`).
-  Phase 42 is repairing the exact 512-train/128-validation W2C population with
-  one iterative algorithm: force FULL under every known compatible suffix,
-  then, only if those fail, execute at most 96 deterministic layer-stratified
-  one-edit suffix variants per current boundary. Add every correct route and
-  recompute the maximal all-FULL boundary until rescue or bounded exhaustion.
-  A 12-sample smoke must pass before four-GPU full execution. Non-rescue means
-  only unrescued under the frozen budget. No gate/router training, Stage 2, or
-  external evaluation is authorized. Phase memory:
+  Phase 42 verified all 640 source records and froze one iterative known-suffix
+  plus capped one-edit repair contract, but its 12-sample four-GPU smoke failed
+  exact old-route replay. 37/312 cached-correct routes now execute incorrectly,
+  affecting 10/12 samples across all datasets. A bounded diagnostic repeated
+  one failure per GPU twice: 4/4 current pairs were exact and 0/4 matched the
+  original cached generated tokens, supporting reproducible runtime/cache
+  drift. Original label-record executor hashes differ from current code. The
+  complete repair, post-repair audit, router/gate training, Stage 2, and
+  external evaluation did not start. Evidence:
+  `analysis/w2c_when_repair/decision_summary.md`; phase memory:
   `workspace/phase_memory/phase_42_w2c_when_label_repair.md`.
 
 - Completed/stopped phase (2026-08-30):

@@ -1,18 +1,20 @@
 # Operational Research Plan: Binary Route Label Regeneration
 
-## Active W2C WHEN-label repair (2026-08-30)
+## Stopped W2C WHEN-label repair (2026-08-30)
 
 The user authorized `plans/w2c_when_label_repair_plan.md` as one bounded
-research action. Apply the same iterative cache repair to the authoritative
-512 train and 128 validation W2C samples: exhaust known compatible suffixes
-after forcing FULL at the current boundary, then use at most 96 deterministic
-one-edit suffix variants only when necessary. Add all correct routes, recompute
-the boundary, and repeat. Freeze all identities, hashes, sharding, and the
-12-sample smoke before live execution. Interpret remaining DEVIATE candidates
-as bounded-search candidates, not globally proven labels. Finish with the
-specified completeness audit and Q1-Q6 decision report, then stop. Router/gate
-training, Stage 2, external evaluation, and automatic follow-on experiments
-are excluded. Phase memory:
+research action. The exact 512-train/128-validation population and iterative
+known-suffix plus capped one-edit repair were frozen, but the prospective
+12-sample smoke failed before full repair. 37/312 cached-correct original routes
+replayed incorrectly under the current runtime across 10/12 samples. Four
+representative failures repeated exactly under the current runtime and none
+matched its original cached tokens. The source label records bind different
+executor hashes from the current repository. Therefore the complete repair,
+post-repair audit, and all training/evaluation stopped. The smallest future
+action is to recover the exact source executor and rerun only the smoke gate;
+otherwise a new current-runtime cache-regeneration plan is required. Neither is
+automatically authorized. Evidence: `analysis/w2c_when_repair/decision_summary.md`;
+phase memory:
 `workspace/phase_memory/phase_42_w2c_when_label_repair.md`.
 
 ## Completed/stopped selective CONTINUE/DEVIATE validation (2026-08-30)

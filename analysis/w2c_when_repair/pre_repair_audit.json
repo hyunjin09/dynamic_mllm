@@ -1,0 +1,86 @@
+{
+  "by_split": {
+    "train": {
+      "mean_valid_routes": 26.43359375,
+      "median_valid_routes": 16.0,
+      "multi_suffix_samples": 216,
+      "samples": 512,
+      "single_suffix_samples": 296,
+      "valid_routes": 13534
+    },
+    "validation": {
+      "mean_valid_routes": 25.890625,
+      "median_valid_routes": 15.5,
+      "multi_suffix_samples": 55,
+      "samples": 128,
+      "single_suffix_samples": 73,
+      "valid_routes": 3314
+    }
+  },
+  "compatible_suffixes": 1269,
+  "dataset_counts": {
+    "chartqa": 214,
+    "gqa": 214,
+    "textvqa": 212
+  },
+  "initial_known_candidates": 1239,
+  "initial_one_edit_available": 55001,
+  "initial_one_edit_fully_covered_samples": 472,
+  "initial_one_edit_selected": 34861,
+  "max_compatible_suffixes": 16,
+  "max_valid_routes": 103,
+  "mean_compatible_suffixes": 1.9828125,
+  "mean_valid_routes": 26.325,
+  "median_compatible_suffixes": 1.0,
+  "median_valid_routes": 16.0,
+  "multi_suffix_samples": 271,
+  "old_boundary_depth_counts": {
+    "early": 223,
+    "late": 194,
+    "middle": 223
+  },
+  "old_mechanism_counts": {
+    "IGNORE": 162,
+    "MULTI": 156,
+    "READ_ONLY": 162,
+    "WRITE_ONLY": 160
+  },
+  "p95_valid_routes": 78.0,
+  "repair_shards": {
+    "rank_estimated_cost": {
+      "0": 9025,
+      "1": 9025,
+      "2": 9025,
+      "3": 9025
+    },
+    "rank_records": {
+      "0": 158,
+      "1": 161,
+      "2": 160,
+      "3": 161
+    },
+    "records": 640,
+    "world_size": 4
+  },
+  "samples": 640,
+  "schema_version": "w2c_when_repair_pre_audit_v1",
+  "single_suffix_samples": 369,
+  "smoke_shards": {
+    "rank_estimated_cost": {
+      "0": 292,
+      "1": 282,
+      "2": 279,
+      "3": 284
+    },
+    "rank_records": {
+      "0": 3,
+      "1": 3,
+      "2": 3,
+      "3": 3
+    },
+    "records": 12,
+    "world_size": 4
+  },
+  "source_records_verified": 640,
+  "valid_routes": 16848
+}
