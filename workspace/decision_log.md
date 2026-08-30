@@ -1260,3 +1260,28 @@ Do not copy raw logs or provisional explanations here.
   repair, prospectively test WHEN-label completeness by inserting `FULL` at a
   bounded stratified set of mandatory boundaries with compatible known
   suffixes. This is a recommendation, not authorization.
+
+## 2026-08-30 — Separate source-contract recovery from numerical replay parity
+
+- Decision or promoted lesson: when transferring discrete four-action labels,
+  preserve per-file source hashes and distinguish a semantic executor change
+  from a hardware/runtime numerical-path change. A changed aggregate code hash
+  is not sufficient evidence that READ/WRITE semantics changed, and exact source
+  recovery is not sufficient evidence of cached-token parity on another GPU
+  architecture.
+- Triggering evidence: the label contract reconstructs all 16/16 historical
+  source files and the frozen YAML exactly from a dirty worktree at recorded
+  `HEAD` `a3c6a411...`. The historical fixed-route action implementation is
+  scientifically valid and source-equivalent to the current fixed path, yet the
+  RTX 6000 Ada replay differs from 41/312 cached token sequences. The
+  discriminating recovered-source H100 replay was canceled before allocation,
+  so H100-versus-Ada numerical drift remains suspected rather than supported.
+- Evidence paths:
+  `analysis/executor_provenance_audit/executor_provenance_audit.md`,
+  `historical_vs_current_executor_diff.md`, and `replay_parity_report.md`.
+- Confidence: high for exact source recovery and semantic equivalence; unknown
+  for the end-to-end replay cause.
+- Consequence for future actions: before repairing or relabeling, rerun the
+  fixed 12-sample/312-route smoke under the recovered H100 contract. Do not
+  silently drop mismatching cached routes or attribute the mismatch to source
+  semantics without new evidence.

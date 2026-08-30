@@ -1,5 +1,21 @@
 # Workflow State
 
+- Completed/stopped audit (2026-08-30): the exact dirty-worktree source that
+  generated `mcts_labels_4action/sequential_branching_v1` is reconstructed and
+  matches all 16/16 contract-bound SHA-256 values plus the frozen YAML hash.
+  Recorded `HEAD` was `a3c6a411...`, but two files were modified and six were
+  untracked relative to that commit. The historical executor implements the
+  intended READ/WRITE truth table; same-layer text READ uses pre-layer visual
+  K/V. The fixed complete-route path has no semantic source difference from
+  current code capable of explaining the Phase-42 replay mismatch. H100 versus
+  RTX BF16 numerical execution is the leading inference but remains unverified:
+  audit-only H100 job 1763 was canceled before allocation at explicit user
+  instruction and consumed zero GPU time. End-to-end decision is fail-closed C,
+  while source recovery and scientific semantics are exact/valid. No executor,
+  label, regeneration, or W2C repair change was made. Evidence:
+  `analysis/executor_provenance_audit/`; phase memory:
+  `workspace/phase_memory/phase_42_w2c_when_label_repair.md`.
+
 - Stopped phase (2026-08-30):
   `plans/w2c_when_label_repair_plan.md` (SHA-256
   `19d750c7acca5caaf37a85438f432e566dd980cbc29ddb1e6cf7d3c8e0c23e88`).

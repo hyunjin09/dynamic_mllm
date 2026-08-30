@@ -16,8 +16,10 @@ labels without training a gate or starting another experiment.
   candidates per boundary and fixed seed `20260830`.
 - A non-rescue supports only `FULL_UNRESCUED_UNDER_BUDGET`, not global
   invalidity or necessity of DEVIATE.
-- Apply the same algorithm and budget to train and validation. Use all four
-  local RTX 6000 Ada GPUs through direct `torchrun`; this server has no Slurm.
+- Apply the same algorithm and budget to train and validation. The original
+  Phase-42 smoke ran on four RTX 6000 Ada GPUs through direct `torchrun` on a
+  server without Slurm. This H100 server instead requires Slurm for any future
+  GPU replay; that machine difference is now part of the parity question.
 - Pass a 12-sample smoke gate before the complete 640-sample repair. Per-sample
   runtime failures are quarantined rather than relabeled.
 - Do not train a router/gate, run Stage 2, run external evaluation, add a
@@ -35,13 +37,17 @@ labels without training a gate or starting another experiment.
   quarantine, but exact old-route replay fails.
 - Stopped: the complete 640-sample repair, repaired-label build, post-repair
   audit, and every downstream training/evaluation step were not started.
-- Blocked: the exact source executor implementation is absent from the current
-  repository state; proceeding under the current executor would violate the
-  prospectively frozen old-route replay gate.
-- Most recent useful observation: 37/312 original cached-correct routes replay
-  incorrectly under the current runtime, affecting 10/12 smoke samples across
-  all datasets. Four representative failures repeat exactly twice on the
-  current runtime, and 0/4 match the original cached generated IDs.
+- Stopped: the exact contract-bound historical source has now been
+  cryptographically reconstructed in a separate ignored tree, but end-to-end
+  parity remains untested because the audit-only H100 replay was canceled
+  before allocation at the user's instruction. Proceeding with label repair is
+  still unauthorized.
+- Most recent useful observation: all 16/16 historical source hashes and the
+  frozen YAML hash match the label contract. The historical fixed-route
+  executor is scientifically valid and source-equivalent to the current fixed
+  path, apart from later unused API additions and one no-op device placement
+  change. The leading H100-versus-RTX numerical-path explanation remains an
+  inference, not a verified cause.
 
 ## Evidence That Matters
 | Evidence | Source / Path | Why It Matters | Status |
@@ -53,6 +59,8 @@ labels without training a gate or starting another experiment.
 | One-base one-edit suffix neighborhoods have at most 81 variants | deterministic pre-repair enumeration from the frozen routes | A cap of 96 exhausts a single-base neighborhood and permits limited multi-suffix coverage | confirmed |
 | 37/312 original cached-correct routes replay incorrectly across 10/12 smoke samples | `analysis/w2c_when_repair/smoke/smoke_executions.jsonl`; `smoke_gate.json` | Fails the prospective smoke gate and forbids the full repair | confirmed |
 | Four representative current-runtime failures reproduce exactly twice; none matches original cached tokens | `analysis/w2c_when_repair/smoke/replay_failure_diagnostic.json`; external raw diagnostic records | Supports reproducible contract drift rather than transient nondeterminism | confirmed |
+| Historical dirty-worktree source reconstructs to all 16/16 contract hashes and implements the intended READ/WRITE truth table | `analysis/executor_provenance_audit/executor_provenance_audit.md`; `historical_vs_current_executor_diff.md` | Rules out a semantic change in the fixed-route executor source as the observed replay cause | confirmed |
+| Recovered-source H100 replay job 1763 was canceled before allocation at user instruction | `analysis/executor_provenance_audit/replay_parity_report.md`; Slurm accounting | Leaves cached-token parity and the hardware/kernel explanation unresolved | confirmed |
 
 ## Failed Attempts and Lessons
 | Attempt | Observed Failure | Diagnosis | Evidence | Lesson / Next Implication | Do Not Repeat |
@@ -67,58 +75,47 @@ labels without training a gate or starting another experiment.
 | Known suffixes, then deterministic one-edit suffix repair capped at 96 per boundary | Directly reuses verified continuations, then expands locally with explicit bounded semantics | Whether enough clean WHEN candidates remain after iterative repair | high | stopped at failed smoke prerequisite |
 | Adapt binary GraphMCTS to four actions | Broader continuation search could find multi-edit rescues | Whether remaining states survive a substantially wider search | high | rejected for this action; larger semantic and implementation change |
 | Known-suffix-only repair | Minimal and directly reproduces Phase-41 rescue mechanism | Repairs proven omissions but cannot discriminate nearby unseen continuations | medium | rejected as underpowered |
-| Recover the exact source executor and rerun only the smoke replay gate | Restores the contract that defined cached correctness | Whether repair can start from a valid route population | medium | smallest future action; requires source artifact/authorization |
+| Run the recovered exact source executor on the existing smoke replay gate | Tests the final unverified execution-parity component | Whether repair can start from a valid route population | low-to-medium | source recovered; GPU replay explicitly deferred |
 | Rebuild all W2C correct routes under the current executor | Establishes a self-consistent new cache when the old executor is unavailable | A new current-runtime supervision population | high | alternative new plan; not authorized |
 
 ## Next-Step Decision
 - Deliberation mode: deep.
-- Active objective and bottleneck: rebuild trustworthy W2C WHEN labels; the
-  exact old-route replay prerequisite fails under the current executor.
-- Relevant memory item used: Phase 41 found 39/128 compatible known-suffix
-  rescues and stopped gate training prospectively.
-- Confirmed observation: 37/312 cached positives fail current execution, and
-  four representative failures are deterministic within the current runtime.
-- Unverified interpretation: which code/environment difference causes the
-  original-versus-current token changes.
-- Diagnosis: supported reproducible runtime/cache drift; root cause unknown.
-- Evidence path if diagnosis is not unknown:
-  `analysis/w2c_when_repair/smoke/replay_failure_diagnostic.json`.
-- Viable alternatives considered: recover the source executor and repeat only
-  smoke; rebuild the W2C correct-route population under the current executor;
-  or ignore/drop replay failures and continue.
-- Chosen action: apply the frozen smoke stop. Do not run the full repair.
-- Strongest objection: the current executor is internally deterministic and
-  could define a new cache by dropping old failures. That changes the source
-  supervision contract after observing the smoke and requires a new plan.
-- How this differs from failed attempts: it preserves the failed prerequisite
-  rather than mixing route-validity contracts within one repaired cache.
-- Automatic execution authorized: no further action.
-- Authorization basis: explicit user request to read and perform
-  `plans/w2c_when_label_repair_plan.md`.
-- Independent review: required because the plan left the bounded continuation
-  strategy unspecified and the full live run is expensive. One read-only
-  `research_reviewer` ranked the chosen action above GraphMCTS adaptation and
-  known-suffix-only repair with medium confidence; the ranking was stable and
-  the strongest objection was the same bounded-validity limitation recorded
-  above.
-- Stop condition: satisfied early because exact old-route replay failed. The
-  640-sample repair and all downstream work remain unexecuted.
+- Active objective and bottleneck: rebuild trustworthy W2C WHEN labels; exact
+  cached-token replay under the recovered historical runtime is still
+  unverified.
+- Relevant memory item used: 37/312 cached positives fail on RTX 6000 Ada even
+  though the current fixed-route implementation is deterministic.
+- Confirmed observation: the historical dirty-worktree source is exactly
+  reconstructed and its action semantics are valid; the current fixed-route
+  path has no semantic source difference that explains the mismatch.
+- Unverified interpretation: H100-versus-Ada BF16 SDPA/GEMM behavior is the
+  leading explanation for the historical-versus-current token divergence.
+- Diagnosis: root cause unknown; hardware/kernel numerical-path drift is
+  suspected, not supported, because the discriminating replay did not run.
+- Chosen action: stop after the provenance audit. Do not regenerate labels,
+  modify either executor, or resume W2C repair.
+- Automatic execution authorized: none.
+- Authorization basis: explicit executor-provenance audit request followed by
+  explicit instruction to report without running the GPU job.
+- Independent review: one required read-only reviewer confirmed exact source
+  recovery and valid semantics, and recommended a fail-closed end-to-end
+  classification unless the H100 replay reaches 312/312 exact parity.
+- Stop condition: satisfied. Audit job 1763 was canceled before allocation and
+  consumed zero GPU time.
 
 ## Latest Research-Action Result
-- Action taken: froze the 640-sample contract and 12-sample cohort, executed
-  the smoke on four GPUs, verified byte-stable resume and all repair trace
-  invariants, then ran one bounded four-GPU replay-stability diagnostic.
-- Result: smoke **FAIL**. There were 37 incorrect old-route replays among 312,
-  across 10/12 samples; all other smoke checks passed and zero samples were
-  quarantined.
-- Evidence saved: `analysis/w2c_when_repair/decision_summary.md`, preflight
-  artifacts, `smoke/smoke_executions.jsonl`, `smoke/smoke_gate.json`,
-  `smoke/smoke_report.md`, and `smoke/replay_failure_diagnostic.json`; raw
-  records under `/mnt/hyemin/qwen_train_eval/outputs/w2c_when_repair_v1/`.
-- Failure or issue: the original label-record executor hashes differ from the
-  current code; the exact original executor artifact is unavailable here.
-- Lesson learned: transferred correct-route labels are not portable across a
-  changed four-action execution implementation even when model revision,
-  evaluator, prompt hashes, and high-level contract ID match.
-- Next implication: recover the exact source executor and rerun only the smoke
-  gate, or authorize a new current-runtime cache-regeneration plan.
+- Action taken: audited label contracts, Git history and objects, dirty-tree
+  hashes, launch wrappers, import resolution, executor semantics, generation
+  settings, and Phase-42 replay evidence; reconstructed the historical source
+  separately and prepared—but did not execute—the exact 12-sample replay.
+- Result: all 16/16 source hashes and the config hash match. FULL, READ_ONLY,
+  WRITE_ONLY, and IGNORE implement the intended state-transition truth table,
+  with text READ using pre-layer visual K/V. Exact cached-token parity is not
+  measured because pending job 1763 was canceled at user instruction.
+- Evidence saved: `analysis/executor_provenance_audit/executor_provenance_audit.md`,
+  `historical_vs_current_executor_diff.md`, and `replay_parity_report.md`.
+- Failure or issue: the complete original numerical execution environment was
+  not frozen, and the distinguishing H100 replay remains unexecuted.
+- Next implication: no W2C repair or label regeneration is authorized. If
+  later requested, run only the existing 12-sample/312-route recovered-source
+  H100 replay before reconsidering label portability.
