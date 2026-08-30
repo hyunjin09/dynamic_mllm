@@ -1,5 +1,18 @@
 # Workflow State
 
+- Active phase (2026-08-30):
+  `plans/selective_continue_deviate_expanded_plan.md` (SHA-256
+  `20a7517dc61197c8d3914cf8cf45183af7438e514ccdb4cba1583f9b25da34e9`).
+  Phase 1 will audit the complete 128-state held-out W2C census by inserting
+  `FULL` at each mandatory boundary and executing all 252 deduplicated routes
+  induced by every compatible frozen suffix. The prospective decision rule
+  admits gate training only if all 128 states remain trusted; any bounded rescue
+  or unresolved state stops before training because it would leave fewer than
+  the plan's minimum 128 trusted validation DEVIATE positives. Four direct GPUs
+  are reserved for live execution. No Stage-2 or external evaluation is
+  authorized. Phase memory:
+  `workspace/phase_memory/phase_41_selective_continue_deviate.md`.
+
 - Completed phase (2026-08-30):
   `plans/four_action_generalization_diagnostic_plan.md` (SHA-256
   `cdc39940a1e19c22f17771bc535d22be792b97cd7f45d7c6128ce816e933e446`).

@@ -1,5 +1,23 @@
 # Operational Research Plan: Binary Route Label Regeneration
 
+## Active selective CONTINUE/DEVIATE validation (2026-08-30)
+
+The user authorized `plans/selective_continue_deviate_expanded_plan.md` as one
+conditional research action. Phase 1 is a complete census of the 128 frozen
+held-out W2C mandatory boundaries. It inserts `FULL` after the exact all-FULL
+prefix and executes all 252 unique routes formed from every compatible known
+suffix, with exact UIDs and routes frozen before outcomes.
+
+The prospective trust gate requires zero bounded rescues and zero unresolved
+states before training: the audit census contains exactly the plan's minimum
+128 validation DEVIATE positives, so any known incomplete state would make the
+clean validation contract unattainable without a post-hoc relaxation. Only if
+that gate passes may the authorized linear/MLP WHEN gates and learned-WHEN +
+oracle-WHAT evaluation proceed. Stage-2 training and external evaluation remain
+out of scope. Evidence is tracked in
+`workspace/phase_memory/phase_41_selective_continue_deviate.md` and will be
+written under `analysis/selective_continue_deviate/`.
+
 ## Completed four-action generalization mechanism diagnostic (2026-08-30)
 
 The user authorized
