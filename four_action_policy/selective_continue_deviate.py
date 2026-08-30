@@ -314,3 +314,41 @@ def summarize_full_insertion_audit(
         ),
         "state_results": state_results,
     }
+
+
+def evaluate_phase1_gate(
+    summary: Mapping[str, Any], decision_config: Mapping[str, Any]
+) -> dict[str, Any]:
+    """Apply the frozen sample-contract gate to a Phase-1 audit summary."""
+
+    states = int(summary["states"])
+    counts = summary["status_counts"]
+    rescued = int(counts.get("FULL-cache-incomplete", 0))
+    unresolved = int(counts.get("unresolved", 0))
+    trusted = int(counts.get("FULL-confirmed-invalid", 0))
+    if rescued + unresolved + trusted != states:
+        raise ValueError("Phase-1 status counts do not cover every state")
+    required = int(decision_config["required_trusted_validation_positives"])
+    passed = (
+        rescued <= int(decision_config["maximum_rescued_states"])
+        and unresolved <= int(decision_config["maximum_unresolved_states"])
+        and trusted >= required
+    )
+    return {
+        "passed": passed,
+        "outcome": (
+            "case_b_proceed_selective_gate"
+            if passed
+            else "case_a_stop_label_incompleteness"
+        ),
+        "states": states,
+        "trusted_validation_deviate_positives": trusted,
+        "rescued_states": rescued,
+        "unresolved_states": unresolved,
+        "required_trusted_validation_positives": required,
+        "next_stage": (
+            "linear_and_mlp_gate_training"
+            if passed
+            else "stop_before_gate_training"
+        ),
+    }

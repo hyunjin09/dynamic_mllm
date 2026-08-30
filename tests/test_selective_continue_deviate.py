@@ -5,6 +5,7 @@ import pytest
 from four_action_policy.selective_continue_deviate import (
     bootstrap_uid_rescue_rate,
     build_full_insertion_subset,
+    evaluate_phase1_gate,
     summarize_full_insertion_audit,
 )
 
@@ -133,3 +134,49 @@ def test_uid_bootstrap_is_deterministic_and_groups_duplicate_uid_rows() -> None:
     assert first["uids"] == 2
     assert first["estimate"] == pytest.approx(0.5)
     assert first["draws"] == 1000
+
+
+def test_phase1_gate_stops_when_a_rescue_reduces_trusted_positive_count() -> None:
+    decision = evaluate_phase1_gate(
+        {
+            "states": 128,
+            "status_counts": {
+                "FULL-cache-incomplete": 1,
+                "FULL-confirmed-invalid": 127,
+            },
+        },
+        {
+            "required_trusted_validation_positives": 128,
+            "maximum_rescued_states": 0,
+            "maximum_unresolved_states": 0,
+        },
+    )
+
+    assert decision == {
+        "passed": False,
+        "outcome": "case_a_stop_label_incompleteness",
+        "states": 128,
+        "trusted_validation_deviate_positives": 127,
+        "rescued_states": 1,
+        "unresolved_states": 0,
+        "required_trusted_validation_positives": 128,
+        "next_stage": "stop_before_gate_training",
+    }
+
+
+def test_phase1_gate_passes_only_with_complete_clean_census() -> None:
+    decision = evaluate_phase1_gate(
+        {
+            "states": 128,
+            "status_counts": {"FULL-confirmed-invalid": 128},
+        },
+        {
+            "required_trusted_validation_positives": 128,
+            "maximum_rescued_states": 0,
+            "maximum_unresolved_states": 0,
+        },
+    )
+
+    assert decision["passed"] is True
+    assert decision["outcome"] == "case_b_proceed_selective_gate"
+    assert decision["next_stage"] == "linear_and_mlp_gate_training"
