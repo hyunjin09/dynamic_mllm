@@ -1170,3 +1170,32 @@ Do not copy raw logs or provisional explanations here.
   W2C/non-FULL supervision mass across both substrates and select on held-out
   W2C rescue plus C2C preservation rather than C2C-dominated overall route
   membership.
+
+## 2026-08-30 — Persistent correction yields small rescue but no architecture advantage
+
+- Decision or promoted lesson: Persistent mandatory-boundary supervision can
+  break exact zero-rescue behavior for both fixed four-action recipes, but the
+  observed held-out gains are small and do not support choosing the online
+  state-conditioned architecture over upfront POLAR. Use the prospective
+  operational tie-break to prefer POLAR for this comparison only.
+- Triggering evidence: On the same frozen 128-W2C/128-C2C validation set,
+  POLAR epoch 15 rescued 7 W2C and preserved 124 C2C, while online epoch 14
+  rescued 6 and preserved 122. The paired online-minus-POLAR rescue difference
+  was -0.0078125 with 10,000-draw 95% bootstrap interval
+  [-0.0625, 0.0390625]. Both were trained on the same 512-W2C/512-C2C subset
+  for 20 epochs with every W2C boundary supervised every epoch.
+- Validity qualification: one frozen C2C record failed a current-runtime direct
+  all-FULL check. Excluding it gives POLAR 124/127 and online 122/127 C2C
+  preservation and leaves both selected epochs and the architecture decision
+  unchanged; the drift cause remains unknown.
+- Evidence paths:
+  `analysis/persistent_corrective_supervision/decision_summary.md`,
+  `analysis/persistent_corrective_supervision/matched_comparison.md`, and
+  `analysis/persistent_corrective_supervision/runtime_cohort_sensitivity.md`.
+- Confidence: high for the fixed matched recipes and frozen decision rule;
+  low for any claim of robust population-level correction or architectural
+  impossibility.
+- Consequence for future actions: Do not interpret train-boundary fit or
+  nonzero rescue alone as robust generalization, do not claim an online feature
+  advantage, and do not open external evaluation for these checkpoint
+  families without a new prospective authorization.

@@ -13,6 +13,7 @@ import torch
 from experiments.train_binary_polar import file_sha256
 from .evaluation import FourActionMetricAccumulator
 from .losses import exact_valid_set_nll, polar_action_bce_per_route
+from .persistent import persistent_boundary_loss
 
 
 OBJECTIVES = ("duplicated_action_bce", "exact_set_nll")
@@ -74,6 +75,7 @@ def train_epoch(
     global_step: int,
     progress_first_batches: int = 0,
     progress_every_batches: int = 0,
+    boundary_lambda: float = 0.0,
 ) -> tuple[dict[str, Any], int]:
     if objective not in OBJECTIVES:
         raise ValueError(f"objective must be one of {OBJECTIVES}")
@@ -81,12 +83,21 @@ def train_epoch(
         raise ValueError("accumulation and route microbatch sizes must be positive")
     if progress_first_batches < 0 or progress_every_batches < 0:
         raise ValueError("progress batch intervals must be nonnegative")
+    if boundary_lambda < 0:
+        raise ValueError("boundary lambda must be nonnegative")
+    if boundary_lambda and objective != "exact_set_nll":
+        raise ValueError("persistent boundary supervision requires exact-set NLL")
     predictor.train()
     encoder.eval()
     optimizer.zero_grad(set_to_none=True)
     accumulated_examples = 0
     total_examples = 0
     total_loss = 0.0
+    total_base_loss = 0.0
+    total_boundary_loss = 0.0
+    total_boundary_examples = 0
+    total_boundary_valid = 0
+    total_boundary_nonfull = 0
     loader_length = len(loader)
     for batch_index, raw_batch in enumerate(loader, start=1):
         batch = move_batch(raw_batch, device)
@@ -103,6 +114,20 @@ def train_epoch(
                     valid_mask=batch["valid_mask"],
                     route_weights=batch["route_weights"],
                 )
+                base_mean_loss = mean_loss
+                if boundary_lambda:
+                    boundary_examples = int(batch["boundary_present"].sum().item())
+                    if boundary_examples * 2 != batch_size:
+                        raise RuntimeError(
+                            "persistent POLAR batches must contain equal W2C and C2C records"
+                        )
+                    boundary_mean_loss = persistent_boundary_loss(
+                        logits,
+                        boundary_layers=batch["boundary_layers"],
+                        valid_actions=batch["boundary_valid_actions"],
+                        present=batch["boundary_present"],
+                    )
+                    mean_loss = base_mean_loss + boundary_lambda * boundary_mean_loss
                 batch_loss_sum = mean_loss * batch_size
             if not bool(torch.isfinite(batch_loss_sum).item()):
                 raise FloatingPointError(
@@ -110,6 +135,20 @@ def train_epoch(
                 )
             batch_loss_sum.backward()
             batch_loss_sum_value = float(batch_loss_sum.detach())
+            total_base_loss += float(base_mean_loss.detach()) * batch_size
+            if boundary_lambda:
+                total_boundary_loss += float(boundary_mean_loss.detach()) * boundary_examples
+                total_boundary_examples += boundary_examples
+                selected = batch["boundary_present"]
+                selected_logits = logits[selected]
+                layers = batch["boundary_layers"][selected]
+                positions = torch.arange(selected_logits.shape[0], device=device)
+                predictions = selected_logits[positions, layers].argmax(dim=-1)
+                masks = batch["boundary_valid_actions"][selected]
+                total_boundary_valid += int(
+                    masks.gather(1, predictions[:, None]).sum().item()
+                )
+                total_boundary_nonfull += int((predictions != 3).sum().item())
         else:
             route_count = int(batch["target_actions"].shape[0])
             for start in range(0, route_count, duplicated_route_microbatch_size):
@@ -170,13 +209,27 @@ def train_epoch(
     if any(parameter.grad is not None for parameter in encoder.parameters()):
         raise RuntimeError("frozen question encoder received gradients")
     mean = total_loss / total_examples
-    return {
+    metrics = {
         "loss": mean,
         "objective": objective,
         "examples": total_examples,
         ("set_nll" if objective == "exact_set_nll" else "duplicated_action_bce"): mean,
         "optimizer_steps": global_step,
-    }, global_step
+    }
+    if boundary_lambda:
+        metrics.update(
+            {
+                "base_set_nll": total_base_loss / total_examples,
+                "boundary_loss": total_boundary_loss / total_boundary_examples,
+                "boundary_examples": total_boundary_examples,
+                "boundary_valid_action_at_1": total_boundary_valid
+                / total_boundary_examples,
+                "boundary_nonfull_recall": total_boundary_nonfull
+                / total_boundary_examples,
+                "boundary_lambda": float(boundary_lambda),
+            }
+        )
+    return metrics, global_step
 
 
 @torch.inference_mode()
@@ -196,11 +249,24 @@ def validate_epoch(
     encoder.eval()
     accumulators = {"overall": FourActionMetricAccumulator(top_k=top_k)}
     route_type_accumulators: dict[str, FourActionMetricAccumulator] = {}
+    boundary_records = 0
+    boundary_valid = 0
+    boundary_nonfull = 0
     for raw_batch in loader:
         batch = move_batch(raw_batch, device)
         question = encoder(batch["input_ids"], batch["attention_mask"])
         with _amp_context(device, amp_dtype):
             logits = forward_from_features(predictor, question, batch).float()
+        if "boundary_present" in batch and bool(batch["boundary_present"].any().item()):
+            selected = batch["boundary_present"]
+            selected_logits = logits[selected]
+            layers = batch["boundary_layers"][selected]
+            positions = torch.arange(selected_logits.shape[0], device=device)
+            predictions = selected_logits[positions, layers].argmax(dim=-1)
+            masks = batch["boundary_valid_actions"][selected]
+            boundary_records += int(selected.sum().item())
+            boundary_valid += int(masks.gather(1, predictions[:, None]).sum().item())
+            boundary_nonfull += int((predictions != 3).sum().item())
         accumulators["overall"].update(
             logits,
             batch["valid_routes"],
@@ -245,7 +311,7 @@ def validate_epoch(
                 batch["valid_mask"].index_select(0, indices),
                 batch["route_weights"].index_select(0, indices),
             )
-    return {
+    output = {
         "overall": accumulators["overall"].finalize(objective=objective),
         "by_benchmark": {
             benchmark: accumulator.finalize(objective=objective)
@@ -257,6 +323,13 @@ def validate_epoch(
             for route_type, accumulator in route_type_accumulators.items()
         },
     }
+    if boundary_records:
+        output["boundary"] = {
+            "records": boundary_records,
+            "valid_action_at_1": boundary_valid / boundary_records,
+            "nonfull_recall": boundary_nonfull / boundary_records,
+        }
+    return output
 
 
 def save_epoch_checkpoint(

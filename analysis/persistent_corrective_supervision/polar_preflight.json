@@ -1,0 +1,50 @@
+{
+  "base_model_snapshot": "/mnt/hyemin/qwen_train_eval/eval/reference/shared_prefix_eval_20260812/model/Qwen2.5-VL-7B-Instruct_cc594898137f460bfe9f0759e9844b3ce807cfb5",
+  "config": "analysis/persistent_corrective_supervision/polar_config.yaml",
+  "config_sha256": "654192728a1284a1eba22d49593c781f35460f477de64eed47450c77cc119ec1",
+  "embedding_snapshot": "datasets/eval/models--Qwen--Qwen3-Embedding-0.6B/snapshots/c54f2e6e80b2d7b7de06f51cec4959f6b3e03418",
+  "embedding_weight_files": [
+    "datasets/eval/models--Qwen--Qwen3-Embedding-0.6B/snapshots/c54f2e6e80b2d7b7de06f51cec4959f6b3e03418/model.safetensors"
+  ],
+  "external_evaluation": {
+    "benchmark_counts": {
+      "chartqa": 2500,
+      "mmmu_pro_standard_test": 1730,
+      "mmmu_pro_vision_test": 1730,
+      "pope_adversarial": 3000,
+      "pope_popular": 3000,
+      "pope_random": 3000
+    },
+    "protocol": "eval/reference/shared_prefix_eval_20260812",
+    "records": 14960
+  },
+  "jobs_launched": [],
+  "modality": "image_question",
+  "objective": "exact_set_nll",
+  "passed": true,
+  "predictor_smoke_shape": [
+    2,
+    28,
+    4
+  ],
+  "ready_for_training": true,
+  "ready_for_visual_cache_extraction": true,
+  "schema_version": "four_action_polar_preflight_v1",
+  "training_population": {
+    "records": 1280,
+    "routes": 42025,
+    "split_counts": {
+      "train": 1024,
+      "validation": 256
+    },
+    "zero_valid_route_exclusions": 106
+  },
+  "visual_cache": {
+    "audit": "outputs/four_action_polar/visual_features_v1/cache_audit_v1.json",
+    "audit_sha256": "6e0701aa3c3366236295e31a729b2e93a82b7ba1262e63d310dc2f71776ca785",
+    "manifest": "analysis/persistent_corrective_supervision/visual_feature_manifest.jsonl",
+    "manifest_sha256": "32b7ceadcbb47c33721afdc12b34789bf2354615bcd2bff62528559898bcc5e0",
+    "present": true,
+    "selected_from_passed_parent_cache": true
+  }
+}

@@ -31,7 +31,9 @@ from four_action_policy.feature_cache import load_verified_feature_index
 from four_action_policy.multimodal import (
     make_multimodal_duplicated_action_collator,
     make_multimodal_set_collator,
+    make_persistent_boundary_collator,
 )
+from four_action_policy.persistent import matched_epoch_indices
 from four_action_policy.predictor import FourActionPolarBackbone
 from four_action_policy.training import save_epoch_checkpoint, train_epoch, validate_epoch
 
@@ -92,6 +94,52 @@ def verify_c2c_ablation_contract(
         raise RuntimeError("POLAR C2C ablation must use its canonical output directory")
     if not config_path.is_file():
         raise RuntimeError("POLAR C2C ablation config is missing")
+
+
+def verify_persistent_contract(
+    config: dict[str, Any], config_path: Path, output_dir: Path
+) -> None:
+    if config.get("protocol_version") != "four_action_persistent_polar_v1":
+        return
+    plan_path = Path(config["source_plan"])
+    parent_path = Path(config["matched_parent_config"])
+    subset_path = Path(config["subset_manifest"])
+    if file_sha256(plan_path) != config["source_plan_sha256"]:
+        raise RuntimeError("generalization plan checksum mismatch")
+    if file_sha256(parent_path) != config["matched_parent_config_sha256"]:
+        raise RuntimeError("matched POLAR parent config checksum mismatch")
+    if file_sha256(subset_path) != config["subset_manifest_sha256"]:
+        raise RuntimeError("persistent subset checksum mismatch")
+    parent = yaml.safe_load(parent_path.read_text(encoding="utf-8"))
+    for section in ("modality", "base_model", "policy", "predictor", "external_evaluation"):
+        if config[section] != parent[section]:
+            raise RuntimeError(f"persistent POLAR parent section differs: {section}")
+    for key in ("source_records", "zero_valid_route_exclusions", "route_cap", "route_weighting", "max_question_tokens"):
+        if config["data"][key] != parent["data"][key]:
+            raise RuntimeError(f"persistent POLAR parent data field differs: {key}")
+    for key in ("root", "source", "feature_width", "dtype", "unpooled", "reuse_imported_binary_cache"):
+        if config["visual_features"][key] != parent["visual_features"][key]:
+            raise RuntimeError(f"persistent POLAR visual field differs: {key}")
+    for key in (
+        "objective", "physical_batch_size", "gradient_accumulation_steps",
+        "effective_batch_size", "duplicated_route_microbatch_size", "learning_rate",
+        "optimizer", "weight_decay", "scheduler", "warmup_steps", "num_workers",
+        "gradient_clip_norm", "precision", "deterministic_algorithms",
+        "no_early_stopping", "save_every_epoch",
+    ):
+        if config["training"][key] != parent["training"][key]:
+            raise RuntimeError(f"persistent POLAR training field differs: {key}")
+    if (
+        int(config["training"]["epochs"]) != 20
+        or int(config["training"]["world_size"]) != 4
+        or float(config["training"]["boundary_lambda"]) != 1.0
+        or int(config["training"]["boundary_events_per_epoch"]) != 512
+    ):
+        raise RuntimeError("persistent POLAR schedule differs from the frozen protocol")
+    if output_dir.resolve() != Path(config["reporting"]["output_dir"]).resolve():
+        raise RuntimeError("persistent POLAR must use its canonical output directory")
+    if not config_path.is_file():
+        raise RuntimeError("persistent POLAR config is missing")
 
 
 def render_c2c_ablation_report(
@@ -171,6 +219,7 @@ def main() -> None:
     preflight_path = Path(args.preflight)
     output_dir = Path(args.output_dir)
     verify_c2c_ablation_contract(config, config_path, output_dir)
+    verify_persistent_contract(config, config_path, output_dir)
     preflight = json.loads(preflight_path.read_text(encoding="utf-8"))
     if (
         preflight.get("passed") is not True
@@ -236,17 +285,44 @@ def main() -> None:
         "max_length": int(config["data"]["max_question_tokens"]),
         "route_weighting": route_weighting,
     }
-    validation_collator = make_multimodal_set_collator(
+    base_set_collator = make_multimodal_set_collator(
         tokenizer, feature_index, **common_collator
     )
+    validation_collator = base_set_collator
+    persistent_enabled = (
+        config.get("protocol_version") == "four_action_persistent_polar_v1"
+    )
+    boundary_lambda = 0.0
+    if persistent_enabled:
+        boundary_path = Path(config["data"]["boundary_manifest"])
+        if file_sha256(boundary_path) != config["data"]["boundary_manifest_sha256"]:
+            raise RuntimeError("persistent boundary manifest checksum mismatch")
+        with boundary_path.open(encoding="utf-8") as handle:
+            boundary_rows = [json.loads(line) for line in handle if line.strip()]
+        boundary_by_uid = {str(row["uid"]): row for row in boundary_rows}
+        expected_w2c = {
+            str(row["uid"])
+            for row in train_dataset.rows + validation_dataset.rows
+            if row["route_type"] == "W2C"
+        }
+        if set(boundary_by_uid) != expected_w2c:
+            raise RuntimeError("persistent boundary population differs from selected W2C")
+        validation_collator = make_persistent_boundary_collator(
+            validation_collator, boundary_by_uid
+        )
+        boundary_lambda = float(config["training"]["boundary_lambda"])
     objective = str(config["training"]["objective"])
     train_collator = (
-        validation_collator
+        base_set_collator
         if objective == "exact_set_nll"
         else make_multimodal_duplicated_action_collator(
             tokenizer, feature_index, **common_collator
         )
     )
+    if persistent_enabled:
+        train_collator = make_persistent_boundary_collator(
+            train_collator, boundary_by_uid
+        )
     physical_batch = int(config["training"]["physical_batch_size"])
     accumulation = int(config["training"]["gradient_accumulation_steps"])
     if physical_batch * accumulation != int(config["training"]["effective_batch_size"]):
@@ -363,10 +439,20 @@ def main() -> None:
 
     for epoch in range(start_epoch, epochs + 1):
         seed_everything(seed + epoch)
+        epoch_order = (
+            matched_epoch_indices(train_dataset.rows, seed=seed, epoch=epoch)
+            if persistent_enabled
+            else None
+        )
         train_loader = DataLoader(
             train_dataset,
-            shuffle=True,
-            generator=torch.Generator().manual_seed(seed + epoch),
+            shuffle=not persistent_enabled,
+            sampler=epoch_order,
+            generator=(
+                None
+                if persistent_enabled
+                else torch.Generator().manual_seed(seed + epoch)
+            ),
             collate_fn=train_collator,
             **common_loader,
         )
@@ -388,6 +474,7 @@ def main() -> None:
             global_step=global_step,
             progress_first_batches=3,
             progress_every_batches=10,
+            boundary_lambda=boundary_lambda,
         )
         validation = validate_epoch(
             predictor,
@@ -430,23 +517,25 @@ def main() -> None:
         print(json.dumps(row, sort_keys=True), flush=True)
     if global_step != total_steps:
         raise RuntimeError(f"optimizer-step mismatch: {global_step} != {total_steps}")
-    best = max(history, key=checkpoint_key)
-    best_checkpoint = checkpoints[int(best["epoch"]) - 1]
-    selection = {
-        "schema_version": "four_action_polar_checkpoint_selection_v1",
-        "selected_before_external_evaluation": True,
-        "config": str(config_path),
-        "config_sha256": config_sha,
-        "objective": objective,
-        "ordering": config["validation"]["checkpoint_order"],
-        "best_epoch": int(best["epoch"]),
-        "best_checkpoint": best_checkpoint["checkpoint"],
-        "best_checkpoint_sha256": best_checkpoint["checkpoint_sha256"],
-        "validation": best["validation"],
-    }
-    (output_dir / "best_checkpoint.json").write_text(
-        json.dumps(selection, indent=2, sort_keys=True) + "\n", encoding="utf-8"
-    )
+    best = None
+    if not persistent_enabled:
+        best = max(history, key=checkpoint_key)
+        best_checkpoint = checkpoints[int(best["epoch"]) - 1]
+        selection = {
+            "schema_version": "four_action_polar_checkpoint_selection_v1",
+            "selected_before_external_evaluation": True,
+            "config": str(config_path),
+            "config_sha256": config_sha,
+            "objective": objective,
+            "ordering": config["validation"]["checkpoint_order"],
+            "best_epoch": int(best["epoch"]),
+            "best_checkpoint": best_checkpoint["checkpoint"],
+            "best_checkpoint_sha256": best_checkpoint["checkpoint_sha256"],
+            "validation": best["validation"],
+        }
+        (output_dir / "best_checkpoint.json").write_text(
+            json.dumps(selection, indent=2, sort_keys=True) + "\n", encoding="utf-8"
+        )
     summary = {
         "schema_version": "four_action_polar_training_v1",
         "passed": True,
@@ -454,7 +543,8 @@ def main() -> None:
         "modality": "image_question",
         "epochs_completed": len(history),
         "global_steps": global_step,
-        "best_epoch": int(best["epoch"]),
+        "best_epoch": int(best["epoch"]) if best is not None else None,
+        "behavioral_checkpoint_selection_deferred": persistent_enabled,
         "checkpoints": [
             {key: value for key, value in checkpoint.items() if key != "metrics"}
             for checkpoint in checkpoints
@@ -468,7 +558,7 @@ def main() -> None:
     summary_path.with_suffix(".json.sha256").write_text(
         f"{file_sha256(summary_path)}  {summary_path.name}\n", encoding="utf-8"
     )
-    if config.get("reporting", {}).get("report"):
+    if config.get("reporting", {}).get("report") and best is not None:
         report_path = Path(config["reporting"]["report"])
         report_path.parent.mkdir(parents=True, exist_ok=True)
         report_path.write_text(

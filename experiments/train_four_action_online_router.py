@@ -64,6 +64,10 @@ from four_action_online_router.supervision import (
 )
 from four_action_policy.actions import decode_action_indices
 from four_action_policy.external import action_statistics
+from four_action_policy.persistent import (
+    matched_epoch_indices,
+    select_behavioral_checkpoint,
+)
 from label_regeneration.runtime import (
     build_native_processor_inputs,
     configure_determinism,
@@ -117,8 +121,13 @@ def distributed_context() -> tuple[int, int, int, torch.device]:
     rank = int(os.environ["RANK"])
     world_size = int(os.environ["WORLD_SIZE"])
     local_rank = int(os.environ["LOCAL_RANK"])
-    if not torch.cuda.is_available() or world_size != 8:
-        raise RuntimeError("the frozen online-router contract requires exactly eight GPUs")
+    if (
+        not torch.cuda.is_available()
+        or world_size < 1
+        or local_rank < 0
+        or local_rank >= torch.cuda.device_count()
+    ):
+        raise RuntimeError("online-router torchrun ranks do not match visible GPUs")
     torch.cuda.set_device(local_rank)
     dist.init_process_group("nccl", device_id=torch.device("cuda", local_rank))
     return rank, world_size, local_rank, torch.device("cuda", local_rank)
@@ -241,11 +250,10 @@ def validate(
         num_layers = int(config["router"]["num_layers"])
         routes = manifest_route_tensor(row, num_layers=num_layers)
         boundary = None
-        if (
-            config["data"].get("route_sampling")
-            == "guaranteed_mandatory_boundary_once_plus_deterministic_valid_route"
-            and row["route_type"] == "W2C"
-        ):
+        if config["data"].get("route_sampling") in {
+            "guaranteed_mandatory_boundary_once_plus_deterministic_valid_route",
+            "persistent_boundary_loss_once_per_w2c_per_epoch",
+        } and row["route_type"] == "W2C":
             boundary = mandatory_boundary_record(row, num_layers=num_layers)
             boundary["teacher_route_index"] = min(boundary["boundary_route_indices"])
             route_index = int(boundary["teacher_route_index"])
@@ -394,38 +402,63 @@ def build_training_optimizer_and_scheduler(parameters, training):
 def render_boundary_coverage_report(
     *, config_path: Path, output_dir: Path, history: list[dict[str, Any]]
 ) -> str:
-    best = max(history, key=execution_checkpoint_key)
-    execution = best["execution"]
-    boundary = best.get("boundary") or {}
-    return "\n".join(
+    config = yaml.safe_load(config_path.read_text(encoding="utf-8"))
+    persistent = config.get("protocol_version") == "four_action_persistent_online_v1"
+    selection = (
+        select_behavioral_checkpoint(history, c2c_threshold=0.95)
+        if persistent
+        else None
+    )
+    selected_epoch = selection["selected_epoch"] if selection else None
+    best = (
+        next(row for row in history if row["epoch"] == selected_epoch)
+        if selected_epoch is not None
+        else (max(history, key=execution_checkpoint_key) if not persistent else None)
+    )
+    lines = [
+        "# Online Four-Action Guaranteed-Boundary Training",
+        "",
+        f"- Config: `{config_path}`",
+        f"- Config SHA-256: `{file_sha256(config_path)}`",
+        f"- Output: `{output_dir}`",
+        f"- Epochs completed: {len(history)}",
+        f"- Selected epoch: {best['epoch'] if best is not None else None}",
+    ]
+    if selection is not None:
+        lines.append(f"- Pareto frontier: {selection['pareto_frontier']}")
+    if best is not None:
+        execution = best["execution"]
+        boundary = best.get("boundary") or {}
+        lines.extend(
+            [
+                "",
+                "## Primary routed behavior",
+                "",
+                f"- W2C free-rollout rescue: {execution['w2c_rescue_rate']:.6f}",
+                f"- C2C preservation: {execution['c2c_preservation_rate']:.6f}",
+                f"- Overall routed accuracy: {execution['overall_routed_accuracy']:.6f}",
+                f"- Mean FULL layers: {execution['mean_action_layers']['FULL']:.6f}",
+                "",
+                "## Mandatory-boundary behavior",
+                "",
+                f"- Validation boundary Valid-Action@1: {boundary.get('valid_action_at_1')}",
+                f"- Validation boundary non-FULL recall: {boundary.get('nonfull_recall')}",
+                f"- Validation free rollout left all-FULL: {(boundary.get('free_rollout') or {}).get('left_all_full_fraction')}",
+            ]
+        )
+    lines.extend(
         [
-            "# Online Four-Action Guaranteed-Boundary Training",
             "",
-            f"- Config: `{config_path}`",
-            f"- Config SHA-256: `{file_sha256(config_path)}`",
-            f"- Output: `{output_dir}`",
-            f"- Epochs completed: {len(history)}",
-            f"- Selected epoch: {best['epoch']}",
-            "",
-            "## Primary routed behavior",
-            "",
-            f"- W2C free-rollout rescue: {execution['w2c_rescue_rate']:.6f}",
-            f"- C2C preservation: {execution['c2c_preservation_rate']:.6f}",
-            f"- Overall routed accuracy: {execution['overall_routed_accuracy']:.6f}",
-            f"- Mean FULL layers: {execution['mean_action_layers']['FULL']:.6f}",
-            "",
-            "## Mandatory-boundary behavior",
-            "",
-            f"- Validation boundary Valid-Action@1: {boundary.get('valid_action_at_1')}",
-            f"- Validation boundary non-FULL recall: {boundary.get('nonfull_recall')}",
-            f"- Validation free rollout left all-FULL: {(boundary.get('free_rollout') or {}).get('left_all_full_fraction')}",
-            "",
-            "Every training W2C sample received exactly one scheduled visit to its",
-            "latest all-FULL-prefix mandatory-deviation boundary. All remaining",
-            "visits retained the original deterministic valid-route sampler.",
+            (
+                "Every selected training W2C sample received one separate mandatory-"
+                "boundary loss in every epoch."
+                if persistent
+                else "Every training W2C sample received exactly one scheduled boundary visit."
+            ),
             "",
         ]
     )
+    return "\n".join(lines)
 
 
 def verify_boundary_coverage_contract(
@@ -433,6 +466,42 @@ def verify_boundary_coverage_contract(
 ) -> None:
     """Fail closed unless A2 differs from its parent only in route exposure."""
 
+    if config.get("protocol_version") == "four_action_persistent_online_v1":
+        plan = Path(config["source_plan"])
+        parent_path = Path(config["matched_parent_config"])
+        subset = Path(config["subset_manifest"])
+        if file_sha256(plan) != config["source_plan_sha256"]:
+            raise RuntimeError("generalization plan checksum mismatch")
+        if file_sha256(parent_path) != config["matched_parent_config_sha256"]:
+            raise RuntimeError("matched online parent config checksum mismatch")
+        if file_sha256(subset) != config["subset_manifest_sha256"]:
+            raise RuntimeError("persistent subset checksum mismatch")
+        parent = yaml.safe_load(parent_path.read_text(encoding="utf-8"))
+        for section in ("scope", "base_model", "executor", "router", "external_evaluation"):
+            if config[section] != parent[section]:
+                raise RuntimeError(f"persistent online parent section differs: {section}")
+        for key in (
+            "source_manifest", "source_manifest_sha256", "zero_valid_route_exclusions",
+            "supervision",
+        ):
+            if config["data"][key] != parent["data"][key]:
+                raise RuntimeError(f"persistent online parent data field differs: {key}")
+        for key in (
+            "distributed_backend", "per_gpu_physical_batch_size", "optimizer",
+            "learning_rate", "weight_decay", "scheduler", "warmup_steps",
+            "gradient_clip_norm", "precision", "deterministic_algorithms",
+            "no_early_stopping", "save_every_epoch", "resume_boundary",
+        ):
+            if config["training"][key] != parent["training"][key]:
+                raise RuntimeError(f"persistent online training field differs: {key}")
+        if (
+            int(config["training"]["epochs"]) != 20
+            or int(config["training"]["world_size"]) != 4
+            or float(config["training"]["boundary_lambda"]) != 1.0
+            or int(config["training"]["boundary_events_per_epoch"]) != 512
+        ):
+            raise RuntimeError("persistent online schedule differs from frozen protocol")
+        return
     if config.get("protocol_version") != "four_action_online_boundary_coverage_v2":
         return
     plan = Path(config["source_plan"])
@@ -486,6 +555,46 @@ def run_smoke(
     trie = manifest_trie(row, num_layers=int(config["router"]["num_layers"]))
     trajectory = replay_teacher_forced_states(wrapped_model, prepared, routes[chosen], trie)
     multi_valid = bool((trajectory.valid_action_mask.sum(dim=-1) > 1).any().item())
+    persistent_boundary_trajectory = None
+    persistent_boundary_layer = None
+    if (
+        config["data"].get("route_sampling")
+        == "persistent_boundary_loss_once_per_w2c_per_epoch"
+        and row["route_type"] == "W2C"
+    ):
+        boundary = mandatory_boundary_record(
+            row, num_layers=int(config["router"]["num_layers"])
+        )
+        boundary["teacher_route_index"] = min(boundary["boundary_route_indices"])
+        persistent_boundary_trajectory = replay_teacher_forced_states(
+            wrapped_model,
+            prepared,
+            boundary_teacher_route(
+                row, boundary, num_layers=int(config["router"]["num_layers"])
+            ),
+            trie,
+        )
+        persistent_boundary_layer = int(boundary["boundary_layer"])
+
+    def smoke_loss() -> torch.Tensor:
+        base = set_valued_action_loss(
+            router_logits_for_trajectory(router, trajectory),
+            trajectory.valid_action_mask,
+        )
+        if persistent_boundary_trajectory is None:
+            return base
+        boundary_logits = router_logits_for_trajectory(
+            router, persistent_boundary_trajectory
+        )[persistent_boundary_layer]
+        boundary_mask = persistent_boundary_trajectory.valid_action_mask[
+            persistent_boundary_layer
+        ]
+        if bool(boundary_mask[3].item()):
+            raise RuntimeError("smoke boundary unexpectedly permits FULL")
+        targeted = set_valued_action_loss(
+            boundary_logits.unsqueeze(0), boundary_mask.unsqueeze(0)
+        )
+        return base + 2.0 * float(config["training"]["boundary_lambda"]) * targeted
 
     full = capture_four_action_route(
         wrapped_model,
@@ -508,9 +617,7 @@ def run_smoke(
     )
     router.eval()
     with torch.no_grad(), torch.autocast(device_type="cuda", dtype=torch.bfloat16):
-        initial_loss = set_valued_action_loss(
-            router_logits_for_trajectory(router, trajectory), trajectory.valid_action_mask
-        )
+        initial_loss = smoke_loss()
     initial_mean = initial_loss.detach().clone()
     dist.all_reduce(initial_mean)
     initial_mean /= world_size
@@ -519,9 +626,7 @@ def run_smoke(
     for _ in range(int(config["smoke"]["optimization_repeats"])):
         optimizer.zero_grad(set_to_none=True)
         with torch.autocast(device_type="cuda", dtype=torch.bfloat16):
-            loss = set_valued_action_loss(
-                router_logits_for_trajectory(router, trajectory), trajectory.valid_action_mask
-            )
+            loss = smoke_loss()
         if not bool(torch.isfinite(loss).item()):
             raise RuntimeError("non-finite smoke loss")
         loss.backward()
@@ -537,9 +642,7 @@ def run_smoke(
         scheduler.step()
     router.eval()
     with torch.no_grad(), torch.autocast(device_type="cuda", dtype=torch.bfloat16):
-        final_loss = set_valued_action_loss(
-            router_logits_for_trajectory(router, trajectory), trajectory.valid_action_mask
-        )
+        final_loss = smoke_loss()
     final_mean = final_loss.detach().clone()
     dist.all_reduce(final_mean)
     final_mean /= world_size
@@ -562,6 +665,7 @@ def run_smoke(
             uid=row["uid"], route_count=len(routes), seed=int(config["training"]["seed"]), epoch=0
         ),
         "multi_valid_state": multi_valid,
+        "persistent_boundary_exercised": persistent_boundary_trajectory is not None,
         "routed_prefix_differs_from_all_full": routed_differs,
         "initial_loss": float(initial_loss.item()),
         "final_loss": float(final_loss.item()),
@@ -577,7 +681,11 @@ def run_smoke(
         "execution": execution,
     }
     records = gather_flat([local], world_size)
-    flags = torch.tensor([multi_valid, routed_differs], dtype=torch.int32, device=device)
+    flags = torch.tensor(
+        [multi_valid, routed_differs, persistent_boundary_trajectory is not None],
+        dtype=torch.int32,
+        device=device,
+    )
     dist.all_reduce(flags, op=dist.ReduceOp.MAX)
     if rank == 0:
         core = router.module
@@ -592,6 +700,11 @@ def run_smoke(
         passed = (
             bool(flags[0].item())
             and bool(flags[1].item())
+            and (
+                config["data"].get("route_sampling")
+                != "persistent_boundary_loss_once_per_w2c_per_epoch"
+                or bool(flags[2].item())
+            )
             and float(final_mean.item()) < float(initial_mean.item())
             and all(item["teacher_route_index"] == item["teacher_route_sampling_repeat"] for item in records)
             and all(max(item["read_query_gradient_sums"]) > 0 for item in records)
@@ -610,6 +723,7 @@ def run_smoke(
             "global_final_mean_loss": float(final_mean.item()),
             "multi_valid_supervision_exercised": bool(flags[0].item()),
             "routed_state_conditioning_exercised": bool(flags[1].item()),
+            "persistent_boundary_supervision_exercised": bool(flags[2].item()),
             "checkpoint_roundtrip_exact": roundtrip_equal,
             "checkpoint_sha256": file_sha256(smoke_checkpoint),
             "measured_smoke_body_seconds": time.time() - started,
@@ -630,9 +744,13 @@ def run_training(
         config["data"].get("route_sampling")
         == "guaranteed_mandatory_boundary_once_plus_deterministic_valid_route"
     )
+    persistent_enabled = (
+        config["data"].get("route_sampling")
+        == "persistent_boundary_loss_once_per_w2c_per_epoch"
+    )
     boundary_by_uid: dict[str, dict[str, Any]] = {}
     epoch_schedule: list[list[dict[str, Any]]] | None = None
-    if coverage_enabled:
+    if coverage_enabled or persistent_enabled:
         boundary_path = Path(config["data"]["boundary_manifest"])
         if file_sha256(boundary_path) != config["data"]["boundary_manifest_sha256"]:
             raise RuntimeError("mandatory-boundary manifest checksum mismatch")
@@ -641,21 +759,32 @@ def run_training(
         expected_w2c = {
             str(row["uid"]) for row in train_rows if row["route_type"] == "W2C"
         }
-        if set(boundary_by_uid) != expected_w2c:
-            raise RuntimeError("mandatory-boundary manifest does not match train W2C UIDs")
-        epoch_schedule = guaranteed_boundary_epoch_schedule(
-            train_rows,
-            samples_per_epoch=int(training["balanced_samples_per_epoch"]),
-            seed=int(training["seed"]),
-            epochs=int(training["epochs"]),
-            world_size=world_size,
-        )
-        exposure_count = sum(
-            bool(visit["mandatory_boundary"])
-            for visits in epoch_schedule for visit in visits
-        )
-        if exposure_count != len(expected_w2c):
-            raise RuntimeError("mandatory-boundary schedule exposure count mismatch")
+        if persistent_enabled:
+            expected_all_w2c = {
+                str(row["uid"])
+                for row in train_rows + validation_rows
+                if row["route_type"] == "W2C"
+            }
+            if set(boundary_by_uid) != expected_all_w2c:
+                raise RuntimeError(
+                    "persistent boundary manifest does not match selected W2C UIDs"
+                )
+        else:
+            if set(boundary_by_uid) != expected_w2c:
+                raise RuntimeError("mandatory-boundary manifest does not match train W2C UIDs")
+            epoch_schedule = guaranteed_boundary_epoch_schedule(
+                train_rows,
+                samples_per_epoch=int(training["balanced_samples_per_epoch"]),
+                seed=int(training["seed"]),
+                epochs=int(training["epochs"]),
+                world_size=world_size,
+            )
+            exposure_count = sum(
+                bool(visit["mandatory_boundary"])
+                for visits in epoch_schedule for visit in visits
+            )
+            if exposure_count != len(expected_w2c):
+                raise RuntimeError("mandatory-boundary schedule exposure count mismatch")
     restart_before_first_epoch = output_dir.exists() and not resume
     if restart_before_first_epoch:
         entries = list(output_dir.iterdir())
@@ -707,7 +836,7 @@ def run_training(
         states = payload.get("rng_states")
         if isinstance(states, list) and len(states) == world_size:
             restore_rng_state(states[rank], device)
-        elif coverage_enabled:
+        elif coverage_enabled or persistent_enabled:
             raise RuntimeError("resume checkpoint lacks complete per-rank RNG states")
         global_step = int(payload["global_step"])
         start_epoch = len(history) + 1
@@ -729,6 +858,9 @@ def run_training(
                 "mandatory_boundary_manifest_sha256": config["data"].get(
                     "boundary_manifest_sha256"
                 ),
+                "mandatory_boundary_exposures_per_epoch": (
+                    len(expected_w2c) if persistent_enabled else 0
+                ),
                 "mandatory_boundary_exposures": (
                     len(boundary_by_uid) if coverage_enabled else 0
                 ),
@@ -745,7 +877,17 @@ def run_training(
 
     accumulation = int(training["gradient_accumulation_steps"])
     for epoch in range(start_epoch, int(training["epochs"]) + 1):
-        if epoch_schedule is None:
+        if persistent_enabled:
+            visits = [
+                {
+                    "row_index": index,
+                    "mandatory_boundary": train_rows[index]["route_type"] == "W2C",
+                }
+                for index in matched_epoch_indices(
+                    train_rows, seed=int(training["seed"]), epoch=epoch
+                )
+            ][rank::world_size]
+        elif epoch_schedule is None:
             visits = [
                 {"row_index": index, "mandatory_boundary": False}
                 for index in balanced_epoch_indices(
@@ -764,6 +906,10 @@ def run_training(
         started = time.time()
         local_boundary_exposures = 0
         local_ordinary_w2c_visits = 0
+        local_base_loss_sum = 0.0
+        local_boundary_loss_sum = 0.0
+        local_boundary_valid = 0
+        local_boundary_nonfull = 0
         for microstep, visit in enumerate(visits, start=1):
             row_index = int(visit["row_index"])
             row = train_rows[row_index]
@@ -771,7 +917,7 @@ def run_training(
                 processor, wrapped_model, row, sources[row["uid"]], device
             )
             routes = manifest_route_tensor(row, num_layers=int(config["router"]["num_layers"]))
-            if bool(visit["mandatory_boundary"]):
+            if bool(visit["mandatory_boundary"]) and not persistent_enabled:
                 boundary = dict(boundary_by_uid[row["uid"]])
                 boundary["teacher_route_index"] = min(
                     int(value) for value in boundary["boundary_route_indices"]
@@ -798,12 +944,57 @@ def run_training(
             sync_context = nullcontext() if synchronize else router.no_sync()
             with sync_context:
                 with torch.autocast(device_type="cuda", dtype=torch.bfloat16):
-                    loss = set_valued_action_loss(
+                    base_loss = set_valued_action_loss(
                         router_logits_for_trajectory(router, trajectory),
                         trajectory.valid_action_mask,
                     )
+                    boundary_loss = None
+                    boundary_prediction = None
+                    if persistent_enabled and row["route_type"] == "W2C":
+                        boundary = dict(boundary_by_uid[row["uid"]])
+                        boundary["teacher_route_index"] = min(
+                            int(value) for value in boundary["boundary_route_indices"]
+                        )
+                        boundary_route = boundary_teacher_route(
+                            row,
+                            boundary,
+                            num_layers=int(config["router"]["num_layers"]),
+                        )
+                        boundary_trajectory = replay_teacher_forced_states(
+                            wrapped_model,
+                            prepared,
+                            boundary_route,
+                            manifest_trie(
+                                row, num_layers=int(config["router"]["num_layers"])
+                            ),
+                        )
+                        boundary_layer = int(boundary["boundary_layer"])
+                        boundary_logits = router_logits_for_trajectory(
+                            router, boundary_trajectory
+                        )[boundary_layer]
+                        boundary_mask = boundary_trajectory.valid_action_mask[
+                            boundary_layer
+                        ]
+                        if bool(boundary_mask[3].item()):
+                            raise RuntimeError("FULL is valid at a frozen mandatory boundary")
+                        boundary_loss = set_valued_action_loss(
+                            boundary_logits.unsqueeze(0),
+                            boundary_mask.unsqueeze(0),
+                        )
+                        boundary_prediction = int(boundary_logits.argmax().item())
+                        loss = base_loss + 2.0 * float(
+                            training["boundary_lambda"]
+                        ) * boundary_loss
+                    else:
+                        loss = base_loss
                 (loss / accumulation).backward()
             loss_sum += float(loss.detach().item())
+            local_base_loss_sum += float(base_loss.detach().item())
+            if boundary_loss is not None:
+                local_boundary_exposures += 1
+                local_boundary_loss_sum += float(boundary_loss.detach().item())
+                local_boundary_valid += int(boundary_mask[boundary_prediction].item())
+                local_boundary_nonfull += int(boundary_prediction != 3)
             if synchronize:
                 torch.nn.utils.clip_grad_norm_(router.parameters(), float(training["gradient_clip_norm"]))
                 optimizer.step()
@@ -823,10 +1014,21 @@ def run_training(
                     ), flush=True
                 )
         totals = torch.tensor(
-            [loss_sum, len(visits), local_boundary_exposures, local_ordinary_w2c_visits],
+            [
+                loss_sum,
+                len(visits),
+                local_boundary_exposures,
+                local_ordinary_w2c_visits,
+                local_base_loss_sum,
+                local_boundary_loss_sum,
+                local_boundary_valid,
+                local_boundary_nonfull,
+            ],
             dtype=torch.float64, device=device
         )
         dist.all_reduce(totals)
+        if persistent_enabled and int(totals[2].item()) != len(expected_w2c):
+            raise RuntimeError("persistent boundary exposure count differs from train W2C")
         metrics, validation_outputs = validate(
             epoch=epoch, rows=validation_rows, sources=sources, processor=processor,
             wrapped_model=wrapped_model, router=router, config=config,
@@ -845,6 +1047,22 @@ def run_training(
                     "mean_loss": float(totals[0].item() / totals[1].item()),
                     "mandatory_boundary_exposures": int(totals[2].item()),
                     "ordinary_w2c_visits": int(totals[3].item()),
+                    "mean_base_loss": float(totals[4].item() / totals[1].item()),
+                    "mean_boundary_loss": (
+                        float(totals[5].item() / totals[2].item())
+                        if totals[2].item()
+                        else None
+                    ),
+                    "boundary_valid_action_at_1": (
+                        float(totals[6].item() / totals[2].item())
+                        if totals[2].item()
+                        else None
+                    ),
+                    "boundary_nonfull_recall": (
+                        float(totals[7].item() / totals[2].item())
+                        if totals[2].item()
+                        else None
+                    ),
                 },
                 **metrics,
             }
@@ -868,17 +1086,31 @@ def run_training(
     if global_step != total_steps:
         raise RuntimeError(f"optimizer-step mismatch: {global_step} != {total_steps}")
     if rank == 0:
-        best = max(history, key=execution_checkpoint_key)
-        checkpoint = checkpoints[int(best["epoch"]) - 1]
+        behavioral = (
+            select_behavioral_checkpoint(
+                history,
+                c2c_threshold=float(config["validation"]["c2c_preservation_threshold"]),
+            )
+            if persistent_enabled
+            else None
+        )
+        best = (
+            next(row for row in history if row["epoch"] == behavioral["selected_epoch"])
+            if behavioral is not None and behavioral["selected_epoch"] is not None
+            else (max(history, key=execution_checkpoint_key) if not persistent_enabled else None)
+        )
+        checkpoint = checkpoints[int(best["epoch"]) - 1] if best is not None else None
         selection = {
             "schema_version": "four_action_online_router_checkpoint_selection_v1",
             "selected_before_external_evaluation": True,
             "config": str(config_path), "config_sha256": file_sha256(config_path),
-            "best_epoch": int(best["epoch"]),
-            "best_checkpoint": checkpoint["checkpoint"],
-            "best_checkpoint_sha256": checkpoint["checkpoint_sha256"],
+            "best_epoch": int(best["epoch"]) if best is not None else None,
+            "best_checkpoint": checkpoint["checkpoint"] if checkpoint else None,
+            "best_checkpoint_sha256": checkpoint["checkpoint_sha256"] if checkpoint else None,
             "checkpoint_order": config["validation"]["tie_break"],
-            "execution": best["execution"], "node": best["node"],
+            "execution": best["execution"] if best is not None else None,
+            "node": best["node"] if best is not None else None,
+            "behavioral_selection": behavioral,
         }
         write_json(output_dir / "best_checkpoint.json", selection)
         write_json(
@@ -886,8 +1118,9 @@ def run_training(
             {
                 "schema_version": "four_action_online_router_training_v1",
                 "passed": True, "epochs_completed": len(history),
-                "global_steps": global_step, "best_epoch": int(best["epoch"]),
-                "best_checkpoint": checkpoint["checkpoint"],
+                "global_steps": global_step,
+                "best_epoch": int(best["epoch"]) if best is not None else None,
+                "best_checkpoint": checkpoint["checkpoint"] if checkpoint else None,
                 "external_evaluation_started": False,
             },
         )
@@ -922,10 +1155,10 @@ def main() -> None:
         config_path = Path(args.config)
         config = yaml.safe_load(config_path.read_text(encoding="utf-8"))
         verify_boundary_coverage_contract(config, config_path)
-        if (
-            args.mode == "train"
-            and config.get("protocol_version") == "four_action_online_boundary_coverage_v2"
-        ):
+        if args.mode == "train" and config.get("protocol_version") in {
+            "four_action_online_boundary_coverage_v2",
+            "four_action_persistent_online_v1",
+        }:
             if Path(args.output_dir).resolve() != Path(
                 config["reporting"]["output_dir"]
             ).resolve():

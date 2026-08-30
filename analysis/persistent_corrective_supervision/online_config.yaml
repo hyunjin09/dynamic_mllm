@@ -1,0 +1,118 @@
+protocol_version: four_action_persistent_online_v1
+source_plan: plans/four_action_generalization.md
+source_plan_sha256: 79c159af4aa451cdbb153e95b7145566f77835770c1408765f1fafe1d35837b5
+matched_parent_config: configs/four_action_online_router_v1.yaml
+matched_parent_config_sha256: 37635f5acbd8842c387683e57de9e76d4a69dced1b23f57010f23e8ff579f21d
+subset_manifest: analysis/persistent_corrective_supervision/subset_manifest.json
+subset_manifest_sha256: 92dc068566b799f852c30d0e459aa4f231d6082f2a59c78c64c56c0b9c66936b
+scope:
+  training_datasets: [gqa, chartqa, textvqa]
+  excluded_training_datasets: [wemath_standard, wemath_pro]
+base_model:
+  model_id: Qwen/Qwen2.5-VL-7B-Instruct
+  revision: cc594898137f460bfe9f0759e9844b3ce807cfb5
+  path: eval/reference/shared_prefix_eval_20260812/model/Qwen2.5-VL-7B-Instruct_cc594898137f460bfe9f0759e9844b3ce807cfb5
+  precision: bfloat16
+  frozen: true
+executor:
+  implementation: unified_four_action
+  contract_sha256: d8f524b928fb30ea0bb37c6a9389893adb338d4f91992d85255fdfb9bea283cb
+  action_order: [IGNORE, READ_ONLY, WRITE_ONLY, FULL]
+  query_state: final_valid_compact_text_control_row_before_each_layer
+data:
+  manifest: analysis/persistent_corrective_supervision/training_manifest.jsonl
+  manifest_sha256: 05716064b11703a339a1bc3f59a54d0e54a50b5490a5748acebbd8f2e91c1583
+  manifest_audit: analysis/persistent_corrective_supervision/subset_audit.json
+  manifest_audit_sha256: 9245d86c1df550c580a7cf56df88c1c2620cf643d84ddd8ff664a5cfe9c904df
+  source_manifest: datasets/mcts_labels_4action/source_inventory_v1/source_manifest_v1.jsonl
+  source_manifest_sha256: a44ca6e8684bc1a559997ce0ea52b2796f3265d19be90e22439c653741f36ed7
+  boundary_manifest: analysis/persistent_corrective_supervision/boundary_manifest.jsonl
+  boundary_manifest_sha256: 868bd1981a69e579e5c9cf671d8b36e3f3165ff0066cc1ff609002e851f887fb
+  records: 1280
+  train_records: 1024
+  validation_records: 256
+  valid_routes: 42025
+  unique_image_groups: 1264
+  zero_valid_route_exclusions: 106
+  route_sampling: persistent_boundary_loss_once_per_w2c_per_epoch
+  ordinary_route_sampling: deterministic_one_valid_route_per_sample_per_epoch
+  supervision: exact_prefix_trie_set_valued_next_action
+  sample_balance: fixed_512_w2c_512_c2c_once_per_epoch
+router:
+  architecture: online_function_specific_read_write_v1
+  hidden_size: 3584
+  num_layers: 28
+  num_actions: 4
+  d_router: 256
+  num_heads: 4
+  mlp_hidden_size: 512
+  dropout: 0.1
+  interaction_scale: 0.1
+  read_visual_query: current_final_text_control_state_plus_read_layer_query
+  write_visual_query: write_layer_query_only
+  write_text_conditioning: post_visual_pooling
+  layer_specific_parameters: [read_layer_queries, write_layer_queries]
+  decision_head: read_unary_plus_write_unary_plus_scaled_four_way_interaction
+training:
+  seed: 20260809
+  epochs: 20
+  distributed_backend: nccl
+  world_size: 4
+  per_gpu_physical_batch_size: 1
+  gradient_accumulation_steps: 16
+  effective_sample_batch_size: 64
+  balanced_samples_per_epoch: 1024
+  optimizer_steps_per_epoch: 16
+  total_optimizer_steps: 320
+  optimizer: AdamW
+  learning_rate: 0.0005
+  weight_decay: 0.01
+  scheduler: cosine
+  warmup_steps: 10
+  gradient_clip_norm: 1.0
+  precision: bfloat16
+  deterministic_algorithms: true
+  no_early_stopping: true
+  save_every_epoch: true
+  resume_boundary: completed_epoch
+  boundary_lambda: 1.0
+  boundary_events_per_epoch: 512
+smoke:
+  records: 8
+  optimization_repeats: 4
+  require_datasets: [gqa, chartqa, textvqa]
+  require_route_types: [W2C, C2C]
+validation:
+  every_epoch: true
+  expected_records: 256
+  node_metrics_teacher_route_seed: 20260819
+  checkpoint_rule: maximize_w2c_rescue_subject_to_c2c_preservation_gte_0.95
+  c2c_preservation_threshold: 0.95
+  paired_bootstrap_draws: 10000
+  paired_bootstrap_seed: 20260830
+  tie_break: [c2c_preservation, overall_routed_accuracy, fewer_c2c_regressions, fewer_full_actions, earlier_epoch]
+  execution_is_primary: true
+  mandatory_boundary_metrics: true
+external_evaluation:
+  protocol: eval/reference/shared_prefix_eval_20260812
+  data_root: datasets/eval/data
+  expected_records: 14960
+  benchmark_counts:
+    chartqa: 2500
+    mmmu_pro_standard_test: 1730
+    mmmu_pro_vision_test: 1730
+    pope_adversarial: 3000
+    pope_popular: 3000
+    pope_random: 3000
+  exclude_benchmarks: [docvqa, textvqa, mmstar_val, mmmu_val]
+  executor: online_unified_four_action
+  baseline: live_unified_full
+  eos_token_ids: [151645]
+  repetition_penalty: 1.05
+  bootstrap_draws: 5000
+  bootstrap_seed: 20260813
+reporting:
+  output_dir: outputs/persistent_corrective_supervision_v1/online
+  history: analysis/persistent_corrective_supervision/online_history.jsonl
+  execution: analysis/persistent_corrective_supervision/online_execution_eval.jsonl
+  report: analysis/persistent_corrective_supervision/online_report.md

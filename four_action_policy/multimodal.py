@@ -6,6 +6,7 @@ from typing import Any, Callable
 
 import torch
 
+from .actions import FOUR_ACTIONS
 from .dataset import make_duplicated_action_collator, make_set_collator
 
 
@@ -53,6 +54,41 @@ def _with_visual_features(
 ) -> Callable[[list[dict[str, Any]]], dict[str, Any]]:
     def collate(rows: list[dict[str, Any]]) -> dict[str, Any]:
         return attach_visual_features(base_collator(rows), rows, feature_index)
+
+    return collate
+
+
+def make_persistent_boundary_collator(
+    base_collator: Callable[[list[dict[str, Any]]], dict[str, Any]],
+    boundary_by_uid: dict[str, dict[str, Any]],
+) -> Callable[[list[dict[str, Any]]], dict[str, Any]]:
+    """Attach the same set-valued mandatory-boundary target to either substrate."""
+
+    action_index = {action: index for index, action in enumerate(FOUR_ACTIONS)}
+
+    def collate(rows: list[dict[str, Any]]) -> dict[str, Any]:
+        batch = base_collator(rows)
+        layers = torch.full((len(rows),), -1, dtype=torch.long)
+        valid = torch.zeros(len(rows), len(FOUR_ACTIONS), dtype=torch.bool)
+        present = torch.zeros(len(rows), dtype=torch.bool)
+        for index, row in enumerate(rows):
+            boundary = boundary_by_uid.get(str(row["uid"]))
+            if row.get("route_type") == "W2C":
+                if boundary is None:
+                    raise KeyError(f"W2C row lacks a mandatory boundary: {row['uid']}")
+                layers[index] = int(boundary["boundary_layer"])
+                actions = [str(value) for value in boundary["valid_nonfull_actions"]]
+                if not actions or "FULL" in actions:
+                    raise ValueError("mandatory boundary must be nonempty and exclude FULL")
+                for action in actions:
+                    valid[index, action_index[action]] = True
+                present[index] = True
+            elif boundary is not None:
+                raise ValueError(f"C2C row unexpectedly has a boundary: {row['uid']}")
+        batch["boundary_layers"] = layers
+        batch["boundary_valid_actions"] = valid
+        batch["boundary_present"] = present
+        return batch
 
     return collate
 

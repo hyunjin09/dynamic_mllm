@@ -1,0 +1,76 @@
+{
+  "boundary_lambda": 1.0,
+  "passed": true,
+  "records": [
+    {
+      "c2c_has_boundary_term": false,
+      "device": "cuda:0",
+      "online_base_loss_finite": true,
+      "online_boundary_loss_finite": true,
+      "online_gradients_finite_nonzero": true,
+      "polar_base_loss_finite": true,
+      "polar_boundary_loss_finite": true,
+      "polar_gradients_finite_nonzero": true,
+      "rank": 0,
+      "semantic_boundary_mask": [
+        false,
+        true,
+        true,
+        false
+      ]
+    },
+    {
+      "c2c_has_boundary_term": false,
+      "device": "cuda:1",
+      "online_base_loss_finite": true,
+      "online_boundary_loss_finite": true,
+      "online_gradients_finite_nonzero": true,
+      "polar_base_loss_finite": true,
+      "polar_boundary_loss_finite": true,
+      "polar_gradients_finite_nonzero": true,
+      "rank": 1,
+      "semantic_boundary_mask": [
+        false,
+        true,
+        true,
+        false
+      ]
+    },
+    {
+      "c2c_has_boundary_term": false,
+      "device": "cuda:2",
+      "online_base_loss_finite": true,
+      "online_boundary_loss_finite": true,
+      "online_gradients_finite_nonzero": true,
+      "polar_base_loss_finite": true,
+      "polar_boundary_loss_finite": true,
+      "polar_gradients_finite_nonzero": true,
+      "rank": 2,
+      "semantic_boundary_mask": [
+        false,
+        true,
+        true,
+        false
+      ]
+    },
+    {
+      "c2c_has_boundary_term": false,
+      "device": "cuda:3",
+      "online_base_loss_finite": true,
+      "online_boundary_loss_finite": true,
+      "online_gradients_finite_nonzero": true,
+      "polar_base_loss_finite": true,
+      "polar_boundary_loss_finite": true,
+      "polar_gradients_finite_nonzero": true,
+      "rank": 3,
+      "semantic_boundary_mask": [
+        false,
+        true,
+        true,
+        false
+      ]
+    }
+  ],
+  "schema_version": "persistent_corrective_four_gpu_smoke_v1",
+  "world_size": 4
+}

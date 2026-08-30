@@ -42,8 +42,9 @@ def validate_frozen_contract(config: dict[str, Any]) -> None:
     objective = str(config["training"]["objective"])
     if objective not in {"duplicated_action_bce", "exact_set_nll"}:
         raise RuntimeError("unsupported four-action training objective")
+    persistent = config.get("protocol_version") == "four_action_persistent_polar_v1"
     exact_training = {
-        "epochs": 10,
+        "epochs": 20 if persistent else 10,
         "physical_batch_size": 128,
         "gradient_accumulation_steps": 1,
         "effective_batch_size": 128,
@@ -61,8 +62,17 @@ def validate_frozen_contract(config: dict[str, Any]) -> None:
         raise RuntimeError("optimizer settings differ from binary full10")
     if config["data"].get("route_cap") is not None:
         raise RuntimeError("four-action supervision must retain all valid routes")
-    if int(config["validation"]["expected_records"]) != 866:
-        raise RuntimeError("full per-epoch validation must contain 866 records")
+    expected_validation = 256 if persistent else 866
+    if int(config["validation"]["expected_records"]) != expected_validation:
+        raise RuntimeError(
+            f"full per-epoch validation must contain {expected_validation} records"
+        )
+    if persistent and (
+        float(config["training"].get("boundary_lambda", -1)) != 1.0
+        or int(config["training"].get("boundary_events_per_epoch", -1)) != 512
+        or int(config["training"].get("world_size", -1)) != 4
+    ):
+        raise RuntimeError("persistent POLAR intervention contract differs from plan")
     if dict(config["external_evaluation"]["benchmark_counts"]) != EXPECTED_COUNTS:
         raise RuntimeError("external benchmark contract differs from the prospective restriction")
     if int(config["external_evaluation"]["expected_records"]) != TOTAL_RECORDS:
@@ -150,10 +160,38 @@ def main() -> None:
     if not (protocol_path / "code/dvr_qwen/eval_metrics.py").is_file():
         raise FileNotFoundError("shared-prefix evaluation code is incomplete")
 
-    cache_audit_path = Path(config["visual_features"]["cache_audit"])
     cache_status: dict[str, Any]
     ready_for_training = False
-    if cache_audit_path.is_file():
+    persistent = config.get("protocol_version") == "four_action_persistent_polar_v1"
+    if persistent:
+        source_cache_audit_path = Path(config["visual_features"]["source_cache_audit"])
+        source_cache_audit = read_json(source_cache_audit_path)
+        if source_cache_audit.get("passed") is not True:
+            raise RuntimeError("source visual cache audit did not pass")
+        feature_manifest = Path(config["visual_features"]["manifest"])
+        observed_feature_sha = file_sha256(feature_manifest)
+        if observed_feature_sha != config["visual_features"]["manifest_sha256"]:
+            raise RuntimeError("selected visual feature manifest checksum mismatch")
+        load_verified_feature_index(
+            feature_manifest,
+            manifest_sha256=observed_feature_sha,
+            expected_uids={str(row["uid"]) for row in manifest.rows},
+            expected_feature_width=int(config["visual_features"]["feature_width"]),
+            verify_tensors=False,
+        )
+        cache_status = {
+            "present": True,
+            "audit": str(source_cache_audit_path),
+            "audit_sha256": file_sha256(source_cache_audit_path),
+            "manifest": str(feature_manifest),
+            "manifest_sha256": observed_feature_sha,
+            "selected_from_passed_parent_cache": True,
+        }
+        ready_for_training = True
+        cache_audit_path = source_cache_audit_path
+    else:
+        cache_audit_path = Path(config["visual_features"]["cache_audit"])
+    if not persistent and cache_audit_path.is_file():
         cache_audit = read_json(cache_audit_path)
         expected_contract = visual_cache_contract(config)
         if cache_audit.get("passed") is not True:

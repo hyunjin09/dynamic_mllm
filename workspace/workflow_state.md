@@ -1,5 +1,27 @@
 # Workflow State
 
+- Completed phase (2026-08-30): `plans/four_action_generalization.md`
+  (SHA-256
+  `79c159af4aa451cdbb153e95b7145566f77835770c1408765f1fafe1d35837b5`).
+  A deterministic matched subset froze 512 W2C + 512 C2C training records and
+  128 W2C + 128 C2C validation records across GQA/ChartQA/TextVQA. Both the
+  unchanged POLAR exact-set-NLL and online set-valued routers trained for 20
+  epochs with one mandatory-boundary term for every W2C every epoch, using all
+  four local RTX 6000 Ada GPUs through direct execution. All 20 checkpoints
+  per substrate were internally executed on the same 256 held-out records.
+  POLAR selected epoch 15 with 7/128 W2C rescues and 124/128 C2C preservation;
+  online selected epoch 14 with 6/128 and 122/128. The paired online-minus-
+  POLAR W2C difference was -0.0078125 (10,000-draw 95% bootstrap interval
+  [-0.0625, 0.0390625]), so the prospective decision is **no supported
+  architecture advantage; operationally prefer POLAR**. A direct all-FULL
+  audit found one current-runtime mismatch in the frozen C2C cohort; excluding
+  it gives POLAR 124/127 and online 122/127 C2C preservation and leaves both
+  selections and the decision unchanged. No external evaluation or follow-up
+  action ran. Evidence: `analysis/persistent_corrective_supervision/decision_summary.md`
+  and `analysis/persistent_corrective_supervision/runtime_cohort_sensitivity.md`;
+  phase memory:
+  `workspace/phase_memory/phase_39_persistent_corrective_supervision.md`.
+
 - Completed phase (2026-08-29): `plans/four_action_collapse.md` (SHA-256
   `f61f7476ff9a5872f823c7df837e1a2ba21774c83e4efc88f152d2b77d5aceb9`).
   A0 froze all 2,397 W2C mandatory boundaries. A1 job `1700` established local

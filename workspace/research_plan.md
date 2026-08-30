@@ -1,6 +1,27 @@
 # Operational Research Plan: Binary Route Label Regeneration
 
-## Active four-action collapse isolation (2026-08-29)
+## Completed persistent corrective-supervision comparison (2026-08-30)
+
+The user authorized `plans/four_action_generalization.md` as one matched
+low-budget comparison of the unchanged upfront POLAR and online four-action
+router substrates. Both used the same deterministic 512-W2C/512-C2C training
+and 128-W2C/128-C2C validation subsets for 20 epochs, with every training W2C
+receiving its mandatory-boundary loss every epoch. All four local GPUs were
+used directly, every checkpoint was internally executed, and no external
+evaluation ran.
+
+POLAR epoch 15 rescued 7/128 W2C while preserving 124/128 C2C; online epoch 14
+rescued 6/128 while preserving 122/128. The paired online-minus-POLAR W2C
+difference was -0.0078125 with 95% bootstrap interval [-0.0625, 0.0390625].
+The frozen decision is therefore **no supported architecture advantage;
+operationally prefer POLAR**. One current-runtime all-FULL mismatch was found
+in the frozen C2C cohort; excluding it leaves both selected epochs and the
+decision unchanged. Evidence is under
+`analysis/persistent_corrective_supervision/`; phase memory is
+`workspace/phase_memory/phase_39_persistent_corrective_supervision.md`. No
+follow-up action is authorized.
+
+## Completed four-action collapse isolation (2026-08-29)
 
 The user authorized `plans/four_action_collapse.md` to compare both candidate
 router families without bundling mechanisms. First test the unchanged online
