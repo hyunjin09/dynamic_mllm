@@ -1,5 +1,20 @@
 # Operational Research Plan: Binary Route Label Regeneration
 
+## Active W2C WHEN-label repair (2026-08-30)
+
+The user authorized `plans/w2c_when_label_repair_plan.md` as one bounded
+research action. Apply the same iterative cache repair to the authoritative
+512 train and 128 validation W2C samples: exhaust known compatible suffixes
+after forcing FULL at the current boundary, then use at most 96 deterministic
+one-edit suffix variants only when necessary. Add all correct routes, recompute
+the boundary, and repeat. Freeze all identities, hashes, sharding, and the
+12-sample smoke before live execution. Interpret remaining DEVIATE candidates
+as bounded-search candidates, not globally proven labels. Finish with the
+specified completeness audit and Q1-Q6 decision report, then stop. Router/gate
+training, Stage 2, external evaluation, and automatic follow-on experiments
+are excluded. Phase memory:
+`workspace/phase_memory/phase_42_w2c_when_label_repair.md`.
+
 ## Completed/stopped selective CONTINUE/DEVIATE validation (2026-08-30)
 
 The user authorized `plans/selective_continue_deviate_expanded_plan.md` as one

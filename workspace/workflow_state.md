@@ -1,5 +1,18 @@
 # Workflow State
 
+- Active phase (2026-08-30):
+  `plans/w2c_when_label_repair_plan.md` (SHA-256
+  `19d750c7acca5caaf37a85438f432e566dd980cbc29ddb1e6cf7d3c8e0c23e88`).
+  Phase 42 is repairing the exact 512-train/128-validation W2C population with
+  one iterative algorithm: force FULL under every known compatible suffix,
+  then, only if those fail, execute at most 96 deterministic layer-stratified
+  one-edit suffix variants per current boundary. Add every correct route and
+  recompute the maximal all-FULL boundary until rescue or bounded exhaustion.
+  A 12-sample smoke must pass before four-GPU full execution. Non-rescue means
+  only unrescued under the frozen budget. No gate/router training, Stage 2, or
+  external evaluation is authorized. Phase memory:
+  `workspace/phase_memory/phase_42_w2c_when_label_repair.md`.
+
 - Completed/stopped phase (2026-08-30):
   `plans/selective_continue_deviate_expanded_plan.md` (SHA-256
   `20a7517dc61197c8d3914cf8cf45183af7438e514ccdb4cba1583f9b25da34e9`).

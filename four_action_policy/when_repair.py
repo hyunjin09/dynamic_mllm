@@ -443,7 +443,14 @@ def select_repair_smoke(
             eligible = []
             for uid, state in state_by_uid.items():
                 current_suffix = (
-                    "single" if int(state["candidate_route_count"]) == 1 else "multi"
+                    "single"
+                    if int(
+                        state.get(
+                            "compatible_suffix_count", state["candidate_route_count"]
+                        )
+                    )
+                    == 1
+                    else "multi"
                 )
                 if (
                     str(state["dataset"]) == dataset
