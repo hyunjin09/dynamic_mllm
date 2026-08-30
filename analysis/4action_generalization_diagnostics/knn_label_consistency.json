@@ -1,0 +1,497 @@
+{
+  "contract": {
+    "batch_size": 64,
+    "checkpoint_selection": "none_fixed_final_epoch",
+    "dropout": 0.0,
+    "epochs": 100,
+    "knn_k": [
+      5,
+      10,
+      20
+    ],
+    "knn_metric": "cosine",
+    "knn_pool_fallback": [
+      "same_dataset_layer",
+      "same_layer",
+      "same_dataset_depth_bin",
+      "global"
+    ],
+    "learning_rate": 0.001,
+    "mlp_hidden_size": 64,
+    "models": [
+      "linear",
+      "mlp"
+    ],
+    "preprocessing": "training_only_featurewise_mean_std",
+    "seed": 20260832,
+    "weight_decay": 0.0001
+  },
+  "entropy": {
+    "action_set": {
+      "H_label_given_layer": 2.0011321221943956,
+      "H_label_given_layer_dataset": 1.8275682984936799
+    },
+    "read_off": {
+      "H_label_given_layer": 0.8578796768109687,
+      "H_label_given_layer_dataset": 0.8354701609743317
+    },
+    "write_off": {
+      "H_label_given_layer": 0.842352531334666,
+      "H_label_given_layer_dataset": 0.8215441104997017
+    }
+  },
+  "representations": {
+    "online": {
+      "mechanism": {
+        "by_k": {
+          "10": {
+            "majority_accuracy": 0.4387755102040816,
+            "mean_label_purity": 0.43061224489795924,
+            "mean_neighbor_distance": 0.5575917807019217,
+            "records": 98
+          },
+          "20": {
+            "majority_accuracy": 0.4387755102040816,
+            "mean_label_purity": 0.4061224489795918,
+            "mean_neighbor_distance": 0.6605230693798665,
+            "records": 98
+          },
+          "5": {
+            "majority_accuracy": 0.42857142857142855,
+            "mean_label_purity": 0.4224489795918368,
+            "mean_neighbor_distance": 0.5001906024401822,
+            "records": 98
+          }
+        },
+        "fallback_counts": {
+          "same_dataset_depth_bin": 94,
+          "same_layer": 4
+        },
+        "neighbor_pairs_at_max_k_records": 1960
+      },
+      "read_off": {
+        "by_k": {
+          "10": {
+            "majority_accuracy": 0.717391304347826,
+            "mean_label_purity": 0.7008695652173914,
+            "mean_neighbor_distance": 0.3681725379872363,
+            "records": 230
+          },
+          "20": {
+            "majority_accuracy": 0.7217391304347827,
+            "mean_label_purity": 0.6591304347826087,
+            "mean_neighbor_distance": 0.509632221409882,
+            "records": 230
+          },
+          "5": {
+            "majority_accuracy": 0.7130434782608696,
+            "mean_label_purity": 0.7026086956521738,
+            "mean_neighbor_distance": 0.2991432994347889,
+            "records": 230
+          }
+        },
+        "fallback_counts": {
+          "same_dataset_depth_bin": 10,
+          "same_dataset_layer": 24,
+          "same_layer": 196
+        },
+        "neighbor_pairs_at_max_k_records": 4600
+      },
+      "when": {
+        "by_k": {
+          "10": {
+            "majority_accuracy": 0.53515625,
+            "mean_label_purity": 0.5554687500000001,
+            "mean_neighbor_distance": 0.36012878424070455,
+            "records": 256
+          },
+          "20": {
+            "majority_accuracy": 0.53515625,
+            "mean_label_purity": 0.533203125,
+            "mean_neighbor_distance": 0.5047929696893231,
+            "records": 256
+          },
+          "5": {
+            "majority_accuracy": 0.546875,
+            "mean_label_purity": 0.54609375,
+            "mean_neighbor_distance": 0.29097156996601636,
+            "records": 256
+          }
+        },
+        "fallback_counts": {
+          "same_dataset_depth_bin": 12,
+          "same_dataset_layer": 46,
+          "same_layer": 198
+        },
+        "neighbor_pairs_at_max_k_records": 5120
+      },
+      "write_off": {
+        "by_k": {
+          "10": {
+            "majority_accuracy": 0.7,
+            "mean_label_purity": 0.6739130434782609,
+            "mean_neighbor_distance": 0.3652058681429926,
+            "records": 230
+          },
+          "20": {
+            "majority_accuracy": 0.7,
+            "mean_label_purity": 0.6278260869565218,
+            "mean_neighbor_distance": 0.5074223912354006,
+            "records": 230
+          },
+          "5": {
+            "majority_accuracy": 0.7304347826086957,
+            "mean_label_purity": 0.6982608695652174,
+            "mean_neighbor_distance": 0.2966453301720123,
+            "records": 230
+          }
+        },
+        "fallback_counts": {
+          "same_dataset_depth_bin": 10,
+          "same_dataset_layer": 23,
+          "same_layer": 197
+        },
+        "neighbor_pairs_at_max_k_records": 4600
+      }
+    },
+    "upfront": {
+      "mechanism": {
+        "by_k": {
+          "10": {
+            "majority_accuracy": 0.35714285714285715,
+            "mean_label_purity": 0.3714285714285715,
+            "mean_neighbor_distance": 0.5751167524446988,
+            "records": 98
+          },
+          "20": {
+            "majority_accuracy": 0.3877551020408163,
+            "mean_label_purity": 0.36938775510204075,
+            "mean_neighbor_distance": 0.7325937519808781,
+            "records": 98
+          },
+          "5": {
+            "majority_accuracy": 0.3469387755102041,
+            "mean_label_purity": 0.3591836734693878,
+            "mean_neighbor_distance": 0.4200749825640424,
+            "records": 98
+          }
+        },
+        "fallback_counts": {
+          "same_dataset_depth_bin": 94,
+          "same_layer": 4
+        },
+        "neighbor_pairs_at_max_k_records": 1960
+      },
+      "read_off": {
+        "by_k": {
+          "10": {
+            "majority_accuracy": 0.6826086956521739,
+            "mean_label_purity": 0.6317391304347827,
+            "mean_neighbor_distance": 0.20575277804094044,
+            "records": 230
+          },
+          "20": {
+            "majority_accuracy": 0.691304347826087,
+            "mean_label_purity": 0.6245652173913043,
+            "mean_neighbor_distance": 0.29767990654735044,
+            "records": 230
+          },
+          "5": {
+            "majority_accuracy": 0.6739130434782609,
+            "mean_label_purity": 0.6400000000000001,
+            "mean_neighbor_distance": 0.15674212065863885,
+            "records": 230
+          }
+        },
+        "fallback_counts": {
+          "same_dataset_depth_bin": 10,
+          "same_dataset_layer": 24,
+          "same_layer": 196
+        },
+        "neighbor_pairs_at_max_k_records": 4600
+      },
+      "when": {
+        "by_k": {
+          "10": {
+            "majority_accuracy": 0.515625,
+            "mean_label_purity": 0.505859375,
+            "mean_neighbor_distance": 0.20501542117941754,
+            "records": 256
+          },
+          "20": {
+            "majority_accuracy": 0.51171875,
+            "mean_label_purity": 0.5052734375,
+            "mean_neighbor_distance": 0.2953217989485166,
+            "records": 256
+          },
+          "5": {
+            "majority_accuracy": 0.50390625,
+            "mean_label_purity": 0.515625,
+            "mean_neighbor_distance": 0.15510845902033202,
+            "records": 256
+          }
+        },
+        "fallback_counts": {
+          "same_dataset_depth_bin": 12,
+          "same_dataset_layer": 46,
+          "same_layer": 198
+        },
+        "neighbor_pairs_at_max_k_records": 5120
+      },
+      "write_off": {
+        "by_k": {
+          "10": {
+            "majority_accuracy": 0.7,
+            "mean_label_purity": 0.638695652173913,
+            "mean_neighbor_distance": 0.2056522787462722,
+            "records": 230
+          },
+          "20": {
+            "majority_accuracy": 0.6956521739130435,
+            "mean_label_purity": 0.6173913043478261,
+            "mean_neighbor_distance": 0.29966441511374015,
+            "records": 230
+          },
+          "5": {
+            "majority_accuracy": 0.6434782608695652,
+            "mean_label_purity": 0.6365217391304349,
+            "mean_neighbor_distance": 0.15591769300103286,
+            "records": 230
+          }
+        },
+        "fallback_counts": {
+          "same_dataset_depth_bin": 10,
+          "same_dataset_layer": 23,
+          "same_layer": 197
+        },
+        "neighbor_pairs_at_max_k_records": 4600
+      }
+    },
+    "z_R": {
+      "mechanism": {
+        "by_k": {
+          "10": {
+            "majority_accuracy": 0.3877551020408163,
+            "mean_label_purity": 0.3714285714285715,
+            "mean_neighbor_distance": 0.45275156547099116,
+            "records": 98
+          },
+          "20": {
+            "majority_accuracy": 0.35714285714285715,
+            "mean_label_purity": 0.36122448979591826,
+            "mean_neighbor_distance": 0.5901524529382812,
+            "records": 98
+          },
+          "5": {
+            "majority_accuracy": 0.37755102040816324,
+            "mean_label_purity": 0.3653061224489796,
+            "mean_neighbor_distance": 0.38114449442490805,
+            "records": 98
+          }
+        },
+        "fallback_counts": {
+          "same_dataset_depth_bin": 94,
+          "same_layer": 4
+        },
+        "neighbor_pairs_at_max_k_records": 1960
+      },
+      "read_off": {
+        "by_k": {
+          "10": {
+            "majority_accuracy": 0.7217391304347827,
+            "mean_label_purity": 0.7117391304347827,
+            "mean_neighbor_distance": 0.33081503853058863,
+            "records": 230
+          },
+          "20": {
+            "majority_accuracy": 0.7130434782608696,
+            "mean_label_purity": 0.6713043478260868,
+            "mean_neighbor_distance": 0.4752728058942441,
+            "records": 230
+          },
+          "5": {
+            "majority_accuracy": 0.7217391304347827,
+            "mean_label_purity": 0.72,
+            "mean_neighbor_distance": 0.27419349537590876,
+            "records": 230
+          }
+        },
+        "fallback_counts": {
+          "same_dataset_depth_bin": 10,
+          "same_dataset_layer": 24,
+          "same_layer": 196
+        },
+        "neighbor_pairs_at_max_k_records": 4600
+      },
+      "when": {
+        "by_k": {
+          "10": {
+            "majority_accuracy": 0.55078125,
+            "mean_label_purity": 0.568359375,
+            "mean_neighbor_distance": 0.3135495882431417,
+            "records": 256
+          },
+          "20": {
+            "majority_accuracy": 0.546875,
+            "mean_label_purity": 0.54296875,
+            "mean_neighbor_distance": 0.4573184875641573,
+            "records": 256
+          },
+          "5": {
+            "majority_accuracy": 0.57421875,
+            "mean_label_purity": 0.575,
+            "mean_neighbor_distance": 0.2579700842617054,
+            "records": 256
+          }
+        },
+        "fallback_counts": {
+          "same_dataset_depth_bin": 12,
+          "same_dataset_layer": 46,
+          "same_layer": 198
+        },
+        "neighbor_pairs_at_max_k_records": 5120
+      },
+      "write_off": {
+        "by_k": {
+          "10": {
+            "majority_accuracy": 0.7043478260869566,
+            "mean_label_purity": 0.6721739130434784,
+            "mean_neighbor_distance": 0.33247410772343666,
+            "records": 230
+          },
+          "20": {
+            "majority_accuracy": 0.7043478260869566,
+            "mean_label_purity": 0.63,
+            "mean_neighbor_distance": 0.47432506621533904,
+            "records": 230
+          },
+          "5": {
+            "majority_accuracy": 0.7,
+            "mean_label_purity": 0.6808695652173913,
+            "mean_neighbor_distance": 0.27601343209871615,
+            "records": 230
+          }
+        },
+        "fallback_counts": {
+          "same_dataset_depth_bin": 10,
+          "same_dataset_layer": 23,
+          "same_layer": 197
+        },
+        "neighbor_pairs_at_max_k_records": 4600
+      }
+    },
+    "z_W": {
+      "mechanism": {
+        "by_k": {
+          "10": {
+            "majority_accuracy": 0.3979591836734694,
+            "mean_label_purity": 0.37755102040816324,
+            "mean_neighbor_distance": 0.36885209271545233,
+            "records": 98
+          },
+          "20": {
+            "majority_accuracy": 0.3979591836734694,
+            "mean_label_purity": 0.3760204081632653,
+            "mean_neighbor_distance": 0.5124414921476389,
+            "records": 98
+          },
+          "5": {
+            "majority_accuracy": 0.40816326530612246,
+            "mean_label_purity": 0.39387755102040817,
+            "mean_neighbor_distance": 0.3121368952464147,
+            "records": 98
+          }
+        },
+        "fallback_counts": {
+          "same_dataset_depth_bin": 94,
+          "same_layer": 4
+        },
+        "neighbor_pairs_at_max_k_records": 1960
+      },
+      "read_off": {
+        "by_k": {
+          "10": {
+            "majority_accuracy": 0.6826086956521739,
+            "mean_label_purity": 0.6291304347826087,
+            "mean_neighbor_distance": 0.2869480622565382,
+            "records": 230
+          },
+          "20": {
+            "majority_accuracy": 0.7130434782608696,
+            "mean_label_purity": 0.6115217391304348,
+            "mean_neighbor_distance": 0.4348794861154169,
+            "records": 230
+          },
+          "5": {
+            "majority_accuracy": 0.6826086956521739,
+            "mean_label_purity": 0.6460869565217392,
+            "mean_neighbor_distance": 0.21887912096604384,
+            "records": 230
+          }
+        },
+        "fallback_counts": {
+          "same_dataset_depth_bin": 10,
+          "same_dataset_layer": 24,
+          "same_layer": 196
+        },
+        "neighbor_pairs_at_max_k_records": 4600
+      },
+      "when": {
+        "by_k": {
+          "10": {
+            "majority_accuracy": 0.55859375,
+            "mean_label_purity": 0.55625,
+            "mean_neighbor_distance": 0.28265826955596324,
+            "records": 256
+          },
+          "20": {
+            "majority_accuracy": 0.5625,
+            "mean_label_purity": 0.532421875,
+            "mean_neighbor_distance": 0.4373132495691666,
+            "records": 256
+          },
+          "5": {
+            "majority_accuracy": 0.5390625,
+            "mean_label_purity": 0.55859375,
+            "mean_neighbor_distance": 0.21390455440452483,
+            "records": 256
+          }
+        },
+        "fallback_counts": {
+          "same_dataset_depth_bin": 12,
+          "same_dataset_layer": 46,
+          "same_layer": 198
+        },
+        "neighbor_pairs_at_max_k_records": 5120
+      },
+      "write_off": {
+        "by_k": {
+          "10": {
+            "majority_accuracy": 0.691304347826087,
+            "mean_label_purity": 0.648695652173913,
+            "mean_neighbor_distance": 0.2813576041215631,
+            "records": 230
+          },
+          "20": {
+            "majority_accuracy": 0.7043478260869566,
+            "mean_label_purity": 0.625,
+            "mean_neighbor_distance": 0.43424943624295104,
+            "records": 230
+          },
+          "5": {
+            "majority_accuracy": 0.7,
+            "mean_label_purity": 0.6704347826086956,
+            "mean_neighbor_distance": 0.21383861471322255,
+            "records": 230
+          }
+        },
+        "fallback_counts": {
+          "same_dataset_depth_bin": 10,
+          "same_dataset_layer": 23,
+          "same_layer": 197
+        },
+        "neighbor_pairs_at_max_k_records": 4600
+      }
+    }
+  }
+}

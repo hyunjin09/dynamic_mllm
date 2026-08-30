@@ -1,5 +1,30 @@
 # Workflow State
 
+- Completed phase (2026-08-30):
+  `plans/four_action_generalization_diagnostic_plan.md` (SHA-256
+  `cdc39940a1e19c22f17771bc535d22be792b97cd7f45d7c6128ce816e933e446`).
+  All 640 frozen W2C mandatory boundaries were exactly matched by split,
+  dataset, and layer to 640 different-UID `FULL`-unique W2C trajectory states.
+  Four direct RTX 6000 Ada ranks extracted finite selected-checkpoint outputs
+  for all 1,280 states. POLAR/online validation KEEP-vs-DEVIATE AUROC is
+  0.542877/0.507751 and argmax deviation recall is 0.054688/0.148438, versus
+  train AUROC 0.915585/0.994514. Both READ_OFF and WRITE_OFF generalization is
+  weak and IGNORE-only recall is zero. The online frozen-state linear WHEN
+  probe reaches 0.737976 AUROC, but within-cell joint state shuffle leaves
+  83.6% of predictions unchanged and does not reduce validation bit AUROCs.
+  k=10 exact mechanism purity is only 0.371--0.431. The final bounded four-GPU
+  audit executed all 19 frozen known-suffix routes for 14 selected
+  cached-invalid states; 6/14 have an execution-correct supposedly invalid
+  action, proving conditional WHAT-label incompleteness. Dominant deployed
+  failure: WHEN, with online trained-signal-use failure, broad WHAT collapse,
+  weak exact-label smoothness, and incomplete cached actions as coexisting
+  supported findings. No new training or external evaluation ran. A future
+  bounded audit inserting `FULL` at mandatory boundaries is recommended only
+  with explicit approval. Evidence:
+  `analysis/4action_generalization_diagnostics/decision_summary.md`; phase
+  memory:
+  `workspace/phase_memory/phase_40_four_action_generalization_diagnostics.md`.
+
 - Completed phase (2026-08-30): `plans/four_action_generalization.md`
   (SHA-256
   `79c159af4aa451cdbb153e95b7145566f77835770c1408765f1fafe1d35837b5`).

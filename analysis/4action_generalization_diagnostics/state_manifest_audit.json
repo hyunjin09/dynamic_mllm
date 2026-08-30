@@ -1,0 +1,1251 @@
+{
+  "boundary_manifest": "analysis/persistent_corrective_supervision/boundary_manifest.jsonl",
+  "boundary_manifest_sha256": "868bd1981a69e579e5c9cf671d8b36e3f3165ff0066cc1ff609002e851f887fb",
+  "cells": [
+    {
+      "dataset": "chartqa",
+      "layer": 0,
+      "negative_candidates": 79,
+      "positives": 6,
+      "selected_negatives": 6,
+      "split": "train"
+    },
+    {
+      "dataset": "chartqa",
+      "layer": 1,
+      "negative_candidates": 127,
+      "positives": 3,
+      "selected_negatives": 3,
+      "split": "train"
+    },
+    {
+      "dataset": "chartqa",
+      "layer": 2,
+      "negative_candidates": 133,
+      "positives": 4,
+      "selected_negatives": 4,
+      "split": "train"
+    },
+    {
+      "dataset": "chartqa",
+      "layer": 3,
+      "negative_candidates": 147,
+      "positives": 5,
+      "selected_negatives": 5,
+      "split": "train"
+    },
+    {
+      "dataset": "chartqa",
+      "layer": 4,
+      "negative_candidates": 157,
+      "positives": 7,
+      "selected_negatives": 7,
+      "split": "train"
+    },
+    {
+      "dataset": "chartqa",
+      "layer": 5,
+      "negative_candidates": 155,
+      "positives": 3,
+      "selected_negatives": 3,
+      "split": "train"
+    },
+    {
+      "dataset": "chartqa",
+      "layer": 6,
+      "negative_candidates": 162,
+      "positives": 10,
+      "selected_negatives": 10,
+      "split": "train"
+    },
+    {
+      "dataset": "chartqa",
+      "layer": 7,
+      "negative_candidates": 163,
+      "positives": 3,
+      "selected_negatives": 3,
+      "split": "train"
+    },
+    {
+      "dataset": "chartqa",
+      "layer": 8,
+      "negative_candidates": 159,
+      "positives": 7,
+      "selected_negatives": 7,
+      "split": "train"
+    },
+    {
+      "dataset": "chartqa",
+      "layer": 9,
+      "negative_candidates": 165,
+      "positives": 3,
+      "selected_negatives": 3,
+      "split": "train"
+    },
+    {
+      "dataset": "chartqa",
+      "layer": 10,
+      "negative_candidates": 161,
+      "positives": 4,
+      "selected_negatives": 4,
+      "split": "train"
+    },
+    {
+      "dataset": "chartqa",
+      "layer": 11,
+      "negative_candidates": 165,
+      "positives": 10,
+      "selected_negatives": 10,
+      "split": "train"
+    },
+    {
+      "dataset": "chartqa",
+      "layer": 12,
+      "negative_candidates": 165,
+      "positives": 12,
+      "selected_negatives": 12,
+      "split": "train"
+    },
+    {
+      "dataset": "chartqa",
+      "layer": 13,
+      "negative_candidates": 163,
+      "positives": 7,
+      "selected_negatives": 7,
+      "split": "train"
+    },
+    {
+      "dataset": "chartqa",
+      "layer": 14,
+      "negative_candidates": 160,
+      "positives": 7,
+      "selected_negatives": 7,
+      "split": "train"
+    },
+    {
+      "dataset": "chartqa",
+      "layer": 15,
+      "negative_candidates": 157,
+      "positives": 6,
+      "selected_negatives": 6,
+      "split": "train"
+    },
+    {
+      "dataset": "chartqa",
+      "layer": 16,
+      "negative_candidates": 157,
+      "positives": 10,
+      "selected_negatives": 10,
+      "split": "train"
+    },
+    {
+      "dataset": "chartqa",
+      "layer": 17,
+      "negative_candidates": 163,
+      "positives": 7,
+      "selected_negatives": 7,
+      "split": "train"
+    },
+    {
+      "dataset": "chartqa",
+      "layer": 18,
+      "negative_candidates": 164,
+      "positives": 3,
+      "selected_negatives": 3,
+      "split": "train"
+    },
+    {
+      "dataset": "chartqa",
+      "layer": 19,
+      "negative_candidates": 160,
+      "positives": 6,
+      "selected_negatives": 6,
+      "split": "train"
+    },
+    {
+      "dataset": "chartqa",
+      "layer": 20,
+      "negative_candidates": 165,
+      "positives": 6,
+      "selected_negatives": 6,
+      "split": "train"
+    },
+    {
+      "dataset": "chartqa",
+      "layer": 21,
+      "negative_candidates": 165,
+      "positives": 7,
+      "selected_negatives": 7,
+      "split": "train"
+    },
+    {
+      "dataset": "chartqa",
+      "layer": 22,
+      "negative_candidates": 168,
+      "positives": 4,
+      "selected_negatives": 4,
+      "split": "train"
+    },
+    {
+      "dataset": "chartqa",
+      "layer": 23,
+      "negative_candidates": 162,
+      "positives": 11,
+      "selected_negatives": 11,
+      "split": "train"
+    },
+    {
+      "dataset": "chartqa",
+      "layer": 24,
+      "negative_candidates": 163,
+      "positives": 6,
+      "selected_negatives": 6,
+      "split": "train"
+    },
+    {
+      "dataset": "chartqa",
+      "layer": 25,
+      "negative_candidates": 166,
+      "positives": 7,
+      "selected_negatives": 7,
+      "split": "train"
+    },
+    {
+      "dataset": "chartqa",
+      "layer": 26,
+      "negative_candidates": 162,
+      "positives": 5,
+      "selected_negatives": 5,
+      "split": "train"
+    },
+    {
+      "dataset": "chartqa",
+      "layer": 27,
+      "negative_candidates": 168,
+      "positives": 2,
+      "selected_negatives": 2,
+      "split": "train"
+    },
+    {
+      "dataset": "gqa",
+      "layer": 0,
+      "negative_candidates": 42,
+      "positives": 11,
+      "selected_negatives": 11,
+      "split": "train"
+    },
+    {
+      "dataset": "gqa",
+      "layer": 1,
+      "negative_candidates": 104,
+      "positives": 11,
+      "selected_negatives": 11,
+      "split": "train"
+    },
+    {
+      "dataset": "gqa",
+      "layer": 2,
+      "negative_candidates": 155,
+      "positives": 4,
+      "selected_negatives": 4,
+      "split": "train"
+    },
+    {
+      "dataset": "gqa",
+      "layer": 3,
+      "negative_candidates": 149,
+      "positives": 4,
+      "selected_negatives": 4,
+      "split": "train"
+    },
+    {
+      "dataset": "gqa",
+      "layer": 4,
+      "negative_candidates": 161,
+      "positives": 7,
+      "selected_negatives": 7,
+      "split": "train"
+    },
+    {
+      "dataset": "gqa",
+      "layer": 5,
+      "negative_candidates": 153,
+      "positives": 3,
+      "selected_negatives": 3,
+      "split": "train"
+    },
+    {
+      "dataset": "gqa",
+      "layer": 6,
+      "negative_candidates": 151,
+      "positives": 4,
+      "selected_negatives": 4,
+      "split": "train"
+    },
+    {
+      "dataset": "gqa",
+      "layer": 7,
+      "negative_candidates": 148,
+      "positives": 9,
+      "selected_negatives": 9,
+      "split": "train"
+    },
+    {
+      "dataset": "gqa",
+      "layer": 8,
+      "negative_candidates": 153,
+      "positives": 4,
+      "selected_negatives": 4,
+      "split": "train"
+    },
+    {
+      "dataset": "gqa",
+      "layer": 9,
+      "negative_candidates": 157,
+      "positives": 4,
+      "selected_negatives": 4,
+      "split": "train"
+    },
+    {
+      "dataset": "gqa",
+      "layer": 10,
+      "negative_candidates": 160,
+      "positives": 6,
+      "selected_negatives": 6,
+      "split": "train"
+    },
+    {
+      "dataset": "gqa",
+      "layer": 11,
+      "negative_candidates": 157,
+      "positives": 4,
+      "selected_negatives": 4,
+      "split": "train"
+    },
+    {
+      "dataset": "gqa",
+      "layer": 12,
+      "negative_candidates": 158,
+      "positives": 9,
+      "selected_negatives": 9,
+      "split": "train"
+    },
+    {
+      "dataset": "gqa",
+      "layer": 13,
+      "negative_candidates": 158,
+      "positives": 8,
+      "selected_negatives": 8,
+      "split": "train"
+    },
+    {
+      "dataset": "gqa",
+      "layer": 14,
+      "negative_candidates": 157,
+      "positives": 7,
+      "selected_negatives": 7,
+      "split": "train"
+    },
+    {
+      "dataset": "gqa",
+      "layer": 15,
+      "negative_candidates": 155,
+      "positives": 12,
+      "selected_negatives": 12,
+      "split": "train"
+    },
+    {
+      "dataset": "gqa",
+      "layer": 16,
+      "negative_candidates": 158,
+      "positives": 6,
+      "selected_negatives": 6,
+      "split": "train"
+    },
+    {
+      "dataset": "gqa",
+      "layer": 17,
+      "negative_candidates": 157,
+      "positives": 5,
+      "selected_negatives": 5,
+      "split": "train"
+    },
+    {
+      "dataset": "gqa",
+      "layer": 18,
+      "negative_candidates": 157,
+      "positives": 3,
+      "selected_negatives": 3,
+      "split": "train"
+    },
+    {
+      "dataset": "gqa",
+      "layer": 19,
+      "negative_candidates": 157,
+      "positives": 5,
+      "selected_negatives": 5,
+      "split": "train"
+    },
+    {
+      "dataset": "gqa",
+      "layer": 20,
+      "negative_candidates": 165,
+      "positives": 5,
+      "selected_negatives": 5,
+      "split": "train"
+    },
+    {
+      "dataset": "gqa",
+      "layer": 21,
+      "negative_candidates": 161,
+      "positives": 4,
+      "selected_negatives": 4,
+      "split": "train"
+    },
+    {
+      "dataset": "gqa",
+      "layer": 22,
+      "negative_candidates": 159,
+      "positives": 10,
+      "selected_negatives": 10,
+      "split": "train"
+    },
+    {
+      "dataset": "gqa",
+      "layer": 23,
+      "negative_candidates": 162,
+      "positives": 9,
+      "selected_negatives": 9,
+      "split": "train"
+    },
+    {
+      "dataset": "gqa",
+      "layer": 24,
+      "negative_candidates": 162,
+      "positives": 7,
+      "selected_negatives": 7,
+      "split": "train"
+    },
+    {
+      "dataset": "gqa",
+      "layer": 25,
+      "negative_candidates": 162,
+      "positives": 6,
+      "selected_negatives": 6,
+      "split": "train"
+    },
+    {
+      "dataset": "gqa",
+      "layer": 26,
+      "negative_candidates": 157,
+      "positives": 3,
+      "selected_negatives": 3,
+      "split": "train"
+    },
+    {
+      "dataset": "gqa",
+      "layer": 27,
+      "negative_candidates": 165,
+      "positives": 1,
+      "selected_negatives": 1,
+      "split": "train"
+    },
+    {
+      "dataset": "textvqa",
+      "layer": 0,
+      "negative_candidates": 81,
+      "positives": 6,
+      "selected_negatives": 6,
+      "split": "train"
+    },
+    {
+      "dataset": "textvqa",
+      "layer": 1,
+      "negative_candidates": 117,
+      "positives": 7,
+      "selected_negatives": 7,
+      "split": "train"
+    },
+    {
+      "dataset": "textvqa",
+      "layer": 2,
+      "negative_candidates": 140,
+      "positives": 6,
+      "selected_negatives": 6,
+      "split": "train"
+    },
+    {
+      "dataset": "textvqa",
+      "layer": 3,
+      "negative_candidates": 149,
+      "positives": 4,
+      "selected_negatives": 4,
+      "split": "train"
+    },
+    {
+      "dataset": "textvqa",
+      "layer": 4,
+      "negative_candidates": 156,
+      "positives": 5,
+      "selected_negatives": 5,
+      "split": "train"
+    },
+    {
+      "dataset": "textvqa",
+      "layer": 5,
+      "negative_candidates": 161,
+      "positives": 2,
+      "selected_negatives": 2,
+      "split": "train"
+    },
+    {
+      "dataset": "textvqa",
+      "layer": 6,
+      "negative_candidates": 162,
+      "positives": 7,
+      "selected_negatives": 7,
+      "split": "train"
+    },
+    {
+      "dataset": "textvqa",
+      "layer": 7,
+      "negative_candidates": 156,
+      "positives": 10,
+      "selected_negatives": 10,
+      "split": "train"
+    },
+    {
+      "dataset": "textvqa",
+      "layer": 8,
+      "negative_candidates": 162,
+      "positives": 3,
+      "selected_negatives": 3,
+      "split": "train"
+    },
+    {
+      "dataset": "textvqa",
+      "layer": 9,
+      "negative_candidates": 157,
+      "positives": 13,
+      "selected_negatives": 13,
+      "split": "train"
+    },
+    {
+      "dataset": "textvqa",
+      "layer": 10,
+      "negative_candidates": 157,
+      "positives": 4,
+      "selected_negatives": 4,
+      "split": "train"
+    },
+    {
+      "dataset": "textvqa",
+      "layer": 11,
+      "negative_candidates": 167,
+      "positives": 5,
+      "selected_negatives": 5,
+      "split": "train"
+    },
+    {
+      "dataset": "textvqa",
+      "layer": 12,
+      "negative_candidates": 162,
+      "positives": 4,
+      "selected_negatives": 4,
+      "split": "train"
+    },
+    {
+      "dataset": "textvqa",
+      "layer": 13,
+      "negative_candidates": 164,
+      "positives": 7,
+      "selected_negatives": 7,
+      "split": "train"
+    },
+    {
+      "dataset": "textvqa",
+      "layer": 14,
+      "negative_candidates": 163,
+      "positives": 9,
+      "selected_negatives": 9,
+      "split": "train"
+    },
+    {
+      "dataset": "textvqa",
+      "layer": 15,
+      "negative_candidates": 165,
+      "positives": 4,
+      "selected_negatives": 4,
+      "split": "train"
+    },
+    {
+      "dataset": "textvqa",
+      "layer": 16,
+      "negative_candidates": 165,
+      "positives": 10,
+      "selected_negatives": 10,
+      "split": "train"
+    },
+    {
+      "dataset": "textvqa",
+      "layer": 17,
+      "negative_candidates": 163,
+      "positives": 6,
+      "selected_negatives": 6,
+      "split": "train"
+    },
+    {
+      "dataset": "textvqa",
+      "layer": 18,
+      "negative_candidates": 164,
+      "positives": 5,
+      "selected_negatives": 5,
+      "split": "train"
+    },
+    {
+      "dataset": "textvqa",
+      "layer": 19,
+      "negative_candidates": 165,
+      "positives": 7,
+      "selected_negatives": 7,
+      "split": "train"
+    },
+    {
+      "dataset": "textvqa",
+      "layer": 20,
+      "negative_candidates": 165,
+      "positives": 4,
+      "selected_negatives": 4,
+      "split": "train"
+    },
+    {
+      "dataset": "textvqa",
+      "layer": 21,
+      "negative_candidates": 160,
+      "positives": 3,
+      "selected_negatives": 3,
+      "split": "train"
+    },
+    {
+      "dataset": "textvqa",
+      "layer": 22,
+      "negative_candidates": 161,
+      "positives": 2,
+      "selected_negatives": 2,
+      "split": "train"
+    },
+    {
+      "dataset": "textvqa",
+      "layer": 23,
+      "negative_candidates": 164,
+      "positives": 8,
+      "selected_negatives": 8,
+      "split": "train"
+    },
+    {
+      "dataset": "textvqa",
+      "layer": 24,
+      "negative_candidates": 161,
+      "positives": 9,
+      "selected_negatives": 9,
+      "split": "train"
+    },
+    {
+      "dataset": "textvqa",
+      "layer": 25,
+      "negative_candidates": 163,
+      "positives": 2,
+      "selected_negatives": 2,
+      "split": "train"
+    },
+    {
+      "dataset": "textvqa",
+      "layer": 26,
+      "negative_candidates": 164,
+      "positives": 13,
+      "selected_negatives": 13,
+      "split": "train"
+    },
+    {
+      "dataset": "textvqa",
+      "layer": 27,
+      "negative_candidates": 164,
+      "positives": 5,
+      "selected_negatives": 5,
+      "split": "train"
+    },
+    {
+      "dataset": "chartqa",
+      "layer": 1,
+      "negative_candidates": 34,
+      "positives": 2,
+      "selected_negatives": 2,
+      "split": "validation"
+    },
+    {
+      "dataset": "chartqa",
+      "layer": 3,
+      "negative_candidates": 36,
+      "positives": 1,
+      "selected_negatives": 1,
+      "split": "validation"
+    },
+    {
+      "dataset": "chartqa",
+      "layer": 4,
+      "negative_candidates": 39,
+      "positives": 2,
+      "selected_negatives": 2,
+      "split": "validation"
+    },
+    {
+      "dataset": "chartqa",
+      "layer": 5,
+      "negative_candidates": 40,
+      "positives": 3,
+      "selected_negatives": 3,
+      "split": "validation"
+    },
+    {
+      "dataset": "chartqa",
+      "layer": 6,
+      "negative_candidates": 39,
+      "positives": 1,
+      "selected_negatives": 1,
+      "split": "validation"
+    },
+    {
+      "dataset": "chartqa",
+      "layer": 7,
+      "negative_candidates": 43,
+      "positives": 1,
+      "selected_negatives": 1,
+      "split": "validation"
+    },
+    {
+      "dataset": "chartqa",
+      "layer": 8,
+      "negative_candidates": 39,
+      "positives": 2,
+      "selected_negatives": 2,
+      "split": "validation"
+    },
+    {
+      "dataset": "chartqa",
+      "layer": 9,
+      "negative_candidates": 41,
+      "positives": 2,
+      "selected_negatives": 2,
+      "split": "validation"
+    },
+    {
+      "dataset": "chartqa",
+      "layer": 10,
+      "negative_candidates": 41,
+      "positives": 1,
+      "selected_negatives": 1,
+      "split": "validation"
+    },
+    {
+      "dataset": "chartqa",
+      "layer": 11,
+      "negative_candidates": 40,
+      "positives": 1,
+      "selected_negatives": 1,
+      "split": "validation"
+    },
+    {
+      "dataset": "chartqa",
+      "layer": 13,
+      "negative_candidates": 42,
+      "positives": 3,
+      "selected_negatives": 3,
+      "split": "validation"
+    },
+    {
+      "dataset": "chartqa",
+      "layer": 14,
+      "negative_candidates": 42,
+      "positives": 2,
+      "selected_negatives": 2,
+      "split": "validation"
+    },
+    {
+      "dataset": "chartqa",
+      "layer": 15,
+      "negative_candidates": 40,
+      "positives": 3,
+      "selected_negatives": 3,
+      "split": "validation"
+    },
+    {
+      "dataset": "chartqa",
+      "layer": 16,
+      "negative_candidates": 41,
+      "positives": 4,
+      "selected_negatives": 4,
+      "split": "validation"
+    },
+    {
+      "dataset": "chartqa",
+      "layer": 17,
+      "negative_candidates": 40,
+      "positives": 1,
+      "selected_negatives": 1,
+      "split": "validation"
+    },
+    {
+      "dataset": "chartqa",
+      "layer": 18,
+      "negative_candidates": 41,
+      "positives": 3,
+      "selected_negatives": 3,
+      "split": "validation"
+    },
+    {
+      "dataset": "chartqa",
+      "layer": 22,
+      "negative_candidates": 38,
+      "positives": 1,
+      "selected_negatives": 1,
+      "split": "validation"
+    },
+    {
+      "dataset": "chartqa",
+      "layer": 23,
+      "negative_candidates": 41,
+      "positives": 2,
+      "selected_negatives": 2,
+      "split": "validation"
+    },
+    {
+      "dataset": "chartqa",
+      "layer": 24,
+      "negative_candidates": 40,
+      "positives": 2,
+      "selected_negatives": 2,
+      "split": "validation"
+    },
+    {
+      "dataset": "chartqa",
+      "layer": 25,
+      "negative_candidates": 42,
+      "positives": 3,
+      "selected_negatives": 3,
+      "split": "validation"
+    },
+    {
+      "dataset": "chartqa",
+      "layer": 26,
+      "negative_candidates": 42,
+      "positives": 3,
+      "selected_negatives": 3,
+      "split": "validation"
+    },
+    {
+      "dataset": "gqa",
+      "layer": 0,
+      "negative_candidates": 7,
+      "positives": 1,
+      "selected_negatives": 1,
+      "split": "validation"
+    },
+    {
+      "dataset": "gqa",
+      "layer": 1,
+      "negative_candidates": 26,
+      "positives": 5,
+      "selected_negatives": 5,
+      "split": "validation"
+    },
+    {
+      "dataset": "gqa",
+      "layer": 2,
+      "negative_candidates": 38,
+      "positives": 1,
+      "selected_negatives": 1,
+      "split": "validation"
+    },
+    {
+      "dataset": "gqa",
+      "layer": 3,
+      "negative_candidates": 38,
+      "positives": 1,
+      "selected_negatives": 1,
+      "split": "validation"
+    },
+    {
+      "dataset": "gqa",
+      "layer": 4,
+      "negative_candidates": 40,
+      "positives": 1,
+      "selected_negatives": 1,
+      "split": "validation"
+    },
+    {
+      "dataset": "gqa",
+      "layer": 5,
+      "negative_candidates": 39,
+      "positives": 1,
+      "selected_negatives": 1,
+      "split": "validation"
+    },
+    {
+      "dataset": "gqa",
+      "layer": 6,
+      "negative_candidates": 40,
+      "positives": 1,
+      "selected_negatives": 1,
+      "split": "validation"
+    },
+    {
+      "dataset": "gqa",
+      "layer": 7,
+      "negative_candidates": 39,
+      "positives": 4,
+      "selected_negatives": 4,
+      "split": "validation"
+    },
+    {
+      "dataset": "gqa",
+      "layer": 8,
+      "negative_candidates": 42,
+      "positives": 1,
+      "selected_negatives": 1,
+      "split": "validation"
+    },
+    {
+      "dataset": "gqa",
+      "layer": 9,
+      "negative_candidates": 39,
+      "positives": 4,
+      "selected_negatives": 4,
+      "split": "validation"
+    },
+    {
+      "dataset": "gqa",
+      "layer": 12,
+      "negative_candidates": 41,
+      "positives": 2,
+      "selected_negatives": 2,
+      "split": "validation"
+    },
+    {
+      "dataset": "gqa",
+      "layer": 13,
+      "negative_candidates": 41,
+      "positives": 1,
+      "selected_negatives": 1,
+      "split": "validation"
+    },
+    {
+      "dataset": "gqa",
+      "layer": 14,
+      "negative_candidates": 40,
+      "positives": 3,
+      "selected_negatives": 3,
+      "split": "validation"
+    },
+    {
+      "dataset": "gqa",
+      "layer": 15,
+      "negative_candidates": 43,
+      "positives": 2,
+      "selected_negatives": 2,
+      "split": "validation"
+    },
+    {
+      "dataset": "gqa",
+      "layer": 16,
+      "negative_candidates": 43,
+      "positives": 1,
+      "selected_negatives": 1,
+      "split": "validation"
+    },
+    {
+      "dataset": "gqa",
+      "layer": 17,
+      "negative_candidates": 41,
+      "positives": 1,
+      "selected_negatives": 1,
+      "split": "validation"
+    },
+    {
+      "dataset": "gqa",
+      "layer": 18,
+      "negative_candidates": 40,
+      "positives": 1,
+      "selected_negatives": 1,
+      "split": "validation"
+    },
+    {
+      "dataset": "gqa",
+      "layer": 19,
+      "negative_candidates": 42,
+      "positives": 1,
+      "selected_negatives": 1,
+      "split": "validation"
+    },
+    {
+      "dataset": "gqa",
+      "layer": 20,
+      "negative_candidates": 42,
+      "positives": 2,
+      "selected_negatives": 2,
+      "split": "validation"
+    },
+    {
+      "dataset": "gqa",
+      "layer": 21,
+      "negative_candidates": 42,
+      "positives": 3,
+      "selected_negatives": 3,
+      "split": "validation"
+    },
+    {
+      "dataset": "gqa",
+      "layer": 22,
+      "negative_candidates": 41,
+      "positives": 1,
+      "selected_negatives": 1,
+      "split": "validation"
+    },
+    {
+      "dataset": "gqa",
+      "layer": 23,
+      "negative_candidates": 41,
+      "positives": 3,
+      "selected_negatives": 3,
+      "split": "validation"
+    },
+    {
+      "dataset": "gqa",
+      "layer": 25,
+      "negative_candidates": 40,
+      "positives": 2,
+      "selected_negatives": 2,
+      "split": "validation"
+    },
+    {
+      "dataset": "textvqa",
+      "layer": 0,
+      "negative_candidates": 19,
+      "positives": 4,
+      "selected_negatives": 4,
+      "split": "validation"
+    },
+    {
+      "dataset": "textvqa",
+      "layer": 1,
+      "negative_candidates": 31,
+      "positives": 2,
+      "selected_negatives": 2,
+      "split": "validation"
+    },
+    {
+      "dataset": "textvqa",
+      "layer": 2,
+      "negative_candidates": 37,
+      "positives": 1,
+      "selected_negatives": 1,
+      "split": "validation"
+    },
+    {
+      "dataset": "textvqa",
+      "layer": 3,
+      "negative_candidates": 37,
+      "positives": 1,
+      "selected_negatives": 1,
+      "split": "validation"
+    },
+    {
+      "dataset": "textvqa",
+      "layer": 4,
+      "negative_candidates": 38,
+      "positives": 1,
+      "selected_negatives": 1,
+      "split": "validation"
+    },
+    {
+      "dataset": "textvqa",
+      "layer": 6,
+      "negative_candidates": 37,
+      "positives": 1,
+      "selected_negatives": 1,
+      "split": "validation"
+    },
+    {
+      "dataset": "textvqa",
+      "layer": 7,
+      "negative_candidates": 40,
+      "positives": 1,
+      "selected_negatives": 1,
+      "split": "validation"
+    },
+    {
+      "dataset": "textvqa",
+      "layer": 8,
+      "negative_candidates": 40,
+      "positives": 2,
+      "selected_negatives": 2,
+      "split": "validation"
+    },
+    {
+      "dataset": "textvqa",
+      "layer": 9,
+      "negative_candidates": 39,
+      "positives": 1,
+      "selected_negatives": 1,
+      "split": "validation"
+    },
+    {
+      "dataset": "textvqa",
+      "layer": 11,
+      "negative_candidates": 39,
+      "positives": 1,
+      "selected_negatives": 1,
+      "split": "validation"
+    },
+    {
+      "dataset": "textvqa",
+      "layer": 12,
+      "negative_candidates": 40,
+      "positives": 1,
+      "selected_negatives": 1,
+      "split": "validation"
+    },
+    {
+      "dataset": "textvqa",
+      "layer": 13,
+      "negative_candidates": 41,
+      "positives": 3,
+      "selected_negatives": 3,
+      "split": "validation"
+    },
+    {
+      "dataset": "textvqa",
+      "layer": 14,
+      "negative_candidates": 41,
+      "positives": 5,
+      "selected_negatives": 5,
+      "split": "validation"
+    },
+    {
+      "dataset": "textvqa",
+      "layer": 15,
+      "negative_candidates": 39,
+      "positives": 1,
+      "selected_negatives": 1,
+      "split": "validation"
+    },
+    {
+      "dataset": "textvqa",
+      "layer": 16,
+      "negative_candidates": 42,
+      "positives": 2,
+      "selected_negatives": 2,
+      "split": "validation"
+    },
+    {
+      "dataset": "textvqa",
+      "layer": 18,
+      "negative_candidates": 37,
+      "positives": 1,
+      "selected_negatives": 1,
+      "split": "validation"
+    },
+    {
+      "dataset": "textvqa",
+      "layer": 19,
+      "negative_candidates": 42,
+      "positives": 3,
+      "selected_negatives": 3,
+      "split": "validation"
+    },
+    {
+      "dataset": "textvqa",
+      "layer": 20,
+      "negative_candidates": 41,
+      "positives": 1,
+      "selected_negatives": 1,
+      "split": "validation"
+    },
+    {
+      "dataset": "textvqa",
+      "layer": 21,
+      "negative_candidates": 38,
+      "positives": 2,
+      "selected_negatives": 2,
+      "split": "validation"
+    },
+    {
+      "dataset": "textvqa",
+      "layer": 22,
+      "negative_candidates": 39,
+      "positives": 1,
+      "selected_negatives": 1,
+      "split": "validation"
+    },
+    {
+      "dataset": "textvqa",
+      "layer": 23,
+      "negative_candidates": 41,
+      "positives": 1,
+      "selected_negatives": 1,
+      "split": "validation"
+    },
+    {
+      "dataset": "textvqa",
+      "layer": 24,
+      "negative_candidates": 41,
+      "positives": 2,
+      "selected_negatives": 2,
+      "split": "validation"
+    },
+    {
+      "dataset": "textvqa",
+      "layer": 26,
+      "negative_candidates": 42,
+      "positives": 2,
+      "selected_negatives": 2,
+      "split": "validation"
+    },
+    {
+      "dataset": "textvqa",
+      "layer": 27,
+      "negative_candidates": 41,
+      "positives": 2,
+      "selected_negatives": 2,
+      "split": "validation"
+    }
+  ],
+  "dataset_counts": {
+    "chartqa": 428,
+    "gqa": 428,
+    "textvqa": 424
+  },
+  "negative_states": 640,
+  "pairs": 640,
+  "passed": true,
+  "positive_states": 640,
+  "records": 1280,
+  "schema_version": "four_action_generalization_state_manifest_audit_v1",
+  "seed": 20260830,
+  "singleton_class_counts": {
+    "FULL": 640,
+    "IGNORE": 162,
+    "READ_ONLY": 162,
+    "WRITE_ONLY": 160
+  },
+  "source_manifest": "analysis/persistent_corrective_supervision/training_manifest.jsonl",
+  "source_manifest_sha256": "05716064b11703a339a1bc3f59a54d0e54a50b5490a5748acebbd8f2e91c1583",
+  "source_plan": "plans/four_action_generalization_diagnostic_plan.md",
+  "source_plan_sha256": "cdc39940a1e19c22f17771bc535d22be792b97cd7f45d7c6128ce816e933e446",
+  "split_counts": {
+    "train": 1024,
+    "validation": 256
+  },
+  "state_manifest": "analysis/4action_generalization_diagnostics/state_manifest.jsonl",
+  "state_manifest_sha256": "5dfb1fb664b27f7a47b0a6b19e044ad9b5d9c193fddb2b97f9118ddd45b785c6",
+  "w2c_uids": 640
+}

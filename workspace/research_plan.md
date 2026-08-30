@@ -1,5 +1,34 @@
 # Operational Research Plan: Binary Route Label Regeneration
 
+## Completed four-action generalization mechanism diagnostic (2026-08-30)
+
+The user authorized
+`plans/four_action_generalization_diagnostic_plan.md` as one bounded diagnostic
+of the frozen Phase-39 POLAR epoch-15 and online epoch-14 routers. Exact
+split/dataset/layer matching produced 640 mandatory-deviation and 640
+`FULL`-unique W2C states. Selected-checkpoint extraction and the final bounded
+execution audit used all four local GPUs directly; probes and deterministic
+analysis changed no trained parameter.
+
+The dominant deployed failure is WHEN generalization: validation
+KEEP-vs-DEVIATE AUROC is 0.542877 POLAR and 0.507751 online, with argmax
+deviation recall 0.054688 and 0.148438. WHAT also collapses, including zero
+IGNORE-only recall for both routers. A fresh linear online-state probe reaches
+0.737976 WHEN AUROC, supporting failure of the trained online
+head/objective/optimization combination to exploit available signal; upfront
+probes stay near POLAR. Exact corrective mechanisms are weakly local in all
+tested spaces. The bounded audit found an execution-correct route for 6/14
+selected cached-invalid states, proving that the WHAT action cache is
+incomplete in those cases but not estimating global error or validating WHEN
+labels.
+
+The phase is complete and stopped. No new router/objective, training run, or
+external evaluation is authorized. If the user authorizes a new prospective
+phase, the smallest discriminator is a bounded WHEN-label completeness audit
+that inserts `FULL` at mandatory boundaries while retaining compatible known
+suffixes. Evidence:
+`analysis/4action_generalization_diagnostics/decision_summary.md`.
+
 ## Completed persistent corrective-supervision comparison (2026-08-30)
 
 The user authorized `plans/four_action_generalization.md` as one matched

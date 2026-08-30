@@ -1,0 +1,97 @@
+protocol_version: four_action_generalization_diagnostics_v1
+source_plan: plans/four_action_generalization_diagnostic_plan.md
+source_plan_sha256: cdc39940a1e19c22f17771bc535d22be792b97cd7f45d7c6128ce816e933e446
+parent_configs:
+  polar:
+    path: analysis/persistent_corrective_supervision/polar_config.yaml
+    sha256: 654192728a1284a1eba22d49593c781f35460f477de64eed47450c77cc119ec1
+  online:
+    path: analysis/persistent_corrective_supervision/online_config.yaml
+    sha256: e535873878ae3bdfcc8bdaf4c7580be674ede73e871c7f379a505870b16b69f0
+checkpoints:
+  polar:
+    epoch: 15
+    path: outputs/persistent_corrective_supervision_v1/polar/epoch_15/checkpoint.pt
+    sha256: e22ee666bbc77bfd3c2f2da5b2a789521d9a989e3622637babdc181a8e1da579
+  online:
+    epoch: 14
+    path: outputs/persistent_corrective_supervision_v1/online/epoch_14/router_checkpoint.pt
+    sha256: 9ab297a2299cd039d12e80395703a21b94b75782d395bae705457dd6f8bf4a4f
+data:
+  source_manifest: analysis/persistent_corrective_supervision/training_manifest.jsonl
+  source_manifest_sha256: 05716064b11703a339a1bc3f59a54d0e54a50b5490a5748acebbd8f2e91c1583
+  source_metadata_manifest: datasets/mcts_labels_4action/source_inventory_v1/source_manifest_v1.jsonl
+  source_metadata_manifest_sha256: a44ca6e8684bc1a559997ce0ea52b2796f3265d19be90e22439c653741f36ed7
+  boundary_manifest: analysis/persistent_corrective_supervision/boundary_manifest.jsonl
+  boundary_manifest_sha256: 868bd1981a69e579e5c9cf671d8b36e3f3165ff0066cc1ff609002e851f887fb
+  visual_feature_manifest: analysis/persistent_corrective_supervision/visual_feature_manifest.jsonl
+  visual_feature_manifest_sha256: 32b7ceadcbb47c33721afdc12b34789bf2354615bcd2bff62528559898bcc5e0
+  state_manifest: analysis/4action_generalization_diagnostics/state_manifest.jsonl
+  state_manifest_sha256: 5dfb1fb664b27f7a47b0a6b19e044ad9b5d9c193fddb2b97f9118ddd45b785c6
+  state_manifest_audit: analysis/4action_generalization_diagnostics/state_manifest_audit.json
+  state_manifest_audit_sha256: e288a06129af4fe84a79995d480ec29fe4d5c6ad67c0bdedb1d1a29abcd130af
+  records: 1280
+  pairs: 640
+action_order:
+- IGNORE
+- READ_ONLY
+- WRITE_ONLY
+- FULL
+extraction:
+  seed: 20260830
+  shuffle_seed: 20260831
+  world_size: 4
+  online_shuffle: joint_text_and_visual_within_split_dataset_layer
+  raw_output_root: /mnt/hyemin/qwen_train_eval/outputs/four_action_generalization_diagnostics_v1
+  feature_shard_root: /mnt/hyemin/qwen_train_eval/outputs/four_action_generalization_diagnostics_v1/state_features
+  dtype: bfloat16
+analysis:
+  binary_threshold: 0.5
+  depth_bins:
+    early:
+    - 0
+    - 9
+    middle:
+    - 10
+    - 18
+    late:
+    - 19
+    - 27
+  bit_ambiguous_policy: exclude_from_that_bit_metric_and_report_count
+  multi_valid_policy: set_valued_only_no_arbitrary_mechanism_class
+  layer_only_baseline: train_empirical_probability_by_exact_layer
+  layer_only_alpha: 0.5
+probes:
+  seed: 20260832
+  models:
+  - linear
+  - mlp
+  epochs: 100
+  batch_size: 64
+  learning_rate: 0.001
+  weight_decay: 0.0001
+  mlp_hidden_size: 64
+  dropout: 0.0
+  checkpoint_selection: none_fixed_final_epoch
+  preprocessing: training_only_featurewise_mean_std
+  knn_k:
+  - 5
+  - 10
+  - 20
+  knn_metric: cosine
+  knn_pool_fallback:
+  - same_dataset_layer
+  - same_layer
+  - same_dataset_depth_bin
+  - global
+label_incompleteness:
+  seed: 20260833
+  cap_per_architecture_action: 12
+  max_known_suffixes: 8
+  correctness_interpretation: positive_proves_cached_incomplete_negative_is_no_bounded_rescue
+reporting:
+  analysis_dir: analysis/4action_generalization_diagnostics
+  state_outputs: /mnt/hyemin/qwen_train_eval/outputs/four_action_generalization_diagnostics_v1/state_outputs.pt
+  diagnostic_summary: analysis/4action_generalization_diagnostics/diagnostic_summary.md
+  decision_summary: analysis/4action_generalization_diagnostics/decision_summary.md
+  figures: analysis/4action_generalization_diagnostics/figures

@@ -1199,3 +1199,34 @@ Do not copy raw logs or provisional explanations here.
   nonzero rescue alone as robust generalization, do not claim an online feature
   advantage, and do not open external evaluation for these checkpoint
   families without a new prospective authorization.
+
+## 2026-08-30 — Four-action held-out failure is dominated by WHEN, with incomplete cached WHAT labels
+
+- Decision or promoted lesson: for the frozen persistent-supervision routers,
+  treat failure to recognize held-out mandatory departures from `FULL` as the
+  dominant deployed decision failure. Do not infer that the online state lacks
+  all transferable signal, and do not treat every action absent from the
+  discovered valid-route cache as execution-invalid.
+- Triggering evidence: exact split/dataset/layer matching gives POLAR/online
+  validation KEEP-vs-DEVIATE AUROC 0.542877/0.507751 and argmax deviation
+  recall 0.054688/0.148438, versus train AUROC 0.915585/0.994514. A fresh
+  prespecified linear probe on the frozen online state reaches 0.737976 WHEN
+  AUROC, while the trained router remains at 0.507751. In the bounded selected
+  cached-invalid audit, 6/14 states have an execution-correct supposedly
+  invalid non-`FULL` action under a compatible known suffix.
+- Mechanism qualification: READ_OFF and WRITE_OFF validation discrimination is
+  weak, IGNORE-only recall is zero for both routers, and k=10 exact mechanism
+  purity is only 0.371--0.431. The label audit is conditional and small; it
+  proves incompleteness for six states but does not estimate global prevalence
+  or show that WHAT incompleteness causes WHEN failure.
+- Evidence paths:
+  `analysis/4action_generalization_diagnostics/decision_summary.md`,
+  `when_keep_vs_deviate.csv`, `representation_probe_results.json`, and
+  `label_incompleteness_results.json` in the same directory.
+- Confidence: high for the frozen matched state population and selected
+  checkpoints; medium for future-action ranking; unknown for the exact causal
+  optimizer/head/objective subcomponent.
+- Consequence for future actions: before a new two-stage head or broader route
+  repair, prospectively test WHEN-label completeness by inserting `FULL` at a
+  bounded stratified set of mandatory boundaries with compatible known
+  suffixes. This is a recommendation, not authorization.
