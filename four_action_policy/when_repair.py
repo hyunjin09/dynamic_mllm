@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from collections import Counter
 from hashlib import sha256
 from typing import Any, Callable, Mapping, Sequence
 
@@ -416,3 +417,106 @@ def repair_w2c_sample(
             }
         )
     raise RuntimeError("repair exceeded the maximum possible boundary advances")
+
+
+def select_repair_smoke(
+    states: Sequence[Mapping[str, Any]],
+    prior_results: Sequence[Mapping[str, Any]],
+    *,
+    seed: int,
+) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+    """Freeze 12 validation states spanning the plan's smoke dimensions."""
+
+    state_by_uid = {str(row["uid"]): dict(row) for row in states}
+    status_by_uid = {str(row["uid"]): str(row["status"]) for row in prior_results}
+    if len(state_by_uid) != len(states) or set(state_by_uid) != set(status_by_uid):
+        raise ValueError("smoke inputs must have identical unique UID coverage")
+    desired = {
+        ("FULL-cache-incomplete", "single"): "early",
+        ("FULL-cache-incomplete", "multi"): "middle",
+        ("FULL-confirmed-invalid", "single"): "late",
+        ("FULL-confirmed-invalid", "multi"): "early",
+    }
+    selected = []
+    for dataset in ("chartqa", "gqa", "textvqa"):
+        for (status, suffix_class), depth in desired.items():
+            eligible = []
+            for uid, state in state_by_uid.items():
+                current_suffix = (
+                    "single" if int(state["candidate_route_count"]) == 1 else "multi"
+                )
+                if (
+                    str(state["dataset"]) == dataset
+                    and status_by_uid[uid] == status
+                    and current_suffix == suffix_class
+                    and str(state["depth_bin"]) == depth
+                ):
+                    eligible.append(state)
+            if not eligible:
+                raise ValueError(
+                    f"no smoke candidate for {dataset}/{status}/{suffix_class}/{depth}"
+                )
+            chosen = min(
+                eligible,
+                key=lambda row: _stable(
+                    seed,
+                    "smoke",
+                    dataset,
+                    status,
+                    suffix_class,
+                    depth,
+                    row["uid"],
+                ),
+            )
+            selected.append(
+                {
+                    **chosen,
+                    "prior_status": status,
+                    "suffix_class": suffix_class,
+                }
+            )
+    if len(selected) != 12 or len({row["uid"] for row in selected}) != 12:
+        raise RuntimeError("smoke selection is not a 12-UID cohort")
+    selected.sort(key=lambda row: str(row["uid"]))
+    audit = {
+        "records": len(selected),
+        "dataset_counts": dict(sorted(Counter(row["dataset"] for row in selected).items())),
+        "prior_status_counts": dict(
+            sorted(Counter(row["prior_status"] for row in selected).items())
+        ),
+        "suffix_class_counts": dict(
+            sorted(Counter(row["suffix_class"] for row in selected).items())
+        ),
+        "depth_counts": dict(sorted(Counter(row["depth_bin"] for row in selected).items())),
+    }
+    return selected, audit
+
+
+def assign_cost_balanced_shards(
+    rows: Sequence[Mapping[str, Any]], *, world_size: int
+) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+    """Deterministically assign records with longest-processing-time sharding."""
+
+    if world_size < 1 or not rows:
+        raise ValueError("sharding requires records and a positive world size")
+    if len({str(row["uid"]) for row in rows}) != len(rows):
+        raise ValueError("sharding rows contain duplicate UIDs")
+    ordered = sorted(
+        rows,
+        key=lambda row: (-int(row["estimated_cost"]), str(row["uid"])),
+    )
+    rank_cost = [0] * world_size
+    rank_count = [0] * world_size
+    assigned = []
+    for row in ordered:
+        rank = min(range(world_size), key=lambda value: (rank_cost[value], rank_count[value], value))
+        assigned.append({**dict(row), "rank": rank})
+        rank_cost[rank] += int(row["estimated_cost"])
+        rank_count[rank] += 1
+    assigned.sort(key=lambda row: (int(row["rank"]), -int(row["estimated_cost"]), str(row["uid"])))
+    return assigned, {
+        "world_size": world_size,
+        "records": len(assigned),
+        "rank_records": {str(rank): rank_count[rank] for rank in range(world_size)},
+        "rank_estimated_cost": {str(rank): rank_cost[rank] for rank in range(world_size)},
+    }

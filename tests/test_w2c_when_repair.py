@@ -1,11 +1,13 @@
 from __future__ import annotations
 
 from four_action_policy.when_repair import (
+    assign_cost_balanced_shards,
     build_known_full_candidates,
     local_suffix_search_plan,
     local_suffix_variants,
     maximal_full_boundary,
     repair_w2c_sample,
+    select_repair_smoke,
 )
 
 
@@ -178,3 +180,55 @@ def test_repair_caches_duplicate_route_evaluations_within_sample() -> None:
     assert result["status"] == "FULL_UNRESCUED_UNDER_BUDGET"
     assert calls == [("FULL", "FULL", "FULL", "FULL")]
     assert len(result["route_execution_cache"]) == 1
+
+
+def test_smoke_selection_freezes_dataset_status_suffix_and_depth_coverage() -> None:
+    desired = {
+        ("FULL-cache-incomplete", "single"): "early",
+        ("FULL-cache-incomplete", "multi"): "middle",
+        ("FULL-confirmed-invalid", "single"): "late",
+        ("FULL-confirmed-invalid", "multi"): "early",
+    }
+    states = []
+    results = []
+    for dataset in ("chartqa", "gqa", "textvqa"):
+        for index, ((status, suffix_class), depth) in enumerate(desired.items()):
+            uid = f"{dataset}-{index}"
+            states.append(
+                {
+                    "uid": uid,
+                    "dataset": dataset,
+                    "depth_bin": depth,
+                    "candidate_route_count": 1 if suffix_class == "single" else 2,
+                }
+            )
+            results.append({"uid": uid, "status": status})
+
+    selected, audit = select_repair_smoke(states, results, seed=31)
+
+    assert len(selected) == 12
+    assert audit["dataset_counts"] == {"chartqa": 4, "gqa": 4, "textvqa": 4}
+    assert audit["prior_status_counts"] == {
+        "FULL-cache-incomplete": 6,
+        "FULL-confirmed-invalid": 6,
+    }
+    assert audit["suffix_class_counts"] == {"multi": 6, "single": 6}
+    assert set(audit["depth_counts"]) == {"early", "middle", "late"}
+
+
+def test_cost_balanced_shards_are_deterministic_and_cover_each_uid_once() -> None:
+    rows = [
+        {"uid": f"u{index}", "estimated_cost": cost}
+        for index, cost in enumerate([10, 9, 8, 7, 6, 5, 4, 3])
+    ]
+
+    first, audit = assign_cost_balanced_shards(rows, world_size=4)
+    second, _ = assign_cost_balanced_shards(rows, world_size=4)
+
+    assert first == second
+    assert {row["uid"] for row in first} == {row["uid"] for row in rows}
+    assert len({row["uid"] for row in first}) == len(rows)
+    assert audit["rank_records"] == {"0": 2, "1": 2, "2": 2, "3": 2}
+    assert max(audit["rank_estimated_cost"].values()) - min(
+        audit["rank_estimated_cost"].values()
+    ) <= 1
