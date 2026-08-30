@@ -1,10 +1,9 @@
 # Phase 41: Selective CONTINUE/DEVIATE Memory
 
 ## Current Objective
-Execute the user-authorized expanded selective CONTINUE/DEVIATE plan, beginning
-with an exhaustive bounded audit of whether `FULL` is actually invalid at the
-frozen held-out W2C mandatory boundaries. Proceed to gate training only if the
-prospective label-trust gate passes.
+Complete the user-authorized expanded selective CONTINUE/DEVIATE plan at its
+prospective Phase-1 decision gate by auditing whether `FULL` is actually
+invalid at the frozen held-out W2C mandatory boundaries.
 
 ## Active Constraints
 - Follow `plans/selective_continue_deviate_expanded_plan.md` (SHA-256
@@ -27,18 +26,19 @@ prospective label-trust gate passes.
   execution. This server has no Slurm.
 
 ## Current State
-- Done: read the complete expanded plan and relevant Phase-40 evidence; verified
-  the full held-out W2C census contains 128 unique states across all required
-  datasets, depth bins, and mechanism groups.
-- Done: verified that exhaustive suffix replay is bounded at 252 unique routes
-  derived from all 256 compatible frozen suffixes (four duplicates removed),
-  with 1--12 routes per state and median one.
-- In progress: freeze and execute the Phase-1 FULL-insertion audit.
+- Done: froze and executed all 252 unique FULL-insertion routes for the complete
+  128-state held-out W2C census across four direct GPUs. The routes cover all
+  256 compatible frozen source suffixes after removing four identical routes.
+- Done: 39/128 boundaries are `FULL-cache-incomplete`, 89/128 are bounded
+  `FULL-confirmed-invalid`, and zero are unresolved. Overall bounded rescue is
+  0.304688 with 10,000-draw 95% UID-bootstrap CI [0.226562, 0.382812].
+- Stopped: the prospective Phase-1 gate fails, so no linear/MLP gate dataset,
+  training, threshold sweep, learned-WHEN + oracle-WHAT execution, Stage 2, or
+  external evaluation was started.
 - Blocked: none.
-- Most recent useful observation: the full census gives balanced dataset support
-  (43 ChartQA, 43 GQA, 42 TextVQA) and covers 48 early, 43 middle, and 37 late
-  boundaries plus 33 IGNORE, 33 READ_ONLY, 32 WRITE_ONLY, and 30 multi-valid
-  mechanisms.
+- Most recent useful observation: bounded rescue occurs across every dataset
+  (15/43 ChartQA, 12/43 GQA, 12/42 TextVQA) and is especially frequent at early
+  boundaries (25/48) and multi-valid boundaries (16/30).
 
 ## Evidence That Matters
 | Evidence | Source / Path | Why It Matters | Status |
@@ -47,6 +47,8 @@ prospective label-trust gate passes.
 | Selected cached-invalid non-FULL actions were incomplete in 6/14 bounded cases | `analysis/4action_generalization_diagnostics/label_incompleteness_results.json` | Makes the analogous missing-FULL audit necessary | confirmed |
 | Frozen validation has exactly 128 W2C mandatory boundaries | `analysis/persistent_corrective_supervision/training_manifest.jsonl`; `boundary_manifest.jsonl` | Sets both the audit census and the plan's minimum clean validation-positive count | confirmed |
 | Every frozen boundary index exactly enumerates compatible known suffixes | read-only Phase-41 preflight, 2026-08-30 | Supports exhaustive bounded replay without an arbitrary route cap | confirmed |
+| Forced FULL has a correct compatible bounded continuation for 39/128 mandatory boundaries | `analysis/selective_continue_deviate/when_label_completeness_results.json` | Fails the prospective label-trust gate and forbids gate training | confirmed |
+| All 252/252 deduplicated routes executed with zero unresolved states | `analysis/selective_continue_deviate/when_full_insertion_executions.jsonl`; external rank shards | Validates the Case-A interpretation | confirmed |
 
 ## Failed Attempts and Lessons
 | Attempt | Observed Failure | Diagnosis | Evidence | Lesson / Next Implication | Do Not Repeat |
@@ -57,44 +59,57 @@ prospective label-trust gate passes.
 ## Open Candidates
 | Candidate | Why Plausible | What It Resolves | Cost | Status |
 |---|---|---|---|---|
-| Exhaustive held-out FULL-insertion audit | Directly tests the assumed invalid action under every known compatible suffix | Whether binary WHEN targets are clean enough | medium | testing |
-| Linear frozen-state WHEN gate | Phase-40 online probe reached 0.738 validation AUROC | Whether a simple head exposes a selective high-confidence region | medium | conditional |
-| Small MLP frozen-state WHEN gate | Authorized limited nonlinear comparator | Whether modest capacity improves safe selectivity | medium | conditional |
-| Label-cache repair | Required if FULL rescues invalidate mandatory boundaries | Restores a trustworthy WHEN target | high | future pivot; not authorized here |
+| Exhaustive held-out FULL-insertion audit | Directly tests the assumed invalid action under every known compatible suffix | Whether binary WHEN targets are clean enough | medium | completed; label trust fails |
+| Linear frozen-state WHEN gate | Phase-40 online probe reached 0.738 validation AUROC | Whether a simple head exposes a selective high-confidence region | medium | rejected by prospective Phase-1 gate |
+| Small MLP frozen-state WHEN gate | Authorized limited nonlinear comparator | Whether modest capacity improves safe selectivity | medium | rejected by prospective Phase-1 gate |
+| Label-cache repair | Required because FULL rescues invalidate mandatory boundaries | Restores a trustworthy WHEN target | high | future pivot; not authorized here |
 
 ## Next-Step Decision
 - Deliberation mode: deep.
-- Active objective and bottleneck: test selective Stage 1 without training on an
-  unverified DEVIATE target; current bottleneck is missing evidence that `FULL`
-  is invalid at mandatory boundaries under compatible continuations.
+- Active objective and bottleneck: determine whether selective Stage 1 can be
+  trained on a trustworthy DEVIATE target; the audit shows that the current
+  target fails this prerequisite.
 - Relevant memory item used: Phase 40 proved bounded WHAT-label incompleteness
   and ranked a direct missing-FULL audit as the smallest next discriminator.
-- Confirmed observation: all 128 validation W2C boundaries can be audited with
-  252 deduplicated routes and complete frozen suffix provenance.
-- Unverified interpretation: whether any forced-FULL boundary can still yield a
-  correct answer under a known compatible continuation.
-- Diagnosis: unknown until execution.
-- Viable alternatives considered: audit a 64/96-state stratified subset; audit
-  the complete 128-state held-out census; train the gate immediately.
-- Chosen action: audit the complete 128-state census, because it is within the
-  authorized range, avoids selection variance, and maximizes subgroup support.
-- Strongest objection: requiring zero rescued states is conservative. It is
-  fixed prospectively because the census contains exactly the plan's minimum
-  128 validation DEVIATE positives; accepting any known incomplete state would
-  weaken either the trusted-label or held-out-size requirement after outcomes.
+- Confirmed observation: 39/128 states have a correct FULL-insertion bounded
+  route; all 252 candidates executed and zero states are unresolved.
+- Unverified interpretation: why cache discovery omitted these valid FULL
+  continuations and how much broader continuation search would change the
+  remaining 89 bounded-invalid states.
+- Diagnosis: supported WHEN-label cache incompleteness; causal source unknown.
+- Viable alternatives considered for a future authorized action: repair/expand
+  continuation coverage and rebuild WHEN labels; relax the clean-validation
+  minimum; train on known incomplete labels.
+- Chosen action: apply the frozen Case-A stop and preserve the negative result;
+  do not build or train the selective gate.
+- Strongest objection: the 89 bounded-invalid states could still train a smaller
+  gate. That would violate the prospectively required 128 trusted validation
+  positives and select a weaker contract after seeing the outcome.
 - How this differs from failed attempts: it changes no model or label and tests
   the key WHEN-label assumption directly under live execution.
 - Automatic execution authorized: yes.
 - Authorization basis: explicit user request on 2026-08-30 to read and perform
   `plans/selective_continue_deviate_expanded_plan.md`.
-- Stop condition: if any state is rescued or unresolved, write the complete
-  Phase-1 evidence and stop before gate training; otherwise complete the
-  authorized gate/oracle stages and stop before Stage 2.
+- Stop condition: satisfied. Complete Phase-1 evidence exists and the action
+  stopped before gate training after 39 bounded rescues.
 
 ## Latest Research-Action Result
-- Action taken: in progress.
-- Result: pending.
-- Evidence saved: helper implementation and tests; prospective protocol pending.
-- Failure or issue: none.
-- Lesson learned: pending.
-- Next implication: pending Phase-1 gate.
+- Action taken: froze the full 128-UID audit and 252 deduplicated routes, then
+  executed every route on four direct GPUs and applied the frozen bootstrap and
+  sample-contract decision.
+- Result: 39/128 bounded FULL rescues (0.304688; 95% CI
+  [0.226562, 0.382812]), 89 bounded invalid, zero unresolved; Case A.
+- Evidence saved: `analysis/selective_continue_deviate/protocol.md`, exact
+  subset/executions/results/report/decision/checksum files; raw rank shards at
+  `/mnt/hyemin/qwen_train_eval/outputs/selective_continue_deviate_v1/full_insertion_audit/`.
+- Verification: 128 unique UIDs, 252/252 routes, every frozen compatible suffix,
+  all artifact checksums pass, and all four rank shards are checksum-bound to
+  the same config/subset.
+- Failure or issue: no runtime failure. Scientific failure: current DEVIATE
+  labels do not meet the prospective completeness/trust contract.
+- Lesson learned: a mandatory boundary derived from discovered correct routes
+  cannot be assumed to make FULL invalid; compatible continuation coverage must
+  be audited before binary gate training.
+- Next implication: a continuation-cache repair, WHEN-label rebuild, and repeat
+  audit is the smallest defensible next action, but it is a new action requiring
+  explicit authorization.

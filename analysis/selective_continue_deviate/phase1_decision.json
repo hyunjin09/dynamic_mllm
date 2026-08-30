@@ -1,0 +1,10 @@
+{
+  "next_stage": "stop_before_gate_training",
+  "outcome": "case_a_stop_label_incompleteness",
+  "passed": false,
+  "required_trusted_validation_positives": 128,
+  "rescued_states": 39,
+  "states": 128,
+  "trusted_validation_deviate_positives": 89,
+  "unresolved_states": 0
+}

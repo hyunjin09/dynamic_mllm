@@ -3,6 +3,36 @@
 Record only decisions, pivots, and lessons that should affect later phases.
 Do not copy raw logs or provisional explanations here.
 
+## 2026-08-30 — Audit mandatory-boundary FULL validity before gate training
+
+- Decision or promoted lesson: Do not treat a mandatory W2C boundary inferred
+  from discovered correct routes as proof that `FULL` is invalid. Before
+  training another CONTINUE/DEVIATE gate from these labels, repair or expand
+  compatible-continuation coverage, rebuild WHEN labels, and repeat a frozen
+  FULL-insertion audit.
+- Triggering evidence: The complete 128-state held-out W2C census executed all
+  252 deduplicated routes induced by every compatible frozen suffix. Forced
+  FULL yielded a correct bounded continuation for 39/128 states (30.47%;
+  10,000-draw 95% UID-bootstrap CI [22.66%, 38.28%]), across ChartQA, GQA, and
+  TextVQA. Zero states were unresolved.
+- Evidence paths:
+  `analysis/selective_continue_deviate/when_label_completeness_report.md`,
+  `analysis/selective_continue_deviate/when_full_insertion_executions.jsonl`,
+  and `workspace/phase_memory/phase_41_selective_continue_deviate.md`.
+- Confidence: high that the current frozen WHEN cache is materially incomplete
+  under the bounded known-suffix executor; unknown why cache discovery omitted
+  these continuations or how many unobserved continuations remain.
+- Applies when: Constructing or evaluating binary KEEP/DEVIATE supervision from
+  the current four-action W2C boundary cache.
+- Does not apply when: Claiming FULL is globally valid at the rescued states,
+  estimating natural prevalence outside the frozen held-out cohort, or
+  diagnosing the discovery failure's cause.
+- Consequence for future actions: Do not train the planned linear/MLP gate on
+  the current labels or relax the clean 128-positive validation contract after
+  seeing this result. A label-repair phase requires explicit authorization.
+- Revisit condition: A prospective repaired cache supplies at least 128 trusted
+  held-out DEVIATE positives and passes a new exhaustive bounded audit.
+
 ## 2026-08-29 — Require internal routed benefit before external router evaluation
 
 - Decision or promoted lesson: Do not spend the restricted external-evaluation

@@ -1,0 +1,45 @@
+{
+  "all_suffix_sets_complete": true,
+  "audit_subset": "analysis/selective_continue_deviate/when_full_insertion_subset.json",
+  "audit_subset_sha256": "4e8677ad39bccd30ca805a868e607be310481130936a9112ec913daf945ba3e4",
+  "boundary_manifest": "analysis/persistent_corrective_supervision/boundary_manifest.jsonl",
+  "boundary_manifest_sha256": "868bd1981a69e579e5c9cf671d8b36e3f3165ff0066cc1ff609002e851f887fb",
+  "candidate_count_histogram": {
+    "1": 73,
+    "2": 29,
+    "3": 8,
+    "4": 9,
+    "5": 5,
+    "7": 1,
+    "8": 1,
+    "9": 1,
+    "12": 1
+  },
+  "candidate_routes": 252,
+  "dataset_counts": {
+    "chartqa": 43,
+    "gqa": 43,
+    "textvqa": 42
+  },
+  "deduplicated_source_routes": 4,
+  "depth_counts": {
+    "early": 48,
+    "late": 37,
+    "middle": 43
+  },
+  "mechanism_counts": {
+    "IGNORE": 33,
+    "MULTI": 30,
+    "READ_ONLY": 33,
+    "WRITE_ONLY": 32
+  },
+  "schema_version": "selective_continue_deviate_full_insertion_subset_audit_v1",
+  "source_compatible_suffixes": 256,
+  "source_manifest": "analysis/persistent_corrective_supervision/training_manifest.jsonl",
+  "source_manifest_sha256": "05716064b11703a339a1bc3f59a54d0e54a50b5490a5748acebbd8f2e91c1583",
+  "source_plan": "plans/selective_continue_deviate_expanded_plan.md",
+  "source_plan_sha256": "20a7517dc61197c8d3914cf8cf45183af7438e514ccdb4cba1583f9b25da34e9",
+  "split": "validation",
+  "states": 128,
+  "uids": 128
+}

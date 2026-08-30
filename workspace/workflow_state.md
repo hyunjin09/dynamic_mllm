@@ -1,16 +1,18 @@
 # Workflow State
 
-- Active phase (2026-08-30):
+- Completed/stopped phase (2026-08-30):
   `plans/selective_continue_deviate_expanded_plan.md` (SHA-256
   `20a7517dc61197c8d3914cf8cf45183af7438e514ccdb4cba1583f9b25da34e9`).
-  Phase 1 will audit the complete 128-state held-out W2C census by inserting
+  Phase 1 audited the complete 128-state held-out W2C census by inserting
   `FULL` at each mandatory boundary and executing all 252 deduplicated routes
-  induced by every compatible frozen suffix. The prospective decision rule
-  admits gate training only if all 128 states remain trusted; any bounded rescue
-  or unresolved state stops before training because it would leave fewer than
-  the plan's minimum 128 trusted validation DEVIATE positives. Four direct GPUs
-  are reserved for live execution. No Stage-2 or external evaluation is
-  authorized. Phase memory:
+  induced by every compatible frozen suffix on four direct GPUs. It found
+  39/128 bounded rescues (30.47%, 10,000-draw 95% UID-bootstrap CI
+  [22.66%, 38.28%]), 89 bounded invalid states, and zero unresolved states,
+  across all three datasets. The prospective label-trust gate therefore fails:
+  only 89 trusted validation DEVIATE positives remain versus the required 128.
+  No gate dataset/training, threshold sweep, oracle-WHAT execution, Stage 2, or
+  external evaluation ran. Evidence:
+  `analysis/selective_continue_deviate/stage1_decision_summary.md`; phase memory:
   `workspace/phase_memory/phase_41_selective_continue_deviate.md`.
 
 - Completed phase (2026-08-30):

@@ -1,0 +1,43 @@
+protocol_version: selective_continue_deviate_phase1_v1
+source_plan: plans/selective_continue_deviate_expanded_plan.md
+source_plan_sha256: 20a7517dc61197c8d3914cf8cf45183af7438e514ccdb4cba1583f9b25da34e9
+parent_online_config:
+  path: analysis/persistent_corrective_supervision/online_config.yaml
+  sha256: e535873878ae3bdfcc8bdaf4c7580be674ede73e871c7f379a505870b16b69f0
+data:
+  source_manifest: analysis/persistent_corrective_supervision/training_manifest.jsonl
+  source_manifest_sha256: 05716064b11703a339a1bc3f59a54d0e54a50b5490a5748acebbd8f2e91c1583
+  source_metadata_manifest: datasets/mcts_labels_4action/source_inventory_v1/source_manifest_v1.jsonl
+  source_metadata_manifest_sha256: a44ca6e8684bc1a559997ce0ea52b2796f3265d19be90e22439c653741f36ed7
+  boundary_manifest: analysis/persistent_corrective_supervision/boundary_manifest.jsonl
+  boundary_manifest_sha256: 868bd1981a69e579e5c9cf671d8b36e3f3165ff0066cc1ff609002e851f887fb
+  audit_subset: analysis/selective_continue_deviate/when_full_insertion_subset.json
+  audit_subset_sha256: 4e8677ad39bccd30ca805a868e607be310481130936a9112ec913daf945ba3e4
+  audit_subset_audit: analysis/selective_continue_deviate/when_full_insertion_subset_audit.json
+  audit_subset_audit_sha256: f6617c12ed9ca671d7ae32073faab04510904dcad04688143a47347f2757d499
+  states: 128
+  candidate_routes: 252
+execution:
+  seed: 20260830
+  world_size: 4
+  raw_output_root: /mnt/hyemin/qwen_train_eval/outputs/selective_continue_deviate_v1
+  executor: live_unified_four_action_full_insertion_known_suffix_replay
+  eos_token_ids:
+  - 151645
+  repetition_penalty: 1.05
+bootstrap:
+  draws: 10000
+  seed: 20260831
+  unit: uid
+phase1_decision:
+  required_trusted_validation_positives: 128
+  maximum_rescued_states: 0
+  maximum_unresolved_states: 0
+  on_fail: stop_before_gate_training
+  on_pass: proceed_to_linear_and_mlp_gate
+reporting:
+  analysis_dir: analysis/selective_continue_deviate
+  execution_records: analysis/selective_continue_deviate/when_full_insertion_executions.jsonl
+  results: analysis/selective_continue_deviate/when_label_completeness_results.json
+  report: analysis/selective_continue_deviate/when_label_completeness_report.md
+  decision_summary: analysis/selective_continue_deviate/stage1_decision_summary.md

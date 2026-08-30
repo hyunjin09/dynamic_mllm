@@ -1,22 +1,21 @@
 # Operational Research Plan: Binary Route Label Regeneration
 
-## Active selective CONTINUE/DEVIATE validation (2026-08-30)
+## Completed/stopped selective CONTINUE/DEVIATE validation (2026-08-30)
 
 The user authorized `plans/selective_continue_deviate_expanded_plan.md` as one
-conditional research action. Phase 1 is a complete census of the 128 frozen
-held-out W2C mandatory boundaries. It inserts `FULL` after the exact all-FULL
-prefix and executes all 252 unique routes formed from every compatible known
-suffix, with exact UIDs and routes frozen before outcomes.
+conditional research action. Phase 1 froze and executed a complete census of
+the 128 held-out W2C mandatory boundaries: 252 unique FULL-insertion routes
+covering every compatible known suffix on four direct GPUs.
 
-The prospective trust gate requires zero bounded rescues and zero unresolved
-states before training: the audit census contains exactly the plan's minimum
-128 validation DEVIATE positives, so any known incomplete state would make the
-clean validation contract unattainable without a post-hoc relaxation. Only if
-that gate passes may the authorized linear/MLP WHEN gates and learned-WHEN +
-oracle-WHAT evaluation proceed. Stage-2 training and external evaluation remain
-out of scope. Evidence is tracked in
-`workspace/phase_memory/phase_41_selective_continue_deviate.md` and will be
-written under `analysis/selective_continue_deviate/`.
+The prospective trust gate fails. A bounded correct FULL continuation exists
+for 39/128 states (30.47%, 10,000-draw 95% UID-bootstrap CI
+[22.66%, 38.28%]); 89 states are bounded invalid and zero are unresolved. This
+leaves only 89 trusted validation DEVIATE positives versus the frozen minimum
+of 128. The phase therefore stopped without gate data/training, threshold
+selection, learned-WHEN + oracle-WHAT execution, Stage 2, or external
+evaluation. Evidence:
+`analysis/selective_continue_deviate/stage1_decision_summary.md`; phase memory:
+`workspace/phase_memory/phase_41_selective_continue_deviate.md`.
 
 ## Completed four-action generalization mechanism diagnostic (2026-08-30)
 
