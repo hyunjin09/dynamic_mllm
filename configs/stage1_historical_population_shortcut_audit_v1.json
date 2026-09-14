@@ -1,0 +1,32 @@
+{
+  "schema_version": "stage1_historical_population_shortcut_audit_config_v1",
+  "run_id": "stage1_historical_population_shortcut_audit_v1",
+  "seed": 20260903,
+  "bootstrap_replicates": 1000,
+  "source_probe_folds": 5,
+  "nuisance_probe_folds": 3,
+  "selected_layers": [0, 14, 21, 27],
+  "threshold": 0.9253839280601031,
+  "output_root": "analysis/dense_failure_stage1/historical_population_shortcut_audit",
+  "sources": {
+    "plan": "plans/stage1_historical_population_shortcut_audit_plan.md",
+    "portable_historical_manifest": "search/greedy_phase1_phase2_reproduction/manifests/all_samples.jsonl",
+    "historical_collection_config": "search/greedy_phase1_phase2_reproduction/config/collection_config.json",
+    "historical_candidate_manifest": "analysis/dense_failure_stage1/current_dense_8k/candidate_manifest.jsonl",
+    "historical_dense_outputs": "analysis/dense_failure_stage1/current_dense_8k/dense_outputs.jsonl",
+    "historical_split_manifest": "analysis/dense_failure_stage1/layerwise_failure_probe/split_manifest.jsonl",
+    "historical_feature_index": "analysis/dense_failure_stage1/current_dense_8k/features/feature_index.jsonl",
+    "historical_feature_schema": "analysis/dense_failure_stage1/current_dense_8k/features/feature_schema.json",
+    "historical_trigger_train": "analysis/dense_failure_stage1/trigger_map/manifests/trigger_map_train.jsonl",
+    "historical_trigger_val": "analysis/dense_failure_stage1/trigger_map/manifests/trigger_map_val.jsonl",
+    "historical_trigger_test": "analysis/dense_failure_stage1/trigger_map/manifests/trigger_map_test.jsonl",
+    "historical_normalization": "analysis/dense_failure_stage1/shared_global_gate/training/global_normalization.pt",
+    "historical_checkpoint": "analysis/dense_failure_stage1/shared_global_gate/training/checkpoints/state_layer_random4.pt",
+    "historical_failure_metrics": "analysis/dense_failure_stage1/layerwise_failure_probe/dataset_layerwise_metrics.csv",
+    "new_candidate_manifest": "analysis/dense_failure_stage2/data_scale_search/manifests/new_candidate_manifest.jsonl",
+    "new_candidate_audit": "analysis/dense_failure_stage2/data_scale_search/manifests/candidate_audit.json",
+    "new_dense_outputs": "analysis/dense_failure_stage2/data_scale_search/manifests/new_dense_results.jsonl",
+    "new_feature_index": "analysis/dense_failure_stage2/data_scale_search/dense/features/feature_index.jsonl",
+    "new_trigger_map": "analysis/dense_failure_stage2/data_scale_search/manifests/new_trigger_map.jsonl"
+  }
+}

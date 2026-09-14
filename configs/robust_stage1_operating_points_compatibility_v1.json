@@ -1,0 +1,68 @@
+{
+  "schema_version": "robust_stage1_operating_points_compatibility_config_v1",
+  "run_id": "robust_stage1_operating_points_compatibility_v1",
+  "seed": 20260903,
+  "world_size": 4,
+  "output_root": "analysis/dense_failure_stage1/robust_operating_points_and_compatibility",
+  "model": {
+    "name": "Qwen/Qwen2.5-VL-7B-Instruct",
+    "revision": "cc594898137f460bfe9f0759e9844b3ce807cfb5",
+    "snapshot_path": "/mnt/hyemin/qwen_train_eval/eval/reference/shared_prefix_eval_20260812/model/Qwen2.5-VL-7B-Instruct_cc594898137f460bfe9f0759e9844b3ce807cfb5",
+    "dtype": "bfloat16",
+    "attention_implementation": "sdpa"
+  },
+  "sources": {
+    "plan": "plans/robust_stage1_operating_points_trigger_label_compatibility_plan.md",
+    "phase63_gate": "analysis/dense_failure_stage1/all_source_threshold_calibration/frozen/robust_stage1_gate.json",
+    "phase63_artifact_manifest": "analysis/dense_failure_stage1/all_source_threshold_calibration/artifact_manifest.json",
+    "phase63_frontier": "analysis/dense_failure_stage1/all_source_threshold_calibration/metrics/full_threshold_sweep.csv",
+    "phase63_fold_stability": "analysis/dense_failure_stage1/all_source_threshold_calibration/crossfit/threshold_stability.csv",
+    "phase62_protocol": "analysis/dense_failure_stage1/all_source_robustness/frozen_protocol.json",
+    "phase62_artifact_manifest": "analysis/dense_failure_stage1/all_source_robustness/artifact_manifest.json",
+    "phase62_checkpoint_manifest": "analysis/dense_failure_stage1/all_source_robustness/main_all/training/checkpoint_manifest.json",
+    "historical_split": "analysis/dense_failure_stage1/layerwise_failure_probe/split_manifest.jsonl",
+    "historical_candidates": "analysis/dense_failure_stage1/current_dense_8k/candidate_manifest.jsonl",
+    "historical_dense": "analysis/dense_failure_stage1/current_dense_8k/dense_outputs.jsonl",
+    "historical_old_trigger_map": "analysis/dense_failure_stage1/trigger_map/manifests/trigger_map_train.jsonl",
+    "historical_trigger_artifact_manifest": "analysis/dense_failure_stage1/trigger_map/artifact_manifest.json",
+    "historical_label_artifact_manifest": "analysis/dense_failure_stage2/full_corrective_labels/artifact_manifest.json",
+    "historical_single_labels": "analysis/dense_failure_stage2/full_corrective_labels/manifests/single_fixable.jsonl",
+    "historical_mcts_labels": "analysis/dense_failure_stage2/full_corrective_labels/manifests/mcts_only_fixable.jsonl",
+    "historical_unresolved": "analysis/dense_failure_stage2/full_corrective_labels/manifests/unresolved.jsonl",
+    "historical_single_routes": "analysis/dense_failure_stage2/full_corrective_labels/routes/successful_single_routes.jsonl",
+    "historical_mcts_routes": "analysis/dense_failure_stage2/full_corrective_labels/routes/successful_mcts_routes.jsonl",
+    "canonical_fold_manifest": "analysis/dense_failure_stage1/canonical_refit_diagnostic/splits/fold_manifest.jsonl",
+    "canonical_candidates": "analysis/dense_failure_stage2/data_scale_search/manifests/new_candidate_manifest.jsonl",
+    "canonical_dense": "analysis/dense_failure_stage2/data_scale_search/manifests/new_dense_results.jsonl",
+    "canonical_old_trigger_map": "analysis/dense_failure_stage2/data_scale_search/manifests/new_trigger_map.jsonl",
+    "canonical_label_artifact_manifest": "analysis/dense_failure_stage2/data_scale_search/artifact_manifest.json",
+    "canonical_single_labels": "analysis/dense_failure_stage2/data_scale_search/manifests/new_single_fixable.jsonl",
+    "canonical_mcts_labels": "analysis/dense_failure_stage2/data_scale_search/manifests/new_mcts_only_fixable.jsonl",
+    "canonical_unresolved": "analysis/dense_failure_stage2/data_scale_search/manifests/new_unresolved.jsonl",
+    "canonical_single_routes": "analysis/dense_failure_stage2/data_scale_search/routes/new_successful_single_routes.jsonl",
+    "canonical_mcts_routes": "analysis/dense_failure_stage2/data_scale_search/routes/new_successful_mcts_routes.jsonl",
+    "historical_dense_config": "configs/current_dense_8k_v1.json",
+    "canonical_dense_config": "configs/stage2_data_scale_dense_v1.json"
+  },
+  "thresholds": {
+    "named_preservation_targets": [0.99, 0.98, 0.97, 0.95, 0.90],
+    "p98_anchor": 0.9711347410314399,
+    "retention_default": ["P98", "P95", "P90"],
+    "minimum_incremental_pooled_wrong_recall": 0.05,
+    "maximum_fold_iqr": 0.05,
+    "maximum_fold_range": 0.10,
+    "maximum_retained_points": 3
+  },
+  "trigger": {
+    "comparison": "strict_greater_than",
+    "layers": 28,
+    "head_scoring": "arithmetic mean of five frozen ALL-source checkpoint probabilities per layer"
+  },
+  "replay": {
+    "require_prior_final_correct": true,
+    "require_prior_replay_token_parity": true,
+    "require_current_generated_token_parity": true,
+    "require_current_lmms_correct": true,
+    "native_full_row_dispatch": true
+  }
+}

@@ -1,6 +1,49 @@
 # Dataset Inventory
 
-Updated: 2026-08-11
+Updated: 2026-09-04
+
+## Standing external-evaluation scope
+
+The user-defined default now contains four benchmark families: ChartQA,
+TextVQA, MMMU-Pro (Standard and Vision), and POPE (adversarial, popular, and
+random). DocVQA, MMStar, and base MMMU remain excluded unless explicitly
+authorized.
+
+The current server handoff transferred active ChartQA/MMMU-Pro/POPE evaluation
+manifests and images but deliberately omitted TextVQA evaluation images. For
+Phase 69, the pinned `lmms-lab/textvqa` validation split at revision
+`9c0699cd19768ac5ab97568f6b3cbac4c0062884` was recovered under
+`/mnt/hyemin/qwen_train_eval/datasets/eval/sources/` and its 5,000 validation
+images were materialized with the original reference builder's RGB JPEG
+quality-95 contract. All 5,000 materialized byte hashes exactly match the
+frozen `heldout_lmms_recommended_v1` manifest. The existing 1,000-image
+Stage-2 TextVQA training source was not substituted for this population.
+
+## Stage-2 data-scale search sources
+
+The transferred `complete_correct_wrong_pools_20260713/images` root contains
+exactly the original 8,000 candidate images and cannot supply a new population
+disjoint from the frozen Stage-1 train/validation/test split. Phase 59 therefore
+requires new canonical training sources under the allowed external root
+`/mnt/hyemin/qwen_train_eval/datasets/stage2_scale_sources/`.
+
+| Dataset | Frozen source | Required subset | Local status |
+|---|---|---|---|
+| GQA | `lmms-lab-encoder/GQA` revision `a6e72d6e1b912da88af8b2f9eba05d5ea8ec2dd8` | complete `train_balanced_instructions` plus prospectively selected image shards 02/13/19/20 | present and Parquet-readable: 943,000 instructions and 13,741 image rows; an unrelated shard 05 left by the canceled broad pull is excluded by config |
+| ChartQA | `vis-nlp/ChartQA` revision `044eabfc306abfe9340c5741f0093aefc5973d06` | `ChartQA Dataset/train` annotations and 1,200 prospectively selected reserve PNGs | complete and image-decode verified. The first pass had two transient HTTP failures and was resumed exactly; an incomplete full checkout remains quarantined and ineligible. |
+| TextVQA | `lmms-lab-encoder/textvqa` revision `9c0699cd19768ac5ab97568f6b3cbac4c0062884` | prospectively selected train shards 00/01/05/11 | present and Parquet-readable: 6,922 train rows with embedded images |
+
+Planned label-blind quotas are 2,000 GQA, 1,000 ChartQA, and 1,000
+TextVQA records. Native source keys, pre-outcome metadata strata, rejection
+reasons, image SHA-256 values, and overlap checks against the complete legacy
+UID/content-group union will be frozen before dense inference.
+
+Candidate freeze completed at
+`analysis/dense_failure_stage2/data_scale_search/manifests/new_candidate_manifest.jsonl`:
+4,000 unique UIDs and 4,000 unique SHA-256 image groups, with dataset counts
+2,000/1,000/1,000 and zero UID/content-group overlap against all 8,000 legacy
+candidates. Manifest SHA-256:
+`a8e1daa29f3003d0de5cf7bc542feaca162eb2f4de9d54a591641bda8eb0740c`.
 
 ## We-Math 2.0 benchmark downloads
 
@@ -235,3 +278,8 @@ Updated: 2026-08-11
   through `datasets/math_labels/wemath20_pro_mcts_max400_v2` and images through
   `datasets/WeMath2Pro/pro_images_v1`.
 - No dataset download was required for the conversion.
+
+
+## Phase88 fixed benchmark schedules (2026-09-14)
+
+Project datasets link resolves inside /mnt/hyemin. Existing ChartQA train images/annotations and TextVQA train Parquet shards supply CAL; existing evaluation manifests and images supply TEST and MMMU/POPE partitioning. No downloads. Train-derived materialized TextVQA image bytes are retained under `/mnt/hyemin/qwen_train_eval/outputs/benchmark_calibrated_fixed_rw_schedule_v1/calibration_images`. Frozen support: ChartQA CAL256/TEST2500, TextVQA255/5000, MMMU-Pro256/3204, POPE252/8748. Byte/RGB/native-identity group leakage check passes; five ChartQA train annotations excluded. See `analysis/benchmark_calibrated_fixed_rw_schedule/splits/`.

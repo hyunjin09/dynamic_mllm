@@ -1,0 +1,114 @@
+{
+  "schema_version": "dense_answer_logit_emergence_v2_config_v1",
+  "model": {
+    "name": "Qwen/Qwen2.5-VL-7B-Instruct",
+    "revision": "cc594898137f460bfe9f0759e9844b3ce807cfb5",
+    "path": "/mnt/hyemin/qwen_train_eval/eval/reference/shared_prefix_eval_20260812/model/Qwen2.5-VL-7B-Instruct_cc594898137f460bfe9f0759e9844b3ce807cfb5",
+    "dtype": "bfloat16",
+    "attention_implementation": "sdpa",
+    "hidden_size": 3584,
+    "layers": 28,
+    "vocab_size": 152064,
+    "artifact_sha256": {
+      "chat_template.json": "ad60d90252ed0b0705ba14e2d0ad0fec0beac1ea955642b54059b36052d8bc96",
+      "config.json": "77d9ec7321cc572e3579e2c84799c9cadaded63c49ce93b101733349fc330c43",
+      "generation_config.json": "0a3aea82869fe29f20dc95ccf3e2bcff380eca1f5ad6447a4a4b37110b08e43e",
+      "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+      "model-00001-of-00005.safetensors": "e97b877e47fde53a6c6e77aafb36e58e91ee9d95c4a3eeac6f1b5c0e6a1c986e",
+      "model-00002-of-00005.safetensors": "a9a300a43b4724eee2abe7c18ceb26768d0ab011eb0cad19d9bfd2476a24d024",
+      "model-00003-of-00005.safetensors": "111223d173e00bbee81cba1216fad28668df3476706b7fd26f4d5b50f8b3a507",
+      "model-00004-of-00005.safetensors": "ef47f634fa57d46ee134edcc09f34085a47da1e16c12a2abe0d67118be6d72ed",
+      "model-00005-of-00005.safetensors": "0c859795ad3a627a9b95bcb762e059d5b768a4a36fdd4affeff269d93fdecc67",
+      "model.safetensors.index.json": "73b333b0b16e5286ddba615d2caebcd495cf7e616f52eb217a81781393d79de9",
+      "preprocessor_config.json": "f2058c716eef96ccaed1cc1e2d0c08306b62586d535b28d9d08e691b2fab7ca0",
+      "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+      "tokenizer_config.json": "4abd3520120e266da84c0864fee064d1fb10806f02225911a47253dd38dc5f56",
+      "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+    }
+  },
+  "inputs": {
+    "candidate_manifest": "analysis/dense_failure_stage1/current_dense_8k/candidate_manifest.jsonl",
+    "candidate_manifest_sha256": "77b3c422c49fde708b1981ea7b0ecb00759a877f72954811e3dd1facf3206122",
+    "dense_outputs": "analysis/dense_failure_stage1/current_dense_8k/dense_outputs.jsonl",
+    "dense_outputs_sha256": "17ded9fd89a7fe8f81df39b038f4530416a1cfeb0a01e6c0b764b7330558e89f",
+    "lmms_eval_contract": "analysis/dense_failure_stage1/current_dense_8k/lmms_eval_contract.md",
+    "lmms_eval_contract_sha256": "6803d46262a9f1632b778716a480aa82370054919dd414a26f8f8b5381694ee1",
+    "expected_records": 7999,
+    "expected_correct": 3999,
+    "expected_wrong": 4000,
+    "datasets": {
+      "gqa": 4000,
+      "chartqa": 1999,
+      "textvqa": 2000
+    }
+  },
+  "position": {
+    "prompt_construction": "exact native dense chat template with add_generation_prompt=true",
+    "answer_prediction_position": "last non-padding token of the complete prompt after assistant generation prefix",
+    "forbidden_position": "last literal user-prompt token",
+    "layer_states": "post-decoder-layer pre-final-RMSNorm hidden state at answer_prediction_position",
+    "readout": "layers 0-26 use model.model.language_model.norm then model.lm_head; layer 27 uses the model's native raw pre-processor output.logits from that same forward, which is the authoritative numerically exact realization of the same norm and head",
+    "score": "raw_logit",
+    "generation_processor_separation": "raw LM-head logits are analyzed; generated tokens are selected after the frozen generation processors, including repetition_penalty=1.05",
+    "sanity_expected_match_rate": 1.0
+  },
+  "targets": {
+    "correct_gt": "first tokenizer ID of canonical gt_answer with add_special_tokens=false and no added prefix",
+    "generated": "exact stored generated_token_ids through the first im_end token",
+    "wrong_collision": "first divergence between canonical GT plus im_end and exact generated tokens through im_end",
+    "teacher_forcing": "condition on the exact common answer-token prefix by replaying the native use_cache greedy path; require replayed prefix equality before reading the first-divergence state",
+    "textvqa_exact_sequence_fallback": "highest-frequency annotation with first-occurrence tie break whose token sequence differs from generation",
+    "unusable": "log and exclude only when no GT/reference sequence diverges from the generated sequence"
+  },
+  "emergence": {
+    "threshold_raw_logit": 0.0,
+    "persistent_layers": 3,
+    "early_cutoff_layer": 4,
+    "strict_comparison": true,
+    "wrong_taxonomy_precedence": [
+      "answer_erosion_if_persistent_gt_preference_precedes_persistent_wrong_preference",
+      "early_wrong_if_wrong_crossover_at_or_before_layer_4",
+      "progressive_wrong_if_wrong_crossover_after_layer_4",
+      "ambiguous_if_no_persistent_wrong_crossover"
+    ]
+  },
+  "sanity": {
+    "seed": 20260830,
+    "records_per_dataset_outcome": 12,
+    "expected_records": 72,
+    "teacher_forced_shared_prefix_per_wrong_dataset": 4,
+    "distinct_image_groups": true,
+    "require_all_layer27_top1_matches": true,
+    "minimum_exact_cached_prefix_and_next_token_replays_per_dataset": 4,
+    "unreplayable_collision_handling": "log and exclude that comparison; never classify it as ambiguous",
+    "require_all_teacher_forced_raw_readouts_match_raw_model_logits": true
+  },
+  "population_reporting": {
+    "coverage_levels": [0.5, 0.75],
+    "selected_curve_layers": [0, 4, 9, 13, 18, 23, 27],
+    "quantiles": [0.25, 0.5, 0.75]
+  },
+  "execution": {
+    "seed": 20260830,
+    "world_size": 4,
+    "worker_batch_records": 32,
+    "run_id": "dense_answer_logit_emergence_v2",
+    "output_root": "analysis/dense_failure_stage1/answer_logit_emergence_v2"
+  },
+  "backend_settings": {
+    "cublas_workspace_config": ":4096:8",
+    "deterministic_algorithms": true,
+    "deterministic_warn_only": false,
+    "flash_sdp_enabled": true,
+    "memory_efficient_sdp_enabled": true,
+    "math_sdp_enabled": true,
+    "cudnn_sdp_enabled": true,
+    "matmul_allow_tf32": false,
+    "matmul_allow_fp16_reduced_precision_reduction": true,
+    "matmul_allow_bf16_reduced_precision_reduction": true,
+    "cudnn_allow_tf32": false,
+    "cudnn_benchmark": false,
+    "cudnn_deterministic": false,
+    "float32_matmul_precision": "highest"
+  }
+}

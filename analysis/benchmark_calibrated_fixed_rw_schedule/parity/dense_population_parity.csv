@@ -1,0 +1,15 @@
+benchmark_family,benchmark,split,uids,native_token_exact,scorer_equivalent_dual_output,valid_q
+chartqa,chartqa,CAL,256,256,0,256
+chartqa,chartqa,TEST,2500,2500,0,2500
+mmmupro,mmmu_pro_standard_test,CAL,128,128,0,128
+mmmupro,mmmu_pro_standard_test,TEST,1602,1602,0,1602
+mmmupro,mmmu_pro_vision_test,CAL,128,128,0,128
+mmmupro,mmmu_pro_vision_test,TEST,1602,1602,0,1602
+pope,pope_adversarial,CAL,84,84,0,84
+pope,pope_adversarial,TEST,2916,2916,0,2916
+pope,pope_popular,CAL,84,84,0,84
+pope,pope_popular,TEST,2916,2916,0,2916
+pope,pope_random,CAL,84,84,0,84
+pope,pope_random,TEST,2916,2916,0,2916
+textvqa,textvqa,CAL,255,255,0,254
+textvqa,textvqa,TEST,5000,5000,0,4996

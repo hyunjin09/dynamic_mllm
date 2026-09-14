@@ -1,0 +1,48 @@
+{
+  "contract_sha256": "460fb72ff34a39f3ec1a1dce7ad0c9883cfe1c6b79070a5f07b861ec14cd6932",
+  "passed": true,
+  "rows": [
+    {
+      "benchmark": "chartqa",
+      "native_full_parity": true,
+      "native_repeat": true,
+      "uid": "cal_chartqa:augmented:5184:two_col_5199.png"
+    },
+    {
+      "benchmark": "mmmu_pro_standard_test",
+      "native_full_parity": true,
+      "native_repeat": true,
+      "uid": "mmmu_pro_standard_test:mmmu_pro_standard_test_validation_Economics_17"
+    },
+    {
+      "benchmark": "mmmu_pro_vision_test",
+      "native_full_parity": true,
+      "native_repeat": true,
+      "uid": "mmmu_pro_vision_test:mmmu_pro_vision_test_validation_Physics_19"
+    },
+    {
+      "benchmark": "pope_adversarial",
+      "native_full_parity": true,
+      "native_repeat": true,
+      "uid": "pope_adversarial:pope_adversarial_001383"
+    },
+    {
+      "benchmark": "pope_popular",
+      "native_full_parity": true,
+      "native_repeat": true,
+      "uid": "pope_popular:pope_popular_004513"
+    },
+    {
+      "benchmark": "pope_random",
+      "native_full_parity": true,
+      "native_repeat": true,
+      "uid": "pope_random:pope_random_006050"
+    },
+    {
+      "benchmark": "textvqa",
+      "native_full_parity": true,
+      "native_repeat": true,
+      "uid": "cal_textvqa:19935"
+    }
+  ]
+}

@@ -1,0 +1,102 @@
+{
+  "schema_version": "ood_first_failure_signal_diagnostic_config_v1",
+  "run_id": "ood_first_failure_signal_diagnostic_v1",
+  "seed": 20260831,
+  "output_root": "analysis/dense_failure_stage1/ood_signal_diagnostic",
+  "sources": {
+    "plan": "plans/ood_first_failure_signal_diagnostic_plan.md",
+    "dense_config": "configs/current_dense_8k_v1.json",
+    "candidate_manifest": "analysis/dense_failure_stage1/current_dense_8k/candidate_manifest.jsonl",
+    "dense_outputs": "analysis/dense_failure_stage1/current_dense_8k/dense_outputs.jsonl",
+    "hidden_feature_index": "analysis/dense_failure_stage1/current_dense_8k/features/feature_index.jsonl",
+    "hidden_feature_schema": "analysis/dense_failure_stage1/current_dense_8k/features/feature_schema.json",
+    "phase48_contract": "analysis/dense_failure_stage1/layerwise_failure_probe/probe_config.json",
+    "phase48_split": "analysis/dense_failure_stage1/layerwise_failure_probe/split_manifest.jsonl",
+    "model_path": "eval/reference/shared_prefix_eval_20260812/model/Qwen2.5-VL-7B-Instruct_cc594898137f460bfe9f0759e9844b3ce807cfb5"
+  },
+  "model": {
+    "name": "Qwen/Qwen2.5-VL-7B-Instruct",
+    "revision": "cc594898137f460bfe9f0759e9844b3ce807cfb5",
+    "processor_revision": "cc594898137f460bfe9f0759e9844b3ce807cfb5",
+    "dtype": "torch.bfloat16",
+    "attention_implementation": "sdpa"
+  },
+  "population": {
+    "records": 7999,
+    "correct": 3999,
+    "wrong": 4000,
+    "datasets": {
+      "gqa": 4000,
+      "chartqa": 1999,
+      "textvqa": 2000
+    }
+  },
+  "runs": {
+    "leave_textvqa_out": {
+      "source_datasets": ["gqa", "chartqa"],
+      "target_dataset": "textvqa"
+    },
+    "leave_chartqa_out": {
+      "source_datasets": ["gqa", "textvqa"],
+      "target_dataset": "chartqa"
+    },
+    "leave_gqa_out": {
+      "source_datasets": ["chartqa", "textvqa"],
+      "target_dataset": "gqa"
+    }
+  },
+  "input_control": {
+    "name": "native_pre_language_decoder",
+    "capture_boundary": "input to decoder layer 0 after native token embedding, vision encoder, and multimodal insertion",
+    "features": ["text_final", "text_mean", "visual_mean"],
+    "composition": "concatenate_in_declared_order",
+    "hidden_size_per_summary": 3584,
+    "input_size": 10752,
+    "shard_size": 64,
+    "smoke_records": 12,
+    "stop_before_decoder_forward": true
+  },
+  "hidden_control_layers": [0, 14, 21, 27],
+  "probe_layers": 28,
+  "source_split": {
+    "train_membership": "phase48_train_restricted_to_source_datasets",
+    "validation_membership": "phase48_val_restricted_to_source_datasets",
+    "ood_target_membership": "all_records_of_held_out_dataset",
+    "in_domain_comparison_membership": "phase48_test_restricted_to_same_target_dataset"
+  },
+  "training": {
+    "model": "single_linear_logit",
+    "loss": "binary_cross_entropy_with_logits",
+    "optimizer": "AdamW",
+    "learning_rate": 0.001,
+    "weight_decay": 0.01,
+    "batch_size": 256,
+    "maximum_epochs": 80,
+    "minimum_epochs": 20,
+    "early_stopping_patience": 12,
+    "checkpoint_selection": "minimum_source_validation_bce",
+    "initialization": "zeros",
+    "class_weighting": null,
+    "compute_dtype": "torch.float32",
+    "normalization": "per_representation_per_dimension_source_train_mean_std",
+    "normalization_std_floor": 0.000001,
+    "allow_tf32": false,
+    "deterministic_algorithms": true
+  },
+  "evaluation": {
+    "positive_class": "current_dense_wrong",
+    "default_probability_threshold": 0.5,
+    "preservation_targets": [0.99, 0.98, 0.95],
+    "threshold_selection": "source_validation_only",
+    "representative_layer_selection": "maximum_source_validation_auroc_tie_lower_layer",
+    "ood_policy": "evaluate_once_after_source_decisions_are_frozen"
+  },
+  "interpretation": {
+    "meaningful_transfer_auroc_floor_all_targets": 0.65,
+    "hidden_over_input_minimum_delta": 0.02,
+    "hidden_gain_required_targets": 2,
+    "minimum_target_auroc_for_shared_predictor_support": 0.55,
+    "purpose": "fixed descriptive decision heuristic, not model or threshold tuning"
+  },
+  "world_size": 4
+}

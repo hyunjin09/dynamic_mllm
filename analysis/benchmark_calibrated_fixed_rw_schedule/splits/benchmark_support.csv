@@ -1,0 +1,5 @@
+benchmark,calibration_uids,calibration_groups,test_uids,test_groups,calibration_source,train_overlap_exclusions,oversized_groups_excluded_from_cal
+chartqa,256,118,2500,1509,available official train image/shard frame,5,0
+textvqa,255,160,5000,3166,available official train image/shard frame,0,0
+mmmupro,256,127,3204,1479,deterministic whole-group partition of existing labeled evaluation,0,0
+pope,252,14,8748,486,deterministic whole-group partition of existing labeled evaluation,0,0

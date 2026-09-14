@@ -1,0 +1,32 @@
+{
+  "purpose": "Cross-server Git packaging checks; not final scientific verification",
+  "metadata_snapshot_files": 59,
+  "clean_destination_restore": {
+    "verified_files": 59,
+    "missing_files": 5,
+    "restored_files": 5,
+    "raw_uid_records_included": false
+  },
+  "restored_destination_check": {
+    "verified_files": 59,
+    "missing_files": 0,
+    "restored_files": 0,
+    "raw_uid_records_included": false
+  },
+  "different_existing_file_refused_and_preserved": true,
+  "all_declared_snapshot_paths_in_git_index": true,
+  "active_frozen_source_hashes_verified": 21,
+  "focused_tests": {
+    "passed": 43,
+    "command": ".venv/bin/python -m pytest tests/test_benchmark_fixed_schedule.py tests/test_benchmark_fixed_reporting.py tests/test_four_action_binary_executor.py -q --basetemp=tests/.phase88_transfer_tmp"
+  },
+  "python_syntax_check": "all staged Python files parsed successfully",
+  "credential_pattern_scan": "no matching token or private-key patterns in staged text or decompressed snapshot payloads",
+  "whitespace_note": "git diff --cached --check reports pre-existing historical Markdown hard breaks and EOF whitespace; preserved to avoid changing historical evidence/source hashes",
+  "limitations": [
+    "Raw UID caches, datasets and model not included in Git",
+    "Destination inference/runtime parity and path relocation not executed",
+    "Source random jobs remain active",
+    "Final held-out interpretation, reporting and verification pending"
+  ]
+}

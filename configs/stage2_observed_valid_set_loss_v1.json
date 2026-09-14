@@ -1,0 +1,46 @@
+{
+  "schema_version": "stage2_observed_valid_set_loss_config_v1",
+  "run_id": "stage2_observed_valid_set_loss_v1",
+  "seed": 20260904,
+  "world_size": 4,
+  "loss": "exact_observed_valid_set_logsumexp",
+  "smoke": {
+    "states_per_category": 12,
+    "epochs": 40,
+    "minimum_loss_reduction": 0.30,
+    "minimum_valid_mass_gain": 0.10,
+    "minimum_corrective_non_full_mass_gain": 0.05,
+    "minimum_final_observed_valid_top1": 0.75,
+    "minimum_final_preservation_full_recall": 0.75
+  },
+  "decision_thresholds": {
+    "meaningful_oracle_recall_gain": 0.05,
+    "meaningful_valid_mass_gain": 0.05,
+    "positive_rollout_net_min": 1
+  },
+  "bootstrap_replicates": 2000,
+  "sources": {
+    "plan": "plans/stage2_observed_valid_set_loss_plan.md",
+    "phase66_contract": "analysis/dense_failure_stage2/shared_union_training/frozen_protocol.json",
+    "phase66_artifact_manifest": "analysis/dense_failure_stage2/shared_union_training/artifact_manifest.json",
+    "union_preservation": "analysis/dense_failure_stage2/shared_union_training/corpus/union_preservation_manifest.jsonl",
+    "union_single": "analysis/dense_failure_stage2/shared_union_training/corpus/union_single_manifest.jsonl",
+    "union_mcts": "analysis/dense_failure_stage2/shared_union_training/corpus/union_mcts_manifest.jsonl",
+    "train_samples": "analysis/dense_failure_stage2/shared_union_training/work/train_samples.jsonl",
+    "validation_manifest": "analysis/dense_failure_stage2/shared_union_training/work/validation_manifest.jsonl",
+    "experiment_B_schedule": "analysis/dense_failure_stage2/shared_union_training/experiment_B_single_plus_mcts/work/full_schedule.jsonl",
+    "phase67_contract": "analysis/dense_failure_stage2/mcts_failure_diagnosis/frozen_protocol.json",
+    "phase67_artifact_manifest": "analysis/dense_failure_stage2/mcts_failure_diagnosis/artifact_manifest.json",
+    "phase67_oracle_rank0": "analysis/dense_failure_stage2/mcts_failure_diagnosis/work/oracle/rank00.jsonl",
+    "phase67_oracle_rank1": "analysis/dense_failure_stage2/mcts_failure_diagnosis/work/oracle/rank01.jsonl",
+    "phase67_oracle_rank2": "analysis/dense_failure_stage2/mcts_failure_diagnosis/work/oracle/rank02.jsonl",
+    "phase67_oracle_rank3": "analysis/dense_failure_stage2/mcts_failure_diagnosis/work/oracle/rank03.jsonl",
+    "rollout_A_P98": "analysis/dense_failure_stage2/shared_union_training/experiment_A_single/rollout/P98/per_sample_results.jsonl",
+    "rollout_A_P95": "analysis/dense_failure_stage2/shared_union_training/experiment_A_single/rollout/P95/per_sample_results.jsonl",
+    "rollout_A_P90": "analysis/dense_failure_stage2/shared_union_training/experiment_A_single/rollout/P90/per_sample_results.jsonl",
+    "rollout_B_P98": "analysis/dense_failure_stage2/shared_union_training/experiment_B_single_plus_mcts/rollout/P98/per_sample_results.jsonl",
+    "rollout_B_P95": "analysis/dense_failure_stage2/shared_union_training/experiment_B_single_plus_mcts/rollout/P95/per_sample_results.jsonl",
+    "rollout_B_P90": "analysis/dense_failure_stage2/shared_union_training/experiment_B_single_plus_mcts/rollout/P90/per_sample_results.jsonl"
+  },
+  "output_root": "analysis/dense_failure_stage2/observed_valid_set_loss"
+}

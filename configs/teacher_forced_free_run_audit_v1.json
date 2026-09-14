@@ -1,0 +1,68 @@
+{
+  "schema_version": "teacher_forced_free_run_audit_config_v1",
+  "run_id": "teacher_forced_free_run_audit_v1",
+  "seed": 20260908,
+  "world_size": 4,
+  "output_root": "analysis/dense_failure_stage2/teacher_forced_free_run_audit",
+  "parent": {
+    "output_root": "analysis/dense_failure_stage2/closed_loop_trajectory_set",
+    "contract_sha256": "00639e7e5638d766ca9d83d912e827456185bfa778fda4ab702407dc6c835f6a",
+    "frozen_protocol": "analysis/dense_failure_stage2/closed_loop_trajectory_set/frozen_protocol.json",
+    "frozen_protocol_sha256": "24f163fc2177d756c01053865af962730d3e3b037aaade71ba6ca61835f13463",
+    "artifact_manifest": "analysis/dense_failure_stage2/closed_loop_trajectory_set/artifact_manifest.json",
+    "artifact_manifest_sha256": "e85219b7e33335b5b31a8de2afe8c1f8803ae47eb69955fe5ecf10ce2f72dde7",
+    "phase76_config": "configs/closed_loop_trajectory_set_v1.json",
+    "phase76_config_sha256": "fd842a2a54b6d877b50fea6d299342475ee2326cf092a90147a08bed44278613",
+    "trajectory_manifest": "analysis/dense_failure_stage2/closed_loop_trajectory_set/corpus/trajectory_set_manifest.jsonl",
+    "trajectory_manifest_sha256": "77e74c155c54a89781beeb5f46470894eca203802e383bf194c5c161cf57599d",
+    "uid_state_files": "analysis/dense_failure_stage2/closed_loop_trajectory_set/corpus/uid_state_files.jsonl",
+    "uid_state_files_sha256": "838e6e4fdd91d0b6974de3c40865d679ba0c2778ec5e109b69e56fce388f4b76",
+    "state_manifest": "analysis/dense_failure_stage2/closed_loop_trajectory_set/corpus/routed_state_cache_manifest.jsonl",
+    "state_manifest_sha256": "f005dfc521ec99bfa8296d7fa87468c64811c10de39d62adacd4c015aaed0330",
+    "replay_completion": "analysis/dense_failure_stage2/closed_loop_trajectory_set/work/replay_completion.json",
+    "replay_completion_sha256": "4941ac981b603c839fca008dc712722e070bcd18454934ab8ad8f3b651d0c3d3",
+    "internal_split": "analysis/dense_failure_stage2/closed_loop_trajectory_set/splits/internal_dev_groups.json",
+    "internal_split_sha256": "dcd1db3b62938b333c9c25092a720a23e481bab9811645bdeb13a5a4496774d5"
+  },
+  "checkpoints": {
+    "full_refit": {
+      "path": "analysis/dense_failure_stage2/closed_loop_trajectory_set/training/full_refit_checkpoint.pt",
+      "sha256": "9153ae1be389635188e1bff0860ce984e3c2c319b24e09de968898564322b044",
+      "manifest": "analysis/dense_failure_stage2/closed_loop_trajectory_set/training/full_refit_checkpoint_manifest.json",
+      "manifest_sha256": "084b97200409780bef54a9bb3f06402127ab00ceca54021c737be369755d8d84"
+    },
+    "internal_dev": {
+      "path": "analysis/dense_failure_stage2/closed_loop_trajectory_set/training/internal_dev_selected_checkpoint.pt",
+      "sha256": "1cad3ac60dfdc1eec95cc0c9befb4922db4d0b4a352f982fcb3414688c870556",
+      "selection": "analysis/dense_failure_stage2/closed_loop_trajectory_set/training/frozen_epoch_selection.json",
+      "selection_sha256": "e3087718be585ad0a478fe71f2fdc529a610c843e518ccd3149154cce3fe1199"
+    }
+  },
+  "population": {
+    "uids": 569,
+    "dense_c_uids": 106,
+    "dense_w_uids": 463,
+    "programs": 4948,
+    "unique_states": 35565,
+    "route_state_occurrences": 69178,
+    "internal_train_uids": 454,
+    "internal_dev_uids": 115
+  },
+  "teacher_forced": {
+    "state_microbatch": 64
+  },
+  "decision_thresholds": {
+    "high_first_nonfull_recall": 0.5,
+    "material_release_delta": 0.05,
+    "material_generalization_drop": 0.15,
+    "majority_fraction": 0.5,
+    "adequate_release_success": 0.5
+  },
+  "provenance_groups": [
+    "single",
+    "original_mcts",
+    "robust_search",
+    "completeness_audit"
+  ],
+  "bound_plan": "plans/teacher_forced_vs_free_run_divergence_audit_plan.md"
+}

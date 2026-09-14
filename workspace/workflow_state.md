@@ -1,5 +1,875 @@
 # Workflow State
 
+## Active Phase 88: Benchmark-calibrated fixed READ/WRITE schedules
+
+User authorized `plans/benchmark_calibrated_fixed_read_write_schedule_plan.md` on2026-09-14. Stage1 is disabled; no learning. Calibration-only independent bit selection, whole-group held-out evaluation, global and20random controls are required. Metadata split and reviewed contract frozen. Nine-case Dense parity smoke and all20,471 regenerated Dense rows passed; CAL-only action smoke and the complete READ sweep passed. Both calibration sweeps passed and all schedules are frozen. M1/M2/M3 and global are complete on all19,452TEST UIDs; four-GPU random controls are active (15,703/19,452 complete at 2026-09-14T19:42:52+09:00). Cross-server snapshot/runbook: `handoff/phase88_server_transfer/README.md`. Final interpretation/reporting remains pending. A missing-q edge case was repaired without excluding any UID. Current memory: `workspace/phase_memory/phase_88_benchmark_fixed_rw_schedule.md`. No top2 or old-search restart.
+
+
+## Completed Phase 87: WRITE harm structure and learnability
+
+Completed `plans/write_harm_structure_learnability_plan.md` on 2026-09-14 KST: 15,185 dense states / 1,413 UIDs, 360 local fits, 57,538 propagation records and 1,620 propagation fits. W-LOCAL-WEAK → qualified W-PROP-C / WRITE-S4. Full local F_ALL rho .04752 / AUROC .48188; exact 6,044-state H8-common delta rises from rho .04119 to .09732 (gain .05613 [.02670,.08523]), AUROC .53872, with no useful high-precision subset. Dense-W agrees. All reports and 12 figures complete; final integrity record: `analysis/write_harm_structure_learnability/final_verification.json`. No further experiment is authorized. One unexecuted recommendation: close tested local/H≤8 routing and reframe unresolved nonlocal intervention structure; no intrinsic-nonlocality or saturation claim. Source/LODO/routed/external work was gated off. Phase85 remains stopped. Memory: `workspace/phase_memory/phase_87_write_harm_structure_learnability.md`; entry report: `analysis/write_harm_structure_learnability/summaries/final_write_characterization.md`.
+
+- Completed/stopped Phase 86 (2026-09-13): full 15,185-state / 1,413-UID frozen Stage1 READ branch-critic diagnostic, including all layer27 states. BC-C qualified: ON/OFF AUROC 0.6728/0.5949, balanced flip preference 47.77%, discordant AUROC 0.4684. Offline policy 30 W→C / 6 C→W, Net+24 [12,36]. Fixed-target cross-scores exclude attributing the branch AUROC gap to score collapse alone. Fresh smoke, full parity, four focused tests, independent result reconstruction, 850 artifact hashes and 1,413 cache hashes pass; manifest `9c033a70...427941c`. Phase85 remains stopped with evidence preserved. Exactly one unexecuted recommendation: paired branch-risk calibration/ranking. Memory: `workspace/phase_memory/phase_86_read_branch_critic.md`; report: `analysis/read_counterfactual_stage1_branch_critic/summaries/branch_critic_summary.md`.
+
+- PRELIMINARY Phase 85 interim (2026-09-13 21:06 KST): exact common 612 completed W UIDs; 695 W pending and excluded. Completion composition is biased. Beam8 ANY/SELECTED@128 = 50.49%/39.71%, gaining 9.80/8.50 pp from 64; no overall saturation. Independent review supports finishing the original population and frozen B256 audit; B512 remains conditional. At that interim timestamp jobs were unchanged; they were subsequently stopped by the user. Report: `analysis/read_only_bounded_planning/interim/PRELIMINARY_20260913_210600/PRELIMINARY_report.md`.
+
+- Historical Phase 85 launch (stopped 2026-09-13 by new user plan): user authorized `plans/read_only_bounded_planning_search_plan.md`, including all four occupied GPUs. Exact population is1307W/106C; cached single-READ-off rescue is223W; exact Hamming2 projection81058 new routes passes250000 cap. Independent review repairs cache binding, adaptive denominator, and enumeration reporting. Execution contract `67d2c6a1...fb0861`, supplemental analysis contract `8d143e37...5e9e39`;42 distinct focused tests pass. All40 smoke UIDs passed; full base128 and gated Hamming2 launched on GPUs0/1/2/3 but were subsequently stopped. No automatic continuation is active. State: `workspace/phase_memory/phase_85_read_only_bounded_planning.md`; evidence: `analysis/read_only_bounded_planning/`.
+
+- Completed/stopped Phase 84 (2026-09-12): froze contract
+  `3a0d2251...affebb6a`, passed fresh-cache repeat, swapped-order H8, exact
+  Phase-82 H1, canonical ON, action-trace, global-census, and cache-readback
+  gates, then extracted 47,133 paired horizon states / 94,266 branches from all
+  15,185 dense states. All 2,115 fixed five-fold/three-seed fits completed.
+  On the 6,916-state H8-common population, pooled DELTA Spearman is
+  `0.0756/0.0688/0.0646/0.1097` and harmful AUROC is
+  `0.5316/0.5287/0.5314/0.5483` for H1/H2/H4/H8. The H8-vs-H1 gains are only
+  `+0.0340` Spearman and `+0.0167` AUROC, with image-group bootstrap lower
+  bounds `-0.0009/-0.0020`; precision@10% is 0.5462 versus prevalence 0.4926.
+  Token H8 Spearman is 0.0854, pooled metrics are non-monotone, and no horizon
+  passes the prospective materiality/high-precision gates, yielding
+  **H-READ-D**. All 51 declared repository files, 12 external caches, and
+  2,115 checkpoint records verify under manifest `1f9005bf...35961`. No routed
+  confirmation, WRITE study, router, search, deployment, or external
+  evaluation ran. Evidence:
+  `analysis/read_harm_short_horizon_propagation/`; phase memory:
+  `workspace/phase_memory/phase_84_read_short_horizon_propagation.md`.
+
+- Completed/stopped Phase 83 (2026-09-11): froze contract
+  `eaaef860...e4d6`, passed exact state/post-state/branch/feature-repeat and
+  full-query causal-SDPA validation, then extracted complete F1-F7 READ
+  features for 15,185 dense states over 1,413 UIDs and 35,565 routed states on
+  four GPUs. READ signs are 7,285 harmful and 7,900 beneficial. The fixed
+  structure gates classify harm as **R-STRUCT-B** (mostly isolated); only
+  1/34 matched feature effects excludes zero and the matched flip probe AUROC
+  is 0.4186, giving **R-MECH-B**. The dense-selected F_ALL/MLP reaches OOF
+  Spearman 0.0697 and harmful AUROC 0.5338, with weak source/LODO transfer and
+  no material external-transfer gate, giving **R-LEARN-C**. Routed OOF
+  Spearman 0.1623 is selection-qualified secondary evidence and does not
+  override the dense-primary result. All 75 artifact hashes verify under
+  manifest `35524bf3...05ab`. The sole unexecuted recommendation is a
+  short-horizon READ effect-propagation/planning audit; no WRITE study,
+  deployment router, external counterfactual, or follow-up ran. Evidence:
+  `analysis/read_harm_structure_learnability/`; phase memory:
+  `workspace/phase_memory/phase_83_read_harm_structure_learnability.md`.
+
+- Completed/stopped Phase 82 (2026-09-10): froze one-step counterfactual-effect
+  contract `a70e921a...2705`, passed stratified dense/routed deterministic and
+  exact FULL-to-canonical post-state parity, then extracted all 15,185 dense
+  states / 45,555 branches and 35,565 routed states / 106,695 branches. All
+  570 primary OOF, 60 routed-secondary OOF, and 60 Dense-to-routed transfer
+  tasks completed under the inherited five-fold image-group-disjoint registry.
+  Dense OOF READ MLP Spearman is `0.0626/0.0533/0.0552/0.0523/0.0773/0.0568`
+  for PRE/FULL/OFF/PAIR/DELTA/PAIR+DELTA; token is `0.0694`. WRITE is
+  `0.0354/0.0364/0.0399/0.0421/0.0380/0.0399`; token is `0.0383`. Reported
+  bootstrap gains include zero, harmful-flip ranking is below chance, and the
+  modest routed token OOF (`0.1290/0.0726`) does not rescue dense-primary or
+  Dense-to-routed identifiability. READ, WRITE, and joint decisions are
+  **Case D**. All 96 declared repository artifact hashes and 52 focused tests
+  verify; manifest `3a0eb918...143e`. The one unexecuted recommendation is a
+  two-layer / short-horizon counterfactual-identifiability audit. No deployment,
+  external evaluation, router retraining, MCTS, or follow-up ran. Evidence:
+  `analysis/dense_failure_stage2/counterfactual_effect_identifiability/`;
+  phase memory: `workspace/phase_memory/phase_82_counterfactual_effect_identifiability.md`.
+
+- Completed/stopped Phase 81 (2026-09-09): froze Step-D contract
+  `efa342f0...e571cf`, refit all 15 Stage-1/Stage-2 M0-X/M1/M3 models on the
+  full internal corpora, and passed a bound seven-task/three-trigger-family
+  smoke. Four direct GPUs recomputed all 19,960 external Dense rows and
+  558,880 layer states with exact Phase-69 token/score/correctness/image and
+  robust-trigger parity. The strict P90 domain is exactly 901 UIDs, 8,442
+  post-trigger states, and zero POPE triggers. All prediction hashes were
+  frozen before labels; all 33,768 four-action branches then passed live-state,
+  FULL token/score/correctness/q, utility-algebra, and global-census checks.
+  External Stage-1 M3 AUROC is `0.4998/0.6794/0.5399/0.5582` for
+  ChartQA/TextVQA/MMMU-Pro/POPE (macro `0.5693`, pooled `0.6980`), yielding
+  category **D1-C**. Stage-2 READ rho is `0.0848/0.1095/0.0246` and WRITE rho
+  `0.0335/0.0158/0.0204` on the three triggered families, yielding **D2-A**.
+  The result does not support robust external failure prediction or
+  current-state local treatment prediction. All 72 artifact hashes and 51
+  focused/inherited tests verify. No deployment, redesign, or next experiment
+  ran. Evidence: `analysis/predictability_generalization/stepD_external_transfer/`;
+  phase memory: `workspace/phase_memory/phase_81_predictability_stepD_external_transfer.md`.
+
+- Completed/stopped Phase 80 (2026-09-09): froze label-blind Qwen3 question
+  encoder contract `d574a8af...30a9` and full Step-C contract
+  `fafd6442...07ecd`, then completed all 300/300 unchanged M0/M1/M3 fits on
+  four direct GPUs across 22 semantic-cluster, source, LODO, and pairwise
+  holdouts. Stage-1 M3 Q1/Q5 AUROC is `0.7828/0.8012`; the +0.0183 delta has
+  95% image-group-bootstrap CI `[-0.0050, 0.0423]`. Concatenated K=100
+  cluster-OOD AUROC is `0.7725` versus ID `0.7869`, but pooled
+  Historical→Canonical/Canonical→Historical AUROC collapses to
+  `0.4342/0.5563`, and LODO is only `0.5508-0.6043`, with severe threshold
+  calibration drift for held-out ChartQA/GQA. Stage-2 cluster-OOD READ/WRITE
+  Spearman is `0.0453/0.0164` and remains near chance under source/LODO.
+  Therefore the plan-defined result is **S1-C source-specific signal / S2-A
+  weak everywhere**, not semantic-neighbor dependence. Six sparse Stage-2
+  within-dataset source cells were prospectively unsupported; four OOF kNN
+  states were explicitly non-estimable at exact `k=5`. All 5,000-draw primary
+  intervals and 5,000/5,000 Q1/Q5 contrast draws completed. Final artifact
+  manifest `ca340f26...da875` verifies. `READY_FOR_STEP_D = true` is procedural
+  only; no Step D, external evaluation, or redesign ran. Evidence:
+  `analysis/predictability_generalization/stepC_generalization/`; phase memory:
+  `workspace/phase_memory/phase_80_predictability_stepC_generalization.md`.
+
+- Completed/stopped Phase 79 (2026-09-09): under frozen parent contract
+  `792cc760...21bba4`, all four direct GPUs completed 600/600 five-fold OOF
+  training tasks and 140/140 state-regime transfers using the exact Phase-78
+  measurements. Stage-1 evaluated 10,399 UIDs/9,982 image groups/291,172
+  states with zero group leakage: nuisance/linear/MLP/current-head AUROC is
+  `0.6814/0.7665/0.7874/0.7869`, and current-head AUROC peaks at layer 20
+  (`0.8257`). Primary dense Stage-2 READ/WRITE joint-router Spearman is only
+  `0.0416/0.0347`, harmful AUROC `0.5193/0.5115`, with top-10% harmful
+  precision near natural prevalence and no z_R/z_W specialization. Routed and
+  bidirectional state-regime transfer results are likewise weak and secondary.
+  All eight 5,000-draw image-group bootstrap intervals are valid, all final
+  artifact hashes verify, and the evidence category is Case D: Stage-1 strong,
+  Stage-2 weak. Two aggregation-only defects were repaired under chained child
+  contract `fb211075...5d3d1` without changing the frozen parent code, fits,
+  predictions, labels, folds, or metrics. `READY_FOR_STEP_C = true` is only a
+  procedural status; Step C was not executed. Evidence:
+  `analysis/predictability_generalization/stepB_id_learnability/`; phase memory:
+  `workspace/phase_memory/phase_79_predictability_stepB_id_learnability.md`.
+
+- Completed/stopped Phase 78 (2026-09-08): froze contract
+  `6103b9b9...4613d` and constructed the full predictability Step-A
+  measurement corpus without training. Stage 1 contains all 10,399 internal
+  UIDs across 9,982 image groups and 291,172 `(sample, layer)` states; 12 live
+  dense replays exactly match tokens, LMMS correctness, image hashes, and all
+  three 28-layer BF16 feature blocks. Strict P90 triggers 1,413 UIDs. The
+  primary census measured all 15,185 dense-origin states / 60,740 four-action
+  branches; the secondary census measured 35,565 unique routed states /
+  142,260 branches after deduplicating 69,178 route occurrences. Controlled
+  utility has broad positive and negative support; primary local rescue and
+  regression state counts are 1,048 and 83. Action semantics, FULL parity,
+  repeatability, state/anchor parity, completeness, and utility algebra all
+  pass. All 41 compact artifact hashes verify and all 1,413 external dense
+  state files are present. `READY_FOR_STEP_B = true`, but no predictability
+  claim is made and no Step-B probe/router training started. Evidence:
+  `analysis/predictability_generalization/stepA_measurement/`; phase memory:
+  `workspace/phase_memory/phase_78_predictability_stepA_measurement.md`.
+
+- Completed/stopped Phase 77 (2026-09-07): under contract
+  `3771fd97...a69be0f`, used the exact Phase-76 full-refit checkpoint on all
+  569 training-side UIDs and the frozen internal-dev checkpoint on the original
+  115 image-group-disjoint dev UIDs. All 35,565 unique routed states and 69,178
+  route occurrences over 4,948 replay-valid programs were audited. Seen
+  FULL/non-FULL/first-nonFULL top-1 recall is 99.47%/1.83%/2.54%; the selected
+  highest-responsibility routes reach only 11.02% first-nonFULL recall. Training
+  Dense-W R0/R1/R2 final-correct counts are `42/43/264` of 463: exact release
+  on the expert corrective state does not help, while forcing the first
+  corrective action yields a +47.73-point jump. Dense-C preservation is
+  106/106. Held-out first-nonFULL recall is 1.79% and W success is 8/93, so
+  generalization is weak but cannot be primary because seen fit is already
+  weak. The fixed rule classifies the earliest bottleneck as
+  `objective_action_learning`; on-policy relabeling is not justified as the
+  first response. All seen/held-out UIDs, R0/R1/R2 rows, release-state/image
+  hashes, required files, and artifact hashes verify; 21 focused/inherited
+  tests pass. The one unexecuted recommendation is a bounded refit retaining
+  the trajectory marginal plus a fixed-weight first-nonFULL auxiliary CE term.
+  No training, search, relabeling, Stage-1 change, or external evaluation ran.
+  Evidence: `analysis/dense_failure_stage2/teacher_forced_free_run_audit/`;
+  phase memory:
+  `workspace/phase_memory/phase_77_teacher_forced_free_run_audit.md`.
+
+- Completed/stopped Phase 76 (2026-09-07): under contract
+  `00639e7e...5f6a`, exact-replayed and cached all 4,948 retained successful
+  programs over 569 UIDs as 35,565 unique closed-loop prefix states (69,178
+  route occurrences), with zero quarantines and exact numerical/gradient
+  parity for the per-UID trajectory-set marginal loss. The image-group-
+  disjoint internal split selected epoch 1/20 at dev loss 0.425405, followed
+  by a one-epoch full 569-UID refit. All 19,960 established ChartQA/TextVQA/
+  MMMU-Pro/POPE rows completed with exact Dense/Stage-1 baseline and feedback-
+  trace parity. Closed-loop W-to-C/C-to-W/net is `0/8/-8`, accuracy 0.780160,
+  versus Dense 0.780561, Open-loop Program `3/8/-5`, and Sequential-A
+  `3/19/-16`. Only 39/496 triggered Dense-W samples receive non-FULL and none
+  rescue; median best-route geometric action probability is 0.7269. The fixed
+  diagnostic rule therefore points next to on-policy state-distribution shift,
+  but no follow-on is authorized or run. All 58 declared artifacts, 569 state
+  files, and 19,960 evaluation rows verify. Evidence:
+  `analysis/dense_failure_stage2/closed_loop_trajectory_set/`; phase memory:
+  `workspace/phase_memory/phase_76_closed_loop_trajectory_set.md`.
+
+- Completed/stopped Phase 75 (2026-09-06): froze contract
+  `e274d24c...06c7fe7`, reproduced every one of 901 Phase-74 triggered top-1
+  paths exactly (3 W-to-C, 8 C-to-W, net -5; zero beam-score error), then used
+  four direct GPUs to execute all 6,944 unique frozen beam programs. W-to-C
+  availability rises `3/10/24/33` at ranks `1/2/4/8`, giving 30 ranking
+  failures, but 463/493 top-1 W failures (93.91%) remain generation failures.
+  TextVQA contains 19 beam rescues versus zero top-1; MMMU-Pro contains 12
+  versus two. All eight C-to-W regressions have a correct lower-ranked
+  candidate; all-FULL is present in six of those beams and absent from two.
+  Mean W beam support is 7.80 unique programs, so high all-FULL top-1 usage is
+  conservatism rather than complete beam collapse. All 32 artifact hashes and
+  65 focused/inherited tests pass. The one unexecuted recommendation is a
+  minimal trigger-state representation-enrichment experiment; no retraining,
+  reranking, search, or follow-on experiment ran. Evidence:
+  `analysis/dense_failure_stage2/program_beam_oracle_audit/`; phase memory:
+  `workspace/phase_memory/phase_75_program_beam_oracle_audit.md`.
+
+- Completed/stopped Phase 74 (2026-09-06): built and exact-replayed 4,948
+  eligible complete P90 suffix programs over 569 UIDs/560 image groups under
+  contract `0c1696ed...597a49`, with all-UID cached/live trigger-state parity.
+  A small autoregressive program decoder selected epoch 2 on an image-group-
+  disjoint internal development split (beam-8 exact match 24/115, 20.87%) and
+  was reinitialized and refit on the full corpus for exactly two epochs. The
+  full paired four-family evaluation completed all 19,960 reference rows with
+  exact Phase-69 Dense/Stage-1 parity. Program W-to-C/C-to-W/net is `3/8/-5`
+  versus Sequential-A `3/19/-16`: it prevents 11 prior regressions but adds no
+  rescues and remains 5 correct answers below Dense (accuracy 0.780311 versus
+  0.780561). This is outcome B, not a deployment winner. All 65 declared
+  artifact hashes and 60 focused/inherited tests pass. The one unexecuted
+  recommendation is to retain program supervision as a conservative
+  formulation while treating corrective-treatment transfer as unresolved; no
+  follow-on experiment ran. Evidence:
+  `analysis/dense_failure_stage2/polar_suffix_program/`; phase memory:
+  `workspace/phase_memory/phase_74_polar_suffix_program.md`.
+
+- Completed/stopped Phase 73 (2026-09-06): audited exactly 1,200 frozen
+  Phase-72 states (500 old KEEP, 500 old INTERVENE, 200 old MIXED) across 422
+  UIDs/415 image groups under contract `3c371c2f...08cc`. Four direct GPUs
+  searched all 3,194 unobserved first-action branches with direct suffix,
+  exhaustive one-later intervention, then MCTS@200. All states completed with
+  zero quarantines; all 1,200 existing successes and 2,504 discoveries replayed
+  correct with exact token parity. Old KEEP invalidation is 496/500 (99.2%,
+  UID-bootstrap 95% CI [98.24%,99.81%]); old INTERVENE invalidation is 271/500
+  (54.2%, [49.30%,58.89%]). Final labels are 4 AUDITED_KEEP, 229
+  AUDITED_INTERVENE, and 967 AUDITED_MIXED; mean action-set cardinality rises
+  1.338 to 3.425. MCTS discovery saturates under the frozen rule (1.80% after
+  iteration 150). The planned audited five-fold binary probe is not estimable:
+  only four clean KEEP UID/groups remain, so one test fold necessarily lacks a
+  class. No fold/metric was changed post hoc. This directly supports severe
+  label/target incompleteness but leaves representation separability unresolved.
+  The one unexecuted recommendation is a prospectively specified set-valued
+  Stage-2 target; no retraining or follow-on experiment ran. Evidence:
+  `analysis/dense_failure_stage2/treatment_label_completeness/`; phase memory:
+  `workspace/phase_memory/phase_73_treatment_label_completeness.md`.
+
+- Completed/stopped Phase 72 (2026-09-05): reconstructed the frozen Phase-68
+  exact-state supervision and extracted Experiment-A z_R/z_W/logits for all
+  21,071 unique exact prefix-states (34,253 route occurrences, 569 UIDs) under
+  contract `082c9f45...e44edd`, with exact router-logit parity and zero
+  missing/duplicate states. Clean fitting uses 18,438 KEEP_REQUIRED and 1,657
+  INTERVENE_REQUIRED states; 976 MIXED states remain descriptive only. Five
+  UID/image-group-disjoint folds give AUROC/AUPRC: margin 0.4632/0.1050,
+  four logits 0.4640/0.0939, READ 0.5370/0.0931, WRITE 0.5219/0.1088, and
+  READ+WRITE 0.5620/0.1086. The prespecified optional RW MLP does not improve
+  this (0.5583/0.1128). RW precision at 5/10/20% coverage is only
+  0.123/0.135/0.123, with 0.0012 recall at 90% precision. Nuisance-only AUROC
+  is 0.8150; matched RW remains weak at 0.5763 AUROC. Decision Case D applies:
+  do not add another head; the one unexecuted recommendation is to diagnose
+  representation/training-state diversity under separate authorization. All
+  89 artifact hashes, 21,071 feature-index rows, and 23 focused/inherited tests
+  pass. No deployment head, router retraining, search, Stage-1 change, or
+  external evaluation ran. Evidence:
+  `analysis/dense_failure_stage2/treatment_selectivity_separability/`; phase
+  memory:
+  `workspace/phase_memory/phase_72_stage2_treatment_selectivity_separability.md`.
+
+- Completed/stopped Phase 71 (2026-09-05): calibrated one frozen global
+  Stage-2 best-non-FULL-minus-FULL margin for Robust ALL-source Stage-1 P90
+  plus Phase-66 Experiment A. Contract `87debbca...900b2` collected 3,907
+  final-epoch routed-state margins over 1,048 training draws and froze 11
+  candidates before development outcomes. All 1,210 required sequential
+  rollouts completed over the 121 triggered Historical-800 UIDs, with exact
+  δ=0 Phase-66 parity. δ=0 remains best at W-to-C/C-to-W/net `4/1/+3`;
+  positive q10/q25/q40 points are `3/1/+2`, `2/1/+1`, and `2/0/+2`; q70+
+  has zero answer-level changes, while q90+ has no non-FULL actions. All five image-group-disjoint cross-fit training
+  folds select δ=0, pooled held-out `4/1/+3`. Rescue maximum-margin median
+  0.6747 is not above regression 0.7210. Therefore a positive global margin is
+  unsupported and the conditional external rerun was correctly not launched.
+  Twenty-eight focused/inherited tests and all artifact hashes pass. The one
+  unexecuted recommendation is to revisit the Stage-2 representation or
+  training signal under separate authorization. Evidence:
+  `analysis/dense_failure_stage2/abstention_margin/`; phase memory:
+  `workspace/phase_memory/phase_71_stage2_abstention_margin_calibration.md`.
+
+- Completed/stopped Phase 70 (2026-09-04): exhaustively decomposed the frozen
+  Phase-69 full-benchmark run using all 19,960 stored paired traces and no new
+  GPU inference. Stage 1 admits 496/4,380 Dense-W and 405/15,580 Dense-C;
+  Stage 2 uses non-FULL on 119/496 triggered W and 92/405 triggered C. These
+  activation rates are similar (0.2399 versus 0.2272), but outcomes are not:
+  only 3/119 treated W are rescued while 19/92 treated C regress. The fixed
+  descriptive classification is preservation-limited for ChartQA/TextVQA,
+  treatment-quality-limited for MMMU-Pro (0 rescues from 82 treated W), and
+  inactive for POPE (maximum Stage-1 score 0.828423, still 0.077710 below P90).
+  TextVQA contributes 12/19 regressions and -10/-16 net. All 22 changed rows,
+  full score/action traces, required tables, six figures, and 28 artifact
+  hashes verify; 12 focused/inherited tests pass. The one unexecuted
+  recommendation is a development-only preservation-calibrated Stage-2
+  abstention margin. Evidence:
+  `analysis/dense_failure_stage2/full_benchmark_exhaustive_audit/`; phase
+  memory:
+  `workspace/phase_memory/phase_70_full_benchmark_exhaustive_regression_rescue_audit.md`.
+
+- Completed/stopped Phase 69 (2026-09-04): ran the first prospectively frozen
+  full paired external evaluation of Robust ALL-source Stage-1 at strict P90
+  followed by Phase-66 Stage-2 Experiment A. Contract
+  `63379eef...27e83` uses the exact `shared_prefix_eval_20260812` manifests,
+  prompt builder, native dense generation, and LMMS-compatible scorers for all
+  19,960 unique ChartQA/TextVQA/MMMU-Pro/POPE UIDs. Dense versus routed results
+  are W-to-C/C-to-W/net `1/3/-2` ChartQA, `2/12/-10` TextVQA, `0/4/-4`
+  MMMU-Pro, and `0/0/0` POPE; pooled `3/19/-16`, delta accuracy -0.000802 with
+  paired-bootstrap 95% CI [-0.001253,-0.000351]. Stage 1 triggers 901/19,960
+  (4.51%); only 211 triggered samples use any non-FULL action, and POPE has no
+  triggers. Decision D applies: this frozen candidate is regression-dominated
+  at full scale. The one unexecuted recommendation is conservative Stage-2
+  action-selection calibration focused on preservation. All 36 final artifact
+  hashes and 19,960 UID/contract checks pass; no retraining, threshold change,
+  new search, or follow-on evaluation ran. Evidence:
+  `analysis/dense_failure_stage2/full_benchmark_eval/`; phase memory:
+  `workspace/phase_memory/phase_69_full_benchmark_end_to_end_evaluation.md`.
+
+- Evaluation-scope amendment (2026-09-04): future external evaluation defaults
+  to four benchmark families: ChartQA; TextVQA; MMMU-Pro Standard and Vision;
+  and POPE adversarial, popular, and random. This supersedes the earlier
+  three-family ChartQA/MMMU-Pro/POPE restriction. DocVQA, MMStar, and base MMMU
+  remain excluded unless explicitly added. The amendment is scope memory, not
+  authorization to launch evaluation, and TextVQA evaluation assets must be
+  independently verified before use.
+
+- Completed/stopped Phase 68 (2026-09-04): replaced only Phase-66 B's one-hot
+  CE with exact-prefix observed-valid-set loss under contract
+  `c3e6adfd...2bd8421`; model, router, seed, optimizer, 3,144-update schedule,
+  sampler, union routes, Stage-1 thresholds, Historical-800 validation,
+  executor, and LMMS evaluator remained fixed. The exact-state audit found
+  21,071 states over 34,253 occurrences, with valid-set sizes 1/2/3/4 =
+  19,772/785/377/137. The deliberate smoke passed all prospective gates.
+  Experiment C raises MCTS nominal/observed-valid non-FULL recall from
+  8.45%/10.36% to 16.16%/21.26%; first/later observed-valid recall rises from
+  13.52%/9.00% to 25.93%/19.25%. It does not repair single-source negative
+  transfer: nominal recall remains 1.36% versus A's 10.78%. Historical-800
+  free rollouts yield P98/P95/P90 net corrections -1/-1/0; P90 has one rescue
+  and one regression. Thus Decision Case B applies: accepting-set ambiguity is
+  a causal oracle-learning bottleneck, but not the sole deployment bottleneck.
+  The 86-file artifact audit and 26 focused/inherited tests pass. No test set,
+  new search, Stage-1/threshold/architecture change, or external evaluation
+  ran. The one unexecuted recommendation is a small partial-prefix on-policy
+  collection. Evidence:
+  `analysis/dense_failure_stage2/observed_valid_set_loss/`; phase memory:
+  `workspace/phase_memory/phase_68_stage2_observed_valid_set_loss.md`.
+
+- Completed/stopped Phase 67 (2026-09-04): diagnosed the Phase-66 MCTS failure
+  under authoritative contract `ffc2b02b...23bbcf` without retraining, new
+  search, threshold changes, or held-out test access. Four exact-replay workers
+  covered 2,519 routes and 34,253 oracle states per checkpoint; the 725 P90
+  MCTS routes also produced 3,863 controlled-prefix rollouts and 6,653 drift
+  rows with every oracle correctness control passing. B recognizes only 8.45%
+  of MCTS non-FULL actions on exact oracle states (first/later 9.93%/7.82%) and
+  first disagrees at the first intervention on 88.83% of routes. Adding MCTS
+  reduces single corrective recall from A's 10.78% to B's 1.36%; the UID-level
+  delta is -21.74 points, 95% CI [-25.56,-18.01]. B's multi-valid-state nominal
+  error is 30.96% versus 5.65% for single-valid states, and accepting any exact-
+  prefix observed-successful action recovers 21.63% of multi-valid rows. C1-C3
+  forcing raises correctness mainly by executing forced corrections; after
+  release B reproduces only 8.35%/6.75%/8.33% of remaining oracle corrective
+  actions. Thus action learning, negative transfer, and label ambiguity are
+  supported; exposure drift is secondary and no later-only representation
+  deficit is isolated. The 50-file artifact audit passes. The one unexecuted
+  recommendation is an unchanged-router observed-valid-set loss experiment.
+  Evidence: `analysis/dense_failure_stage2/mcts_failure_diagnosis/`; phase
+  memory: `workspace/phase_memory/phase_67_stage2_mcts_failure_diagnosis.md`.
+
+- Completed/stopped Phase 66 (2026-09-04): froze shared Stage-2 contract
+  `b17a81d...40f8`, deduplicating 106 preservation bases, 1,688 successful
+  single routes over 270 W bases, and 725 MCTS routes over 216 W bases. Both
+  matched shared-router arms passed native-dense implementation smoke and
+  four-action overfit gates, then completed 3,144 fixed updates and P98/P95/P90
+  free rollouts over all 800 leakage-free Historical validation UIDs. Single-
+  only A produced W-to-C/C-to-W/net `0/0/0`, `0/0/0`, and `4/1/+3`; its P90
+  gain was +0.00375 accuracy. Adding MCTS in B produced zero W-to-C and zero
+  C-to-W at every threshold, while final non-FULL recall fell from 0.1920 to
+  0.1687. Thus MCTS label abundance did not improve learned rollout behavior.
+  The final planned B condition selects P98 only by conservative tie-break
+  among three unchanged-accuracy points and is Decision C (under-generalized),
+  not a positive deployment selection. Canonical OOF rows overlap Stage-2
+  supervision, so their requested validation cells are explicitly unavailable;
+  conclusions are Historical-800-only. The 145-file artifact audit passes. No
+  held-out test, Stage-1 change, new threshold, search, or external evaluation
+  ran. Evidence: `analysis/dense_failure_stage2/shared_union_training/`; phase
+  memory: `workspace/phase_memory/phase_66_stage2_shared_union_training.md`.
+
+- Completed/stopped Phase 65 (2026-09-04): froze contract
+  `767284f1...57ab4`, passed a four-GPU 12-UID smoke, and completed all 1,413
+  robust-gate work UIDs (1,104 new-search UIDs plus existing-route recapture and
+  106 triggered-C preservation UIDs) with zero failures or duplicates. Shared
+  search resolved 333/1,906 previously missing threshold pairs: 55 by exhaustive
+  single intervention and 278 additional by MCTS@200. Final known-corrective
+  coverage is P98 108/344 (0.3140), P95 234/727 (0.3219), and P90 463/1,307
+  (0.3542); 236/493/844 remain unresolved at budget. The run retained 2,519
+  exact-replay-valid routes and 34,253 routed state rows in 569 verified shards.
+  Search used 34,023 single terminal routes, 1,799 MCTS roots, 327,832 MCTS
+  iterations, and 15.40 sample GPU-hours; sharing saved 18,777 single terminal
+  evaluations and 52 MCTS roots. Correctability remains much lower on GQA and
+  late L19-L27 triggers. The 611-file artifact audit passes. No Stage-2 model
+  was trained and no threshold, Stage-1, test, or external evaluation changed.
+  Evidence: `analysis/dense_failure_stage2/robust_gate_corrective_search/`;
+  phase memory:
+  `workspace/phase_memory/phase_65_robust_missing_corrective_search.md`.
+
+- Completed/stopped Phase 64 (2026-09-03): kept the Phase-63 ALL-source head
+  frozen and audited treatment-dependent P98/P95/P90 operating points under
+  contract `ab254e98...546674`. The held-out frontier gives worst-source C
+  preservation 0.9808/0.9501/0.9003 and pooled W recall
+  0.1054/0.2179/0.3572, with five-fold threshold ranges
+  0.00361/0.01000/0.01465. Exact five-head-mean scoring reproduced 12,000
+  prior held-out trajectory checks with zero error and mapped all 6,399
+  Historical plus 4,000 Canonical train rows. P98/P95/P90 trigger
+  344/727/1,307 W and 7/30/106 C; exact replay preserves 67/146/259 W with at
+  least one reusable route. Every one of 2,618 route×operating-point replays
+  remained LMMS-correct with exact stored-token parity. The residual workloads
+  are 277/581/1,048 W, or 1,104 unique W across all points. Thirty-one artifact
+  hashes and 54 focused/inherited tests pass. No corrective search, Stage-2
+  training, Stage-1 retuning, or external evaluation ran. Evidence:
+  `analysis/dense_failure_stage1/robust_operating_points_and_compatibility/`;
+  phase memory:
+  `workspace/phase_memory/phase_64_robust_operating_points_and_compatibility.md`.
+
+- Completed/stopped Phase 63 (2026-09-03): calibrated one strict any-layer
+  threshold for the frozen Phase-62 ALL-source Shared Random-4 system using
+  Historical validation plus 4,000 Canonical OOF trajectories, while keeping
+  the 800-record Historical test outside selection. Under contract
+  `30288d8a...262a38`, the prospective 98%-worst-source rule selects and freezes
+  `tau=0.9711347410314399`. Historical/Canonical C preservation is
+  0.9875/0.9808; W recall is 0.0650/0.1240 (pooled 0.1054), with pooled trigger
+  precision 0.6734 and median first trigger L23. The untouched Historical test
+  gives 0.9975 C preservation, 0.0650 W recall, and 0.9630 precision. Five
+  cross-fit thresholds span 0.96859-0.97220 (IQR 0.00254), minimum held-out
+  Canonical-fold C preservation is 0.9728, and no adequately supported
+  dataset/source cell falls below 90% preservation. Canonical ChartQA preserves
+  0.9842 C with 0.1034 W recall; Canonical TextVQA detects 0/19 W (Wilson upper
+  0.1682), so its benefit remains unresolved. Decision A freezes gate hash
+  `d3b019b3...cae4f`; 33 artifact hashes and 24 focused/inherited tests pass.
+  No trigger map, Stage-2 work, search, retraining, or external evaluation ran.
+  Evidence:
+  `analysis/dense_failure_stage1/all_source_threshold_calibration/`; phase
+  memory:
+  `workspace/phase_memory/phase_63_stage1_all_source_threshold_calibration.md`.
+
+- Completed/stopped Phase 62 (2026-09-03): trained the unchanged Shared
+  Random-4 head with exact 25/25/25/25 Historical-C/Historical-W/Canonical-C/
+  Canonical-W epoch quotas and the frozen old normalization under contract
+  `08dbf146...90a4fa`. Five canonical OOF folds plus a five-model Historical
+  probability ensemble yield AUROC 0.7689 Canonical and 0.8394 Historical;
+  average/worst source AUROC is 0.8042/0.7689, improving worst-source behavior
+  over both specialists (0.4056 historical-only, 0.5511 canonical-only).
+  Historical GQA/ChartQA/TextVQA is 0.7370/0.9487/0.9488; Canonical is
+  0.7538/0.5826/0.6111, with only 19 Canonical TextVQA-W. Full target-blind
+  LODO Historical/Canonical AUROC is 0.7016/0.5691 ChartQA,
+  0.6243/0.6259 TextVQA, and 0.6034/0.5931 GQA. Thus the frozen rule selects
+  Decision B: source-robust for the current mixture but benchmark-OOD limited.
+  L26 is post-hoc diagnostically consistent across all six LODO cells (minimum
+  0.6270) but was not selected. All 4,000 Canonical OOF and 1,600 Historical
+  ensemble rows are complete; 85 artifact hashes, eight checkpoint provenance
+  records, exact sampler quotas, target exclusion, and 22 tests pass. No
+  threshold, trigger map, Stage-2 change, search, or external evaluation ran.
+  Evidence: `analysis/dense_failure_stage1/all_source_robustness/`; phase
+  memory: `workspace/phase_memory/phase_62_stage1_all_source_robustness.md`.
+
+- Completed/stopped Phase 61 (2026-09-03): refit the exact historical Shared
+  Random-4 Stage-1 head on frozen canonical current-runtime labels while
+  retaining the exact old global normalization, under contract
+  `c1a0420...0c826`. Five image-group-disjoint 800-record folds produced one
+  OOF 28-layer trajectory for every 4,000 canonical UIDs. Max-score OOF AUROC
+  recovered from 0.4056 for the frozen old head to 0.8178 (paired gain +0.4123,
+  95% CI [+0.3862,+0.4376]); GQA/ChartQA/TextVQA are
+  0.7214/0.7021/0.4640. Thus ChartQA inversion disappears and the same
+  architecture retains canonical signal on GQA/ChartQA, while TextVQA remains
+  unresolved with only 19 W. Canonical Dense-C mean/p95 max risk fell from
+  0.8056/1.0000 to 0.4677/0.9186. A full-canonical fit scored only 0.5511 on
+  frozen historical val+test versus 0.8885 for the old head, confirming that
+  neither source-specific boundary is robust across both regimes. The bounded
+  old-recipe reproduction error is 6.22e-08; 23 artifact hashes and 13 tests
+  pass. Decision A is retained with a dataset caveat: recommend a separately
+  authorized source-balanced old+canonical experiment, not Arm B or Stage-2
+  regeneration. No threshold, trigger map, Stage-2 artifact, search, or routing
+  run changed. Evidence:
+  `analysis/dense_failure_stage1/canonical_refit_diagnostic/`; phase memory:
+  `workspace/phase_memory/phase_61_stage1_canonical_refit_diagnostic.md`.
+
+- Completed/stopped Phase 60 (2026-09-03): reconstructed the historical Stage-1
+  population and audited the frozen Shared Random-4 head using existing
+  artifacts only under protocol `411a7530...99dd`. The old 8K population was
+  explicitly selected as previous-Qwen Dense-C/Dense-W quotas (GQA 2K/2K,
+  ChartQA and TextVQA 1K/1K); the executable 7,999 and its 6,399/800/800
+  Phase-48 splits therefore share one selection regime despite zero UID and
+  image-SHA-group overlap. Within current Dense-C, L21 old-vs-canonical source
+  AUROC is 0.586 GQA, 0.938 ChartQA, and 0.937 TextVQA. Canonical-minus-old-C
+  frozen max-score shifts are +0.089/+0.689/+0.712. Metadata-only old-test
+  correctness AUROC is 0.673/0.788/0.630 and canonical ChartQA/overall invert
+  to 0.381/0.272. Frozen max-score old-test AUROC falls from 0.886 overall to
+  0.840 under exact visual-token matching and 0.820 under fixed coarsened
+  token/aspect/question matching, so measured nuisances explain part but not
+  most of the historical signal. New correct ChartQA/TextVQA states project
+  toward the historical wrong geometry; normalized source shift is
+  concentrated (conditioned median/max RMS 0.063/1.323), not a uniform proof
+  that old normalization is the primary cause. All 30 artifacts and 34 focused
+  tests pass. No inference, retraining, threshold change, Stage-2 work, or
+  corrective search ran. Evidence:
+  `analysis/dense_failure_stage1/historical_population_shortcut_audit/`; phase
+  memory: `workspace/phase_memory/phase_60_stage1_historical_population_shortcut_audit.md`.
+
+- Completed/stopped Phase 59 (2026-09-01): froze an outcome-blind,
+  metadata-stratified canonical-source pool of exactly 4,000 new train
+  identities (2,000 GQA / 1,000 ChartQA / 1,000 TextVQA), with unique image
+  SHA groups and zero overlap with all 8,000 legacy candidates, under search
+  contract `d85b5e9b...c4d94`. Four shared direct GPUs completed 4,000/4,000
+  current-runtime dense rows with zero skips (3,129 C / 871 W). The unchanged
+  Shared Random-4 gate produced 257 triggered W and 1,691 triggered C; exact
+  search yielded 75 SINGLE_FIXABLE, 33 additional MCTS_ONLY_FIXABLE, and 149
+  UNRESOLVED. All 2,707 retained routes replay exactly; all 1,799 new state
+  shards and all 1,837 accepted artifact hashes validate. Expanded A/B/C now
+  contain 1,730/8,578/508 routes over 1,730/773/242 bases; 44 new bounded-
+  fixable GQA bases meet the prospective material-increase criterion. New
+  bounded fixability among triggered W is 0.4202 versus 0.4822 old, within the
+  frozen ±0.10 tolerance, but the gate shows major canonical-source shift:
+  `P(trigger|C)=0.5404` versus 0.0122 old and `P(trigger|W)=0.2951` versus
+  0.5878 old. Thus this is canonical-source scale-up, not a pure sample-count
+  replication. The focused/regression suite passes 39/39. No Stage-2 model
+  was trained and no validation/test search, test evaluation, Stage-1 retune,
+  or external evaluation ran. Evidence:
+  `analysis/dense_failure_stage2/data_scale_search/`; phase memory:
+  `workspace/phase_memory/phase_59_stage2_data_scale_search.md`.
+
+- Completed/stopped Phase 58 (2026-09-01): implemented the revised 698-first
+  shared Stage-2 router with exact routed text/visual-token replay and froze
+  contract `8f090f7d...bdb14`, a 3,144-update final-checkpoint-only schedule, and
+  one validation opening. The 1,792-token peak-memory smoke passed exact native
+  dense token parity with 16,778 MiB process-reserved memory and 13,849 MiB
+  shared-GPU headroom. The 48-W/24-C overfit gate passed (0.7292 non-FULL
+  recall; all three non-FULL actions learned). Full Corpus A+B training was
+  numerically clean after moving only the small router to FP32, but the final
+  train diagnostic remained near-FULL (0.0315 non-FULL recall). Validation
+  completed all 800 UIDs/235 triggered UIDs exactly once: W→C/W→W/C→C/C→W
+  were `5/395/400/0`, raising accuracy `0.5000→0.50625` with perfect C
+  preservation. Behavior is narrow: 98.397% post-trigger FULL, 96.30% of
+  intervened samples act immediately at trigger, no WRITE_ONLY rollout action,
+  and no GQA intervention; the five rescues are 2 ChartQA + 3 TextVQA. An
+  earlier BF16-router attempt was stopped/quarantined at non-finite epoch-5
+  loss and produced no checkpoint. All 53 accepted artifact hashes and 800-UID
+  coverage checks pass; 48 focused/regression tests pass. Repository-wide
+  collection remains unavailable because transferred historical modules and
+  reference-package paths are absent. No V1.5, Corpus C, test evaluation,
+  Stage-1 change, or external evaluation ran. Evidence:
+  `analysis/dense_failure_stage2/v1_training_revised/`; phase memory:
+  `workspace/phase_memory/phase_58_stage2_v1_training_revised.md`.
+
+- Completed/stopped Phase 57 (2026-09-01): audited the authoritative Phase-56
+  Corpus A+B single-label supervision under analysis contract
+  `32261c07...f7bc5` after reverifying all 977 Phase-56 source hashes. The
+  frozen inputs are exactly 39 preservation samples/routes with 400 states and
+  698 SINGLE_FIXABLE samples with 7,628 successful single routes and 199,193
+  states. Routes/sample have mean 10.93, median 7, IQR 2-15, and range 1-60;
+  sample-weighted RO/WO/IGNORE fractions are 0.2666/0.2649/0.4685. Correction
+  is mainly delayed: 491/698 = 0.703 are delayed-only and median
+  trigger-to-intervention delay is 13 layers. Naive Corpus B is 0.9617 FULL
+  (25.11:1), with 90,609 duplicated semantic rows and 4,151 exact entering
+  states carrying multiple observed route labels. The simplest recommended V1
+  loader is one uniformly sampled route per W sample, one corrective plus up
+  to two pre- and two post-FULL states (expected FULL 0.7847), and C:W = 1:2
+  sample mixing; alternatives remain metadata and multi-label loss is deferred.
+  All 28 output hashes and 18 focused/inherited tests pass. No training,
+  inference, search, Corpus C use, validation/test labeling, rollout, or
+  external evaluation ran. Evidence:
+  `analysis/dense_failure_stage2/single_label_audit/`; phase memory:
+  `workspace/phase_memory/phase_57_stage2_single_label_distribution_audit.md`.
+
+- Completed/stopped Phase 56 (2026-09-01): froze full corrective-label
+  generation under contract `6489a0b...9905b`, imported the exact cap-200
+  interpretation of the 120-row Phase-55 pilot, and executed the remaining
+  1,761 triggered Dense-W searches plus all 39 triggered Dense-C FULL-suffix
+  preservation rows on four direct GPUs. All 1,800 fresh UIDs completed once
+  with zero failures. The final 1,881-W classes are 698 SINGLE_FIXABLE
+  (0.3711), 209 MCTS_ONLY_FIXABLE (0.1111), and 974 UNRESOLVED (0.5178), for
+  bounded correctability 907/1,881 = 0.4822, only +0.0155 above the cap-200
+  pilot projection. Support is highly nonuniform: GQA/ChartQA/TextVQA total
+  rates are 0.1986/0.4854/0.6448, and L0/L1-8/L9-18/L19-27 rates are
+  0.5923/0.4560/0.3975/0.2507. All 7,628 single routes, 442 MCTS routes, and
+  39 preservation routes replayed exactly into 946 provenance-bound shards
+  with 208,280 routed state rows. Corpus A/B/C contain 400/199,193/8,687
+  state rows and remain separate. The 977-file artifact audit passes under
+  manifest SHA-256 `a26d31e1...0ff4d4`; 57 scoped tests pass. One
+  implementation-only trigger-field alias smoke failed closed, was
+  quarantined, regression-tested, and produced no accepted scientific row.
+  No Stage-2 model was trained, Stage 1 was unchanged, validation/test were
+  not searched, and no external/downstream evaluation ran. Evidence:
+  `analysis/dense_failure_stage2/full_corrective_labels/`; phase memory:
+  `workspace/phase_memory/phase_56_full_corrective_label_generation.md`.
+
+- Completed/stopped Phase 55 (2026-08-31): froze and executed the 120-row
+  trigger-conditioned corrective-search pilot under contract
+  `6b4eb6de...afa2c`. The prospective image-group-unique diagnostic allocation
+  uses 40 train triggered Dense-W samples per dataset and reports both balanced
+  and Phase-54 dataset×depth-cell-weighted estimates. Four direct GPUs passed a
+  12-row parity/provenance smoke and completed 120/120 UIDs with zero failures.
+  Exhaustive singles found 35/120 fixable; ordered trajectory-conditioned MCTS
+  added 22/120, for balanced total 57/120 (0.4750) and cell-weighted total
+  0.5309. Fixable@100/200/300 was 52/56/57; the frozen 0.01 absolute-gain rule
+  selects 200 iterations. Preferred correct routes use median one non-FULL
+  action (IQR 1–3), and 14/57 fixable samples exposed multiple successful
+  trigger actions. GQA/ChartQA/TextVQA support is 0.400/0.475/0.550; depth-bin
+  support is 0.652/0.438/0.562/0.303. All 360 retained correct routes replayed
+  exactly into 57 provenance-bound shards with 7,776 routed state rows; 106
+  artifact hashes and 46 focused/regression tests pass. Projected scale-up is
+  about 362,007 terminal routes, 31.15 GPU-hours, or 7.79 four-GPU wall-hours.
+  No remaining 1,761-row search, triggered-C search, Stage-2 training, Stage-1
+  change, validation/test search, W-to-C repair, or external evaluation ran.
+  Evidence: `analysis/dense_failure_stage2/corrective_search_pilot/`; phase
+  memory: `workspace/phase_memory/phase_55_trigger_conditioned_corrective_search_pilot.md`.
+
+- Completed/stopped Phase 54 (2026-08-31): froze and audited the existing
+  Shared Random-4 dynamic Stage-1 trigger map under contract
+  `d9dd591a...5653a7`, without Qwen inference or new four-action search. Four
+  direct GPU workers reconstructed only the missing 6,399 train score
+  trajectories from hash-verified stored dense features; saved Phase-51
+  validation/test trajectories supplied the other 1,600 rows. The complete
+  7,999-row partitions are train C/no-trigger, C/trigger, W/no-trigger,
+  W/trigger `3160/39/1319/1881`; validation `377/23/188/212`; and test
+  `376/24/196/204`. Preservation/recall/precision are
+  `0.9878/0.5878/0.9797` train, `0.9425/0.5300/0.9021` validation, and
+  `0.9400/0.5100/0.8947` test. GQA wrong recall is only `0.180/0.185` on
+  validation/test versus `0.880/0.800` ChartQA and `0.880/0.870` TextVQA.
+  The deterministic 24-record score check passed within `2.81e-7`, all trigger
+  decisions matched, all 1,600 Phase-53 trigger rows and 18 Phase-52 aggregate
+  fields matched exactly, all 41 artifact hashes match, and 36 focused tests
+  pass. The authoritative future train workloads are 1,881 triggered-W search
+  candidates and 39 triggered-C FULL-suffix preservation candidates; val/test
+  remain non-training cohorts. Two implementation-only attempts stopped
+  fail-closed and were quarantined before accepted outputs. All GPUs are idle.
+  No Stage-2 labels/training, threshold change, persistence/EMA, W-to-C repair,
+  or external evaluation ran. Evidence:
+  `analysis/dense_failure_stage1/trigger_map/`; phase memory:
+  `workspace/phase_memory/phase_54_stage1_trigger_map_audit.md`.
+
+- Completed/stopped Phase 53 (2026-08-31): executed current-runtime
+  treatment-correctability for the Phase-52 shared Random-4, independent
+  sequential, and fixed-L27 gates under frozen contract
+  `2f935dd0...c956f1e`. A 12/12 smoke passed native-dense token parity and
+  31/31 cached-suffix/complete-route parity. Four direct GPUs completed all
+  443 validation and 433 test execution samples, 2,196 regimes, and 59,239
+  unique bounded-search routes with zero final failures. Validation froze
+  shared Random-4 before test: validation population rescue/conditional
+  correctability were `0.2025/0.3821`, versus `0.1825/0.3544` independent and
+  `0.1975/0.3657` fixed L27. Held-out values were `0.2100/0.4118`,
+  `0.1975/0.3709`, and `0.2200/0.4171`, respectively. Shared-gate full-replay
+  enrichment was 1.1211 validation and 1.1132 test; triggered-correct
+  preservability was 1.0 for every gate. Early shared triggers were more
+  conditionally correctable, but fixed-L27 replay slightly exceeded dynamic
+  population rescue on test and remains a serious fallback. The 463-record
+  selected-gate Stage-2 handoff is frozen; proceeding to an action head is
+  supported only provisionally and requires separate authorization. A
+  regime-status schema defect and native/materialized BF16 SDPA parity defect
+  were caught fail-closed, fixed, regression-tested, and their two invalid
+  contracts quarantined. All 22 required artifact hashes and 35 focused tests
+  pass; all GPUs are idle. No Stage-2 training, broad W2C repair/MCTS, routing
+  training, or external evaluation ran. Evidence:
+  `analysis/dense_failure_stage1/treatment_correctability/`; phase memory:
+  `workspace/phase_memory/phase_53_stage1_treatment_correctability.md`.
+
+- Completed/stopped Phase 52 (2026-08-31): reused the frozen Phase-50/51
+  validation/test score trajectories and selected one Stage-1 admission gate
+  under contract `f065d372...f2288135`, without retraining or model inference.
+  Full validation sweeps maximized `(wrong detected - correct false triggers) /
+  800` subject to aggregate failure precision at least 0.90. Shared fixed L27
+  won at raw threshold `0.8497647428417646`, with validation
+  preservation/recall/precision/utility `0.9400/0.5400/0.9000/0.2400`; shared
+  Random-4 was three net utility samples behind. The frozen winner transferred
+  to `0.9500/0.5275/0.9134/0.23875` on the selection-held-out test. Independent
+  sequential tied test utility at `0.23875`; shared Random-4 and All-28 reached
+  `0.2250` and `0.2175`, so sequential gating has no demonstrated aggregate
+  utility advantage. Fixed-L27 minus the validation runner-up has test 95%
+  bootstrap intervals spanning zero for utility `[-0.00375, 0.03125]` and
+  recall `[-0.0125, 0.0475]`. Performance remains task-dependent: winner test
+  utility is `0.0775/0.3850/0.4150` on GQA/ChartQA/TextVQA and GQA precision is
+  only `0.7460`. Carry fixed L27 and this threshold only into a separately
+  authorized treatment-feasibility phase; it is not a final deployment
+  threshold or a universal fixed-layer claim. All 20 artifact hashes and 21
+  focused/regression tests pass; no treatment, W-to-C/four-action work, MCTS,
+  OOD, external evaluation, or GPU job ran. Evidence:
+  `analysis/dense_failure_stage1/gate_winner_selection/`; phase memory:
+  `workspace/phase_memory/phase_52_stage1_gate_winner_selection.md`.
+
+- Completed/stopped Phase 51 (2026-08-31): executed the authorized shared
+  Stage-1 predictor/global-risk gate under frozen contract
+  `264a9407...65e095b`, reusing the exact Phase-48 6,399/800/800 split and
+  compact current-dense features. Four direct GPUs trained the four
+  prospectively fixed models: state-only All-28, layer-only All-28,
+  state+layer All-28, and state+layer Random-4. Validation designated
+  state+layer Random-4 with the full 0-27 gate window before one aggregate test
+  pass; state/layer-only controls never received test scores. The shared
+  predictor matches independent-probe ranking (mean test layer AUROC
+  0.8769 versus 0.8737), while layer-only is exactly chance and state+layer
+  does not materially exceed state-only. At the 99% validation target,
+  Random-4 transfers from 0.9900/0.3950 validation preservation/recall to
+  0.9875/0.4050 test, reducing absolute preservation drift from Phase-50's
+  0.0425 to 0.0025. However, test preservation/wrong-recall spread across
+  GQA/ChartQA/TextVQA is 0.0300/0.7600, not better than Phase 50's
+  0.0250/0.7250. A validation-selected shared fixed L27 also gives
+  0.9825/0.4200 versus sequential 0.9875/0.4050, so sequential deployment has
+  no clear advantage. The frozen readiness decision is **NO**: do not connect
+  this gate to treatment. All 33 required hashes, 4x800 validation and 2x800
+  test trajectories with 28 scores, five figures, and 26 focused tests pass;
+  all GPUs are idle. One pre-test implementation error was quarantined under
+  `shared_global_gate.invalid_6dd970d9` and no checkpoint crossed contract
+  hashes. No OOD, treatment, W-to-C/four-action work, MCTS, or external
+  evaluation ran. Evidence: `analysis/dense_failure_stage1/shared_global_gate/`;
+  phase memory:
+  `workspace/phase_memory/phase_51_shared_stage1_global_risk_gate.md`.
+
+- Completed/stopped Phase 50 (2026-08-31): reused the exact 28 frozen Phase-48
+  linear probes and its 800/800 validation/test cohorts to evaluate the
+  authorized independent layer-wise first-trigger gate under frozen contract
+  `6b1e4812...653831d`. Validation-only shared-alpha calibration selected
+  `alpha=0` for both 99% and 98% targets (1.000 correct preservation, 0.4100
+  wrong recall) and `alpha=0.00250627` for 95% (0.9675 preservation, 0.4750
+  recall), after which test was opened once. On test, the 99%/98% gate retained
+  only 0.9575 of correct samples while detecting 0.4175 of wrong samples; the
+  95% gate achieved 0.9550/0.4775. Median first triggers were layers 3 and 2,
+  respectively. The sequential gate improved over the best fixed L14/L21/L27
+  baseline by only +0.0200 recall at the 99% target and was worse by 0.0225 and
+  0.0500 at 98% and 95%. Test wrong-recall spread across datasets was
+  0.7250/0.7250/0.6650 (GQA much weaker than ChartQA/TextVQA), so the common
+  calibration is not a robust final gate under the prospective criteria. All
+  1,600 score rows contain 28 scores, 17 required artifact hashes match, 17
+  focused tests pass, and all four GPUs are idle. No probe was retrained and no
+  treatment, shared predictor, global risk-budget model, routing, or external
+  evaluation ran. Evidence:
+  `analysis/dense_failure_stage1/independent_sequential_gate/`; phase memory:
+  `workspace/phase_memory/phase_50_independent_sequential_gate.md`.
+
+- Completed/stopped Phase 49 (2026-08-31): executed the authorized OOD-first
+  dense-failure diagnostic under frozen contract `dfef70e6...c64fff`. The
+  native pre-language-decoder control was validated on a 12/12 exact-repeat
+  four-GPU smoke with one pre-hook capture and zero decoder forward firings,
+  then extracted for all 7,999 current-label rows into 128 audited shards.
+  Cross-dataset image-group overlap is zero. Eighty-seven source-only linear
+  probes were fitted for the three leave-one-dataset-out runs; source
+  validation froze representative layers 22 (TextVQA target), 26 (ChartQA),
+  and 20 (GQA) before one-pass target scoring. Representative OOD AUROC is
+  0.7236 on TextVQA, 0.4502 on ChartQA, and 0.6160 on GQA, versus pre-decoder
+  0.5219/0.5472/0.5432. Target-descriptive layer-21 AUROC is
+  0.8046/0.8018/0.5975, showing real but nonuniform and layer-unstable transfer.
+  Source 99%-preservation thresholds transfer conservatively only to TextVQA
+  (actual preservation 0.995, wrong recall 0.092); preservation collapses on
+  ChartQA (0.305) and GQA (0.138), making their high recalls nonconservative.
+  The fixed prospective interpretation gate therefore rejects a strong
+  benchmark-general computation-dependent claim and does not authorize the
+  shared Stage-1 predictor on that rationale. All 87 tasks, required artifacts,
+  and SHA-256 checks pass; 28 focused tests pass. No shared predictor, layer
+  embedding, W-to-C work, routing, Stage 2, or external evaluation ran.
+  Evidence: `analysis/dense_failure_stage1/ood_signal_diagnostic/`; phase
+  memory: `workspace/phase_memory/phase_49_ood_failure_signal_diagnostic.md`.
+
+- Completed/stopped Phase 48 (2026-08-30): executed the authorized 28-layer
+  current-dense failure-predictability diagnostic under frozen contract
+  `3cf49a46...0234cd`. The exact image-group-disjoint split is 6,399 train / 800
+  validation / 800 test with zero UID or group overlap. Four direct GPUs fitted
+  one identical regularized linear probe per layer over the concatenated
+  `text_final`/`text_mean`/`visual_mean` summaries; validation froze the full
+  layers-0-27 informative region before a single test evaluation. Test
+  AUROC/AUPRC are already 0.8421/0.8519 at layer 0 and best AUROC is 0.8992 at
+  layer 21, before Phase-47 answer commitment at layers 25-27. Every dataset is
+  informative from layer 0, but GQA is weaker (0.6981, peak 0.7713) than
+  ChartQA/TextVQA (about 0.94 at layer 0, peaks above 0.97). Among transferred
+  validation thresholds that still meet the requested preservation on test,
+  best wrong recall is 0.3350 at 99%, 0.4275 at 98%, and 0.5225 at 95%.
+  All required artifacts and 28 checkpoints pass SHA-256 audit; 21 focused
+  tests pass. Because informative-only 0-27 equals all-layer, a future
+  separately authorized comparison should prioritize all-layer versus random-k
+  over 0-27; layers 16-27 may be a predeclared stronger-plateau sensitivity.
+  No shared predictor, W→C work, routing, MCTS, or external evaluation ran.
+  Evidence: `analysis/dense_failure_stage1/layerwise_failure_probe/`; phase
+  memory:
+  `workspace/phase_memory/phase_48_layerwise_dense_failure_predictability.md`.
+
+- Completed/stopped Phase 47 (2026-08-30): corrected dense answer-logit
+  emergence at the actual assistant answer-start position over all 7,999
+  current LMMS-labeled native-dense samples. Frozen contract
+  `c9a6d630...cbdcce` passed a 72/72 stratified first-token gate plus cached
+  shared-prefix checks, and four direct GPUs completed 7,999/7,999 records with
+  zero execution failures. Layer-27 raw top-1 reproduced 7,926/7,999 stored
+  first tokens (99.09%); residual differences reflect frozen generation
+  processors rather than the old position error. Of 4,000 wrong samples, 3,993
+  first-divergence comparisons are usable and 7 unreplayable collisions are
+  explicitly excluded. Correct GT first becomes raw top-1 at median layer 26
+  (IQR 26–27), with 94.95% top-1 at layer 27. The fixed three-layer persistent
+  rule is right-censored and is defined for only 851/3,999 correct samples
+  (median 24 among defined). The literal wrong zero-crossing median is layer 2,
+  but early targets have extremely low ranks and near-zero, balanced margins;
+  material wrong-answer separation occurs around layers 23–27 and is strongest
+  at 25–27. Fixed wrong taxonomy: 1,977 early, 33 progressive, 1,711 answer
+  erosion, and 272 ambiguous over 3,993 usable samples; early/erosion counts are
+  sign patterns, not proof of semantic early answers. The evidence supports
+  layers 25–27 (especially 26–27) as a candidate late supervision region but
+  does not select a Stage-1 strategy. No predictor training, W→C work, routing,
+  MCTS, or external evaluation ran. Evidence:
+  `analysis/dense_failure_stage1/answer_logit_emergence_v2/`; phase memory:
+  `workspace/phase_memory/phase_47_answer_position_logit_emergence_v2.md`.
+
+- Completed/stopped Phase 46 (2026-08-30): executed the user-authorized first-answer-token
+  logit-lens analysis in `plans/dense_answer_logit_emergence_analysis_plan.md`
+  over all 7,999 completed current-dense samples. The prospective analysis uses
+  the frozen Qwen2.5-VL final norm/head on the saved final literal user-query
+  token state, raw-logit delta 1.0, three-layer persistence, early cutoff layer
+  4, and companion persistent zero crossings. It uses canonical GT first tokens
+  and exact generated first tokens and fit no learned probe. Four direct GPUs
+  scored 128/128 shards and 7,999/7,999 unique UIDs with finite logits under
+  frozen contract `73daef6c...`. Correct GT-vs-strongest-token delta and zero
+  emergence were both 0/3,999; wrong delta emergence was 2,215/4,000, reaching
+  50% coverage at layer 21 but never 75%. Wrong taxonomy was 1,203 early, 425
+  progressive, 587 answer erosion, and 1,785 ambiguous, including 594 exact
+  GT/predicted first-token collisions. The one allowed validity diagnostic found
+  layer-27 `<|im_end|>` top-1 for 54/54 checked correct records, confirming that
+  the saved final literal user-token position predicts chat structure rather
+  than the first assistant answer. Therefore no supervision start range or
+  training strategy is selected; optional sequence analysis and all training
+  were stopped. Evidence: `analysis/dense_failure_stage1/logit_emergence/`;
+  phase memory:
+  `workspace/phase_memory/phase_46_dense_answer_logit_emergence.md`.
+
+- Completed Phase 45 (2026-08-30): the user stopped the Phase-44 fail-closed
+  repair/recheck workflow and authorized one direct current-dense Stage-1 data
+  action. The complete recovered population is 8,000 GQA/ChartQA/TextVQA
+  candidates. Native Qwen2.5-VL dense all-on inference will be scored by the
+  official `lmms-eval==0.7.3` task implementations, retaining raw fractional
+  TextVQA consensus and the repository's existing 0.5 binary threshold. An
+  18/18 functional smoke passed, followed by a four-GPU full run. All 8,000
+  candidates were attempted; 7,999 completed and one ChartQA sample was
+  explicitly skipped for a missing image. Current LMMS labels are 3,999 correct
+  and 4,000 wrong (GQA 2,000/2,000, ChartQA 999/1,000, TextVQA 1,000/1,000).
+  All completed samples have finite BF16 `[28,3584]` text-final, text-mean, and
+  visual-mean features across 128 shards. The completed population has 7,476
+  image groups. No split or predictor training ran. Evidence root:
+  `analysis/dense_failure_stage1/current_dense_8k/`; phase memory:
+  `workspace/phase_memory/phase_45_current_dense_8k_lmms.md`.
+
+- Stopped Phase 44 (2026-08-30): the user replaced historical-label recovery
+  with authoritative current-runtime native-dense regeneration. The tracked
+  portable reproduction manifest restores all 8,000 requested GQA/ChartQA/
+  TextVQA identities and annotations; all required semantic fields match the
+  independent 6,917-row transferred overlap. The implementation loads native
+  Qwen2.5-VL directly with no routed wrapper, freezes physical content-hash
+  image groups, and gates optional 28-layer passive pooled-state extraction on
+  exact 24-record token parity. The next boundary is contract freeze followed
+  by repeatability/hook smoke; four-GPU full execution is authorized only after
+  those gates pass. Stop before predictor training. Phase memory:
+  `workspace/phase_memory/phase_44_current_dense_stage1_regeneration.md`.
+
+- Stopped Phase 43 audit (2026-08-30):
+  `plans/stage1_dense_failure_8k_label_audit_plan.md` (SHA-256
+  `1e645d2f59df580606be067812d78d4e2c3e19e8973ce78387e9cc727fcdcc6d`).
+  The physical active pool is complete at 8,000 images with historical 4K/4K
+  filename buckets, but the six source JSONLs and canonical 8K regenerated
+  label/contract bundle were not transferred. The available source derivative
+  contains only 6,917 positive-route VQA rows and omits all 1,083 zero-positive
+  rows plus the original dense predictions. Current dense counts reconstruct
+  to 4,045 correct / 3,955 wrong. All image bytes form 7,477 SHA-256 groups,
+  including 513 repeated-content groups, so future splitting must be image
+  group/content disjoint. The authority decision is
+  `EXECUTION_CONTRACT_UNRESOLVED`; no replay subset, GPU inference, split,
+  hidden-state extraction, or training was started. Evidence:
+  `analysis/dense_failure_stage1/8k_label_audit/`; phase memory:
+  `workspace/phase_memory/phase_43_stage1_dense_failure_label_audit.md`.
+
 - Completed/stopped audit (2026-08-30): the exact dirty-worktree source that
   generated `mcts_labels_4action/sequential_branching_v1` is reconstructed and
   matches all 16/16 contract-bound SHA-256 values plus the frozen YAML hash.

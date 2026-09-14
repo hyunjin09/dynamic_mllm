@@ -1,0 +1,17 @@
+benchmark,target_n,actual_n,image_groups
+chartqa,32,32,14
+chartqa,64,63,28
+chartqa,128,127,58
+chartqa,256,256,118
+mmmupro,32,30,15
+mmmupro,64,64,31
+mmmupro,128,128,63
+mmmupro,256,256,127
+pope,32,18,1
+pope,64,54,3
+pope,128,126,7
+pope,256,252,14
+textvqa,32,31,20
+textvqa,64,64,41
+textvqa,128,127,78
+textvqa,256,255,160

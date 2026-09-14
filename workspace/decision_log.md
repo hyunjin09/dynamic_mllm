@@ -3,6 +3,725 @@
 Record only decisions, pivots, and lessons that should affect later phases.
 Do not copy raw logs or provisional explanations here.
 
+## 2026-09-09 — Treat the current Stage-1 signal as source/dataset-specific, not semantic-neighbor memorization
+
+- Decision or promoted lesson: retain the current Stage-1 hidden-state signal
+  as robust to semantic-neighbor distance and unseen label-blind question
+  clusters, but do not treat it as source- or dataset-transferable. Any future
+  use must calibrate and validate on the intended source/task family. Continue
+  to treat the current Stage-2 local READ/WRITE utility predictor as weak.
+- Triggering evidence: Stage-1 M3 Q1/Q5 AUROC is 0.7828/0.8012 and its
+  Q5-minus-Q1 delta is +0.0183 with 5,000-draw image-group-bootstrap 95% CI
+  [-0.0050, 0.0423]. Concatenated K=100 cluster-OOD AUROC is 0.7725 versus ID
+  0.7869. In contrast, Historical→Canonical/Canonical→Historical AUROC is
+  0.4342/0.5563, LODO AUROC is 0.5508-0.6043, and pairwise transfer is
+  0.4985-0.5807. Cluster-OOD Stage-2 READ/WRITE Spearman remains only
+  0.0453/0.0164, with LODO near zero.
+- Qualification: GQA within-dataset source transfer is stronger (~0.74), so
+  source specificity is heterogeneous rather than universal collapse. K=100
+  cluster OOD establishes robustness to this frozen question encoder's
+  partition, not arbitrary semantic shifts. LODO threshold drift is especially
+  severe for ChartQA/GQA and should not be generalized to every dataset.
+- Evidence paths:
+  `analysis/predictability_generalization/stepC_generalization/statistics/similarity_q1_q5_bootstrap.csv`,
+  `question_cluster_ood/stage1_metrics.csv`,
+  `source_transfer/*_stage1.csv`, `dataset_lodo/lodo_stage1.csv`, and
+  `summaries/stepC_generalization_summary.md`.
+- Confidence: high for split isolation, all 300 fit completions, frozen encoder
+  and model contracts, exact kNN support accounting, and the S1-C/S2-A
+  descriptive categories; unknown for the causal feature or preprocessing
+  responsible for source/dataset failure.
+- Consequence for future actions: do not deploy a global Stage-1 threshold or
+  claim transferable failure prediction from Phase-79 ID AUROC. A separately
+  authorized Step D may measure external transfer, but redesigning Stage 1 or
+  Stage 2 is a strategic pivot and must be planned prospectively.
+
+## 2026-09-09 — Separate learnable dense failure risk from weak local READ/WRITE utility
+
+- Decision or promoted lesson: retain the Phase-79 Stage-1 state signal as
+  genuine in-domain learnability, but do not treat the tested current-state
+  representation/head family as a useful predictor of immediate READ or WRITE
+  utility. Keep these as distinct scientific conclusions.
+- Triggering evidence: leakage-free five-fold OOF Stage-1 AUROC is 0.6814 for
+  nuisance, 0.7665 linear, 0.7874 MLP, and 0.7869 current head; current-head
+  AUROC peaks at layer 20 (0.8257), and its group-bootstrap 95% interval is
+  [0.7789, 0.7946]. For 15,185 primary dense post-trigger states, joint-router
+  READ/WRITE Spearman is 0.0416/0.0347, harmful AUROC is 0.5193/0.5115, and
+  top-10% harmful precision is 0.4937/0.4775 versus prevalence 0.480/0.472.
+  z_R does not beat z_W for READ, z_W does not beat z_R for WRITE, nuisance is
+  the strongest READ correlate, and routed/transfer correlations remain weak.
+- Qualification: Step B is same-population in-domain OOF. It does not test
+  question/template independence, dataset LODO, external transfer, causal
+  branch necessity, or deployable routing. Routed-state evidence covers a
+  selected 569-UID successful-route corpus. Weak Stage-2 predictability does
+  not prove controlled effects are absent; Phase 78 directly measured them.
+- Evidence paths:
+  `analysis/predictability_generalization/stepB_id_learnability/`, especially
+  `stage1/overall_metrics.csv`, `stage2_dense/continuous_metrics.csv`,
+  `stage2_dense/representation_specificity.csv`,
+  `statistics/uid_bootstrap_ci.csv`, and
+  `summaries/stepB_id_learnability_summary.md`.
+- Confidence: high for fold isolation, full OOF completeness, metric
+  reproducibility, and the Case-D in-domain classification; unknown for why
+  the immediate utilities are weakly predictable and for all OOD behavior.
+- Consequence for future actions: do not deploy or add another local
+  READ/WRITE utility gate from this frozen ladder. A separately authorized
+  Step C may test semantic/source generalization without redesigning targets;
+  any Stage-2 target/representation pivot requires its own prospective plan.
+
+## 2026-09-08 — Step-A controlled utility measurements are valid and non-degenerate
+
+- Decision or promoted lesson: retain the frozen Phase-78 census as the
+  authoritative measurement basis for a separately authorized predictability
+  phase. Keep dense-origin and routed-state utilities as distinct domains, and
+  do not infer predictability from their label distributions alone.
+- Triggering evidence: all 10,399 internal UIDs / 291,172 Stage-1 layer states
+  are represented; strict P90 yields 1,413 UIDs and 15,185 primary dense-origin
+  states. All 60,740 primary and 142,260 secondary four-action branches are
+  complete. Primary `U_READ` has 7,962 positive and 7,223 negative states;
+  `U_WRITE` has 7,353 positive, 6,419 negative, and 1,413 zero states. The
+  routed census contains 35,565 unique states deduplicated from 69,178 route
+  occurrences and likewise has broad signed utility support. Primary controlled
+  correctness labels contain 1,048 local-rescue and 83 local-regression states.
+- Qualification: these are teacher-forced annotated-answer likelihood effects
+  plus separately preserved LMMS correctness flips, not learned-predictor
+  performance. ChartQA's relaxed numeric acceptance interval has no finite
+  answer-string representation, so continuous q uses the literal annotation
+  while discrete correctness retains LMMS semantics. Routed states cover the
+  existing 569-UID exact corpus rather than all reachable routed states.
+- Evidence paths:
+  `analysis/predictability_generalization/stepA_measurement/`, especially
+  `summaries/stepA_measurement_summary.md`, `summaries/stepB_readiness.md`, and
+  `artifact_manifest.json`.
+- Confidence: high for census completeness, action semantics, replay parity,
+  utility algebra, and label provenance; unknown for actual Stage-1 or Stage-2
+  predictability.
+- Consequence for future actions: Step B is measurement-ready, but it must be a
+  separately authorized research action. Do not train a probe/router or choose
+  a supervision depth from Step-A distributions alone.
+
+## 2026-09-07 — Diagnose the trajectory-set router as corrective-action-underlearned before exposure-limited
+
+- Decision or promoted lesson: do not treat strong route-level geometric
+  probability or free-run support departure as evidence that exposure bias is
+  the primary Stage-2 bottleneck. First require high top-1 recall for sparse
+  corrective actions on exact expert states. For the frozen Phase-76 router,
+  change the objective before collecting on-policy labels.
+- Triggering evidence: the Phase-77 full-refit seen audit scores all 69,178
+  route-state occurrences and obtains 99.47% FULL recall but only 1.83%
+  non-FULL and 2.54% first-nonFULL recall. Even the highest-responsibility route
+  per W UID reaches only 11.02% first-correction recall. On 463 W UIDs, R0 free
+  rollout rescues 42 and R1 exact-state release rescues 43, while R2 forcing
+  the first corrective action rescues 264. Thus removing pre-intervention drift
+  adds 0.22 points, but executing the missed corrective action adds 47.73
+  points. Frozen held-out first-correction recall is likewise 1.79%.
+- Qualification: R2 still leaves 199/463 W UIDs wrong, so later exposure,
+  incomplete route support, representation, or action-sequence problems may
+  remain. Off-support means outside observed successful routes, not invalid.
+  This audit does not prove that an auxiliary loss will work or that internal
+  gains will transfer externally.
+- Evidence paths:
+  `analysis/dense_failure_stage2/teacher_forced_free_run_audit/teacher_forced/action_class_metrics.csv`,
+  `teacher_forced/highest_responsibility_route_metrics.csv`,
+  `release/release_success_summary.csv`,
+  `generalization/seen_vs_heldout_summary.csv`, and
+  `summaries/teacher_forced_free_run_audit_summary.md`.
+- Confidence: high for the exact-state recall, hybrid-release effects, frozen
+  held-out comparison, and execution provenance; moderate for calling later
+  exposure secondary rather than irrelevant.
+- Consequence for future actions: if separately authorized, test one bounded
+  objective change that retains the trajectory marginal and adds a fixed-weight
+  first-nonFULL auxiliary cross-entropy term. Do not start DAgger/on-policy
+  relabeling first, and do not add more route labels as a substitute for action
+  recall.
+- Revisit condition: a corrective-sensitive objective produces high seen and
+  held-out first-nonFULL recall but free rollout remains weak, at which point a
+  bounded on-policy exposure experiment becomes justified.
+
+## 2026-09-06 — Retire the old binary Stage-2 treatment labels; preserve expanded action sets
+
+- Decision or promoted lesson: do not train or evaluate another Stage-2
+  KEEP-versus-INTERVENE head from the old observed single-route labels. Preserve
+  the replay-validated expanded action sets and their MIXED status. Any future
+  target change, including set-valued supervision, requires a separately
+  approved prospective plan.
+- Triggering evidence: a frozen four-GPU audit of 1,200 exact states searched
+  all 3,194 unobserved first-action branches. It invalidated 496/500 old KEEP
+  labels and 271/500 old INTERVENE labels to MIXED. Final bounded labels are 4
+  AUDITED_KEEP, 229 AUDITED_INTERVENE, and 967 AUDITED_MIXED; 1,087/1,200
+  states gained at least one action and mean action-set cardinality increased
+  from 1.338 to 3.425. All 2,504 discoveries replayed exactly, zero states were
+  quarantined, and MCTS discovery met the frozen saturation rule.
+- Qualification: these are bounded-search successful-action sets, not exhaustive
+  causal treatment labels. The unchanged audited-label probe is not estimable:
+  four clean KEEP UID/groups cannot populate both classes in five disjoint test
+  folds. Therefore this phase directly supports label incompleteness but does
+  not establish whether the frozen RW representation can separate trustworthy
+  binary treatment need.
+- Evidence paths:
+  `analysis/dense_failure_stage2/treatment_label_completeness/metrics/overall_completeness.csv`,
+  `labels/old_vs_audited_action_sets.jsonl`, `search/replay_validation.jsonl`,
+  `probe_recheck/probe_estimability_note.md`, and
+  `summaries/treatment_label_completeness_summary.md`.
+- Confidence: high for the sampled-state invalidation rates, exact replay, and
+  bounded-search saturation; none for an audited binary AUROC because it is not
+  statistically estimable under the frozen split contract.
+- Consequence for future actions: do not interpret Phase-72 RW AUROC 0.562 as a
+  clean representation test and do not add another binary head. If explicitly
+  authorized, prospectively define and validate one set-valued treatment target
+  before fitting Stage 2.
+- Revisit condition: a new identification protocol yields adequate clean support
+  in both binary classes, or a prospectively approved set-valued objective
+  changes the treatment question.
+
+## 2026-09-04 — Do not equate MCTS oracle-label yield with learned Stage-2 value
+
+- Decision or promoted lesson: treat the current shared single-label Stage-2
+  router as under-generalized and do not run its held-out test. Richer MCTS
+  supervision is not automatically beneficial: under a matched architecture,
+  optimizer, update budget, C:W mixture, and validation population, it removed
+  the small P90 gain observed with single-only supervision. Any next repair
+  requires a separately approved prospective plan; do not add more search or
+  MCTS labels by default.
+- Triggering evidence: Experiment A (preservation+single) achieved P90
+  W-to-C/C-to-W/net `4/1/+3`, raising Historical-800 accuracy from 0.5000 to
+  0.50375. Experiment B (same system plus 1:1 single:MCTS W supervision)
+  produced `0/0/0` at P98, P95, and P90. Final teacher-forced non-FULL recall
+  was 0.1920 for A and 0.1687 for B; B used at least one non-FULL action on only
+  4.13% of P90-triggered samples. Both overfit gates and full execution audits
+  passed, so this is a learned rollout result rather than a failed launch.
+- Evidence paths:
+  `analysis/dense_failure_stage2/shared_union_training/comparison/A_vs_B.csv`,
+  `experiment_A_single/metrics/threshold_comparison.csv`,
+  `experiment_B_single_plus_mcts/metrics/threshold_comparison.csv`,
+  `summaries/shared_stage2_decision.md`, and
+  `workspace/phase_memory/phase_66_stage2_shared_union_training.md`.
+- Confidence: high for the matched Historical-800 comparison and exact artifact
+  provenance; low for the cause of B's under-generalization. Canonical OOF rows
+  contributed Stage-2 supervision and are not a leakage-free Stage-2 holdout.
+- Applies when: deciding whether the current shared Stage-2 formulation or more
+  MCTS supervision is ready for test/deployment on this three-dataset regime.
+- Does not apply when: claiming MCTS search itself lacks oracle value, claiming
+  the A/P90 +3 generalizes beyond Historical validation, or diagnosing the
+  representation/objective/exposure cause without a targeted experiment.
+- Consequence for future actions: preserve A/P90 as a small validation-only
+  signal and B/P98 as the plan's conservative tied final-condition point, but
+  promote neither to test. A new plan must address learned-policy
+  under-generalization rather than merely increasing route count.
+- Revisit condition: a prospectively specified objective/representation or
+  exposure-correction experiment yields reproducible positive net rollout on a
+  genuinely held-out Stage-2 population.
+
+## 2026-09-04 — Keep robust-gate corrective corpora threshold-specific and treat MCTS as essential supervision
+
+- Decision or promoted lesson: preserve separate P98/P95/P90 Stage-2 corpora
+  and do not select a deployment threshold from corrective-label yield. New
+  corrective supervision is predominantly MCTS-derived, while GQA and late
+  trigger handoffs remain substantially less correctable under the bounded
+  executor/search contract. A future comparison must use the same Stage-2
+  architecture and evaluation semantics across operating points and account
+  explicitly for their unequal preservation/corrective support.
+- Triggering evidence: shared search resolves 333/1,906 missing pairs, with 55
+  new-single and 278 new-MCTS outcomes. Final known-corrective coverage is
+  108/344 P98, 234/727 P95, and 463/1,307 P90. P90 GQA coverage is
+  0.1946 historical and 0.2544 canonical versus 0.48397 historical TextVQA and
+  about 0.533 ChartQA. L19-L27 bounded coverage is only 0.277/0.273/0.276 for
+  P98/P95/P90, below the supported middle-depth cells. All 2,519 routes and
+  34,253 states passed exact replay and provenance verification.
+- Evidence paths:
+  `analysis/dense_failure_stage2/robust_gate_corrective_search/metrics/threshold_coverage.csv`,
+  `metrics/dataset_source_breakdown.csv`, `metrics/trigger_depth_breakdown.csv`,
+  `summaries/threshold_corpus_summary.md`, and `artifact_manifest.json`.
+- Confidence: high for population counts, bounded-search outcomes, route replay,
+  and state provenance; low for predicting learned end-to-end benefit before a
+  matched Stage-2 validation experiment.
+- Applies when: designing Stage-2 training for these frozen robust operating
+  points and the Historical+Canonical GQA/ChartQA/TextVQA mixture.
+- Does not apply when: calling unresolved pairs unfixable, choosing P90 because
+  it has the most labels, claiming trigger depth is causal, or transferring
+  these rates to unseen benchmarks.
+- Consequence for future actions: if separately authorized, first freeze a
+  matched threshold-specific Stage-2 training/evaluation design; preservation
+  plus single supervision is the clean first comparison, with MCTS as an
+  explicit second ablation rather than silently mixing label families.
+- Revisit condition: matched Stage-2 rollout results contradict the label-yield
+  ordering or a new search/treatment contract materially changes coverage.
+
+## 2026-09-03 — Carry P98/P95/P90 as treatment-dependent operating points and reuse only replay-verified routes
+
+- Decision or promoted lesson: keep the Phase-63 five-head ALL-source scoring
+  system fixed and carry P98/P95/P90 as conservative, middle, and permissive
+  candidates. None is the final threshold. For future Stage-2 reconstruction,
+  reuse only routes whose first intervention is at or after the new trigger and
+  whose exact current-runtime replay is LMMS-correct; search only the remaining
+  triggered-W population.
+- Triggering evidence: held-out worst-source C preservation is
+  0.9808/0.9501/0.9003 and pooled W recall is 0.1054/0.2179/0.3572. On the
+  10,399 train rows, P98/P95/P90 trigger 344/727/1,307 W; 67/146/259 already
+  have replay-compatible routes. All 2,618 route×operating-point replays pass
+  exact token parity and current LMMS correctness. Residual workloads are
+  277/581/1,048 W, with 1,104 unique UIDs across the three points.
+- Evidence paths:
+  `analysis/dense_failure_stage1/robust_operating_points_and_compatibility/thresholds/named_operating_points.csv`,
+  `metrics/operating_point_summary.csv`, `metrics/route_reuse_summary.csv`,
+  `compatibility/replay_results.jsonl`, and
+  `summaries/next_search_recommendation.md`.
+- Confidence: high for the bound artifacts, trigger maps, structural checks,
+  and exact replay compatibility. Train admission rates are in-sample
+  five-head-ensemble descriptions and must not be substituted for held-out
+  calibration estimates.
+- Applies when: rebuilding Stage-2 supervision for the frozen ALL-source gate
+  on the Historical+Canonical GQA/ChartQA/TextVQA populations.
+- Does not apply when: selecting a final deployment threshold from these label
+  counts, treating unsearched rows as unfixable, or transferring the gate to a
+  new benchmark/source regime.
+- Consequence for future actions: a separately authorized corrective-search
+  plan should deduplicate the 1,104-UID missing union while preserving each
+  operating point's trigger-layer handoff. Final threshold choice requires
+  measured W-to-C benefit and C-to-W harm under actual Stage-2 treatment.
+- Revisit condition: new search finds materially different correctability by
+  operating point, replay semantics change, or held-out source evidence changes
+  the preservation frontier.
+
+## 2026-09-03 — Freeze the conservative ALL-source gate only for the observed three-benchmark mixture
+
+- Decision or promoted lesson: use the Phase-62 ALL-source Shared Random-4
+  system with one strict global threshold `0.9711347410314399` for subsequent
+  in-scope trigger-map compatibility work. This is a conservative gate for the
+  observed Historical+Canonical GQA/ChartQA/TextVQA mixture, not evidence of
+  benchmark-universal calibration.
+- Triggering evidence: the prospectively selected threshold preserves
+  Historical/Canonical Dense-C at 98.75%/98.08% while recalling 6.50%/12.40%
+  of Dense-W (10.54% pooled) with 67.34% pooled trigger precision. The untouched
+  Historical test preserves 99.75% C with 6.50% W recall and 96.30% precision.
+  Five canonical cross-fit thresholds span only 0.96859-0.97220 and no supported
+  dataset/source cell has C preservation below 90%.
+- Evidence paths:
+  `analysis/dense_failure_stage1/all_source_threshold_calibration/frozen/robust_stage1_gate.json`,
+  `metrics/reference_operating_points.csv`, `crossfit/threshold_stability.csv`,
+  `metrics/dataset_source_breakdown.csv`, and
+  `summaries/threshold_calibration_summary.md`.
+- Confidence: high in the exact artifact-level threshold calculation,
+  Historical validation/test behavior, and current Canonical OOF estimate;
+  low for Canonical TextVQA benefit because the gate detects 0 of only 19 W.
+  Canonical OOF rows are single held-out-fold predictions whereas deployment
+  uses the named five-head probability ensemble, so the next trigger-map phase
+  must preserve and audit that exact scoring provenance.
+- Applies when: regenerating the Stage-1 trigger map or auditing compatibility
+  of prior Stage-2 corrective labels within the declared three datasets.
+- Does not apply when: claiming unseen-dataset calibration, creating
+  dataset-specific thresholds, relaxing to the 95% point, or reusing old
+  trigger layers/labels without a compatibility audit.
+- Consequence for future actions: the next separately authorized action is a
+  new robust trigger map followed by old/new sample-and-layer compatibility
+  accounting. Do not automatically launch new corrective search or Stage-2
+  training.
+- Revisit condition: exact ensemble trigger-map scoring violates the calibrated
+  preservation behavior, a supported dataset/source cell becomes catastrophic,
+  or new held-out source evidence materially changes the operating point.
+
+## 2026-09-03 — Use the ALL-source head only for the declared mixture; do not claim benchmark-general transfer
+
+- Decision or promoted lesson: Exact source×correctness-balanced Historical +
+  Canonical training produces a useful shared Stage-1 boundary across the two
+  observed source regimes, but leave-one-dataset-out transfer remains mixed.
+  Treat this head as a candidate for the current three-benchmark mixture, not a
+  universal failure detector.
+- Triggering evidence: The ALL-source head reaches Historical/Canonical AUROC
+  0.8394/0.7689 and worst-source 0.7689, versus specialist worst-source AUROCs
+  0.4056 and 0.5511. Per-source dataset AUROC is Historical
+  0.7370/0.9487/0.9488 and Canonical 0.7538/0.5826/0.6111 for
+  GQA/ChartQA/TextVQA. Target-blind LODO Historical/Canonical AUROC is
+  0.7016/0.5691 ChartQA, 0.6243/0.6259 TextVQA, and 0.6034/0.5931 GQA, failing
+  the frozen all-target 0.60 worst-source rule.
+- Evidence paths:
+  `analysis/dense_failure_stage1/all_source_robustness/summaries/all_source_training_summary.md`,
+  `summaries/dataset_ood_summary.md`, `main_all/metrics/source_summary.csv`,
+  `main_all/metrics/dataset_source_breakdown.csv`, `lodo/lodo_summary.csv`, and
+  `workspace/phase_memory/phase_62_stage1_all_source_robustness.md`.
+- Confidence: high for aggregate source robustness, exact sampling/provenance,
+  and the observed mixed OOD results; low for Canonical TextVQA precision
+  because it has only 19 wrong samples. L26's minimum 0.6270 across six OOD
+  cells is post-hoc diagnostic evidence, not an authorized layer selection.
+- Applies when: choosing a Stage-1 substrate for the current Historical+
+  Canonical GQA/ChartQA/TextVQA mixture or describing its scope.
+- Does not apply when: claiming unseen-benchmark generalization, calibrating a
+  threshold, selecting L26 from these target results, or regenerating Stage-2
+  labels without a separate compatibility decision.
+- Consequence for future actions: if separately authorized, calibrate a robust
+  threshold only on the declared ALL mixture and retain dataset×source safety
+  reporting. Do not automatically generate a trigger map or modify Stage 2.
+- Revisit condition: a prospectively frozen common-layer experiment or new
+  unseen benchmark contradicts the current OOD limitation, or threshold
+  calibration cannot maintain required safety across dataset×source cells.
+
+## 2026-09-03 — Keep the Stage-1 architecture, but treat fitted boundaries as source-regime-specific
+
+- Decision or promoted lesson: The historical Shared Random-4 feature/head
+  architecture can learn canonical current-runtime dense-failure ranking for
+  GQA and ChartQA without changing the old normalization. The main old-gate
+  deployment failure was therefore its historical fitted boundary/population
+  regime, not a demonstrated inability of the architecture to encode canonical
+  failure. Do not, however, deploy the canonical-only fit as a universal gate:
+  reverse transfer to the historical population is weak, and TextVQA remains
+  unresolved.
+- Triggering evidence: Five-fold group-disjoint canonical refitting raises
+  overall max-score AUROC from 0.4056 to 0.8178, a paired +0.4123 with 95% CI
+  [+0.3862,+0.4376]. GQA/ChartQA OOF AUROC is 0.7214/0.7021, removing the old
+  ChartQA inversion. TextVQA OOF AUROC is 0.4640 with only 19 W. The
+  full-canonical fit reaches only 0.5511 on frozen historical val+test versus
+  0.8885 for the old head. Frozen-old score reproduction differs by at most
+  6.22e-08.
+- Evidence paths:
+  `analysis/dense_failure_stage1/canonical_refit_diagnostic/summaries/canonical_refit_summary.md`,
+  `metrics/canonical_oof_summary.csv`, `metrics/canonical_dataset_breakdown.csv`,
+  `metrics/paired_bootstrap_difference.csv`, `metrics/historical_cross_eval.csv`,
+  and `workspace/phase_memory/phase_61_stage1_canonical_refit_diagnostic.md`.
+- Confidence: high that the unchanged architecture can rank canonical GQA and
+  ChartQA failures and that source-specific fitted boundaries transfer poorly;
+  low for TextVQA because only 19 canonical wrong examples exist. Overall AUROC
+  also reflects cross-dataset prevalence differences, so within-dataset results
+  are required alongside it.
+- Applies when: selecting the next Stage-1 repair direction for the historical
+  and canonical GQA/ChartQA/TextVQA populations.
+- Does not apply when: claiming TextVQA recovery, claiming old normalization is
+  irrelevant, treating OOF probabilities as calibrated deployment scores, or
+  reusing either source-specific checkpoint as a final mixed-source gate.
+- Consequence for future actions: if separately authorized, test one unchanged
+  head with explicitly source-balanced historical + canonical training and
+  group-disjoint evaluation in both regimes. Do not calibrate a new threshold
+  or regenerate Stage-2 labels until cross-regime ranking is established.
+- Revisit condition: source-balanced mixed training fails within GQA/ChartQA,
+  or a canonical-normalization Arm B materially changes the unresolved
+  TextVQA/calibration behavior.
+
+## 2026-09-03 — Treat old Stage-1 success as same-selection-regime evidence, not canonical robustness
+
+- Decision or promoted lesson: The historical 7,999 Stage-1 train/validation/
+  test population was constructed from fixed previous-Qwen Dense-C/Dense-W
+  quotas. Its group-disjoint validation/test performance demonstrates identity
+  generalization within that selected regime, not robustness to an outcome-
+  blind canonical source. Before changing architecture, test whether the same
+  head can relearn canonical-label ranking with the frozen old normalization.
+- Triggering evidence: Within current Dense-C, group-held-out historical-vs-
+  canonical L21 source AUROC is 0.586 GQA, 0.938 ChartQA, and 0.937 TextVQA;
+  canonical-minus-old-C frozen max-score means shift by +0.089/+0.689/+0.712.
+  Old test max-score AUROC falls only from 0.886 to 0.840 with exact visual-
+  token matching and 0.820 with fixed multi-variable matching, so observable
+  nuisances contribute but do not explain all same-regime ranking. Canonical
+  correct ChartQA/TextVQA states also move toward the historical wrong feature
+  direction.
+- Evidence paths:
+  `analysis/dense_failure_stage1/historical_population_shortcut_audit/summaries/old_head_shortcut_summary.md`,
+  `metrics/source_probe.csv`, `metrics/matched_head_performance.csv`,
+  `metrics/feature_geometry.csv`, and
+  `workspace/phase_memory/phase_60_stage1_historical_population_shortcut_audit.md`.
+- Confidence: high for population construction, feature accessibility, score
+  association, and matched observational results; medium for the mixed
+  shortcut/boundary interpretation; no causal claim that token count or source
+  identity is directly used by the head.
+- Applies when: interpreting the old gate's in-regime validation/test success or
+  selecting the smallest next Stage-1 repair diagnostic for these three tasks.
+- Does not apply when: claiming the Stage-1 representation is unusable,
+  identifying a sole causal nuisance, or asserting that normalization cannot
+  matter. The original pre-quota pool is absent, so causal selection rates are
+  unavailable.
+- Consequence for future actions: if separately authorized, first fit the same
+  head on canonical training labels while retaining old normalization. Only if
+  that fails should a canonical train-fold normalization arm be added; defer
+  source-mixed training until the simpler boundary test is resolved.
+- Revisit condition: a canonical-label same-head fit fails to recover held-out
+  ranking or a controlled nuisance intervention contradicts the observational
+  shortcut evidence.
+
+## 2026-08-31 — Prefer fixed L27 over sequential gates for the first treatment-feasibility test
+
+- Decision or promoted lesson: Under the prospectively frozen aggregate
+  admission utility and 90% failure-precision floor, carry the shared
+  Random-4 predictor's fixed layer-27 score at threshold
+  `0.8497647428417646` into the next separately authorized treatment-feasibility
+  experiment. Do not pay for sequential gating when it provides no measured
+  utility advantage under these controls.
+- Triggering evidence: Fixed L27 led validation by only three net utility
+  samples, with preservation/recall/precision/utility rate
+  `0.9400/0.5400/0.9000/0.2400`, and transferred to
+  `0.9500/0.5275/0.9134/0.23875` on test. Independent sequential tied its test
+  utility rate exactly; shared Random-4 and All-28 reached `0.2250` and
+  `0.2175`. Against the validation runner-up, 95% paired-bootstrap intervals
+  span zero for both test utility-rate difference `[-0.00375, 0.03125]` and
+  wrong-recall difference `[-0.0125, 0.0475]`.
+- Evidence paths:
+  `analysis/dense_failure_stage1/gate_winner_selection/decision_summary.md`,
+  `validation_summary.csv`, `test_comparison.csv`,
+  `bootstrap_comparison.json`, and
+  `workspace/phase_memory/phase_52_stage1_gate_winner_selection.md`.
+- Confidence: medium for the fixed candidate ranking and high for exact
+  reproduction of the frozen criterion. Fixed L27 had already been selected
+  among L14/L21/L27 on Phase-51 validation, so this is not an unbiased claim
+  over all possible fixed depths.
+- Applies when: choosing the one Stage-1 admission substrate and operating
+  point for the next matched four-action treatment-feasibility experiment on
+  the same current-runtime three-dataset mixture.
+- Does not apply when: claiming fixed L27 is universally superior, claiming
+  early failure signal is useless, transferring the threshold to a new task,
+  or treating this admission threshold as the final routed-system threshold.
+- Consequence for future actions: Retain the frozen winner plus its 99/98/95
+  reference points, and judge the eventual system by actual W-to-C rescue,
+  C-to-W regression, and routed accuracy. Keep independent and shared
+  sequential gates as baselines, not co-winners.
+- Revisit condition: a prospective treatment experiment shows that earlier
+  admission materially improves rescue/safety, or task-calibration evidence
+  changes the aggregate deployment objective. Winner test utility is highly
+  heterogeneous (`0.0775/0.3850/0.4150` on GQA/ChartQA/TextVQA), with only
+  `0.7460` GQA precision.
+
+## 2026-08-31 — Shared scores repair aggregate preservation drift but not task calibration
+
+- Decision or promoted lesson: One shared state predictor and a single
+  trajectory-level raw-score threshold can stabilize aggregate conservative
+  preservation, but this is not sufficient for a robust Stage-1 admission
+  gate. Do not connect the Phase-51 gate to visual treatment because its
+  cross-dataset failure coverage remains strongly heterogeneous.
+- Triggering evidence: The validation-designated state+layer Random-4 gate at
+  the 99% point transfers from 0.9900/0.3950 preservation/recall on validation
+  to 0.9875/0.4050 on test, reducing preservation drift from the independent
+  gate's 0.0425 to 0.0025. Yet GQA/ChartQA/TextVQA test wrong recall is
+  0.040/0.740/0.800, a 0.760 spread versus Phase 50's already-large 0.725.
+  Preservation spread is 0.030 versus 0.025. Mean test layer AUROC remains
+  strong at 0.8769 versus 0.8737 for independent probes, so the negative gate
+  decision is not caused by loss of ranking signal.
+- Evidence paths:
+  `analysis/dense_failure_stage1/shared_global_gate/decision_summary.md`,
+  `evaluation/test_results.csv`, `evaluation/dataset_breakdown.csv`, and
+  `workspace/phase_memory/phase_51_shared_stage1_global_risk_gate.md`.
+- Confidence: high for this exact current three-dataset mixture, compact
+  representation, pooled train-only normalization, shared MLP, and frozen
+  global-threshold protocol; none for another calibration objective or new
+  benchmark family.
+- Applies when: deciding whether the current shared predictor/global threshold
+  is ready to admit samples into four-action treatment.
+- Does not apply when: claiming shared predictors cannot match independent
+  ranking, because mean AUROC is matched; claiming layer identity is necessary,
+  because state-only validation AUROC is essentially equal; or ruling out a
+  separately specified calibration/risk-control method.
+- Consequence for future actions: preserve shared state prediction as an
+  informative substrate but reject this raw global-threshold gate for
+  treatment. Any new risk-control phase requires explicit authorization and
+  must target sample-level task heterogeneity prospectively without post-hoc
+  dataset thresholds.
+- Revisit condition: a prospectively frozen calibration or risk-control method
+  reduces dataset preservation/recall mismatch while retaining aggregate
+  conservative preservation on untouched data.
+
+## 2026-08-31 — Do not treat independent per-layer tail calibration as a robust sequential gate
+
+- Decision or promoted lesson: Reusing the 28 independent Phase-48 probes with
+  one shared validation-correct tail parameter produces early, nontrivial
+  failure triggers, but the union of layer crossings is not a robust
+  conservative gate. Do not connect this V1 gate to treatment or treat it as a
+  final admission mechanism.
+- Triggering evidence: Validation selected `alpha=0` for the 99% and 98%
+  targets, yielding 1.000 correct preservation and 0.4100 wrong recall, but the
+  frozen thresholds transferred to only 0.9575 preservation on untouched test
+  with 0.4175 wrong recall. The 95% point reached 0.9550/0.4775 on test.
+  Sequential recall exceeded the best fixed L14/L21/L27 comparator by only
+  +0.0200 at the 99% target and was lower by 0.0225/0.0500 at 98%/95%.
+  Dataset test wrong-recall spread was 0.7250 at the 99%/98% points and 0.6650
+  at 95%, with GQA far below ChartQA and TextVQA.
+- Evidence paths:
+  `analysis/dense_failure_stage1/independent_sequential_gate/decision_summary.md`,
+  `test_results.csv`, `dataset_breakdown.csv`, `single_layer_comparison.csv`,
+  and `workspace/phase_memory/phase_50_independent_sequential_gate.md`.
+- Confidence: high for this exact known three-dataset mixture, Phase-48 split,
+  frozen independent probes, empirical higher-quantile rule, and first-trigger
+  policy; none for another calibration family or jointly trained gate.
+- Applies when: deciding whether to deploy or connect the current independent
+  layer-wise sequential gate to an intervention.
+- Does not apply when: claiming that early failure signal is absent (median
+  detected trigger is layer 3 at the conservative point), that all sequential
+  models must fail, or that a shared/global risk-budget method has been tested.
+- Consequence for future actions: preserve this as a negative admission-policy
+  result. A shared predictor or global risk-budget formulation would be a new,
+  separately authorized action and must address sample-level union risk and
+  dataset calibration explicitly.
+- Revisit condition: a prospectively specified joint/sample-level calibration
+  method meets conservative preservation on untouched data without
+  dataset-specific post-hoc tuning.
+
+## 2026-08-31 — Do not promote in-domain failure accessibility to a benchmark-general predictor claim
+
+- Decision or promoted lesson: The strong Phase-48 in-domain linear signal is
+  not sufficient evidence for a benchmark-general, calibration-stable dense-
+  failure predictor. Preserve the leave-one-dataset-out result as mixed: useful
+  mid-layer ranking transfers to TextVQA and ChartQA and weakly to GQA, but a
+  source-validation-selected layer and conservative threshold do not transfer
+  reliably across all three targets.
+- Triggering evidence: Source-only selection chose layers 22/26/20 for held-out
+  TextVQA/ChartQA/GQA. Their full-target AUROCs were 0.7236/0.4502/0.6160,
+  compared with native pre-language-decoder AUROCs 0.5219/0.5472/0.5432.
+  Descriptively, fixed layer 21 reached 0.8046/0.8018/0.5975, so the signal is
+  not absent, but transfer is nonuniform and the source-optimal depth can be
+  anti-predictive on a target. Source-calibrated 99%-preservation thresholds
+  achieved actual target preservation 0.9950/0.3053/0.1380; only TextVQA
+  retained the intended conservative operating regime.
+- Evidence paths:
+  `analysis/dense_failure_stage1/ood_signal_diagnostic/decision_summary.md`,
+  `input_only_vs_hidden.csv`, `in_domain_vs_ood.csv`, and
+  `workspace/phase_memory/phase_49_ood_failure_signal_diagnostic.md`.
+- Confidence: high for these three leave-one-dataset-out transfers under the
+  frozen current model, compact representation, current LMMS labels, and
+  Phase-48 split memberships; low for broader benchmark families or another
+  backbone/runtime.
+- Applies when: motivating a shared Stage-1 predictor as benchmark-general,
+  selecting layers across tasks, or transferring conservative failure-gating
+  thresholds to an unseen task.
+- Does not apply when: claiming no hidden-state failure signal exists, because
+  mid-layer OOD ranking remains strong on two targets; evaluating a predictor
+  explicitly trained for the known deployment mixture; or extrapolating to
+  external benchmark families not tested here.
+- Consequence for future actions: do not proceed directly to the shared
+  predictor with learnable layer embeddings on a benchmark-general rationale.
+  A later experiment requires explicit authorization and must state whether it
+  targets the known three-dataset deployment mixture or introduces a separate
+  prospective mechanism for cross-task layer/calibration robustness.
+- Revisit condition: a prospectively fixed shared-depth/calibration protocol,
+  additional task families, or a deployment-mixture objective supplies
+  decision-changing evidence without target tuning.
+
+## 2026-08-30 — Treat dense failure as linearly accessible across the full stack
+
+- Decision or promoted lesson: For the frozen 7,999-sample current-dense
+  population and concatenated `text_final`/`text_mean`/`visual_mean` compact
+  representation, final LMMS failure is linearly predictable from layer 0.
+  Use layers 0-27 as the informative range; layers 16-27 are a stronger
+  descriptive plateau, not evidence that early layers should be excluded.
+- Triggering evidence: on the untouched image-group-disjoint 800-record test
+  split, layer-0 AUROC/AUPRC are 0.8421/0.8519 and peak AUROC is 0.8992 at
+  layer 21. All datasets are above chance at layer 0, although GQA is weaker
+  (0.6981; peak 0.7713) than ChartQA/TextVQA (about 0.94 at layer 0; peaks above
+  0.97). Validation-threshold transfers that still satisfy test correct
+  preservation detect 33.50%/42.75%/52.25% of wrong samples at 99%/98%/95%
+  preservation.
+- Evidence paths:
+  `analysis/dense_failure_stage1/layerwise_failure_probe/analysis_summary.md`,
+  `test_metrics.csv`, `dataset_layerwise_metrics.csv`, and
+  `workspace/phase_memory/phase_48_layerwise_dense_failure_predictability.md`.
+- Confidence: high for held-out linear accessibility under this exact split,
+  feature contract, label population, and regularized probe protocol; no claim
+  about causal failure awareness or another representation/model.
+- Applies when: choosing supervision depths for the next shared Stage-1
+  predictor on the current compact dense-state dataset.
+- Does not apply when: claiming explicit answers form early, attributing signal
+  to one feature component, transferring precision/AUPRC to natural benchmark
+  prevalence, or choosing an intervention policy without execution evidence.
+- Consequence for future actions: do not compare all-layer supervision with
+  “informative-only layers 0-27,” because they are the same arm. If separately
+  authorized, prioritize all-layer versus random-k over 0-27; a fixed 16-27
+  arm may be included only as a stronger-plateau efficiency sensitivity.
+- Revisit condition: component ablation, another model/runtime/population, or a
+  shared-predictor experiment supplies decision-changing generalization or
+  efficiency evidence.
+
+## 2026-08-30 — Treat answer emergence as late and keep raw logits separate from generation processors
+
+- Decision or promoted lesson: For the frozen Qwen2.5-VL Stage-1 population,
+  answer-token emergence under the final norm/head lens is a late-stack event.
+  Layers 25–27, especially 26–27, are the only evidence-backed candidate region
+  from this diagnostic. Early zero-threshold sign runs must not be interpreted
+  as formed answers, and this result does not itself select a supervision
+  strategy or prove that early hidden states lack correctness information.
+- Triggering evidence: At the true assistant answer-start state, correct GT
+  first reaches raw top-1 at median layer 26 (IQR 26–27), with the population
+  top-1 fraction rising 22.3% → 47.1% → 94.9% at layers 25–27. For wrong
+  samples, the eventual generated token reaches rank ≤10 for 64.1%, 86.8%, and
+  100% at layers 25–27, while its raw top-1 fraction reaches 20.3%, 42.9%, and
+  91.2%. Earlier wrong GT-minus-generated margins are close to zero with both
+  tokens ranked in the tens of thousands, even though the fixed sign-crossing
+  rule reports median layer 2.
+- Evidence paths:
+  `analysis/dense_failure_stage1/answer_logit_emergence_v2/analysis_summary.md`,
+  `layerwise_correct_summary.csv`, `layerwise_wrong_summary.csv`, and
+  `workspace/phase_memory/phase_47_answer_position_logit_emergence_v2.md`.
+- Confidence: high for the descriptive raw-logit trajectories under this exact
+  model/runtime and answer-position contract; moderate for using 25–27 as a
+  candidate supervision region; none for a strategy choice not yet tested.
+- Applies when: deciding the next Stage-1 supervision-depth comparison for the
+  current 7,999-sample dense population.
+- Does not apply when: claiming the full early hidden state is uninformative,
+  transferring the depth boundary to another model, or treating raw top-1 as
+  identical to a token selected after generation processors.
+- Consequence for future actions: if separately authorized, design the next
+  comparison around a prospectively fixed late candidate range rather than
+  using the literal early sign-crossing median. At layer 27 use the model's
+  native raw `output.logits`; for cached continuations validate raw logits and
+  processed generated tokens in their own score spaces.
+- Revisit condition: a learned failure-prediction experiment, alternate fixed
+  margin rule, or different model/runtime provides decision-changing evidence.
+
+## 2026-08-30 — Do not use final-user-token states as answer-start logit lenses
+
+- Decision or promoted lesson: The Phase-45 `text_final` feature is the final
+  literal user-prompt token and must not be treated as the assistant answer-start
+  position for an unfiltered final-head vocabulary competition. It may remain a
+  predictor input, but answer-logit emergence requires an actually aligned
+  answer-start state or a separately justified readout contract.
+- Triggering evidence: Applying the exact frozen Qwen2.5-VL final RMSNorm and
+  LM head to all 7,999 records produced zero persistent correct GT-vs-strongest-
+  token emergence events among 3,999 correct samples. The layer-27 correct
+  margin averaged -29.683. In the one allowed cheap validity diagnostic,
+  `<|im_end|>` was top-1 at layer 27 for all 54 correct records in a frozen
+  source shard, as expected at the token immediately preceding the chat
+  delimiter.
+- Evidence paths:
+  `analysis/dense_failure_stage1/logit_emergence/analysis_summary.md`,
+  `analysis/dense_failure_stage1/logit_emergence/validity_diagnostic.json`, and
+  `workspace/phase_memory/phase_46_dense_answer_logit_emergence.md`.
+- Confidence: high that the correct-sample strongest-token comparator is
+  positionally invalid; moderate for the descriptive wrong GT-vs-generated
+  token trajectories, which remain a query-position relative readout.
+- Applies when: Interpreting or designing answer-logit analyses from the
+  Phase-45 saved feature tensors.
+- Does not apply when: Claiming the hidden state itself lacks correctness
+  information, rejecting `text_final` as a learned-predictor input, or
+  interpreting a genuinely assistant-start-aligned state.
+- Consequence for future actions: Do not choose a Stage-1 supervision start
+  layer from Phase-46 curves. If answer-emergence evidence is still required,
+  prospectively extract the actual assistant-start state before comparing GT
+  tokens with vocabulary competitors.
+- Revisit condition: A frozen answer-position extraction shows exact token
+  alignment and a valid strongest-competitor interpretation.
+
+## 2026-08-30 — Use current native-dense LMMS labels for Stage 1
+
+- Decision or promoted lesson: The authoritative Stage-1 target population is
+  the current native Qwen2.5-VL dense all-on output scored by the official
+  task-specific LMMS-Eval contracts. Historical correct/wrong buckets remain
+  metadata even when they happen to agree with the regenerated labels.
+- Triggering evidence: The four-GPU run attempted all 8,000 recovered
+  GQA/ChartQA/TextVQA candidates. It completed 7,999 with 3,999 current-correct
+  and 4,000 current-wrong outcomes; one ChartQA image was missing. An independent
+  LMMS rescore found zero score or binary-label mismatches. Fresh generated text
+  exactly matched the historical stored dense prediction for all 7,999
+  executable samples, so there were zero bucket flips under this exact dense
+  model/runtime.
+- Evidence paths: `analysis/dense_failure_stage1/current_dense_8k/dense_outputs.jsonl`,
+  `analysis/dense_failure_stage1/current_dense_8k/generation_summary.json`,
+  `analysis/dense_failure_stage1/current_dense_8k/lmms_eval_contract.md`, and
+  `workspace/phase_memory/phase_45_current_dense_8k_lmms.md`.
+- Confidence: high for this exact snapshot, prompt, dense executor, and
+  executable recovered population.
+- Applies when: Defining labels and data membership for the next Stage-1 dense
+  failure-predictor experiment.
+- Does not apply when: Interpreting four-action/sparse route replay parity,
+  claiming parity under another model/runtime, or treating the one missing
+  sample as executed.
+- Consequence for future actions: Join predictor inputs through the frozen
+  `features/feature_index.jsonl` and labels through `dense_outputs.jsonl`; use
+  image-group-disjoint splits over the 7,999 completed records. Do not recover,
+  rebalance, or overwrite labels from historical buckets.
+- Revisit condition: The model snapshot, prompt, generation policy, LMMS task
+  semantics, or completed sample population changes.
+
 ## 2026-08-30 — Audit mandatory-boundary FULL validity before gate training
 
 - Decision or promoted lesson: Do not treat a mandatory W2C boundary inferred
@@ -123,6 +842,23 @@ Do not copy raw logs or provisional explanations here.
   multiple-choice, and POPE metrics separately rather than pooling them.
 - Revisit condition: The user explicitly approves adding or replacing an
   evaluation benchmark.
+
+## 2026-09-04 — Expand the standing external-evaluation scope to four benchmark families
+
+- Decision or promoted lesson: interpret future user requests for external
+  evaluation as ChartQA, TextVQA, MMMU-Pro, and POPE unless the user explicitly
+  narrows or replaces the scope for that action.
+- Required sub-suites: report MMMU-Pro Standard and Vision separately, and
+  POPE adversarial, popular, and random separately.
+- Triggering evidence: explicit user instruction on 2026-09-04 to add TextVQA
+  to the prior ChartQA/MMMU-Pro/POPE evaluation set.
+- Supersedes: the 2026-08-27 three-family restriction above only with respect
+  to TextVQA. DocVQA, MMStar, and base MMMU remain excluded.
+- Operational qualification: this standing scope does not itself authorize an
+  evaluation run. Before execution, freeze and verify the TextVQA evaluation
+  split, sample manifest, images, LMMS task evaluator, and provenance. Do not
+  substitute TextVQA training-label samples for the evaluation benchmark.
+- Confidence: high; this is a user-defined scope decision.
 
 ## 2026-08-22 — Task family predicts visual-access amount more than placement
 
@@ -1285,3 +2021,633 @@ Do not copy raw logs or provisional explanations here.
   fixed 12-sample/312-route smoke under the recovered H100 contract. Do not
   silently drop mismatching cached routes or attribute the mismatch to source
   semantics without new evidence.
+## 2026-08-31 — Failure detection modestly enriches visual-treatment opportunity, but late replay remains competitive
+
+- Decision or promoted lesson: treat the frozen Stage-1 risk gate as a useful
+  admission signal for a future learned action head, not as proof that dynamic
+  intervention is necessary. Keep fixed-L27 detect-and-replay as a serious
+  fallback, and do not generalize treatment feasibility from ChartQA/TextVQA
+  to GQA.
+- Triggering evidence: under one current-runtime all-single plus seeded
+  12-pair bounded search, validation-selected shared Random-4 rescued
+  81/400 dense-wrong samples (0.2025 population rescue), versus 73/400 for
+  independent sequential and 79/400 for fixed L27. Held-out rescue was
+  84/400, 79/400, and 88/400, respectively. Shared-gate full-replay
+  correctability enrichment transferred from 1.1211 validation to 1.1132
+  test, and every triggered-correct sample was preservable by at least one
+  bounded route. Test population rescue for shared Random-4 was only
+  2/200 on GQA, versus 34/100 ChartQA and 48/100 TextVQA.
+- Evidence paths:
+  `analysis/dense_failure_stage1/treatment_correctability/decision_summary.md`,
+  `metrics/gate_correctability.csv`, `metrics/enrichment.csv`, and
+  `metrics/dataset_breakdown.csv` under the same root.
+- Confidence: high for the frozen split, current native full-row executor, and
+  bounded search contract; low for exhaustive oracle coverage or a causal
+  claim that earlier triggering itself creates the observed enrichment.
+- Consequence for future actions: a separately authorized Stage-2 action-head
+  experiment may use the frozen 463-record selected-gate handoff, but it must
+  compare against fixed-L27 replay and report GQA separately. Do not interpret
+  the bounded lower estimates as exhaustive correctability or select a final
+  deployment architecture from this phase alone.
+
+## 2026-08-31 — Freeze the exact dynamic-gate population before Stage-2 labeling
+
+- Decision or promoted lesson: any future Shared Random-4 Stage-2 label
+  generation must use the frozen Phase-54 train trigger manifests rather than
+  reconstructing admission ad hoc. Validation and test trigger cohorts remain
+  non-training populations, and the large GQA coverage deficit must be
+  reported separately.
+- Triggering evidence: the complete current-dense map contains 1,881 triggered
+  train Dense-W samples and 39 triggered train Dense-C samples. Validation/test
+  preservation, wrong recall, and precision are `0.9425/0.5300/0.9021` and
+  `0.9400/0.5100/0.8947`, but wrong recall is only `0.180/0.185` for GQA versus
+  `0.880/0.800` ChartQA and `0.880/0.870` TextVQA. All 1,600 prior trigger rows
+  and 18 prior aggregate fields reproduce exactly.
+- Evidence paths: `analysis/dense_failure_stage1/trigger_map/decision_summary.md`,
+  `manifests/train_triggered_wrong.jsonl`,
+  `manifests/train_triggered_correct.jsonl`, and
+  `metrics/dataset_breakdown.csv` under the same root.
+- Confidence: high for the frozen checkpoint, threshold, current split, labels,
+  and trigger identities; no claim is made that triggered errors are fixable or
+  that earlier triggers are causally better.
+- Consequence for future actions: a separately authorized corrective suffix
+  search may label only the 1,881 train triggered-W rows and use the 39 train
+  triggered-C rows for FULL-suffix preservation. Do not train on validation or
+  test trajectories, and do not treat the 1,319 train Dense-W misses as Stage-2
+  opportunities under the current gate.
+
+## 2026-08-31 — Sequential corrective search adds support, but saturates by 200 iterations
+
+- Decision or promoted lesson: for the frozen Shared Random-4 train triggered
+  Dense-W cohort, retain exhaustive single-intervention discovery and a bounded
+  sequential suffix search; multi-action search adds meaningful oracle support,
+  but use a 200-iteration cap rather than 300 if full label generation is later
+  authorized. This is search-label evidence, not learned-policy generalization.
+- Triggering evidence: in a prospectively balanced 120-row pilot, exhaustive
+  singles fixed 35 samples and sequential trajectory-conditioned MCTS fixed 22
+  additional samples. Fixable@100/200/300 was 52/56/57, so 200→300 added only
+  1/120 = 0.0083, below the frozen 0.01 material-gain rule. Phase-54
+  dataset×depth-cell weighting estimates total bounded support at 0.5309.
+  Preferred successful routes use median one non-FULL action (IQR 1–3), while
+  14/57 fixable samples have multiple observed successful trigger actions.
+- Qualification: the pilot deliberately balances datasets and partially
+  balances trigger depth; weighted results are model-based cell estimates, not
+  a new random full-population sample. Deterministic 2/3/4-cardinality rollouts
+  make depth comparisons interpretable but can miss corrections requiring more
+  interventions. GQA correctability remains lower than TextVQA, and late
+  triggers are least correctable in this sample.
+- Evidence paths:
+  `analysis/dense_failure_stage2/corrective_search_pilot/decision_summary.md`,
+  `metrics/overall_correctability.csv`, `metrics/budget_saturation.csv`, and
+  `future_stage2_labels/successful_route_manifest.jsonl` under the same root.
+- Confidence: high for the frozen pilot contract, current-runtime executor,
+  binary LMMS reward, and bounded-search counts; medium for the cell-weighted
+  full-cohort projection; unknown for a learned Stage-2 policy's generalization.
+- Consequence for future actions: do not rerun this pilot or default to 300.
+  Any separately authorized full label phase should use exactly the Phase-54
+  1,881-row train triggered-W manifest, preserve single/MCTS provenance, use a
+  200-iteration MCTS cap, keep the 39 triggered-C FULL-suffix supervision
+  separate, and stop again before Stage-2 training unless that training is
+  explicitly authorized.
+
+## 2026-09-01 — Full corrective support is real but strongly dataset- and depth-dependent
+
+- Decision or promoted lesson: preserve both simple single-intervention and
+  trajectory-conditioned MCTS supervision, but do not interpret the full
+  bounded oracle corpus as evidence that a learned Stage-2 router will
+  generalize. A future V1 should use preservation plus single routes first;
+  MCTS-only corpus C is a separately measurable V2 addition.
+- Triggering evidence: over all 1,881 frozen train triggered Dense-W samples,
+  exhaustive singles fix 698 (0.3711) and cap-200 MCTS adds 209 (0.1111), for
+  total bounded support 907/1,881 = 0.4822. This is close to the cap-200 pilot
+  projection 0.4667, but total support is only 0.1986 for GQA versus 0.4854
+  ChartQA and 0.6448 TextVQA, and falls from 0.5923 at trigger layer 0 to
+  0.2507 for layers 19-27. Exact replay produced 7,628 single, 442 MCTS, and 39
+  preservation routes with 208,280 routed state rows.
+- Qualification: `UNRESOLVED` is bounded-search failure, not proof of
+  unfixability. Route multiplicity must not silently determine training
+  weight, and train-only oracle support does not select a deployment policy.
+- Evidence paths:
+  `analysis/dense_failure_stage2/full_corrective_labels/decision_summary.md`,
+  `metrics/overall_fixability.csv`, `metrics/dataset_breakdown.csv`,
+  `metrics/trigger_depth_breakdown.csv`, and
+  `stage2_corpora/corpus_manifest.json` under the same root.
+- Confidence: high for population coverage, current-runtime LMMS reward,
+  exact route replay, cap-200 semantics, and corpus provenance; unknown for
+  learned-policy generalization or final architecture choice.
+- Consequence for future actions: do not rerun label generation or merge
+  route sources. A separately authorized Stage-2 V1 should begin with Corpus
+  A+B, explicitly choose sample- versus route-balanced sampling, and report
+  GQA/depth breakdowns. Add Corpus C only as a controlled V2 comparison.
+
+## 2026-09-01 — Stage-2 V1 must balance samples and retain post-trigger FULL timing
+
+- Decision or promoted lesson: do not train Corpus A+B by expanding every
+  retained route and every suffix state equally. For a separately authorized
+  Stage-2 V1, use each W sample as the sampling unit, choose one successful
+  single route uniformly, retain its corrective state plus a small bracketing
+  set of pre/post FULL states, and explicitly oversample the 39 preservation
+  samples. Keep alternative successful actions as provenance/metadata rather
+  than collapsing them to one supposedly unique oracle action.
+- Triggering evidence: the 698 SINGLE_FIXABLE samples have 1-60 successful
+  routes (median 7), while naive Corpus B contains 191,565 FULL versus 7,628
+  non-FULL states (96.17% FULL, 25.11:1). Exact routed-state identity finds
+  90,609 route-derived duplicate rows. Moreover, 491/698 samples are
+  delayed-only, median intervention delay is 13 layers, and 2,685/4,421
+  successful sample/layer positions have multiple observed non-FULL actions.
+- Evidence paths:
+  `analysis/dense_failure_stage2/single_label_audit/summaries/single_label_audit_summary.md`,
+  `metrics/sample_route_multiplicity.csv`,
+  `metrics/naive_state_class_balance.csv`,
+  `metrics/immediate_vs_delayed.csv`, and
+  `metrics/state_redundancy.csv` under the same root.
+- Confidence: high for corpus geometry and exact state redundancy; medium for
+  the proposed S3+S1 and C:W=1:2 loader because no Stage-2 training or free
+  rollout has tested it.
+- Consequence for future actions: the simplest defensible V1 loader is one
+  uniformly sampled route per W sample, one corrective plus up to two pre- and
+  two post-FULL states, and C:W=1:2 sample mixing. Treat S2 K=2 as the simple
+  more-balanced runner-up, do not add Corpus C automatically, and do not infer
+  learned-policy generalization from this audit.
+
+## 2026-09-01 — Stage-2 V1 proves narrow correction, not broad action generalization
+
+- Decision or promoted lesson: retain the shared exact-state Stage-2 router as
+  proof that conservative learned correction is possible, but do not treat V1
+  as broad action/timing generalization and do not automatically add Corpus C.
+- Triggering evidence: the prospectively frozen 39-C/698-W run passes local
+  overfit (0.7292 non-FULL recall) and improves validation by 5 net samples
+  with zero C→W, but its final train diagnostic has only 0.0315 non-FULL
+  recall. Free rollout is 98.397% FULL; 96.30% of intervened samples act at the
+  trigger, WRITE_ONLY is never selected, GQA receives no non-FULL action, and
+  all five rescues are ChartQA/TextVQA.
+- Qualification: the strict prospective FULL-collapse flag is false because
+  54/235 triggered samples intervene at least once, but action-level behavior
+  is still near-FULL and immediate-intervention collapsed. Teacher-forced
+  metrics are train diagnostics, so data diversity, label ambiguity,
+  sampler/loss imbalance, and exposure shift are not separated.
+- Evidence paths:
+  `analysis/dense_failure_stage2/v1_training_revised/free_rollout/overall_metrics.json`,
+  `free_rollout/action_behavior.csv`, `free_rollout/dataset_breakdown.csv`,
+  `diagnostics/collapse_check.json`, and `summaries/stage2_v1_decision.md`.
+- Confidence: high for exact validation transitions, preservation, action
+  behavior, and accepted contract/checkpoint hashes; unknown for which one of
+  the remaining bottlenecks is causal.
+- Consequence for future actions: stop V1. A separately authorized next plan
+  must choose a bounded discriminator for coverage/timing failure. Do not open
+  test, add the 209 MCTS-only samples, change loss/layer inputs, or rerun V1
+  automatically.
+
+## 2026-09-01 — Canonical-source scale-up adds corrective bases but exposes frozen-gate source shift
+
+- Decision or promoted lesson: preserve the expanded A/B/C corpora as useful
+  disjoint supervision, but describe Phase 59 as canonical-source expansion
+  rather than a pure sample-count replication. Any later matched training must
+  keep the frozen Stage-1 gate and report dataset/source composition and trigger
+  behavior explicitly.
+- Triggering evidence: 4,000 prospectively frozen candidates completed with
+  zero skips and yielded 75 single-fixable plus 33 MCTS-only bases, including
+  44 new bounded-fixable GQA bases. Bounded fixability among triggered W is
+  0.4202 versus 0.4822 in the old pool, within the prospective ±0.10 tolerance.
+  However, `P(trigger|C)` shifted from 0.0122 old to 0.5404 new and
+  `P(trigger|W)` from 0.5878 to 0.2951. Expanded A/B/C contain
+  1,730/8,578/508 routes over 1,730/773/242 bases.
+- Qualification: candidates were selected outcome-blind from pinned canonical
+  training sources with metadata stratification and zero UID/SHA-group overlap;
+  the resulting dense correctness and gate mix were not rebalanced post hoc.
+  `UNRESOLVED` remains bounded-search failure, not proof of unfixability.
+- Evidence paths:
+  `analysis/dense_failure_stage2/data_scale_search/summaries/data_scale_search_summary.md`,
+  `metrics/old_vs_new_yield.csv`, `metrics/dataset_breakdown.csv`, and
+  `combined_corpora/corpus_manifest.json` under the same root.
+- Confidence: high for candidate disjointness, current-runtime labels, trigger
+  identities, exact route replay, and artifact provenance; unknown for learned
+  policy generalization or the cause of the gate's source shift.
+- Consequence for future actions: if separately authorized, run Scaled-Single
+  with Expanded A+B first under the frozen V1 training/evaluation contract,
+  then add Corpus C as a controlled comparison. Do not retune Stage 1 or alter
+  architecture/loss simultaneously.
+## 2026-09-04 — MCTS supervision failure combines weak action learning, interference, and exact-prefix ambiguity
+
+- Decision or promoted lesson: do not attribute the Phase-66 zero-gain MCTS arm
+  primarily to free-rollout exposure shift, and do not add more of the same
+  single-label MCTS supervision. The smallest next discriminator is an
+  unchanged-router observed-valid-set loss, subject to separate authorization.
+- Triggering evidence: on exact successful-route states, B recalls only 8.45%
+  of MCTS non-FULL actions (first/later 9.93%/7.82%) and first disagrees at the
+  first intervention on 88.83% of MCTS routes. B reduces single corrective
+  recall from A's 10.78% to 1.36%; its UID-weighted delta is -21.74 points with
+  95% CI [-25.56,-18.01]. Multi-valid B rows have 30.96% nominal error versus
+  5.65% for single-valid rows, while accepting any exact-prefix successful
+  action recovers 21.63% of multi-valid rows. After C1-C3 oracle-prefix forcing,
+  only 8.35%/6.75%/8.33% of remaining corrective actions are reproduced.
+- Qualification: state drift is measurable after a wrong action and forced
+  corrections improve final accuracy, so exposure remains a secondary factor.
+  This training-route diagnosis does not establish deployment benefit,
+  unseen-source generalization, or that sequential correction is impossible.
+- Evidence paths: `analysis/dense_failure_stage2/mcts_failure_diagnosis/`,
+  especially `summaries/mcts_failure_diagnosis_summary.md`,
+  `negative_transfer/paired_bootstrap.csv`, and
+  `ambiguity/error_by_valid_action_count.csv`.
+- Confidence: high for the frozen exact-replay diagnosis; unknown for the
+  proposed set-valued objective until separately tested.
+- Consequence for future actions: keep A/B checkpoints and Stage 1 frozen. If
+  authorized, test only `-log(sum p(observed-valid actions))` first, and require
+  both improved MCTS oracle corrective recall and retention of A-like single
+  corrective behavior before any free-rollout promotion.
+
+## 2026-09-04 — Observed-valid supervision improves oracle compatibility but not deployment
+
+- Decision or promoted lesson: retain exact-prefix observed-valid sets as a
+  better supervision contract for ambiguous successful-route states, but do
+  not promote Experiment C as a deployment winner. Label ambiguity was a
+  causal oracle-learning bottleneck for MCTS states, not the sole cause of the
+  Stage-2 failure.
+- Triggering evidence: with every Phase-66 B variable except the loss fixed, C
+  improves MCTS nominal/observed-valid non-FULL recall from 0.0845/0.1036 to
+  0.1616/0.2126. First/later observed-valid recall improves from
+  0.1352/0.0900 to 0.2593/0.1925. Overall valid probability mass rises from
+  0.8022 to 0.9056. Yet single corrective nominal recall remains 0.0136
+  (versus A's 0.1078), and Historical-800 P98/P95/P90 net corrections are
+  -1/-1/0; P90 contains one rescue and one regression.
+- Qualification: observed-valid action sets contain only actions seen in
+  bounded successful searches, not every valid action. Oracle improvement does
+  not establish unseen-source/test generalization or deployment benefit.
+- Evidence paths:
+  `analysis/dense_failure_stage2/observed_valid_set_loss/`, especially
+  `oracle_eval/overall_metrics.csv`,
+  `oracle_eval/single_negative_transfer.csv`,
+  `free_rollout/threshold_comparison.csv`, and
+  `summaries/observed_valid_set_loss_summary.md`.
+- Confidence: high for the matched Historical-800 and exact-replay conclusion;
+  unknown for on-policy correction and unseen-source/test behavior.
+- Consequence for future actions: do not repeat one-hot multi-route
+  supervision and do not open the held-out test. If separately authorized,
+  isolate exposure shift with a small partial-prefix on-policy collection under
+  fixed C before changing the router, Stage 1, thresholds, or architecture.
+
+## 2026-09-04 — The frozen P90 plus Stage-2 A candidate is regression-dominated at full external scale
+
+- Decision or promoted lesson: do not promote the exact Robust ALL-source
+  Shared Random-4 P90 gate plus Phase-66 Experiment A as the deployed method.
+  It produced more regressions than rescues on the complete established
+  external population.
+- Triggering evidence: all 19,960 reference UIDs completed under contract
+  `63379eef...27e83`. ChartQA/TextVQA/MMMU-Pro/POPE W→C/C→W/net are
+  `1/3/-2`, `2/12/-10`, `0/4/-4`, and `0/0/0`; pooled is `3/19/-16`.
+  Delta accuracy is -0.000802 with paired-bootstrap 95% CI
+  [-0.001253,-0.000351]. Stage 1 triggers 901 samples, but only 211 use any
+  non-FULL action; POPE has zero triggers.
+- Qualification: this rejects only the exact frozen threshold/checkpoint and
+  execution candidate. It does not show that dynamic routing, four-action
+  decomposition, or a better preservation policy cannot work. Current dense
+  accuracies differ slightly from the rounded original-server reference even
+  with exact manifests/prompt/scorers, so cross-server output identity is not
+  claimed.
+- Evidence paths: `analysis/dense_failure_stage2/full_benchmark_eval/`,
+  especially `metrics/benchmark_summary.csv`, `metrics/paired_bootstrap.csv`,
+  `metrics/stage1_admission.csv`, `metrics/stage2_action_behavior.csv`, and
+  `summaries/method_level_decision.md`.
+- Confidence: high for population coverage, paired outcomes, current-runtime
+  scoring, and the negative method decision; unknown for the causal source of
+  individual regressions.
+- Consequence for future actions: stop this candidate. The single retained,
+  unexecuted direction is conservative Stage-2 action-selection calibration
+  focused on preservation, subject to a new prospective plan and explicit
+  authorization.
+
+## 2026-09-04 — Full-eval loss is preservation-dominated in pooled accounting, with family-specific failure modes
+
+- Decision or promoted lesson: do not expand Stage-1 admission for the frozen
+  candidate before Stage-2 preservation improves. Conditional Stage-2
+  activation is nearly the same on triggered W and C, but its outcome is much
+  worse on C; the family-level diagnosis is not uniform.
+- Triggering evidence: Stage 1 admits 496/4,380 W and 405/15,580 C, then
+  Stage 2 uses non-FULL on 119/496 W and 92/405 C. Only 3/119 treated W rescue,
+  whereas 19/92 treated C regress. TextVQA contributes 12 regressions and two
+  rescues; MMMU-Pro treats 82 W without any rescue; POPE never triggers and its
+  maximum score remains 0.077710 below P90.
+- Qualification: this is deterministic funnel accounting, not proof that one
+  action caused any individual transition. The audit does not establish that
+  current Stage-2 logits can separate rescues from regressions, nor does POPE
+  inactivity measure Stage-2 quality.
+- Evidence paths:
+  `analysis/dense_failure_stage2/full_benchmark_exhaustive_audit/`, especially
+  `funnel/pooled_funnel.csv`, `funnel/bottleneck_classification.csv`,
+  `answer_changes/all_22_answer_changes.jsonl`, and
+  `summaries/exhaustive_audit_summary.md`.
+- Confidence: high for the exact accounting and benchmark heterogeneity;
+  unknown for action-level causality and confidence-margin separability.
+- Consequence for future actions: if separately authorized, test exactly one
+  preservation-calibrated Stage-2 abstention margin selected on development
+  data under a C-preservation constraint. Do not tune it on these 22 external
+  answer changes and do not lower Stage 1 first.
+
+## 2026-09-05 — The current Stage-2 global confidence margin does not improve treatment selectivity
+
+- Decision or promoted lesson: do not add a positive global
+  best-non-FULL-minus-FULL margin to the frozen Experiment-A method. Keep δ=0
+  only as the development winner; because this does not change the failed
+  external candidate, do not rerun external evaluation.
+- Triggering evidence: on Historical-800, δ=0 gives W→C/C→W/net `4/1/+3`.
+  q10, q25, and q40 give `3/1/+2`, `2/1/+1`, and `2/0/+2`; q50/q60 give
+  `1/0/+1`, and q70+ gives `0/0/0`. All five image-group-disjoint cross-fit
+  training folds select δ=0, with pooled held-out `4/1/+3`. Median maximum
+  executed margins are 0.6747 for rescues and 0.7210 for the sole regression.
+- Qualification: only four rescues and one regression occur on this small
+  development set, and the grid comes from sampler-weighted final-epoch states.
+  This rejects the prespecified one-dimensional global margin for the current
+  router; it does not prove Stage-2 representations, actions, or retraining
+  cannot improve treatment quality.
+- Evidence paths: `analysis/dense_failure_stage2/abstention_margin/`, especially
+  `development/per_margin_rollout_summary.csv`,
+  `crossfit/stability_summary.json`, and
+  `diagnostics/margin_by_transition.csv`.
+- Confidence: high for the frozen-grid sequential-rollout result and selection;
+  low for fine-grained margin-distribution comparisons because transition
+  counts are sparse.
+- Consequence for future actions: move away from post-hoc global confidence
+  gating. If separately authorized, revisit the Stage-2 representation or
+  training signal; do not retune this margin on development or external data.
+
+## 2026-09-05 — Frozen Stage-2 READ/WRITE summaries do not support another treatment gate
+
+- Decision or promoted lesson: do not add a KEEP-vs-INTERVENE head or a learned
+  four-logit abstention readout to the current Experiment-A representation. The
+  exact routed-state probe evidence is weak and lacks a useful high-precision
+  intervention region; the next authorized work should diagnose representation
+  or training-state diversity, not another confidence/readout layer.
+- Triggering evidence: all 21,071 exact prefix-states were extracted with exact
+  router-logit parity and split across five UID/image-group-disjoint folds.
+  Clean labels contain 18,438 KEEP_REQUIRED and 1,657 INTERVENE_REQUIRED states;
+  976 MIXED states are excluded from fitting. OOF AUROC/AUPRC is 0.4632/0.1050
+  for the scalar margin, 0.4640/0.0939 for four logits, 0.5370/0.0931 for z_R,
+  0.5219/0.1088 for z_W, and 0.5620/0.1086 for [z_R;z_W]. The prespecified
+  optional MLP reaches only 0.5583/0.1128. RW precision at top 5/10/20% is
+  0.123/0.135/0.123; recall at 90% precision is 0.0012. Nuisance-only AUROC is
+  0.8150, while matched RW remains weak at 0.5763.
+- Qualification: KEEP_REQUIRED means FULL is the only action observed in a
+  successful replay-valid continuation, not proof that every unsearched
+  intervention fails. The corpus is highly imbalanced and route-source support
+  differs; matched AUPRC uses deliberately balanced nuisance-cell weights and
+  is not prevalence-comparable to natural AUPRC. This rejects readily usable
+  selectivity in this frozen representation/probe family, not corrective
+  routing, READ/WRITE control, or richer/diversified representations.
+- Evidence paths:
+  `analysis/dense_failure_stage2/treatment_selectivity_separability/`, especially
+  `metrics/probe_summary.csv`, `metrics/matched_sensitivity.csv`,
+  `metrics/nuisance_controls.csv`, and
+  `summaries/treatment_selectivity_summary.md`.
+- Confidence: high for exact-state provenance, group isolation, extracted
+  representation identity, and the negative prospective decision; moderate
+  for route-specific comparisons because positive support varies materially.
+- Consequence for future actions: stop Phase 72. If separately authorized,
+  choose one bounded representation/training-state-diversity discriminator.
+  Do not train or deploy another Stage-2 treatment gate from these summaries.
+
+## 2026-09-06 — Complete suffix-program supervision improves preservation but not corrective transfer
+
+- Decision or promoted lesson: retain complete-program supervision only as a
+  conservative Stage-2 formulation; do not promote the Phase-74 predictor as a
+  deployment winner. Modeling the joint post-trigger trajectory sharply
+  reduces regressions relative to independent local actions, but does not
+  increase rescues and still underperforms Dense.
+- Triggering evidence: all 4,948 eligible programs over 569 UIDs replayed
+  LMMS-correct with exact token and cached/live trigger-state parity. On all
+  19,960 external rows, Program W-to-C/C-to-W/net is `3/8/-5`, compared with
+  Sequential-A `3/19/-16`. Program accuracy is 0.780311, Dense accuracy is
+  0.780561, and the paired-bootstrap 95% interval for Program-minus-Dense is
+  [-0.000601, 0.000050].
+- Qualification: the program decoder exactly matches only 20.87% of known
+  development programs, and successful-route labels are bounded by prior
+  search. The result establishes improved preservation for this frozen
+  formulation, not an upper bound on program prediction or corrective
+  routing.
+- Evidence paths:
+  `analysis/dense_failure_stage2/polar_suffix_program/`, especially
+  `metrics/full_benchmark_summary.csv`, `metrics/paired_bootstrap.csv`,
+  `metrics/dense_c_preservation.csv`, and
+  `summaries/polar_suffix_program_full_eval_summary.md`.
+- Confidence: high for corpus validity, paired external outcomes, and the
+  preservation improvement; unresolved for how to improve treatment transfer.
+- Consequence for future actions: do not deploy this candidate or interpret
+  reduced C-to-W alone as success. Any follow-on must directly address why
+  known corrective programs fail to transfer, under a new prospective plan
+  and explicit authorization.
+
+## 2026-09-06 — Frozen beam-8 exposes secondary ranking capacity but dominant candidate failure
+
+- Decision or promoted lesson: do not treat top-1 ranking as the primary
+  remaining Stage-2 bottleneck. The frozen program beam contains meaningful
+  additional rescue capacity, especially for TextVQA, but candidate
+  generation/representation dominates population-level failures.
+- Triggering evidence: under contract `e274d24c...06c7fe7`, all 901 top-1 paths
+  reproduced exactly before 6,944/6,944 frozen unique candidates executed.
+  W-to-C@1/@2/@4/@8 is `3/10/24/33`. Of 493 top-1 W failures, 30 (6.09%) have
+  a correct lower-ranked candidate and 463 (93.91%) have none. TextVQA rises
+  from 0 to 19 oracle-available rescues and MMMU-Pro from 2 to 12. Median
+  top1-minus-correct sequence-score gap for ranking failures is 1.886, and
+  best-correct programs use a median one non-FULL action versus zero for
+  top-1 wrong programs.
+- Qualification: W-to-C@8 is an external-label oracle ceiling, not a deployable
+  method or evidence that a reranker can identify the correct candidate.
+  Candidate support is limited to the frozen width-8 beam and does not measure
+  all possible suffix programs.
+- Evidence paths:
+  `analysis/dense_failure_stage2/program_beam_oracle_audit/`, especially
+  `metrics/benchmark_breakdown.csv`, `metrics/w_failure_decomposition.csv`,
+  `metrics/score_gap_analysis.csv`, and
+  `summaries/program_beam_oracle_audit_summary.md`.
+- Confidence: high for frozen-beam completeness, exact top-1 parity, and the
+  ranking-versus-generation decomposition; unknown for whether a different
+  trigger representation will improve candidate support.
+- Consequence for future actions: if separately authorized, test one minimal
+  trigger-state representation enrichment while keeping Stage 1, action
+  semantics, beam width, evaluator, and evaluation firewall fixed. Do not fit
+  a reranker to these external oracle outcomes.
+
+## 2026-09-07 — Offline closed-loop trajectory-set supervision does not repair corrective transfer
+
+- Decision or promoted lesson: do not promote the Phase-76 closed-loop
+  trajectory-set router as a deployment winner. Recomputing the unchanged
+  READ/WRITE representation on actual routed states and marginalizing over all
+  known successful trajectories improves preservation relative to independent
+  local labels, but still produces no external corrective rescues.
+- Triggering evidence: all 4,948 programs over 569 UIDs exact-replayed into
+  35,565 unique prefix states with zero quarantines. All 19,960 external rows
+  completed under contract `00639e7e...5f6a`. Closed-loop W-to-C/C-to-W/net is
+  `0/8/-8` at accuracy 0.780160, versus Dense 0.780561, Open-loop Program
+  `3/8/-5`, and Sequential-A `3/19/-16`. Only 39/496 triggered Dense-W samples
+  receive any non-FULL action, and none rescue, even though the median
+  best-route geometric action probability on the training corpus is 0.7269.
+- Qualification: feedback and the set-valued objective changed together, and
+  successful trajectories remain bounded by offline search. The result rejects
+  this exact offline formulation; it does not establish that dynamic routing,
+  richer representations, on-policy labels, Stage 1, or MCTS are generally
+  ineffective.
+- Evidence paths:
+  `analysis/dense_failure_stage2/closed_loop_trajectory_set/`, especially
+  `summaries/closed_loop_trajectory_set_full_eval_summary.md`,
+  `metrics/full_benchmark_summary.csv`, `metrics/stage1_stage2_funnel.csv`,
+  `training/responsibility_statistics.csv`, and `artifact_manifest.json`.
+- Confidence: high for replay completeness, objective correctness, paired
+  external outcomes, and the negative deployment decision; moderate for the
+  on-policy-shift diagnosis because the combined formulation does not causally
+  isolate representation from state-support mismatch.
+- Consequence for future actions: stop this candidate. If separately
+  authorized, run one bounded on-policy state-distribution diagnostic/relabeling
+  experiment with architecture, Stage-1 gate, action semantics, evaluator, and
+  external firewall fixed.
+
+## 2026-09-09 — Current dense-failure and local-utility heads do not robustly transfer externally
+
+- Decision or promoted lesson: do not treat pooled external Stage-1
+  discrimination as robust transfer, and do not proceed to deployment with the
+  current-state local READ/WRITE utility heads. Per-benchmark evidence is the
+  controlling result: Stage 1 is category `D1-C`, and Stage 2 is `D2-A`.
+- Triggering evidence: all 19,960 external UIDs reproduced the frozen Dense and
+  strict-P90 trigger traces exactly. Stage-1 M3 AUROC is 0.4998 ChartQA, 0.6794
+  TextVQA, 0.5399 MMMU-Pro, and 0.5582 POPE (macro 0.5693; pooled 0.6980).
+  All 8,442 triggered dense states received complete four-branch measurement.
+  READ Spearman is 0.0848/0.1095/0.0246 and WRITE Spearman is
+  0.0335/0.0158/0.0204 on ChartQA/TextVQA/MMMU-Pro; POPE has no P90-triggered
+  states. Predictions were frozen before utility labels, and all 33,768 branch
+  parity checks passed.
+- Qualification: this rejects broad transfer for the exact frozen
+  representations, objectives, and linear/joint-head families. It does not
+  establish that richer representations, benchmark-calibrated Stage 1,
+  history/nonlocal Stage-2 information, or counterfactual probes cannot work.
+  The pooled Stage-1 AUROC is confounded by cross-benchmark prevalence/score
+  structure and is not a substitute for within-benchmark transfer.
+- Evidence paths:
+  `analysis/predictability_generalization/stepD_external_transfer/`, especially
+  `summaries/stepD_external_transfer_summary.md`,
+  `stage1/benchmark_metrics.csv`,
+  `stage2_predictability/read_benchmark_metrics.csv`,
+  `stage2_predictability/write_benchmark_metrics.csv`, and
+  `statistics/group_bootstrap_ci.csv`.
+- Confidence: high for completeness, parity, per-benchmark metrics, and the
+  fixed D1-C/D2-A decisions; unknown for untested richer/nonlocal formulations.
+- Consequence for future actions: if separately authorized, first use one
+  bounded diagnostic to distinguish Stage-1 source calibration from
+  representation failure. Do not add routing complexity or train another
+  current-state local utility head merely from the pooled score.
+
+## 2026-09-10 — Exact one-step action effects do not reliably identify full-suffix READ/WRITE utility
+
+- Decision or promoted lesson: do not build a one-layer speculative
+  probe-and-route controller from the current pooled or token-aware
+  representations. Exact one-step alternatives remain weak predictors of the
+  frozen full-suffix utility targets.
+- Triggering evidence: all 15,185 dense states / 45,555 one-step branches and
+  35,565 routed states / 106,695 branches passed same-prestate, action-bit,
+  deterministic-repeat, and exact FULL-to-canonical post-state checks. Dense
+  OOF READ PRE/DELTA/token Spearman is `0.0626/0.0773/0.0694`; the DELTA-minus-
+  PRE 95% image-group-bootstrap interval is `[-0.0089, 0.0381]`. Dense WRITE
+  PRE/PAIR/token is `0.0354/0.0421/0.0383`. Harmful-flip AUROC is 0.4561 for
+  READ and 0.4106 for WRITE. Routed token OOF reaches only `0.1290/0.0726`,
+  and Dense-to-routed token transfer is `0.1141/0.0699` for READ/WRITE.
+- Qualification: this rejects one-step identifiability for the exact targets,
+  populations, representations, and fixed capacity ladder. It does not show
+  that a bounded multi-layer probe, a short rollout, or other nonlocal/history
+  information cannot identify utility; it establishes no benchmark gain,
+  compute saving, deployment safety, or causal optimality.
+- Evidence paths:
+  `analysis/dense_failure_stage2/counterfactual_effect_identifiability/`,
+  especially `summaries/counterfactual_effect_identifiability_summary.md`,
+  `statistics/uid_bootstrap_ci.csv`,
+  `statistics/pairwise_model_differences.csv`, and
+  `routed_secondary/dense_to_routed_transfer.csv`.
+- Confidence: high for execution validity, population completeness, and the
+  Case-D conclusion; unknown for horizons beyond one layer.
+- Consequence for future actions: stop one-layer controller investment. If
+  separately authorized, the single smallest remaining discriminator is the
+  prospectively specified two-layer / short-horizon counterfactual-
+  identifiability audit; do not run it automatically.
+
+## 2026-09-11 — Explicit local READ-operation structure does not robustly identify full-suffix harm
+
+- Decision or promoted lesson: do not train another local READ-harm classifier
+  or promote the selection-qualified routed result. Explicit attention,
+  compatibility, update, value, and spatial-concentration features do not make
+  the frozen full-suffix READ-harm target robustly predictable.
+- Triggering evidence: the complete primary census contains 15,185 states over
+  1,413 UIDs, with 7,285 harmful and 7,900 beneficial READ effects. Harmful
+  adjacent persistence fails its shuffled-null gate, while span and immediate-
+  neighborhood gates pass only marginally, yielding `R-STRUCT-B`. Only 1/34
+  matched feature effects has a pooled group-bootstrap interval excluding zero;
+  the harmful-vs-beneficial matched probe AUROC is 0.4186, yielding `R-MECH-B`.
+  The prospectively selected F_ALL/MLP dense OOF Spearman/AUROC is
+  `0.0697/0.5338`, and historical↔canonical and LODO transfer remain weak,
+  yielding `R-LEARN-C`.
+- Qualification: the result applies to the frozen current-operation F1-F7
+  features, full-suffix target, populations, folds, and linear/small-MLP
+  capacity ladder. It does not establish that READ is harmless, that attention
+  lacks causal structure, or that short-horizon propagation/history/planning
+  information cannot identify harm. Routed OOF Spearman 0.1623 is secondary and
+  selection-qualified, not evidence of dense-primary robustness.
+- Evidence paths: `analysis/read_harm_structure_learnability/`, especially
+  `summaries/read_harm_structure_summary.md`,
+  `summaries/read_harm_mechanism_summary.md`,
+  `summaries/read_harm_learnability_summary.md`, and `artifact_manifest.json`.
+- Confidence: high for census completeness, operation fidelity, hash integrity,
+  and the fixed categories; moderate for the qualitative "mostly isolated"
+  label because two of three structure components pass narrowly.
+- Consequence for future actions: stop this local-classifier branch. The sole
+  unexecuted recommendation is one bounded short-horizon READ
+  effect-propagation/planning audit, requiring separate user authorization.
+
+## 2026-09-12 — READ harm remains non-identifiable through eight FULL continuation layers
+
+- Decision or promoted lesson: do not train or deploy another one-state or
+  H<=8 READ-harm controller from the tested pooled or token-comparator family.
+  Propagated counterfactual effect magnitude grows, but predictive information
+  does not satisfy the prospective materiality or high-precision gates.
+- Triggering evidence: all 15,185 dense states yielded 47,133 valid horizon
+  pairs / 94,266 ON/OFF branches after exact H1 parent parity, canonical ON,
+  fresh-cache repeat, swapped-order H8, action-trace, census, and cache-readback
+  checks. On the 6,916-state H8-common support, pooled DELTA Spearman is
+  `0.0756/0.0688/0.0646/0.1097` and harmful AUROC is
+  `0.5316/0.5287/0.5314/0.5483` for H1/H2/H4/H8. H8-minus-H1 gains are only
+  `+0.0340/+0.0167`, with 95% image-group-bootstrap lower bounds
+  `-0.0009/-0.0020`; token H8 Spearman is 0.0854, metrics are non-monotone,
+  and precision@10% 0.5462 is only +0.0536 over prevalence. Category:
+  **H-READ-D**.
+- Qualification: this result is limited to the fixed current-runtime dense
+  population, target `H_R`, FULL-vs-WRITE_ONLY intervention, common FULL
+  continuations through H<=8, inherited group folds, fixed models, and tested
+  pooled/token representations. It does not establish that READ is harmless or
+  rule out longer-horizon planning/search, history, or a different causal
+  information family. Routed confirmation was optional for H-READ-D and was
+  not run because it is selection-biased and cannot override the dense-primary
+  non-material result.
+- Evidence paths: `analysis/read_harm_short_horizon_propagation/`, especially
+  `summaries/read_short_horizon_propagation_summary.md`,
+  `statistics/group_bootstrap_ci.csv`, `controls/`, and
+  `artifact_manifest.json` (`1f9005bf...35961`).
+- Confidence: high for execution validity, census completeness, artifact
+  integrity, and the H-READ-D decision; unknown for horizons beyond eight.
+- Consequence for future actions: stop this short-horizon branch. The sole
+  unexecuted recommendation is a separately authorized bounded longer-horizon
+  READ planning/search study; do not start it automatically.
+
+
+## 2026-09-13 — Preserve original Stage1 output indexing and separate score shift from target shift
+
+- Direct evidence: Phase86 original native features are decoder outputs indexed l, including valid layer27; compact Stage2 caches retain the last control token and cannot substitute for Stage1 final-user and mean-user-text summaries. Exact reconstruction passed all 15,185 states, with original ON scores reproduced within 1.37e-7.
+- Timing consequence: historical trigger l already used dense post-layer-l features, while StepA acts pre-layer l. First-trigger branch comparison is retrospective; any future controller must explicitly resolve rollback or action timing rather than silently shift indices/labels.
+- Interpretation consequence: ON/OFF failure AUROC 0.6728/0.5949 alone does not diagnose counterfactual representation collapse. Holding targets fixed yields ON/OFF-score AUROC 0.6728/0.6710 on ON outcomes and 0.5948/0.5949 on OFF outcomes. Compare scores on fixed labels before attributing a cross-branch metric difference to the representation.
+- Evidence: `analysis/read_counterfactual_stage1_branch_critic/stage1_post_action_indexing_contract.md`, `scores/fixed_target_cross_score_diagnostic.csv`, `parity/independent_result_verification.json`.
+- Scope: frozen Stage1 and this exact internal branch corpus. Qualified BC-C is a measured relative-choice failure, not a permanent impossibility claim or proof calibration will recover it. No follow-on execution authorized.
+
+
+## 2026-09-14 — WRITE propagation influence does not imply useful harm identification
+
+- Direct evidence: Phase87 FULL versus READ_ONLY preserves same-layer text, while every one of 6,044 H8-common states has text divergence after one subsequent FULL layer. HW labels remain frozen. Complete 15,185-state local and 57,538-record propagation evidence passed parity and raw hash readback.
+- Learnability: local F_ALL rho .04752 / AUC .48188; H8 common delta rho .09732 / AUC .53872. H8−H0 gains +.05613 [.02670,.08523] rho and +.02255 [.00514,.03957] AUC are real but below the fixed gain thresholds and yield no useful precision. Dense-W confirms. Category is qualified W-PROP-C / WRITE-S4, not zero signal or intrinsic nonlocality.
+- Reusable interpretation rules: keep absolute and relative representation norms separate; compare horizons on exact common support; align READ/WRITE horizon conventions and baseline target signs explicitly. WRITE H8 includes eight subsequent layers; prior READ H8 includes seven. Utility signs and correctness flips are distinct targets.
+- Scope and consequence: close the tested local/H≤8 family; longer horizons/representations remain unknown. A metadata-only H16 audit reveals strongly reduced and shifted support, not a new result. No transfer failure may be inferred from skipped positive-gated tests. No search/router or strategic pivot is authorized.
+- Evidence: `analysis/write_harm_structure_learnability/summaries/final_write_characterization.md`, `write_propagation_summary.md`, `read_vs_write_characterization.md`, `final_review_reconciliation.md`, and `analysis/write_harm_structure_learnability/artifact_manifest.json`.
+
+### Phase88 — Native generation continuation requires its exact position convention
+Direct evidence: `analysis/benchmark_calibrated_fixed_rw_schedule/parity/dense_scorer_mismatch_diagnostic.json`. All28 prefill states and initial logits can match while generated correctness differs. On MMMU-Pro Standard Psychology128, the inherited cached decoder used full length plus maximum-based RoPE delta (position323); installed native HF5 generation increments the final prompt position (position194). Aligning only continuation restores exact native output. Apply the same convention to generation and multi-token q, and regenerate affected evidence after a correction. Phase88 uses a scoped adapter; historical shared files and prior-phase reported results were not modified or re-audited. This finding does not itself quantify any effect on earlier conclusions.

@@ -1,5 +1,9 @@
 # External Assets for a Second Server
 
+## Current Phase88 transfer
+
+Start with `handoff/phase88_server_transfer/README.md`. That runbook lists the current raw cache, exact model, absolute-path constraints, environment snapshot and final-sync requirement. The older sizes and training assets below are historical; they are not the minimum Phase88 transfer set. Source computation is still active, and Git alone does not include its raw UID records.
+
 These payloads are intentionally excluded from Git. Transfer only the subsets
 needed for the next action.
 
@@ -18,6 +22,13 @@ bash infra/link_external_assets.sh /path/to/dynamic_mllm_data_root
 ```
 
 ## Required only for the bundled external evaluation
+
+The standing prospective evaluation scope was expanded on 2026-09-04 to four
+families: ChartQA, TextVQA, MMMU-Pro Standard/Vision, and POPE
+adversarial/popular/random. The transferred bundle was previously scoped to
+ChartQA/MMMU-Pro/POPE; therefore TextVQA evaluation manifests and images must be
+verified or acquired under an approved asset root before a future evaluation.
+Do not treat TextVQA training images as evaluation assets.
 
 Under `eval/reference/shared_prefix_eval_20260812/`, Git retains the protocol,
 code, scripts, environment files, inventory, and checksums. Transfer these

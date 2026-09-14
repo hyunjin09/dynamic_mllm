@@ -5,6 +5,12 @@ Qwen2.5-VL. The repository intentionally separates version-controlled source
 from machine-local datasets, model weights, checkpoints, and experiment
 artifacts.
 
+For the current Phase88 research state, start with
+[`research_handoff.md`](research_handoff.md). When moving to another server,
+follow the [Phase88 transfer runbook](handoff/phase88_server_transfer/README.md)
+for the current environment snapshot, frozen metadata restoration and external
+payloads. The source experiment was still running when this snapshot was made.
+
 ## What Git contains
 
 - model instrumentation, binary visual-routing, MCTS, scoring, and evaluation

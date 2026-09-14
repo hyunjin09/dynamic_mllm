@@ -1,0 +1,76 @@
+{
+  "schema_version": "stage1_gate_treatment_correctability_config_v1",
+  "run_id": "stage1_gate_treatment_correctability_v1",
+  "seed": 20260831,
+  "world_size": 4,
+  "model": {
+    "name": "Qwen/Qwen2.5-VL-7B-Instruct",
+    "revision": "cc594898137f460bfe9f0759e9844b3ce807cfb5",
+    "snapshot_path": "/mnt/hyemin/qwen_train_eval/eval/reference/shared_prefix_eval_20260812/model/Qwen2.5-VL-7B-Instruct_cc594898137f460bfe9f0759e9844b3ce807cfb5",
+    "dtype": "bfloat16",
+    "attention_implementation": "sdpa"
+  },
+  "sources": {
+    "plan": "plans/stage1_gate_treatment_correctability_plan.md",
+    "dense_config": "configs/current_dense_8k_v1.json",
+    "candidate_manifest": "analysis/dense_failure_stage1/current_dense_8k/candidate_manifest.jsonl",
+    "dense_outputs": "analysis/dense_failure_stage1/current_dense_8k/dense_outputs.jsonl",
+    "split_manifest": "analysis/dense_failure_stage1/layerwise_failure_probe/split_manifest.jsonl",
+    "phase48_manifest": "analysis/dense_failure_stage1/layerwise_failure_probe/artifact_manifest.json",
+    "gate_selection": "analysis/dense_failure_stage1/gate_winner_selection/selected_winner.json",
+    "gate_selection_manifest": "analysis/dense_failure_stage1/gate_winner_selection/artifact_manifest.json",
+    "independent_validation_scores": "analysis/dense_failure_stage1/independent_sequential_gate/validation_scores.jsonl",
+    "independent_test_scores": "analysis/dense_failure_stage1/independent_sequential_gate/test_scores.jsonl",
+    "shared_validation_scores": "analysis/dense_failure_stage1/shared_global_gate/evaluation/validation_scores/state_layer_random4.jsonl",
+    "shared_test_scores": "analysis/dense_failure_stage1/shared_global_gate/evaluation/test_scores.jsonl",
+    "feature_index": "analysis/dense_failure_stage1/current_dense_8k/features/feature_index.jsonl",
+    "shared_checkpoint": "analysis/dense_failure_stage1/shared_global_gate/training/checkpoints/state_layer_random4.pt",
+    "shared_normalization": "analysis/dense_failure_stage1/shared_global_gate/training/global_normalization.pt"
+  },
+  "output_root": "analysis/dense_failure_stage1/treatment_correctability",
+  "gates": [
+    "shared_random4",
+    "independent_sequential",
+    "fixed_l27"
+  ],
+  "operating_points": "phase52_selected_only",
+  "execution": {
+    "native_full_row_dispatch": true,
+    "dense_prefix_source": "exact_native_all_full_prefill"
+  },
+  "search": {
+    "actions": [
+      "READ_ONLY",
+      "WRITE_ONLY",
+      "IGNORE"
+    ],
+    "all_single_interventions": true,
+    "seeded_distinct_layer_pair_panel": 12,
+    "maximum_routes_at_layer_0": 96,
+    "early_stop": "first_lmms_correct_route",
+    "old_cached_correctness_authoritative": false
+  },
+  "enrichment": {
+    "reference_contract": "same_full_replay_route_panel_from_layer_0",
+    "population": "all_dense_wrong_per_split",
+    "dynamic_deployment_correctability_reported_separately": true
+  },
+  "dynamic_gate_selection": {
+    "split": "validation",
+    "ordered_criteria": [
+      "higher_population_oracle_rescue",
+      "higher_triggered_wrong_correctability",
+      "higher_triggered_correct_preservability",
+      "lower_equivalent_prompt_passes",
+      "prefer_shared_random4_on_exact_tie"
+    ],
+    "test_may_not_change_selection": true
+  },
+  "smoke": {
+    "records": 12,
+    "routes_per_regime": 6,
+    "require_native_dense_token_parity": true,
+    "require_suffix_complete_route_token_parity": true
+  },
+  "scoring_timeout_seconds": 5.0
+}

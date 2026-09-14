@@ -1,0 +1,11 @@
+# Implementation smoke
+
+- Passed: **True**
+- Contract: `83d647b2e4b2fe09a0cec2a1c0076a6397c832806d8646bdde8599c352d409eb`
+- Worst prompt: `chartqa:chartqa_train_two_col_42036_faddc12bb6` (1792 prompt / 1740 visual tokens)
+- Native all-FULL token parity: True
+- Router logits: [4, 4]; router gradients: True
+- Frozen Qwen gradients all absent: True; no Stage-1 module was loaded.
+- Process peak allocated/reserved: 16607/16682 MiB
+- Conservative shared-GPU headroom after this peak: 14354 MiB
+- Wall time: 13.14 s

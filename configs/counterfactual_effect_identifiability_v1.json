@@ -1,0 +1,207 @@
+{
+  "schema_version": "counterfactual_effect_identifiability_config_v1",
+  "run_id": "counterfactual_effect_identifiability_v1",
+  "seed": 20260910,
+  "world_size": 4,
+  "output_root": "analysis/dense_failure_stage2/counterfactual_effect_identifiability",
+  "external_cache_root": "/mnt/hyemin/qwen_train_eval/outputs/counterfactual_effect_identifiability_v1",
+  "model": {
+    "name": "Qwen/Qwen2.5-VL-7B-Instruct",
+    "revision": "cc594898137f460bfe9f0759e9844b3ce807cfb5",
+    "snapshot_path": "/mnt/hyemin/qwen_train_eval/eval/reference/shared_prefix_eval_20260812/model/Qwen2.5-VL-7B-Instruct_cc594898137f460bfe9f0759e9844b3ce807cfb5",
+    "dtype": "bfloat16",
+    "attention_implementation": "sdpa",
+    "decoder_layers": 28,
+    "hidden_size": 3584,
+    "processor_use_fast": false,
+    "local_files_only": true
+  },
+  "population": {
+    "dense_uids": 1413,
+    "dense_image_groups": 1385,
+    "dense_states": 15185,
+    "routed_uids": 569,
+    "routed_states": 35565
+  },
+  "branches": {
+    "actions": ["FULL", "WRITE_ONLY", "READ_ONLY"],
+    "read_pair": ["FULL", "WRITE_ONLY"],
+    "write_pair": ["FULL", "READ_ONLY"],
+    "stop_after_target_layer": true,
+    "match_frozen_stepA_action_execution": true,
+    "native_full_rows_for_unpadded_prompts": true,
+    "raw_state_dtype": "bfloat16",
+    "hash_algorithm": "sha256"
+  },
+  "features": {
+    "branch_representation": ["last_valid_text_state", "mean_valid_visual_state"],
+    "primary_conditions": ["pre", "full_post", "off_post", "pair", "delta", "pair_plus_delta"],
+    "primary_counterfactual_condition": "delta",
+    "token_comparator": {
+      "kind": "shared_projection_attention_pair_comparator",
+      "projection_size": 64,
+      "attention_heads": 1,
+      "readout_hidden_size": 128,
+      "activation": "GELU",
+      "dropout": 0.1,
+      "branch_combination": ["full", "off", "full_minus_off"]
+    },
+    "delta_ablation_conditions": ["text_delta", "visual_delta", "text_visual_delta"],
+    "exclude": [
+      "dataset_id",
+      "source_id",
+      "dense_correctness",
+      "utility_labels",
+      "future_hidden_states",
+      "final_answer_logits",
+      "future_actions",
+      "route_identity"
+    ]
+  },
+  "split": {
+    "registry": "analysis/predictability_generalization/stepB_id_learnability/splits/group_fold_registry.jsonl",
+    "inner_roles_pattern": "analysis/predictability_generalization/stepB_id_learnability/splits/inner_roles_fold{fold}.jsonl",
+    "folds": 5,
+    "group_key": "image_group_id_then_uid",
+    "forbid_state_random_split": true
+  },
+  "targets": {
+    "read_column": "u_read_w1",
+    "read_formula": "q_full-q_write_only",
+    "write_column": "u_write_r1",
+    "write_formula": "q_full-q_read_only",
+    "target_scaling": "outer_fit_subset_median_and_1.4826_MAD",
+    "target_scale_floor": 0.0001,
+    "harmful_definition": "utility_strictly_less_than_zero",
+    "neutral_definition": "utility_exactly_equal_to_zero"
+  },
+  "training": {
+    "seeds": [2026090801, 2026090802, 2026090803],
+    "uid_equal_total_weight": true,
+    "optimizer": "AdamW",
+    "gradient_clip_norm": 1.0,
+    "regression_loss": "Huber_delta_1_in_fold_local_scaled_target_space",
+    "checkpoint_selection": "minimum_inner_calibration_loss_then_earliest_epoch",
+    "compute_dtype": "float32",
+    "linear": {
+      "learning_rate": 0.001,
+      "weight_decay": 0.01,
+      "batch_size": 512,
+      "minimum_epochs": 8,
+      "maximum_epochs": 40,
+      "early_stopping_patience": 6
+    },
+    "mlp": {
+      "hidden_size": 128,
+      "dropout": 0.1,
+      "learning_rate": 0.0005,
+      "weight_decay": 0.01,
+      "batch_size": 512,
+      "minimum_epochs": 5,
+      "maximum_epochs": 20,
+      "early_stopping_patience": 4
+    },
+    "token_comparator": {
+      "learning_rate": 0.0003,
+      "weight_decay": 0.01,
+      "state_microbatch": 8,
+      "minimum_epochs": 5,
+      "maximum_epochs": 20,
+      "early_stopping_patience": 4
+    }
+  },
+  "controls": {
+    "random_pair_match_tiers": [
+      "layer_dataset_source_outcome",
+      "layer_dataset_outcome",
+      "layer_dataset",
+      "layer",
+      "dataset_source_outcome_nearest_layer",
+      "dataset_outcome_nearest_layer",
+      "dataset_nearest_layer",
+      "global_nearest_layer"
+    ],
+    "random_pair_forbid_same_uid": true,
+    "random_pair_seed": 2026091091,
+    "random_pair_conditions": ["pair", "delta"],
+    "branch_order_condition": "pair",
+    "branch_order": "off_then_full",
+    "secondary_selection": "highest_three_seed_dense_oof_mlp_spearman_then_fixed_condition_order",
+    "secondary_condition_tiebreak": ["delta", "pair_plus_delta", "pair", "full_post", "off_post", "pre"],
+    "secondary_models": ["selected_mlp", "token_comparator"]
+  },
+  "decision": {
+    "weak_absolute_spearman_below": 0.1,
+    "strong_spearman_at_least": 0.2,
+    "material_gain_over_pre": 0.1,
+    "unique_pair_gain_over_best_single": 0.05,
+    "token_gain_over_best_pooled": 0.1,
+    "random_pair_collapse_gap": 0.05,
+    "case_priority": ["C", "A", "B", "D"],
+    "unmet_pattern_fallback": "D_with_mixed_or_inconclusive_qualification"
+  },
+  "evaluation": {
+    "primary_metric": "spearman",
+    "metrics": ["spearman", "pearson", "mae", "rmse"],
+    "harmful_coverages": [0.05, 0.1, 0.2],
+    "harmful_precision_targets": [0.9, 0.95],
+    "depth_bins": {"early": [0, 8], "middle": [9, 18], "late": [19, 27]},
+    "trigger_relative_bins": {"at_trigger": [0, 0], "after_1_2": [1, 2], "after_3_5": [3, 5], "after_6_plus": [6, 27]},
+    "minimum_breakdown_rows": 10,
+    "uid_macro_minimum_nonconstant_states": 3,
+    "bootstrap_draws": 5000,
+    "bootstrap_seed": 2026091099,
+    "bootstrap_unit": "image_group_id",
+    "confidence_level": 0.95
+  },
+  "execution_runtime": {
+    "torch_intraop_threads_per_worker": 16,
+    "torch_interop_threads_per_worker": 1,
+    "packed_batch_prefetch_depth": 1,
+    "pinned_host_batches": true
+  },
+  "smoke": {
+    "dense_states": 12,
+    "routed_states": 12,
+    "require_layer_27": true,
+    "repeat_all_branches": true,
+    "require_exact_tensor_parity": true,
+    "require_all_datasets_and_dense_outcomes": true
+  },
+  "sources": {
+    "plan": "plans/counterfactual_effect_identifiability_plan.md",
+    "stepA_contract": "analysis/predictability_generalization/stepA_measurement/frozen_contract.json",
+    "stepA_artifact_manifest": "analysis/predictability_generalization/stepA_measurement/artifact_manifest.json",
+    "stepB_contract": "analysis/predictability_generalization/stepB_id_learnability/frozen_contract.json",
+    "stepB_artifact_manifest": "analysis/predictability_generalization/stepB_id_learnability/artifact_manifest.json",
+    "internal_samples": "analysis/predictability_generalization/stepA_measurement/manifests/internal_sample_manifest.jsonl",
+    "dense_states": "analysis/predictability_generalization/stepA_measurement/stage2_dense/exact_state_manifest.jsonl",
+    "dense_features": "analysis/predictability_generalization/stepA_measurement/stage2_dense/state_feature_manifest.jsonl",
+    "dense_utilities": "analysis/predictability_generalization/stepA_measurement/stage2_dense/utility_labels.csv",
+    "dense_flips": "analysis/predictability_generalization/stepA_measurement/stage2_dense/correctness_flip_labels.csv",
+    "routed_states": "analysis/predictability_generalization/stepA_measurement/stage2_routed/exact_state_manifest.jsonl",
+    "routed_features": "analysis/predictability_generalization/stepA_measurement/stage2_routed/state_feature_manifest.jsonl",
+    "routed_utilities": "analysis/predictability_generalization/stepA_measurement/stage2_routed/utility_labels.csv",
+    "routed_flips": "analysis/predictability_generalization/stepA_measurement/stage2_routed/correctness_flip_labels.csv",
+    "routed_program_manifest": "analysis/dense_failure_stage2/closed_loop_trajectory_set/corpus/trajectory_set_manifest.jsonl",
+    "routed_uid_files": "analysis/dense_failure_stage2/closed_loop_trajectory_set/corpus/uid_state_files.jsonl",
+    "phase76_contract": "analysis/dense_failure_stage2/closed_loop_trajectory_set/frozen_protocol.json",
+    "phase76_artifact_manifest": "analysis/dense_failure_stage2/closed_loop_trajectory_set/artifact_manifest.json"
+  },
+  "backend_settings": {
+    "cublas_workspace_config": ":4096:8",
+    "deterministic_algorithms": true,
+    "deterministic_warn_only": false,
+    "flash_sdp_enabled": true,
+    "memory_efficient_sdp_enabled": true,
+    "math_sdp_enabled": true,
+    "cudnn_sdp_enabled": true,
+    "matmul_allow_tf32": false,
+    "matmul_allow_fp16_reduced_precision_reduction": true,
+    "matmul_allow_bf16_reduced_precision_reduction": true,
+    "cudnn_allow_tf32": false,
+    "cudnn_benchmark": false,
+    "cudnn_deterministic": false,
+    "float32_matmul_precision": "highest"
+  }
+}

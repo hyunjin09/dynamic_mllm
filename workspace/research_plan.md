@@ -1,5 +1,177 @@
 # Operational Research Plan: Binary Route Label Regeneration
 
+## Active Phase 88: Benchmark-calibrated fixed READ/WRITE schedules
+
+User authorized `plans/benchmark_calibrated_fixed_read_write_schedule_plan.md` on2026-09-14. Stage1 is disabled; no learning. Calibration-only independent bit selection, whole-group held-out evaluation, global and20random controls are required. Metadata split and reviewed contract frozen. Dense parity smoke passed; full dense baseline is running on four GPUs before sequential calibration and held-out stages. A missing-q edge case was repaired without excluding any UID. Current memory: `workspace/phase_memory/phase_88_benchmark_fixed_rw_schedule.md`. No top2 or old-search restart.
+
+
+## Completed Phase 87: WRITE harm structure and learnability
+
+Completed `plans/write_harm_structure_learnability_plan.md` on 2026-09-14 KST: 15,185 dense states / 1,413 UIDs, 360 local fits, 57,538 propagation records and 1,620 propagation fits. W-LOCAL-WEAK → qualified W-PROP-C / WRITE-S4. Full local F_ALL rho .04752 / AUROC .48188; exact 6,044-state H8-common delta rises from rho .04119 to .09732 (gain .05613 [.02670,.08523]), AUROC .53872, with no useful high-precision subset. Dense-W agrees. All reports and 12 figures complete; final integrity record: `analysis/write_harm_structure_learnability/final_verification.json`. No further experiment is authorized. One unexecuted recommendation: close tested local/H≤8 routing and reframe unresolved nonlocal intervention structure; no intrinsic-nonlocality or saturation claim. Source/LODO/routed/external work was gated off. Phase85 remains stopped. Memory: `workspace/phase_memory/phase_87_write_harm_structure_learnability.md`; entry report: `analysis/write_harm_structure_learnability/summaries/final_write_characterization.md`.
+
+## Completed Phase 86: Frozen Stage-1 READ branch critic
+
+User authorized `plans/read_counterfactual_stage1_branch_critic_diagnostic_plan.md` on 2026-09-13, explicitly replacing Phase85. Execute only the offline diagnostic, exact frozen Stage1 and full dense branch population, with missing one-layer feature reconstruction and hard parity. Stop after one BC category and one unexecuted recommendation. No search restart or closed-loop controller. Completed on all 15,185 states: BC-C, qualified; ON/OFF AUROC 0.6728/0.5949, balanced flip accuracy 47.77%, offline Net +24 (30 rescues, 6 regressions). Only the paired branch-risk calibration/ranking recommendation remains unexecuted; no next phase is authorized.
+
+## Stopped Phase 85: READ-only bounded planning/search
+
+User authorized `plans/read_only_bounded_planning_search_plan.md` on2026-09-12, explicitly using all four GPUs even occupied. Execute only that plan with unchanged P90 and WRITE ON; no learned controller or external deployment. Prospective operational rules and cache provenance are frozen in `analysis/read_only_bounded_planning/`; stop after characterization and one unexecuted next recommendation.
+
+## Completed Phase 84: READ short-horizon counterfactual propagation
+
+The user explicitly authorized
+`plans/read_short_horizon_counterfactual_propagation_plan.md`. Reuse the exact
+15,185-state READ target and Step-B image-group folds; execute paired FULL vs
+WRITE_ONLY intervention branches followed only by common FULL layers to frozen
+horizons H=1/2/4/8. Primary emergence uses H=8 common support with fixed
+capacity, plus native-support, text/visual, token, random-pair, permuted-target,
+Dense-W, flip, layer, trigger, and source controls. Independent review requires
+fresh-cache repeated and swapped-order H=8 hash parity and one identical frozen
+token comparator across all horizons. Contract `3a0d2251...affebb6a` passed all
+parity/census gates and all 2,115 OOF fits completed. On common H8 support,
+DELTA Spearman is `0.0756/0.0688/0.0646/0.1097` and harmful AUROC is
+`0.5316/0.5287/0.5314/0.5483` for H1/H2/H4/H8. H8 improves on H1 by only
+`+0.0340/+0.0167`, with group-bootstrap lower bounds below zero; token H8 is
+0.0854 Spearman and no useful high-precision subset exists. The fixed result is
+**H-READ-D**. Stop this action. The sole unexecuted recommendation is a
+separately authorized bounded longer-horizon READ planning/search study; do not
+start WRITE, a deployment router, search, or external evaluation.
+
+## Active external-evaluation scope (amended 2026-09-04)
+
+Unless the user explicitly narrows or replaces the scope for a later action,
+all future requests to run or plan external evaluation mean these four benchmark
+families:
+
+1. ChartQA
+2. TextVQA
+3. MMMU-Pro, reported separately for Standard and Vision
+4. POPE, reported separately for adversarial, popular, and random
+
+Do not silently add DocVQA, MMStar, or base MMMU. TextVQA was added by explicit
+user instruction on 2026-09-04 and supersedes the earlier three-family
+ChartQA/MMMU-Pro/POPE restriction. Adding TextVQA to the standing scope does not
+itself authorize an evaluation run. Before any such run, verify and freeze its
+task split, manifest, images, LMMS evaluator, and overlap/provenance checks; do
+not infer that TextVQA evaluation assets are present from the training-label
+assets.
+
+## Completed one-step counterfactual-effect identifiability audit (2026-09-10)
+
+Phase 82 froze contract `a70e921a...2705` and completed the full planned audit
+over 15,185 dense states and the secondary 35,565 exact routed states. Exact
+same-prestate branching, deterministic repeats, action isolation, and
+FULL-to-canonical post-state parity passed before complete extraction. Under
+the inherited five-fold image-group-disjoint OOF contract, best dense READ
+Spearman is 0.0773 from the pooled FULL-minus-WRITE_ONLY delta, versus 0.0626
+from PRE; the 95% image-group-bootstrap difference interval is
+`[-0.0089, 0.0381]`. Best dense WRITE Spearman is 0.0421 from the FULL/READ_ONLY
+pair, while PRE is 0.0354. Token-aware, single-post, random-pair, swapped-order,
+Dense-W, layer/depth, correctness-flip, routed-OOF, and Dense-to-routed transfer
+checks do not establish strong or unique one-step effect identifiability. The
+frozen result is **Case D** for READ, WRITE, and jointly. Do not build a
+one-layer speculative probe-and-route controller from this result. The sole
+unexecuted recommendation is a separately authorized two-layer / short-horizon
+counterfactual-identifiability audit. Evidence:
+`analysis/dense_failure_stage2/counterfactual_effect_identifiability/`; final
+manifest `3a0eb918...143e`.
+
+## Completed Predictability Step-D external transfer study (2026-09-09)
+
+Phase 81 froze contract `efa342f0...e571cf` and completed the prospectively
+specified zero-retuning transfer on all 19,960 established ChartQA, TextVQA,
+MMMU-Pro, and POPE rows. All Dense outputs and robust triggers exactly match
+the Phase-69 parity oracle. The fixed P90 gate triggers 901 UIDs and yields
+8,442 dense post-trigger states; POPE has zero triggers. Predictions were
+hash-frozen before all 33,768 four-action branches were measured. Stage-1 M3
+per-family AUROC is `0.4998/0.6794/0.5399/0.5582` (macro `0.5693`), and
+Stage-2 READ/WRITE macro Spearman is `0.0730/0.0232`. The frozen categories are
+**D1-C** and **D2-A**. This completes and stops the A-to-D predictability
+phase. The one unexecuted implication is to distinguish Stage-1 source
+calibration from representation failure before adding routing complexity, and
+to treat nonlocal/history/counterfactual information as the unresolved
+Stage-2 direction. No next experiment or redesign is authorized. Evidence:
+`analysis/predictability_generalization/stepD_external_transfer/`; artifact
+manifest `bf22455a...f0d9`.
+
+## Completed Predictability Step-C internal generalization study (2026-09-09)
+
+Phase 80 froze one label-blind cached Qwen3 question encoder and reused the
+exact Phase-78 targets plus Phase-79 M0/M1/M3 model and optimization contracts
+across 22 semantic-cluster, source, LODO, and pairwise holdouts. All 300 fits
+completed. Stage-1 is not materially dependent on nearest-question similarity:
+M3 Q1/Q5 AUROC is `0.7828/0.8012`, with Δ `+0.0183` and 95% image-group
+bootstrap CI `[-0.0050, 0.0423]`; concatenated K=100 cluster-OOD AUROC is
+`0.7725` versus ID `0.7869`. However pooled bidirectional source transfer is
+only `0.4342/0.5563`, LODO is `0.5508-0.6043`, and train-calibrated thresholds
+drift badly on held-out ChartQA/GQA. Stage-2 READ/WRITE remains near chance
+across all shift families. The frozen interpretation is **S1-C source-specific
+signal / S2-A weak everywhere**. Procedural `READY_FOR_STEP_D = true` does not
+authorize Step D, external evaluation, or a method/target redesign. Evidence:
+`analysis/predictability_generalization/stepC_generalization/`; contract
+`fafd6442...07ecd`; final manifest `ca340f26...da875`.
+
+## Completed Predictability Step-B in-domain learnability study (2026-09-09)
+
+Phase 79 completed the prospectively frozen five-fold image-group-disjoint
+capacity ladder over the exact Phase-78 corpus. Stage-1 eventual dense failure
+is materially learnable in-domain: nuisance/linear/MLP/current-head OOF AUROC
+is `0.6814/0.7665/0.7874/0.7869`, with current-head performance peaking at
+layer 20 (`0.8257`). In contrast, primary dense Stage-2 READ/WRITE utility is
+weak: joint-router Spearman is `0.0416/0.0347`, harmful AUROC is
+`0.5193/0.5115`, high-confidence harmful precision is near prevalence, and the
+expected z_R/z_W specialization is absent. Selected routed-state and
+bidirectional regime-transfer results remain weak and secondary. The frozen
+classification is Case D, Stage-1 strong / Stage-2 weak. Step C is
+procedurally ready but was not run; no OOD claim, external evaluation,
+deployment conclusion, or Stage-2 redesign is authorized. Evidence:
+`analysis/predictability_generalization/stepB_id_learnability/`; parent contract
+`792cc760...21bba4`; final manifest `6dc42193...a3b4c`.
+
+## Completed large-scale treatment-label completeness audit (2026-09-06)
+
+Phase 73 froze 1,200 exact Phase-72 states across 422 UIDs and searched every
+one of 3,194 unobserved first-action branches under direct, exhaustive
+one-later-intervention, and MCTS@200 suffix search. All four GPUs completed the
+audit with zero quarantines and exact replay validation. Expanded action sets
+invalidate 496/500 old KEEP and 271/500 old INTERVENE labels; the final bounded
+labels are 4 AUDITED_KEEP, 229 AUDITED_INTERVENE, and 967 AUDITED_MIXED. MCTS
+discovery satisfies the frozen saturation rule. The planned five-fold audited
+binary probe is not estimable because only four clean KEEP UID/image groups
+remain; no post-hoc fold or metric change was made. This establishes severe
+label/target incompleteness and prevents a representation-limited conclusion
+from the old binary target. The only proposed next direction is a separately
+authorized, prospectively specified set-valued Stage-2 target. Evidence:
+`analysis/dense_failure_stage2/treatment_label_completeness/`; contract
+`3c371c2f4f8372b36eb5965a97344adc6d4f1a76ae906009a93c72e63bff08cc`.
+
+## Completed exhaustive full-benchmark regression/rescue audit (2026-09-04)
+
+Phase 70 used only the complete Phase-69 paired traces to decompose the frozen
+pipeline. Pooled Stage-1 W admission is 496/4,380 and C false admission is
+405/15,580. Non-FULL activation is similar conditional on trigger—119/496 W
+and 92/405 C—but treatment rescues only 3/119 W while regressing 19/92 C.
+ChartQA and TextVQA are descriptively preservation-limited, MMMU-Pro is
+treatment-quality-limited with zero rescues from 82 treated W, and POPE is
+inactive because no Stage-1 score crosses P90. TextVQA contributes 12/19
+regressions and -10/-16 net. No inference, training, threshold change, or
+search ran. The single unexecuted recommendation is a development-calibrated
+Stage-2 abstention margin under a C-preservation constraint; the 22 external
+answer changes must not be used to select it. Evidence:
+`analysis/dense_failure_stage2/full_benchmark_exhaustive_audit/`.
+
+## Completed full-benchmark Stage-1→Stage-2 evaluation (2026-09-04)
+
+Phase 69 evaluated the frozen Robust ALL-source Shared Random-4 P90 gate plus
+Phase-66 Experiment A against reference-native dense inference on all 19,960
+UIDs in the four-family scope. Pooled W→C/C→W/net is `3/19/-16`; ChartQA,
+TextVQA, MMMU-Pro, and POPE nets are `-2/-10/-4/0`. The exact candidate is
+therefore regression-dominated at full scale. Stage 1 triggered 901 samples,
+211 received any non-FULL action, and POPE triggered zero times. No follow-on
+change is authorized. Evidence is under
+`analysis/dense_failure_stage2/full_benchmark_eval/`; contract
+`63379eeff80fd5b046cb980cdfccea7fab232e15eb5b14924a24b60393327e83`.
+
 ## Stopped W2C WHEN-label repair (2026-08-30)
 
 The user authorized `plans/w2c_when_label_repair_plan.md` as one bounded
@@ -605,3 +777,19 @@ only by the frozen internal rule, and evaluates each selected checkpoint on the
 unchanged no-DocVQA 22,307-record suite. No new MCTS, Pareto filtering, NLL,
 architecture change, threshold tuning, or automatic follow-on experiment is
 authorized.
+
+# Completed Phase 83: READ-Harm Structure and Learnability
+
+Phase 83 froze contract `eaaef860...e4d6`, passed exact state/branch and
+operation-level full-query causal-SDPA validation, and completed the bounded
+READ-harm audit on all 15,185 dense and 35,565 routed states. Harm is widespread
+but the fixed structure rule gives **R-STRUCT-B** (mostly isolated); only 1/34
+matched feature effects excludes zero and the matched probe is below chance,
+giving **R-MECH-B**. The prospectively selected F_ALL/MLP dense predictor has
+OOF Spearman `0.0697` and harmful AUROC `0.5338`; source/LODO transfer is weak
+and the material external-transfer gate fails, giving **R-LEARN-C**. The routed
+OOF result (`0.1623`) remains selection-qualified secondary evidence. All 75
+artifact hashes verify under manifest `35524bf3...05ab`. Stop this action. The
+sole unexecuted recommendation is a separately authorized short-horizon READ
+effect-propagation/planning audit; do not start WRITE, routing, search,
+deployment-policy training, or external counterfactual execution.

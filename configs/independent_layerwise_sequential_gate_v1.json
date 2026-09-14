@@ -1,0 +1,53 @@
+{
+  "schema_version": "independent_layerwise_sequential_gate_config_v1",
+  "run_id": "independent_layerwise_sequential_gate_v1",
+  "seed": 20260831,
+  "output_root": "analysis/dense_failure_stage1/independent_sequential_gate",
+  "sources": {
+    "plan": "plans/independent_layerwise_sequential_gate_plan.md",
+    "phase48_static_config": "configs/layerwise_dense_failure_probe_v1.json",
+    "phase48_contract": "analysis/dense_failure_stage1/layerwise_failure_probe/probe_config.json",
+    "phase48_split": "analysis/dense_failure_stage1/layerwise_failure_probe/split_manifest.jsonl",
+    "phase48_feature_manifest": "analysis/dense_failure_stage1/layerwise_failure_probe/feature_shard_manifest.json"
+  },
+  "population": {
+    "validation_records": 800,
+    "test_records": 800,
+    "validation_correct": 400,
+    "validation_wrong": 400,
+    "test_correct": 400,
+    "test_wrong": 400
+  },
+  "gate": {
+    "layers": 28,
+    "score_semantics": "frozen_phase48_probability_of_current_dense_wrong",
+    "trigger_comparison": "strict_greater_than",
+    "first_trigger_policy": true,
+    "no_trigger_action": "continue_full",
+    "trigger_action": "admit_for_possible_intervention_only"
+  },
+  "calibration": {
+    "family": "shared_correct_tail_quantile",
+    "quantile_method": "higher",
+    "alpha_grid": "all_empirical_tail_breakpoints_from_0_through_0.10_plus_exact_0.10",
+    "maximum_alpha": 0.10,
+    "operating_point_selection": "largest_alpha_with_validation_sample_correct_preservation_at_least_target",
+    "preservation_targets": [0.99, 0.98, 0.95],
+    "test_recalibration": false,
+    "dataset_specific_thresholds": false
+  },
+  "single_layer_baselines": [14, 21, 27],
+  "trigger_regions": {
+    "early": [0, 8],
+    "middle": [9, 18],
+    "late": [19, 27]
+  },
+  "interpretation": {
+    "meaningful_wrong_recall_floor": 0.05,
+    "useful_remaining_depth_latest_median_trigger": 18,
+    "little_sequential_gain_ceiling": 0.02,
+    "dataset_metric_spread_warning": 0.10,
+    "purpose": "fixed descriptive decision rules, not threshold tuning"
+  },
+  "world_size": 4
+}

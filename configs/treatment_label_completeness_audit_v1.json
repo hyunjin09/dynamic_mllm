@@ -1,0 +1,87 @@
+{
+  "schema_version": "treatment_label_completeness_audit_config_v1",
+  "run_id": "treatment_label_completeness_audit_v1",
+  "seed": 20260905,
+  "world_size": 4,
+  "output_root": "analysis/dense_failure_stage2/treatment_label_completeness",
+  "model": {
+    "name": "Qwen/Qwen2.5-VL-7B-Instruct",
+    "revision": "cc594898137f460bfe9f0759e9844b3ce807cfb5",
+    "snapshot_path": "/mnt/hyemin/qwen_train_eval/eval/reference/shared_prefix_eval_20260812/model/Qwen2.5-VL-7B-Instruct_cc594898137f460bfe9f0759e9844b3ce807cfb5",
+    "dtype": "bfloat16",
+    "attention_implementation": "sdpa",
+    "decoder_layers": 28
+  },
+  "sources": {
+    "plan": "plans/large_scale_treatment_label_completeness_audit_plan.md",
+    "phase72_contract": "analysis/dense_failure_stage2/treatment_selectivity_separability/frozen_protocol.json",
+    "phase72_artifact_manifest": "analysis/dense_failure_stage2/treatment_selectivity_separability/artifact_manifest.json",
+    "exact_state_manifest": "analysis/dense_failure_stage2/treatment_selectivity_separability/dataset/exact_state_manifest.jsonl",
+    "phase72_feature_index": "analysis/dense_failure_stage2/treatment_selectivity_separability/features/feature_index.jsonl",
+    "phase72_feature_schema": "analysis/dense_failure_stage2/treatment_selectivity_separability/features/feature_schema.md",
+    "phase72_representation_manifest": "analysis/dense_failure_stage2/treatment_selectivity_separability/features/representation_manifest.json",
+    "phase68_exact_state_index": "analysis/dense_failure_stage2/observed_valid_set_loss/valid_sets/exact_state_index.jsonl",
+    "phase65_contract": "analysis/dense_failure_stage2/robust_gate_corrective_search/frozen_protocol.json",
+    "phase65_artifact_manifest": "analysis/dense_failure_stage2/robust_gate_corrective_search/artifact_manifest.json",
+    "global_route_store": "analysis/dense_failure_stage2/robust_gate_corrective_search/routes/global_route_store.jsonl",
+    "phase66_contract": "analysis/dense_failure_stage2/shared_union_training/frozen_protocol.json",
+    "phase66_artifact_manifest": "analysis/dense_failure_stage2/shared_union_training/artifact_manifest.json",
+    "experiment_a_checkpoint": "analysis/dense_failure_stage2/shared_union_training/experiment_A_single/training/final_checkpoint.pt",
+    "train_samples": "analysis/dense_failure_stage2/shared_union_training/work/train_samples.jsonl"
+  },
+  "sampling": {
+    "targets": {
+      "KEEP_REQUIRED": 500,
+      "INTERVENE_REQUIRED": 500,
+      "MIXED": 200
+    },
+    "uid_cap": 4,
+    "dimensions": [
+      "dataset",
+      "source_regime",
+      "layer_bin",
+      "route_source_signature"
+    ]
+  },
+  "search": {
+    "action_order": ["FULL", "READ_ONLY", "WRITE_ONLY", "IGNORE"],
+    "direct_suffix": "forced_first_action_then_all_FULL",
+    "single_later": "all_later_layers_x_three_nonFULL_then_all_FULL",
+    "mcts_maximum_iterations": 200,
+    "mcts_extra_iterations_after_first_success": 0,
+    "mcts_exploration_constant": 1.4142135623730951,
+    "mcts_rollout_cardinalities": [2, 3, 4],
+    "mcts_retained_successful_routes": 1,
+    "stop_branch_at_first_success": true,
+    "native_full_row_dispatch": true,
+    "require_exact_discovery_replay": true,
+    "require_existing_success_replay": true
+  },
+  "smoke": {
+    "states": 8,
+    "mcts_iterations_per_branch": 2,
+    "require_all_four_forced_actions": true,
+    "require_full_route_token_parity": true,
+    "require_exact_phase72_representation_parity": true
+  },
+  "decision_thresholds": {
+    "large_invalidation_point_estimate_min": 0.20,
+    "large_invalidation_uid_bootstrap_ci_lower_min": 0.10,
+    "mostly_stable_uid_bootstrap_ci_upper_max": 0.10,
+    "material_rw_auroc_gain_min": 0.05,
+    "material_rw_auroc_floor": 0.60,
+    "useful_precision_at_5pct_min": 0.80,
+    "mcts_saturation_min_discoveries": 10,
+    "mcts_saturation_max_iteration_151_200_fraction": 0.10,
+    "bootstrap_replicates": 2000
+  },
+  "probe": {
+    "folds": 5,
+    "linear_epochs": 300,
+    "linear_learning_rate": 0.03,
+    "linear_weight_decay": 0.0001,
+    "coverage_fractions": [0.05, 0.10, 0.20],
+    "precision_targets": [0.90, 0.95],
+    "phase72_rw_auroc": 0.5619808351782994
+  }
+}

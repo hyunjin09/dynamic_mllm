@@ -3,6 +3,7 @@
 .uv-cache/
 .uv-python/
 .pytest_cache/
+/tests/.phase*_tmp/
 .mypy_cache/
 .ruff_cache/
 **/__pycache__/

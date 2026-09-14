@@ -1,0 +1,84 @@
+{
+  "schema_version": "layerwise_dense_failure_probe_config_v1",
+  "run_id": "layerwise_dense_failure_probe_v1",
+  "seed": 20260830,
+  "sources": {
+    "dense_outputs": "analysis/dense_failure_stage1/current_dense_8k/dense_outputs.jsonl",
+    "feature_index": "analysis/dense_failure_stage1/current_dense_8k/features/feature_index.jsonl",
+    "feature_schema": "analysis/dense_failure_stage1/current_dense_8k/features/feature_schema.json",
+    "answer_emergence_correct": "analysis/dense_failure_stage1/answer_logit_emergence_v2/layerwise_correct_summary.csv",
+    "answer_emergence_wrong": "analysis/dense_failure_stage1/answer_logit_emergence_v2/layerwise_wrong_summary.csv",
+    "plan": "plans/layerwise_dense_failure_predictability_plan.md"
+  },
+  "output_root": "analysis/dense_failure_stage1/layerwise_failure_probe",
+  "population": {
+    "records": 7999,
+    "correct": 3999,
+    "wrong": 4000,
+    "datasets": {
+      "gqa": 4000,
+      "chartqa": 1999,
+      "textvqa": 2000
+    }
+  },
+  "split": {
+    "method": "deterministic_greedy_image_group_disjoint",
+    "targets": {
+      "train": 6399,
+      "val": 800,
+      "test": 800
+    },
+    "stratification_cells": [
+      "dataset",
+      "current_dense_wrong"
+    ]
+  },
+  "input": {
+    "features": [
+      "text_final",
+      "text_mean",
+      "visual_mean"
+    ],
+    "composition": "concatenate_in_declared_order",
+    "layers": 28,
+    "hidden_size_per_summary": 3584,
+    "input_size": 10752,
+    "normalization": "per_layer_per_dimension_train_mean_std",
+    "normalization_std_floor": 1e-06,
+    "prohibited_inputs": [
+      "dataset_id",
+      "ground_truth_answer",
+      "historical_bucket",
+      "W_to_C_membership",
+      "route_information"
+    ]
+  },
+  "training": {
+    "model": "single_linear_logit",
+    "loss": "binary_cross_entropy_with_logits",
+    "optimizer": "AdamW",
+    "learning_rate": 0.001,
+    "weight_decay": 0.01,
+    "batch_size": 256,
+    "maximum_epochs": 80,
+    "minimum_epochs": 20,
+    "early_stopping_patience": 12,
+    "checkpoint_selection": "minimum_validation_bce",
+    "initialization": "zeros",
+    "class_weighting": null,
+    "compute_dtype": "torch.float32",
+    "allow_tf32": false,
+    "deterministic_algorithms": true
+  },
+  "evaluation": {
+    "positive_class": "current_dense_wrong",
+    "default_probability_threshold": 0.5,
+    "preservation_targets": [
+      0.99,
+      0.98,
+      0.95
+    ],
+    "threshold_selection_split": "val",
+    "test_policy": "evaluate_once_after_validation_region_freeze"
+  }
+}

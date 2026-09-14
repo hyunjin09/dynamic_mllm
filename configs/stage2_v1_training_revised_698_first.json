@@ -1,0 +1,93 @@
+{
+  "schema_version": "stage2_v1_training_revised_config_v1",
+  "run_id": "stage2_v1_training_revised_698_first_v1",
+  "seed": 20260901,
+  "world_size": 4,
+  "model": {
+    "name": "Qwen/Qwen2.5-VL-7B-Instruct",
+    "revision": "cc594898137f460bfe9f0759e9844b3ce807cfb5",
+    "snapshot_path": "/mnt/hyemin/qwen_train_eval/eval/reference/shared_prefix_eval_20260812/model/Qwen2.5-VL-7B-Instruct_cc594898137f460bfe9f0759e9844b3ce807cfb5",
+    "dtype": "bfloat16",
+    "attention_implementation": "sdpa",
+    "decoder_layers": 28,
+    "hidden_size": 3584
+  },
+  "router": {
+    "router_size": 256,
+    "num_heads": 4,
+    "dropout": 0.1,
+    "compute_dtype": "float32",
+    "action_order": ["FULL", "READ_ONLY", "WRITE_ONLY", "IGNORE"],
+    "layer_embedding": false,
+    "stage1_latent_input": false
+  },
+  "sampling": {
+    "w_unit": "uniform_uid_once_per_epoch",
+    "route_within_uid": "uniform_successful_single_route",
+    "w_states": "mandatory_corrective_plus_pre_full_plus_post_full_plus_other_full",
+    "c_states": "uniform_up_to_four_post_trigger_full",
+    "c_to_w_draw_ratio": "1:2",
+    "w_draws_per_epoch": 698,
+    "c_draws_per_epoch": 350
+  },
+  "overfit": {
+    "w_uids": 48,
+    "c_uids": 24,
+    "fixed_one_route_per_w_uid": true,
+    "epochs": 40,
+    "learning_rate": 0.001,
+    "weight_decay": 0.01,
+    "gradient_clip_norm": 1.0,
+    "minimum_loss_reduction": 0.3,
+    "minimum_full_recall": 0.75,
+    "minimum_non_full_recall": 0.4,
+    "minimum_supported_action_recall": 0.2,
+    "minimum_predicted_non_full_fraction": 0.1
+  },
+  "training": {
+    "epochs": 12,
+    "global_sample_draws_per_epoch": 1048,
+    "global_optimizer_updates_per_epoch": 262,
+    "total_global_optimizer_updates": 3144,
+    "optimizer": "AdamW",
+    "learning_rate": 0.0003,
+    "weight_decay": 0.01,
+    "schedule": "constant",
+    "warmup_updates": 0,
+    "gradient_clip_norm": 1.0,
+    "loss": "plain_four_way_cross_entropy",
+    "checkpoint_selection": "final_global_update_only"
+  },
+  "backend_settings": {
+    "cublas_workspace_config": ":4096:8",
+    "deterministic_algorithms": true,
+    "deterministic_warn_only": false,
+    "flash_sdp_enabled": true,
+    "memory_efficient_sdp_enabled": true,
+    "math_sdp_enabled": true,
+    "cudnn_sdp_enabled": true,
+    "matmul_allow_tf32": false,
+    "matmul_allow_fp16_reduced_precision_reduction": true,
+    "matmul_allow_bf16_reduced_precision_reduction": true,
+    "cudnn_allow_tf32": false,
+    "cudnn_benchmark": false,
+    "cudnn_deterministic": false,
+    "float32_matmul_precision": "highest"
+  },
+  "sources": {
+    "plan": "plans/stage2_v1_training_plan_revised_698_first.md",
+    "phase56_contract": "analysis/dense_failure_stage2/full_corrective_labels/frozen_protocol.json",
+    "phase56_artifact_manifest": "analysis/dense_failure_stage2/full_corrective_labels/artifact_manifest.json",
+    "corpus_manifest": "analysis/dense_failure_stage2/full_corrective_labels/stage2_corpora/corpus_manifest.json",
+    "corpus_a": "analysis/dense_failure_stage2/full_corrective_labels/stage2_corpora/corpus_A_preservation.jsonl",
+    "corpus_b": "analysis/dense_failure_stage2/full_corrective_labels/stage2_corpora/corpus_B_single_corrective.jsonl",
+    "full_triggered_wrong_manifest": "analysis/dense_failure_stage2/full_corrective_labels/manifests/full_triggered_wrong_manifest.jsonl",
+    "train_work_manifest": "analysis/dense_failure_stage2/full_corrective_labels/work/manifests/full_work_manifest.jsonl",
+    "candidate_manifest": "analysis/dense_failure_stage1/current_dense_8k/candidate_manifest.jsonl",
+    "dense_outputs": "analysis/dense_failure_stage1/current_dense_8k/dense_outputs.jsonl",
+    "trigger_map_val": "analysis/dense_failure_stage1/trigger_map/manifests/trigger_map_val.jsonl",
+    "val_execution_manifest": "analysis/dense_failure_stage1/treatment_correctability/treatment_search/val_execution_manifest.jsonl",
+    "lmms_scoring": "dense_failure_stage1/lmms_scoring.py"
+  },
+  "output_root": "analysis/dense_failure_stage2/v1_training_revised"
+}

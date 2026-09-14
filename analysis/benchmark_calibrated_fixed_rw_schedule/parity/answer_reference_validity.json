@@ -1,0 +1,35 @@
+{
+  "invalid_q_rows": [
+    {
+      "uid": "cal_textvqa:8997",
+      "benchmark": "textvqa",
+      "split": "CAL",
+      "reason": "TextVQA q references are empty"
+    },
+    {
+      "uid": "textvqa:textvqa_val_000000034820",
+      "benchmark": "textvqa",
+      "split": "TEST",
+      "reason": "TextVQA q references are empty"
+    },
+    {
+      "uid": "textvqa:textvqa_val_000000035165",
+      "benchmark": "textvqa",
+      "split": "TEST",
+      "reason": "TextVQA q references are empty"
+    },
+    {
+      "uid": "textvqa:textvqa_val_000000036153",
+      "benchmark": "textvqa",
+      "split": "TEST",
+      "reason": "TextVQA q references are empty"
+    },
+    {
+      "uid": "textvqa:textvqa_val_000000039028",
+      "benchmark": "textvqa",
+      "split": "TEST",
+      "reason": "TextVQA q references are empty"
+    }
+  ],
+  "correctness_evaluation_retained": true
+}

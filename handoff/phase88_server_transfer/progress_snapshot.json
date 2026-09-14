@@ -1,0 +1,44 @@
+{
+  "stage": "random",
+  "supervisor_pid": 2361209,
+  "checked_unix": 1789382572.6716125,
+  "error": null,
+  "total_uids": 19452,
+  "completed_uids": 15703,
+  "ranks": [
+    {
+      "rank": 0,
+      "completed": 4203,
+      "total": 4863,
+      "uids_per_second": 0.26104290007877334,
+      "eta_seconds": 2528.3200569746805,
+      "last_progress_age_seconds": 0.017454147338867188
+    },
+    {
+      "rank": 1,
+      "completed": 4255,
+      "total": 4863,
+      "uids_per_second": 0.2643664356061536,
+      "eta_seconds": 2299.8380963375507,
+      "last_progress_age_seconds": 2.2854981422424316
+    },
+    {
+      "rank": 2,
+      "completed": 3002,
+      "total": 4863,
+      "uids_per_second": 0.1864821533439018,
+      "eta_seconds": 9979.507243076658,
+      "last_progress_age_seconds": 2.2932052612304688
+    },
+    {
+      "rank": 3,
+      "completed": 4243,
+      "total": 4863,
+      "uids_per_second": 0.26354526850442733,
+      "eta_seconds": 2352.537017713845,
+      "last_progress_age_seconds": 0.017122268676757812
+    }
+  ],
+  "current_stage_eta_seconds": 9979.507243076658,
+  "eta_scope": "Current stage only; estimate from completed execution timings, not scientific extrapolation"
+}

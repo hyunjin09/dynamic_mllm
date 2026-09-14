@@ -1,0 +1,70 @@
+{
+  "contract_sha256": "7c97a4b8246a823bfc226747393b72e0c11bd41edf205d3f597737437354feef",
+  "passed": true,
+  "rows": [
+    {
+      "benchmark": "chartqa",
+      "dense_only_test_sentinel": false,
+      "native_full_token_parity": true,
+      "native_repeat": true,
+      "native_score_correctness_parity": true,
+      "uid": "cal_chartqa:augmented:5184:two_col_5199.png"
+    },
+    {
+      "benchmark": "mmmu_pro_standard_test",
+      "dense_only_test_sentinel": false,
+      "native_full_token_parity": true,
+      "native_repeat": true,
+      "native_score_correctness_parity": true,
+      "uid": "mmmu_pro_standard_test:mmmu_pro_standard_test_validation_Economics_17"
+    },
+    {
+      "benchmark": "mmmu_pro_vision_test",
+      "dense_only_test_sentinel": false,
+      "native_full_token_parity": true,
+      "native_repeat": true,
+      "native_score_correctness_parity": true,
+      "uid": "mmmu_pro_vision_test:mmmu_pro_vision_test_validation_Physics_19"
+    },
+    {
+      "benchmark": "pope_adversarial",
+      "dense_only_test_sentinel": false,
+      "native_full_token_parity": true,
+      "native_repeat": true,
+      "native_score_correctness_parity": true,
+      "uid": "pope_adversarial:pope_adversarial_001383"
+    },
+    {
+      "benchmark": "pope_popular",
+      "dense_only_test_sentinel": false,
+      "native_full_token_parity": true,
+      "native_repeat": true,
+      "native_score_correctness_parity": true,
+      "uid": "pope_popular:pope_popular_004513"
+    },
+    {
+      "benchmark": "pope_random",
+      "dense_only_test_sentinel": false,
+      "native_full_token_parity": true,
+      "native_repeat": true,
+      "native_score_correctness_parity": true,
+      "uid": "pope_random:pope_random_006050"
+    },
+    {
+      "benchmark": "textvqa",
+      "dense_only_test_sentinel": false,
+      "native_full_token_parity": true,
+      "native_repeat": true,
+      "native_score_correctness_parity": true,
+      "uid": "cal_textvqa:19935"
+    },
+    {
+      "benchmark": "mmmu_pro_standard_test",
+      "dense_only_test_sentinel": true,
+      "native_full_token_parity": false,
+      "native_repeat": true,
+      "native_score_correctness_parity": true,
+      "uid": "mmmu_pro_standard_test:mmmu_pro_standard_test_test_Music_53"
+    }
+  ]
+}

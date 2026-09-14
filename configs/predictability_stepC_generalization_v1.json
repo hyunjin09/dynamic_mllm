@@ -1,0 +1,69 @@
+{
+  "schema_version": "predictability_stepC_generalization_config_v1",
+  "run_id": "predictability_stepC_generalization_v1",
+  "seed": 20260909,
+  "world_size": 4,
+  "output_root": "analysis/predictability_generalization/stepC_generalization",
+  "external_output_root": "/mnt/hyemin/qwen_train_eval/outputs/predictability_stepC_generalization_v1",
+  "parent": {
+    "stepA_contract": "analysis/predictability_generalization/stepA_measurement/frozen_contract.json",
+    "stepA_artifact_manifest": "analysis/predictability_generalization/stepA_measurement/artifact_manifest.json",
+    "stepB_root": "analysis/predictability_generalization/stepB_id_learnability",
+    "stepB_contract": "analysis/predictability_generalization/stepB_id_learnability/frozen_contract.json",
+    "stepB_artifact_manifest": "analysis/predictability_generalization/stepB_id_learnability/artifact_manifest.json"
+  },
+  "encoder": {
+    "model_name": "Qwen/Qwen3-Embedding-0.6B",
+    "snapshot": "datasets/eval/models--Qwen--Qwen3-Embedding-0.6B/snapshots/c54f2e6e80b2d7b7de06f51cec4959f6b3e03418",
+    "shared_instruction": "Given a visual-question-answering question, retrieve semantically similar questions.",
+    "input_template": "Instruct: {instruction}\nQuery: {question}",
+    "question_normalization": "Unicode_NFKC_then_collapse_whitespace",
+    "pooling": "last_non_padding_token",
+    "padding_side": "left",
+    "max_length": 512,
+    "truncation": true,
+    "dtype": "bfloat16",
+    "attention_implementation": "sdpa",
+    "output_dtype": "float32",
+    "normalization": "L2",
+    "batch_size_per_gpu": 64
+  },
+  "semantic": {
+    "similarity_bins": 5,
+    "knn_k": 5,
+    "cluster_count": 100,
+    "cluster_folds": 5,
+    "cluster_maximum_iterations": 100,
+    "inner_calibration_fraction": 0.1,
+    "support": {
+      "minimum_fit_uids": 20,
+      "minimum_calibration_uids": 5,
+      "minimum_test_uids": 20,
+      "require_nonconstant_target": true
+    }
+  },
+  "execution_runtime": {
+    "torch_intraop_threads_per_worker": 16,
+    "torch_interop_threads_per_worker": 1,
+    "packed_batch_prefetch_depth": 1,
+    "pinned_host_batches": true
+  },
+  "evaluation": {
+    "bootstrap_draws": 5000,
+    "bootstrap_seed": 2026090999,
+    "bootstrap_unit": "image_group_id",
+    "confidence_level": 0.95,
+    "stage1_preservation_targets": [0.9, 0.95, 0.98, 0.99],
+    "harmful_coverages": [0.05, 0.1, 0.2],
+    "depth_bins": {"early": [0, 8], "middle": [9, 18], "late": [19, 27]},
+    "trigger_relative_bins": {"at_trigger": [0, 0], "after_1_2": [1, 2], "after_3_5": [3, 5], "after_6_plus": [6, 27]},
+    "minimum_breakdown_rows": 10,
+    "uid_macro_minimum_nonconstant_states": 3
+  },
+  "smoke": {
+    "embedding_uids": 32,
+    "require_exact_repeat_embeddings": true,
+    "require_unit_norm": true,
+    "training_epochs": 1
+  }
+}

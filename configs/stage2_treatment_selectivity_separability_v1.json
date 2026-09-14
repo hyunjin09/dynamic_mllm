@@ -1,0 +1,43 @@
+{
+  "schema_version": "stage2_treatment_selectivity_separability_config_v1",
+  "run_id": "stage2_treatment_selectivity_separability_v1",
+  "seed": 20260905,
+  "world_size": 4,
+  "folds": 5,
+  "probe": {
+    "linear_epochs": 300,
+    "linear_learning_rate": 0.03,
+    "linear_weight_decay": 0.0001,
+    "mlp_epochs": 300,
+    "mlp_learning_rate": 0.003,
+    "mlp_weight_decay": 0.0001,
+    "mlp_hidden_size": 64,
+    "weak_nonrandom_auroc_min": 0.55,
+    "strong_auroc_min": 0.70,
+    "clear_gain_min": 0.05,
+    "high_precision_at_5pct_min": 0.80,
+    "nuisance_high_auroc_min": 0.65,
+    "matched_collapse_drop_min": 0.10,
+    "matched_weak_auroc_max": 0.60
+  },
+  "support": {
+    "minimum_class_rows_for_breakdown": 10,
+    "coverage_fractions": [0.05, 0.10, 0.20],
+    "precision_targets": [0.90, 0.95]
+  },
+  "sources": {
+    "plan": "plans/stage2_treatment_selectivity_separability_plan.md",
+    "phase66_contract": "analysis/dense_failure_stage2/shared_union_training/frozen_protocol.json",
+    "phase66_artifact_manifest": "analysis/dense_failure_stage2/shared_union_training/artifact_manifest.json",
+    "phase68_contract": "analysis/dense_failure_stage2/observed_valid_set_loss/frozen_protocol.json",
+    "phase68_artifact_manifest": "analysis/dense_failure_stage2/observed_valid_set_loss/artifact_manifest.json",
+    "exact_state_index": "analysis/dense_failure_stage2/observed_valid_set_loss/valid_sets/exact_state_index.jsonl",
+    "union_preservation": "analysis/dense_failure_stage2/shared_union_training/corpus/union_preservation_manifest.jsonl",
+    "union_single": "analysis/dense_failure_stage2/shared_union_training/corpus/union_single_manifest.jsonl",
+    "union_mcts": "analysis/dense_failure_stage2/shared_union_training/corpus/union_mcts_manifest.jsonl",
+    "train_samples": "analysis/dense_failure_stage2/shared_union_training/work/train_samples.jsonl",
+    "experiment_a_checkpoint": "analysis/dense_failure_stage2/shared_union_training/experiment_A_single/training/final_checkpoint.pt",
+    "experiment_a_checkpoint_selection": "analysis/dense_failure_stage2/shared_union_training/experiment_A_single/training/selected_checkpoint.json"
+  },
+  "output_root": "analysis/dense_failure_stage2/treatment_selectivity_separability"
+}

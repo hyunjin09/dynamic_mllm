@@ -1,0 +1,25 @@
+{
+  "user_requested_pause": true,
+  "leave_existing_pipeline_running": true,
+  "resume_only_after_user_message": true,
+  "observed_status": {
+    "stage": "methods",
+    "supervisor_pid": 2361209,
+    "updated_unix": 1789359854.05649,
+    "worker_pids": [
+      2361383,
+      2361384,
+      2361385,
+      2361386
+    ]
+  },
+  "recorded_unix": 1789362955.2881348,
+  "remaining_main_agent_work": [
+    "Inspect completion/failure status without launching duplicates",
+    "Finish held-out analysis if needed",
+    "Generate reports and figures",
+    "Review efficacy separately from calibration-determined qualified CAL-D",
+    "Verify artifacts and update compact research state",
+    "Exactly one unexecuted recommendation; no follow-up experiment"
+  ]
+}

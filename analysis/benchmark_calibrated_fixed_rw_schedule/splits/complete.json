@@ -1,0 +1,47 @@
+{
+  "passed": true,
+  "split_sha256": "21dc39f7ca4ac02a47fafda2dd583ed6fb37515a059f8eb74b5547fe42caa512",
+  "states": 20471,
+  "support": [
+    {
+      "benchmark": "chartqa",
+      "calibration_groups": 118,
+      "calibration_source": "available official train image/shard frame",
+      "calibration_uids": 256,
+      "oversized_groups_excluded_from_cal": 0,
+      "test_groups": 1509,
+      "test_uids": 2500,
+      "train_overlap_exclusions": 5
+    },
+    {
+      "benchmark": "textvqa",
+      "calibration_groups": 160,
+      "calibration_source": "available official train image/shard frame",
+      "calibration_uids": 255,
+      "oversized_groups_excluded_from_cal": 0,
+      "test_groups": 3166,
+      "test_uids": 5000,
+      "train_overlap_exclusions": 0
+    },
+    {
+      "benchmark": "mmmupro",
+      "calibration_groups": 127,
+      "calibration_source": "deterministic whole-group partition of existing labeled evaluation",
+      "calibration_uids": 256,
+      "oversized_groups_excluded_from_cal": 0,
+      "test_groups": 1479,
+      "test_uids": 3204,
+      "train_overlap_exclusions": 0
+    },
+    {
+      "benchmark": "pope",
+      "calibration_groups": 14,
+      "calibration_source": "deterministic whole-group partition of existing labeled evaluation",
+      "calibration_uids": 252,
+      "oversized_groups_excluded_from_cal": 0,
+      "test_groups": 486,
+      "test_uids": 8748,
+      "train_overlap_exclusions": 0
+    }
+  ]
+}

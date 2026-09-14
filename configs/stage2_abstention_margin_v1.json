@@ -1,0 +1,63 @@
+{
+  "schema_version": "stage2_abstention_margin_config_v1",
+  "run_id": "stage2_abstention_margin_v1",
+  "seed": 20260905,
+  "world_size": 4,
+  "stage1_operating_point": {
+    "name": "P90",
+    "threshold": 0.9061332901863008,
+    "comparison": "strict_greater_than"
+  },
+  "stage2": {
+    "experiment": "A",
+    "action_order": ["FULL", "READ_ONLY", "WRITE_ONLY", "IGNORE"],
+    "selection_rule": "best_nonfull_logit_minus_full_logit_strictly_greater_than_delta",
+    "checkpoint_sha256": "48536bfbf6ebf62071898aea91952b6fe6a3f13b5723b09f6d814eb0ad9bbc7f",
+    "parent_contract_sha256": "b17a81d4749b842fd843a344d3799bffdfc0f41e2c516a835242b656324440f8"
+  },
+  "grid": {
+    "source": "experiment_A_final_training_epoch_sampler_weighted_routed_states",
+    "epoch_zero_based": 11,
+    "expected_draws": 1048,
+    "quantiles": [0.10, 0.25, 0.40, 0.50, 0.60, 0.70, 0.80, 0.90, 0.95],
+    "include_zero": true,
+    "include_positive_infinity": true,
+    "deduplicate": true
+  },
+  "development": {
+    "population": "historical_frozen_validation_800",
+    "expected_samples": 800,
+    "expected_dense_correct": 400,
+    "expected_dense_wrong": 400,
+    "expected_p90_triggered": 121,
+    "folds": 5,
+    "group_key": "image_group_id",
+    "minimum_c_to_c_preservation": 0.995,
+    "positive_margin_must_strictly_improve_net_over_zero": true,
+    "tie_break": ["max_net", "fewer_c_to_w", "more_w_to_c", "fewer_interventions", "larger_delta"]
+  },
+  "external": {
+    "run_only_if_selected_delta_positive": true,
+    "parent_contract_sha256": "63379eeff80fd5b046cb980cdfccea7fab232e15eb5b14924a24b60393327e83",
+    "expected_samples": 19960,
+    "reuse_phase69_dense_and_no_trigger_rows": true,
+    "rerun_only_frozen_stage1_triggered_rows": true,
+    "no_retuning": true
+  },
+  "sources": {
+    "plan": "plans/stage2_abstention_margin_calibration_plan.md",
+    "phase66_config": "configs/stage2_shared_union_threshold_comparison_v1.json",
+    "phase66_contract": "analysis/dense_failure_stage2/shared_union_training/frozen_protocol.json",
+    "phase66_checkpoint": "analysis/dense_failure_stage2/shared_union_training/experiment_A_single/training/final_checkpoint.pt",
+    "phase66_selected_checkpoint": "analysis/dense_failure_stage2/shared_union_training/experiment_A_single/training/selected_checkpoint.json",
+    "phase66_schedule": "analysis/dense_failure_stage2/shared_union_training/experiment_A_single/work/full_schedule.jsonl",
+    "phase66_train_samples": "analysis/dense_failure_stage2/shared_union_training/work/train_samples.jsonl",
+    "phase66_validation_manifest": "analysis/dense_failure_stage2/shared_union_training/work/validation_manifest.jsonl",
+    "phase66_delta0_results": "analysis/dense_failure_stage2/shared_union_training/experiment_A_single/rollout/P90/per_sample_results.jsonl",
+    "phase69_config": "configs/full_benchmark_end_to_end_eval_v1.json",
+    "phase69_contract": "analysis/dense_failure_stage2/full_benchmark_eval/frozen_protocol.json",
+    "phase69_prepared_manifest": "analysis/dense_failure_stage2/full_benchmark_eval/manifests/all_full_manifest.jsonl",
+    "phase69_paired_results": "analysis/dense_failure_stage2/full_benchmark_eval/paired/all_paired.jsonl"
+  },
+  "output_root": "analysis/dense_failure_stage2/abstention_margin"
+}

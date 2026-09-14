@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "python": "3.12.7 (main, Oct 16 2024, 04:37:19) [Clang 18.1.8 ]",
+  "scipy": "1.18.1",
+  "numpy": "2.5.1",
+  "installed_packages": [
+    "scipy==1.18.1"
+  ],
+  "unchanged_numpy": true,
+  "command": "UV_CACHE_DIR=/mnt/hyemin/qwen_train_eval/uv_cache uv pip install --python .venv/bin/python scipy",
+  "reason": "Missing declared scipy.stats.spearmanr dependency at schedule-selection import; no measurement or selector-code change",
+  "recorded_unix": 1789359802.9231093
+}

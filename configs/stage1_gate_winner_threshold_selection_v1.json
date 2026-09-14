@@ -1,0 +1,72 @@
+{
+  "schema_version": "stage1_gate_winner_threshold_selection_config_v1",
+  "run_id": "stage1_gate_winner_threshold_selection_v1",
+  "seed": 20260831,
+  "sources": {
+    "plan": "plans/stage1_gate_winner_threshold_selection_plan.md",
+    "phase50_manifest": "analysis/dense_failure_stage1/independent_sequential_gate/artifact_manifest.json",
+    "phase50_validation_scores": "analysis/dense_failure_stage1/independent_sequential_gate/validation_scores.jsonl",
+    "phase50_test_scores": "analysis/dense_failure_stage1/independent_sequential_gate/test_scores.jsonl",
+    "phase51_manifest": "analysis/dense_failure_stage1/shared_global_gate/artifact_manifest.json",
+    "phase51_all28_validation_scores": "analysis/dense_failure_stage1/shared_global_gate/evaluation/validation_scores/state_layer_all28.jsonl",
+    "phase51_all28_training_complete": "analysis/dense_failure_stage1/shared_global_gate/training/histories/state_layer_all28.complete.json",
+    "phase51_random4_validation_scores": "analysis/dense_failure_stage1/shared_global_gate/evaluation/validation_scores/state_layer_random4.jsonl",
+    "phase51_random4_training_complete": "analysis/dense_failure_stage1/shared_global_gate/training/histories/state_layer_random4.complete.json",
+    "phase51_test_scores": "analysis/dense_failure_stage1/shared_global_gate/evaluation/test_scores.jsonl"
+  },
+  "output_root": "analysis/dense_failure_stage1/gate_winner_selection",
+  "population": {
+    "validation": 800,
+    "validation_correct": 400,
+    "validation_wrong": 400,
+    "test": 800,
+    "test_correct": 400,
+    "test_wrong": 400
+  },
+  "candidates": [
+    {
+      "name": "independent_sequential",
+      "display_name": "Independent Sequential",
+      "control": "shared_alpha_to_28_higher_quantile_validation_correct_thresholds",
+      "simplicity_rank": 2
+    },
+    {
+      "name": "shared_all28",
+      "display_name": "Shared All-28 Sequential",
+      "control": "one_global_raw_score_threshold_over_layers_0_27",
+      "simplicity_rank": 1
+    },
+    {
+      "name": "shared_random4",
+      "display_name": "Shared Random-4 Sequential",
+      "control": "one_global_raw_score_threshold_over_layers_0_27",
+      "simplicity_rank": 1
+    },
+    {
+      "name": "shared_fixed_l27",
+      "display_name": "Shared Fixed-L27",
+      "control": "one_raw_score_threshold_at_layer_27_of_shared_random4",
+      "simplicity_rank": 0
+    }
+  ],
+  "selection": {
+    "primary": "maximum_validation_utility_rate",
+    "minimum_failure_precision": 0.9,
+    "tie_breakers": [
+      "higher_correct_preservation",
+      "higher_wrong_detection_recall",
+      "earlier_median_trigger",
+      "lower_simplicity_rank",
+      "frozen_candidate_order"
+    ],
+    "reference_preservation_targets": [0.99, 0.98, 0.95, 0.9]
+  },
+  "bootstrap": {
+    "replicates": 10000,
+    "seed": 20260831,
+    "confidence": 0.95,
+    "alternative": "validation_runner_up"
+  },
+  "test_policy": "freeze_selected_winner_before_verifying_or_reading_phase52_test_score_files",
+  "scope_note": "test trajectories preexist from phases 50 and 51; test is selection-held-out within phase 52, not historically unopened"
+}

@@ -1,0 +1,3 @@
+# Native token equivalence repair
+
+Focused observation: nativeB. versus unifiedB; same score1/correct in two repeats on Music53. Diagnosis supported: native-versus-cached token path difference, not benchmark correctness change. Exact cause of small numerical/logit difference remains unknown. Independent read-only review: STABLE, high confidence, accept dual-output perUID record > rerun unchanged rows > abandon. Keep scorer equality hard, native authority, and fixed unified q. Parent contract 4bd73b5177f96f38af6e7507f5dea1dd6c456aba048ab82187503fbc7cdacf8d and 5687 exact-parity Dense rows retained by immutable hash manifest. No READ/WRITE calibration or TEST intervention executed. Full protocol has the bounded repair rule.

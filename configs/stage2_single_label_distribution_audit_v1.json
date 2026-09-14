@@ -1,0 +1,22 @@
+{
+  "schema_version": "stage2_single_label_distribution_audit_config_v1",
+  "source_root": "analysis/dense_failure_stage2/full_corrective_labels",
+  "source_artifact_manifest": "analysis/dense_failure_stage2/full_corrective_labels/artifact_manifest.json",
+  "source_corpus_manifest": "analysis/dense_failure_stage2/full_corrective_labels/stage2_corpora/corpus_manifest.json",
+  "corpus_a_routes": "analysis/dense_failure_stage2/full_corrective_labels/stage2_corpora/corpus_A_preservation.jsonl",
+  "corpus_b_routes": "analysis/dense_failure_stage2/full_corrective_labels/stage2_corpora/corpus_B_single_corrective.jsonl",
+  "state_index": "analysis/dense_failure_stage2/full_corrective_labels/states/state_index.jsonl",
+  "feature_schema": "analysis/dense_failure_stage2/full_corrective_labels/states/feature_schema.json",
+  "expected": {
+    "contract_sha256": "6489a0b39af3efb22bcb527d3b43c474dc7bcb01cc453445aab45f420eb9905b",
+    "corpus_a_samples": 39,
+    "corpus_a_routes": 39,
+    "corpus_a_states": 400,
+    "corpus_b_samples": 698,
+    "corpus_b_routes": 7628,
+    "corpus_b_states": 199193
+  },
+  "exact_feature_hash_audit": true,
+  "output_root": "analysis/dense_failure_stage2/single_label_audit",
+  "plan": "plans/stage2_single_label_distribution_audit_plan.md"
+}

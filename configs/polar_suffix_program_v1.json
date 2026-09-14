@@ -1,0 +1,109 @@
+{
+  "schema_version": "polar_suffix_program_config_v1",
+  "run_id": "polar_suffix_program_v1",
+  "seed": 20260906,
+  "world_size": 4,
+  "output_root": "analysis/dense_failure_stage2/polar_suffix_program",
+  "model": {
+    "name": "Qwen/Qwen2.5-VL-7B-Instruct",
+    "revision": "cc594898137f460bfe9f0759e9844b3ce807cfb5",
+    "snapshot_path": "/mnt/hyemin/qwen_train_eval/eval/reference/shared_prefix_eval_20260812/model/Qwen2.5-VL-7B-Instruct_cc594898137f460bfe9f0759e9844b3ce807cfb5",
+    "dtype": "bfloat16",
+    "attention_implementation": "sdpa",
+    "decoder_layers": 28,
+    "hidden_size": 3584,
+    "processor_use_fast": false,
+    "local_files_only": true
+  },
+  "stage1": {
+    "candidate": "Robust ALL-source Shared Random-4 five-checkpoint probability mean",
+    "head_manifest": "analysis/dense_failure_stage1/all_source_threshold_calibration/inputs/head_manifest.json",
+    "normalization": "analysis/dense_failure_stage1/shared_global_gate/training/global_normalization.pt",
+    "threshold": 0.9061332901863008,
+    "comparison": "strict_greater_than",
+    "feature_components": ["text_final", "text_mean", "visual_mean"]
+  },
+  "stage2a_initialization": {
+    "checkpoint": "analysis/dense_failure_stage2/shared_union_training/experiment_A_single/training/final_checkpoint.pt",
+    "checkpoint_sha256": "48536bfbf6ebf62071898aea91952b6fe6a3f13b5723b09f6d814eb0ad9bbc7f",
+    "parent_contract_sha256": "b17a81d4749b842fd843a344d3799bffdfc0f41e2c516a835242b656324440f8"
+  },
+  "program_model": {
+    "router_size": 256,
+    "num_heads": 4,
+    "decoder_blocks": 2,
+    "feedforward_size": 1024,
+    "dropout": 0.1,
+    "actions": ["FULL", "READ_ONLY", "WRITE_ONLY", "IGNORE"],
+    "beam_width": 8,
+    "beam_score": "sum_action_log_probabilities"
+  },
+  "corpus": {
+    "operating_point": "P90",
+    "preservation": "analysis/dense_failure_stage2/robust_gate_corrective_search/threshold_corpora/P90/preservation.jsonl",
+    "single": "analysis/dense_failure_stage2/robust_gate_corrective_search/threshold_corpora/P90/single.jsonl",
+    "mcts": "analysis/dense_failure_stage2/robust_gate_corrective_search/threshold_corpora/P90/mcts.jsonl",
+    "route_store": "analysis/dense_failure_stage2/robust_gate_corrective_search/routes/global_route_store.jsonl",
+    "work_manifest": "analysis/dense_failure_stage2/robust_gate_corrective_search/work/manifests/full_work_manifest.jsonl",
+    "phase65_contract": "analysis/dense_failure_stage2/robust_gate_corrective_search/frozen_protocol.json",
+    "completeness_state_manifest": "analysis/dense_failure_stage2/treatment_label_completeness/sampling/frozen_1200_state_manifest.jsonl",
+    "completeness_replay": "analysis/dense_failure_stage2/treatment_label_completeness/search/replay_validation.jsonl",
+    "phase73_contract": "analysis/dense_failure_stage2/treatment_label_completeness/frozen_protocol.json"
+  },
+  "training": {
+    "dev_fraction": 0.2,
+    "minimum_cell_uids": 5,
+    "optimizer": "AdamW",
+    "learning_rate": 0.0003,
+    "weight_decay": 0.01,
+    "gradient_clip_norm": 1.0,
+    "batch_size": 16,
+    "maximum_epochs": 20,
+    "epoch_selection": "earliest_minimum_weighted_dev_length_normalized_program_nll",
+    "full_refit": "reinitialize_same_seed_and_train_100_percent_for_selected_epoch",
+    "loss": "length_normalized_teacher_forced_program_nll_then_cell_uid_route_weight",
+    "feature_cache_dtype": "bfloat16"
+  },
+  "generation": {
+    "decoder": "custom_greedy_argmax_float32_repetition_penalty",
+    "do_sample": false,
+    "num_beams": 1,
+    "use_cache": true,
+    "eos_token_ids": [151645],
+    "repetition_penalty": 1.05
+  },
+  "evaluation": {
+    "base_config": "configs/full_benchmark_end_to_end_eval_v1.json",
+    "phase69_contract": "analysis/dense_failure_stage2/full_benchmark_eval/frozen_protocol.json",
+    "phase69_paired": "analysis/dense_failure_stage2/full_benchmark_eval/paired/all_paired.jsonl",
+    "expected_total": 19960,
+    "reuse_sequential_a_only_after_exact_parity": true,
+    "paired_bootstrap_draws": 5000,
+    "paired_bootstrap_seed": 2026090617
+  },
+  "smoke": {
+    "training_uids": 8,
+    "require_native_dense_token_parity": true,
+    "require_exact_suffix_replay": true,
+    "require_exact_cache_tensor_roundtrip": true,
+    "require_exact_live_cached_branch_context_logits": true,
+    "require_same_layer_read_semantics": true,
+    "require_checkpoint_roundtrip": true
+  },
+  "backend_settings": {
+    "cublas_workspace_config": ":4096:8",
+    "deterministic_algorithms": true,
+    "deterministic_warn_only": false,
+    "flash_sdp_enabled": true,
+    "memory_efficient_sdp_enabled": true,
+    "math_sdp_enabled": true,
+    "cudnn_sdp_enabled": true,
+    "matmul_allow_tf32": false,
+    "matmul_allow_fp16_reduced_precision_reduction": true,
+    "matmul_allow_bf16_reduced_precision_reduction": true,
+    "cudnn_allow_tf32": false,
+    "cudnn_benchmark": false,
+    "cudnn_deterministic": false,
+    "float32_matmul_precision": "highest"
+  }
+}

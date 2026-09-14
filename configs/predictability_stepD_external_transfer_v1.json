@@ -1,0 +1,205 @@
+{
+  "schema_version": "predictability_stepD_external_transfer_config_v1",
+  "run_id": "predictability_stepD_external_transfer_v1",
+  "seed": 20260909,
+  "world_size": 4,
+  "output_root": "analysis/predictability_generalization/stepD_external_transfer",
+  "external_output_root": "/mnt/hyemin/qwen_train_eval/outputs/predictability_stepD_external_transfer_v1",
+  "parents": {
+    "stepA_root": "analysis/predictability_generalization/stepA_measurement",
+    "stepA_contract": "analysis/predictability_generalization/stepA_measurement/frozen_contract.json",
+    "stepA_artifact_manifest": "analysis/predictability_generalization/stepA_measurement/artifact_manifest.json",
+    "stepB_root": "analysis/predictability_generalization/stepB_id_learnability",
+    "stepB_contract": "analysis/predictability_generalization/stepB_id_learnability/frozen_contract.json",
+    "stepB_artifact_manifest": "analysis/predictability_generalization/stepB_id_learnability/artifact_manifest.json",
+    "stepC_root": "analysis/predictability_generalization/stepC_generalization",
+    "stepC_contract": "analysis/predictability_generalization/stepC_generalization/frozen_contract.json",
+    "stepC_artifact_manifest": "analysis/predictability_generalization/stepC_generalization/artifact_manifest.json",
+    "phase69_root": "analysis/dense_failure_stage2/full_benchmark_eval",
+    "phase69_contract": "analysis/dense_failure_stage2/full_benchmark_eval/frozen_protocol.json",
+    "phase69_artifact_manifest": "analysis/dense_failure_stage2/full_benchmark_eval/artifact_manifest.json"
+  },
+  "internal": {
+    "sample_manifest": "analysis/predictability_generalization/stepA_measurement/manifests/internal_sample_manifest.jsonl",
+    "stage1_state_manifest": "analysis/predictability_generalization/stepA_measurement/stage1/dense_state_manifest.jsonl",
+    "stage1_labels": "analysis/predictability_generalization/stepA_measurement/stage1/dense_outcome_labels.csv",
+    "stage2_state_manifest": "analysis/predictability_generalization/stepA_measurement/stage2_dense/exact_state_manifest.jsonl",
+    "stage2_utility_labels": "analysis/predictability_generalization/stepA_measurement/stage2_dense/utility_labels.csv",
+    "stage1_cache_manifest": "analysis/predictability_generalization/stepB_id_learnability/work/stage1_cache_manifest.json",
+    "stage2_cache_manifest": "analysis/predictability_generalization/stepB_id_learnability/work/stage2_dense_cache_manifest.json",
+    "uid_embedding_index": "analysis/predictability_generalization/stepC_generalization/question_semantics/uid_embedding_index.jsonl",
+    "question_embeddings": "analysis/predictability_generalization/stepC_generalization/question_semantics/uid_question_embeddings.npy",
+    "encoder_contract": "analysis/predictability_generalization/stepC_generalization/question_semantics/encoder_contract.json"
+  },
+  "external": {
+    "prepared_manifest": "analysis/dense_failure_stage2/full_benchmark_eval/manifests/all_full_manifest.jsonl",
+    "dense_results": {
+      "chartqa": "analysis/dense_failure_stage2/full_benchmark_eval/dense/chartqa_results.jsonl",
+      "textvqa": "analysis/dense_failure_stage2/full_benchmark_eval/dense/textvqa_results.jsonl",
+      "mmmu_pro": "analysis/dense_failure_stage2/full_benchmark_eval/dense/mmmu_pro_results.jsonl",
+      "pope": "analysis/dense_failure_stage2/full_benchmark_eval/dense/pope_results.jsonl"
+    },
+    "paired_results": "analysis/dense_failure_stage2/full_benchmark_eval/paired/all_paired.jsonl",
+    "expected_counts": {
+      "chartqa": 2500,
+      "textvqa": 5000,
+      "mmmu_pro_standard_test": 1730,
+      "mmmu_pro_vision_test": 1730,
+      "pope_adversarial": 3000,
+      "pope_popular": 3000,
+      "pope_random": 3000
+    },
+    "expected_total": 19960
+  },
+  "model": {
+    "name": "Qwen/Qwen2.5-VL-7B-Instruct",
+    "revision": "cc594898137f460bfe9f0759e9844b3ce807cfb5",
+    "snapshot_path": "/mnt/hyemin/qwen_train_eval/eval/reference/shared_prefix_eval_20260812/model/Qwen2.5-VL-7B-Instruct_cc594898137f460bfe9f0759e9844b3ce807cfb5",
+    "dtype": "bfloat16",
+    "attention_implementation": "sdpa",
+    "decoder_layers": 28,
+    "hidden_size": 3584,
+    "processor_use_fast": false,
+    "local_files_only": true
+  },
+  "generation": {
+    "decoder": "reference_native_generate_and_four_action_cached_greedy",
+    "do_sample": false,
+    "num_beams": 1,
+    "use_cache": true,
+    "eos_token_ids": [151645],
+    "repetition_penalty": 1.05,
+    "max_new_tokens": {
+      "chartqa": 16,
+      "textvqa": 16,
+      "mmmu_pro_standard_test": 16,
+      "mmmu_pro_vision_test": 16,
+      "pope_adversarial": 128,
+      "pope_popular": 128,
+      "pope_random": 128
+    }
+  },
+  "robust_p90": {
+    "threshold": 0.9061332901863008,
+    "comparison": "strict_greater_than",
+    "reference_trigger_count": 901,
+    "reference_pope_trigger_count": 0,
+    "head_manifest": "analysis/dense_failure_stage1/all_source_threshold_calibration/inputs/head_manifest.json",
+    "normalization": "analysis/dense_failure_stage1/shared_global_gate/training/global_normalization.pt"
+  },
+  "refit": {
+    "epoch_selection": "per-model-or-seed median_low of the five Step-B fold best epochs, frozen before external scoring",
+    "train_population": "all_internal_states",
+    "stage1": {
+      "m0_x": {"seed": 20260908, "epochs": 9},
+      "m1": {"seed": 20260908, "epochs": 2},
+      "m3": [
+        {"seed": 2026090801, "epochs": 1},
+        {"seed": 2026090802, "epochs": 1},
+        {"seed": 2026090803, "epochs": 1}
+      ]
+    },
+    "stage2": {
+      "read": {
+        "m0_x": {"seed": 20260908, "epochs": 12},
+        "m1": {"seed": 20260908, "epochs": 3},
+        "m3": [
+          {"seed": 2026090801, "epochs": 1},
+          {"seed": 2026090802, "epochs": 3},
+          {"seed": 2026090803, "epochs": 3}
+        ]
+      },
+      "write": {
+        "m0_x": {"seed": 20260908, "epochs": 16},
+        "m1": {"seed": 20260908, "epochs": 5},
+        "m3": [
+          {"seed": 2026090801, "epochs": 2},
+          {"seed": 2026090802, "epochs": 2},
+          {"seed": 2026090803, "epochs": 2}
+        ]
+      }
+    }
+  },
+  "question_encoder": {
+    "contract": "analysis/predictability_generalization/stepC_generalization/question_semantics/encoder_contract.json",
+    "model_name": "Qwen/Qwen3-Embedding-0.6B",
+    "snapshot": "datasets/eval/models--Qwen--Qwen3-Embedding-0.6B/snapshots/c54f2e6e80b2d7b7de06f51cec4959f6b3e03418",
+    "shared_instruction": "Given a visual-question-answering question, retrieve semantically similar questions.",
+    "input_template": "Instruct: {instruction}\nQuery: {question}",
+    "normalization": "Unicode_NFKC_then_collapse_whitespace",
+    "pooling": "last_non_padding_token",
+    "padding_side": "left",
+    "max_length": 512,
+    "truncation": true,
+    "dtype": "bfloat16",
+    "attention_implementation": "sdpa",
+    "output_dtype": "float32_L2",
+    "batch_size_per_gpu": 64,
+    "knn_k": 5
+  },
+  "evaluation": {
+    "reference_code_root": "eval/reference/shared_prefix_eval_20260812/code",
+    "scorer": "eval/reference/shared_prefix_eval_20260812/code/dvr_qwen/eval_metrics.py",
+    "input_builder": "eval/reference/shared_prefix_eval_20260812/code/dvr_qwen/scripts/cache_preference_gt_router_features.py",
+    "correctness_thresholds": {
+      "chartqa": 1.0,
+      "textvqa": 0.5,
+      "mmmu_pro_standard_test": 1.0,
+      "mmmu_pro_vision_test": 1.0,
+      "pope_adversarial": 1.0,
+      "pope_popular": 1.0,
+      "pope_random": 1.0
+    },
+    "stage1_preservation_targets": [0.9, 0.95, 0.98, 0.99],
+    "harmful_coverages": [0.05, 0.1, 0.2],
+    "bootstrap_draws": 5000,
+    "bootstrap_seed": 2026090917,
+    "bootstrap_unit": "image_group_id",
+    "depth_bins": {"early": [0, 8], "middle": [9, 18], "late": [19, 27]},
+    "trigger_relative_bins": {"at_trigger": [0, 0], "after_1_2": [1, 2], "after_3_5": [3, 5], "after_6_plus": [6, 27]},
+    "minimum_breakdown_rows": 10
+  },
+  "interpretation_rules": {
+    "stage1_useful_auroc_minimum": 0.65,
+    "stage1_control_advantage_minimum": 0.02,
+    "stage1_broad_requires_all_four_useful": true,
+    "stage1_same_family_requires_chartqa_and_textvqa_useful": true,
+    "stage2_nontrivial_absolute_spearman_minimum": 0.1,
+    "stage2_control_advantage_minimum": 0.02,
+    "stage2_broad_requires_supported_benchmarks": 2
+  },
+  "measurement": {
+    "q_score": "weighted_logsumexp_of_per_reference_token_mean_logprob_without_eos",
+    "chartqa_q": "literal_annotation",
+    "textvqa_q": "EvalAI_normalized_empirical_reference_mixture",
+    "mmmu_pro_q": "evaluator_consistent_uppercase_option_letter",
+    "pope_q": "lowercase_yes_or_no",
+    "q_absolute_tolerance": 1e-6,
+    "actions": ["FULL", "READ_ONLY", "WRITE_ONLY", "IGNORE"],
+    "suffix_after_current_layer": "all_FULL"
+  },
+  "backend_settings": {
+    "cublas_workspace_config": ":4096:8",
+    "deterministic_algorithms": true,
+    "deterministic_warn_only": false,
+    "flash_sdp_enabled": true,
+    "memory_efficient_sdp_enabled": true,
+    "math_sdp_enabled": true,
+    "cudnn_sdp_enabled": true,
+    "matmul_allow_tf32": false,
+    "matmul_allow_fp16_reduced_precision_reduction": true,
+    "matmul_allow_bf16_reduced_precision_reduction": true,
+    "cudnn_allow_tf32": false,
+    "cudnn_benchmark": false,
+    "cudnn_deterministic": false,
+    "float32_matmul_precision": "highest"
+  },
+  "smoke": {
+    "one_per_task_variant": true,
+    "require_native_hooked_token_parity": true,
+    "require_dense_reference_token_and_score_parity": true,
+    "require_robust_trigger_trace_parity": true,
+    "require_stage2_state_hash_repeatability": true,
+    "require_full_branch_token_score_q_parity": true
+  }
+}

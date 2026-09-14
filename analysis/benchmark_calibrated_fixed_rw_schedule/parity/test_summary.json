@@ -1,0 +1,7 @@
+{
+  "passed": true,
+  "tests": 14,
+  "execution_tests": 7,
+  "reporting_tests": 7,
+  "reporting_note": "Seven reporting checks include integer-count random ties and calibration-precluded CAL-D retaining hypothetical positive held-out efficacy. Bound execution tests unchanged since successful pre-freeze run."
+}

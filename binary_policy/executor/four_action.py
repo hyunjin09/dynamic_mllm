@@ -47,6 +47,20 @@ class FourActionLayerExecution:
 
 
 @dataclass
+class OneStepFourActionOutput:
+    """Action-isolated output immediately after one decoder layer."""
+
+    target_layer: int
+    action: str
+    pre_text_state: torch.Tensor
+    pre_visual_state: torch.Tensor
+    post_text_state: torch.Tensor
+    post_visual_state: torch.Tensor
+    cache: BinaryRouteCache | None
+    execution: FourActionLayerExecution
+
+
+@dataclass
 class FullBaseline:
     inputs: BinaryInputs
     pre_layer_states: list[tuple[torch.Tensor, torch.Tensor]]
@@ -391,11 +405,20 @@ def capture_four_action_route(
     *,
     prepared_inputs: BinaryInputs | None = None,
     use_cache: bool = True,
+    native_full_rows: bool = False,
 ) -> FullBaseline:
-    """Run one complete four-action route through the unified executor."""
+    """Run one complete four-action route through the unified executor.
+
+    ``native_full_rows=True`` preserves native maskless causal dispatch for
+    each unpadded full-row call while compacted READ-off calls retain their
+    explicit masks.  The default preserves historical materialized-mask route
+    behavior.
+    """
     meta = prepared_inputs or build_binary_inputs(model, dict(inputs))
     if meta.text_states.shape[0] != 1:
         raise NotImplementedError("four-action executor is validated only for batch size one")
+    if native_full_rows and not _native_causal(meta):
+        raise ValueError("native full-row dispatch requires an unpadded prompt")
     decoder = resolve_decoder(model)
     actions = tuple(normalize_four_action(action) for action in layer_actions)
     if len(actions) != len(decoder.layers):
@@ -420,7 +443,7 @@ def capture_four_action_route(
             layer_index=layer_index,
             cache=cache,
             use_cache=use_cache,
-            native_causal=False,
+            native_causal=native_full_rows,
         )
         stats.append(execution)
     full_hidden = _normalize_full(model, text_states, visual_states, meta)
@@ -433,7 +456,102 @@ def capture_four_action_route(
         prompt_logits=_last_text_logits(model, full_hidden, meta),
         cache=cache,
         layer_stats=stats,
-        native_causal=False,
+        native_causal=native_full_rows,
+        layer_actions=actions,
+    )
+
+
+@torch.inference_mode()
+def capture_four_action_suffix_from_full_baseline(
+    model,
+    baseline: FullBaseline,
+    start_layer: int,
+    suffix_actions,
+) -> FullBaseline:
+    """Continue from an already executed all-FULL prefix with a routed suffix.
+
+    The cached prefix, incoming text state, and incoming visual state are cloned
+    from ``baseline``.  No decoder layer before ``start_layer`` is executed
+    again.  This is the deployment-faithful path for a dynamic gate that fires
+    during the dense prefill.
+    """
+
+    if any(action != "FULL" for action in baseline.layer_actions):
+        raise ValueError("suffix execution requires an all-FULL baseline")
+    return capture_four_action_suffix_from_route_baseline(
+        model,
+        baseline,
+        start_layer,
+        suffix_actions,
+        expected_prefix=("FULL",) * int(start_layer),
+    )
+
+
+@torch.inference_mode()
+def capture_four_action_suffix_from_route_baseline(
+    model,
+    baseline: FullBaseline,
+    start_layer: int,
+    suffix_actions,
+    *,
+    expected_prefix=None,
+) -> FullBaseline:
+    """Continue from an arbitrary cached exact routed prefix.
+
+    The supplied baseline establishes the decoder state and K/V cache before
+    ``start_layer``.  Its later actions are only placeholders: callers replace
+    the complete suffix while preserving the exact routed prefix.  Supplying
+    ``expected_prefix`` makes state identity fail closed at the branch point.
+    """
+
+    decoder = resolve_decoder(model)
+    if baseline.cache is None:
+        raise ValueError("route suffix execution requires a cached baseline")
+    start = int(start_layer)
+    if start < 0 or start >= len(decoder.layers):
+        raise ValueError(f"start_layer must be in [0, {len(decoder.layers) - 1}]")
+    if len(baseline.layer_actions) != len(decoder.layers):
+        raise ValueError("baseline route length differs from decoder depth")
+    if expected_prefix is not None:
+        expected = tuple(normalize_four_action(action) for action in expected_prefix)
+        if len(expected) != start or tuple(baseline.layer_actions[:start]) != expected:
+            raise ValueError("baseline route prefix differs from expected prefix")
+    suffix = tuple(normalize_four_action(action) for action in suffix_actions)
+    if len(suffix) != len(decoder.layers) - start:
+        raise ValueError("suffix action count differs from the remaining decoder layers")
+
+    meta = baseline.inputs
+    cache = _clone_cache_prefix(baseline.cache, start)
+    text_states, visual_states = baseline.pre_layer_states[start]
+    pre_layer_states = list(baseline.pre_layer_states[:start])
+    stats = list(baseline.layer_stats[:start])
+    for layer_index, action in enumerate(suffix, start=start):
+        pre_layer_states.append((text_states.detach().clone(), visual_states.detach().clone()))
+        text_states, visual_states, execution = four_action_layer(
+            model,
+            decoder.layers[layer_index],
+            text_states,
+            visual_states,
+            meta,
+            action=action,
+            layer_index=layer_index,
+            cache=cache,
+            use_cache=True,
+            native_causal=baseline.native_causal,
+        )
+        stats.append(execution)
+    actions = (*baseline.layer_actions[:start], *suffix)
+    full_hidden = _normalize_full(model, text_states, visual_states, meta)
+    return FullBaseline(
+        inputs=meta,
+        pre_layer_states=pre_layer_states,
+        text_hidden_state=text_states,
+        visual_hidden_state=visual_states,
+        full_hidden_state=full_hidden,
+        prompt_logits=_last_text_logits(model, full_hidden, meta),
+        cache=cache,
+        layer_stats=stats,
+        native_causal=baseline.native_causal,
         layer_actions=actions,
     )
 
@@ -446,11 +564,19 @@ def capture_online_four_action_route(
     *,
     prepared_inputs: BinaryInputs | None = None,
     use_cache: bool = True,
+    native_full_rows: bool = False,
 ) -> FullBaseline:
-    """Choose each action from the actual state produced by its routed prefix."""
+    """Choose each action from the actual state produced by its routed prefix.
+
+    ``native_full_rows=True`` matches the native all-FULL dispatch for every
+    unpadded full-row call.  Compact READ-off calls continue to use their
+    explicit causal masks.
+    """
     meta = prepared_inputs or build_binary_inputs(model, dict(inputs))
     if meta.text_states.shape[0] != 1:
         raise NotImplementedError("four-action executor is validated only for batch size one")
+    if native_full_rows and not _native_causal(meta):
+        raise ValueError("native full-row dispatch requires an unpadded prompt")
     decoder = resolve_decoder(model)
     cache = BinaryRouteCache(len(decoder.layers)) if use_cache else None
     text_states = meta.text_states
@@ -474,7 +600,7 @@ def capture_online_four_action_route(
             layer_index=layer_index,
             cache=cache,
             use_cache=use_cache,
-            native_causal=False,
+            native_causal=native_full_rows,
         )
         stats.append(execution)
     full_hidden = _normalize_full(model, text_states, visual_states, meta)
@@ -487,7 +613,7 @@ def capture_online_four_action_route(
         prompt_logits=_last_text_logits(model, full_hidden, meta),
         cache=cache,
         layer_stats=stats,
-        native_causal=False,
+        native_causal=native_full_rows,
         layer_actions=tuple(actions),
     )
 
@@ -593,6 +719,57 @@ def _four_action_forward_from_baseline(
         prompt_logits=_last_text_logits(model, full_hidden, meta),
         full_hidden_state=full_hidden,
         prefill=prefill,
+    )
+
+
+@torch.inference_mode()
+def one_step_four_action_from_baseline(
+    model,
+    baseline: FullBaseline,
+    target_layer: int,
+    action: str,
+) -> OneStepFourActionOutput:
+    """Execute one candidate action and stop after the target decoder layer.
+
+    Every candidate starts from the exact pre-layer tensors and an independent
+    clone of the captured prefix cache.  No later decoder layer, final norm, or
+    LM head is evaluated, which makes this helper suitable for leakage-free
+    one-step counterfactual feature construction.
+    """
+
+    decoder = resolve_decoder(model)
+    target_layer = int(target_layer)
+    if target_layer < 0 or target_layer >= len(decoder.layers):
+        raise ValueError(f"target_layer must be in [0, {len(decoder.layers) - 1}]")
+    if baseline.cache is None:
+        raise ValueError("one-step four-action execution requires a cached baseline")
+    action = normalize_four_action(action)
+    pre_text, pre_visual = baseline.pre_layer_states[target_layer]
+    # A decoder layer reads only its own cache slot. At prefill that target
+    # slot is empty, so earlier-layer K/V tensors cannot affect this isolated
+    # one-step result and need not be copied.
+    prefix_cache = BinaryRouteCache(len(baseline.cache.key_cache))
+    post_text, post_visual, execution = four_action_layer(
+        model,
+        decoder.layers[target_layer],
+        pre_text,
+        pre_visual,
+        baseline.inputs,
+        action=action,
+        layer_index=target_layer,
+        cache=prefix_cache,
+        use_cache=True,
+        native_causal=baseline.native_causal,
+    )
+    return OneStepFourActionOutput(
+        target_layer=target_layer,
+        action=action,
+        pre_text_state=pre_text,
+        pre_visual_state=pre_visual,
+        post_text_state=post_text.detach().clone(),
+        post_visual_state=post_visual.detach().clone(),
+        cache=prefix_cache,
+        execution=execution,
     )
 
 

@@ -1,0 +1,65 @@
+{
+  "schema_version": "program_beam_oracle_audit_config_v1",
+  "run_id": "program_beam_oracle_audit_v1",
+  "seed": 20260906,
+  "world_size": 4,
+  "output_root": "analysis/dense_failure_stage2/program_beam_oracle_audit",
+  "sources": {
+    "phase74_config": "configs/polar_suffix_program_v1.json",
+    "phase74_contract": "analysis/dense_failure_stage2/polar_suffix_program/frozen_protocol.json",
+    "phase74_artifact_manifest": "analysis/dense_failure_stage2/polar_suffix_program/artifact_manifest.json",
+    "phase74_paired": "analysis/dense_failure_stage2/polar_suffix_program/evaluation/all_paired.jsonl",
+    "phase74_evaluation_manifest": "analysis/dense_failure_stage2/polar_suffix_program/work/evaluation_manifest.jsonl",
+    "phase74_evaluation_input": "analysis/dense_failure_stage2/polar_suffix_program/work/evaluation_input.json",
+    "phase74_checkpoint_manifest": "analysis/dense_failure_stage2/polar_suffix_program/training/full_refit_checkpoint_manifest.json",
+    "phase74_checkpoint": "analysis/dense_failure_stage2/polar_suffix_program/training/full_refit_checkpoint.pt",
+    "phase69_paired": "analysis/dense_failure_stage2/full_benchmark_eval/paired/all_paired.jsonl"
+  },
+  "frozen_parent": {
+    "phase74_contract_sha256": "0c1696ed895353f31ba40201633215f235bacc7175624dccd2ac8d7fdb597a49",
+    "phase74_checkpoint_sha256": "1621851b18f805ce02d27fbebd4d2f67a26861397173581fd606e0922b3f0564",
+    "phase69_contract_sha256": "63379eeff80fd5b046cb980cdfccea7fab232e15eb5b14924a24b60393327e83"
+  },
+  "beam": {
+    "width": 8,
+    "score": "sum_action_log_probabilities",
+    "actions": ["FULL", "READ_ONLY", "WRITE_ONLY", "IGNORE"],
+    "total_layers": 28,
+    "late_trigger_support": "min(beam_width, action_count ** remaining_layers)"
+  },
+  "parity": {
+    "separate_global_gate": true,
+    "exact_fields": [
+      "trigger_layer",
+      "program_suffix_actions",
+      "beam_top1_actions",
+      "program_generated_token_ids",
+      "program_generated_answer",
+      "program_score",
+      "program_correct"
+    ],
+    "beam_score_absolute_tolerance": 1e-6,
+    "expected_w_to_c": 3,
+    "expected_c_to_w": 8,
+    "expected_net": -5
+  },
+  "population": {
+    "external_rows": 19960,
+    "triggered": 901,
+    "triggered_dense_w": 496,
+    "triggered_dense_c": 405,
+    "ranked_program_entries": 6944,
+    "layer27_exhaustive_four": 66
+  },
+  "execution": {
+    "resume_requires_exact_contract_and_program_coverage": true,
+    "reuse_full_baseline_within_uid": true,
+    "rank1_executed_in_parity_pass": true,
+    "candidate_labels_used_only_after_generation": true
+  },
+  "decision": {
+    "primary_basis": "ranking_failure_w_count_vs_generation_failure_w_count",
+    "tie_is_mixed_with_conservative_generation_recommendation": true,
+    "no_external_label_fitting": true
+  }
+}

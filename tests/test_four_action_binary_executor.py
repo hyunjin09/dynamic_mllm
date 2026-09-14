@@ -8,6 +8,8 @@ from binary_policy.executor.cache import BinaryRouteCache
 from binary_policy.executor.four_action import (
     FOUR_ACTIONS,
     capture_four_action_route,
+    capture_four_action_suffix_from_route_baseline,
+    capture_four_action_suffix_from_full_baseline,
     capture_full_baseline,
     capture_online_four_action_route,
     capture_route_baseline,
@@ -17,6 +19,7 @@ from binary_policy.executor.four_action import (
     local_four_action_forward,
     layerwise_token_scores_from_cached_prompt,
     normalize_four_action,
+    one_step_four_action_from_baseline,
     route_conditioned_four_action_forward,
     score_token_ids_from_local_forward,
     score_token_ids_from_cached_prompt,
@@ -249,6 +252,61 @@ def test_baseline_cache_is_not_mutated_by_local_branches():
     assert baseline.cache.lengths() == before == [4, 4, 4]
 
 
+def test_one_step_branches_stop_at_target_and_match_canonical_full_post_state():
+    model = FakeModel(layers=3)
+    baseline = capture_full_baseline(model, {}, prepared_inputs=fixture_inputs(), use_cache=True)
+    baseline_calls = [list(layer.calls) for layer in model.model.layers]
+
+    outputs = {
+        action: one_step_four_action_from_baseline(model, baseline, 1, action)
+        for action in FOUR_ACTIONS
+    }
+    expected_text, expected_visual = baseline.pre_layer_states[2]
+    assert torch.equal(outputs["FULL"].post_text_state, expected_text)
+    assert torch.equal(outputs["FULL"].post_visual_state, expected_visual)
+    for output in outputs.values():
+        assert output.target_layer == 1
+        assert output.execution.layer_index == 1
+        assert output.execution.action == output.action
+        assert torch.equal(output.pre_text_state, baseline.pre_layer_states[1][0])
+        assert torch.equal(output.pre_visual_state, baseline.pre_layer_states[1][1])
+
+    # Each branch invokes only the target layer and follows the exact frozen
+    # four-action implementation used by Step A.
+    assert model.model.layers[0].calls == baseline_calls[0]
+    assert model.model.layers[1].calls == baseline_calls[1] + [2, 4, 4, 2, 4]
+    assert model.model.layers[2].calls == baseline_calls[2]
+    assert baseline.cache.lengths() == [4, 4, 4]
+
+
+def test_one_step_native_full_branch_matches_native_canonical_post_state():
+    model = FakeModel(layers=3)
+    baseline = capture_full_baseline(
+        model,
+        {},
+        prepared_inputs=fixture_inputs(),
+        use_cache=True,
+        native_causal=True,
+    )
+    output = one_step_four_action_from_baseline(model, baseline, 1, "FULL")
+    assert torch.equal(output.post_text_state, baseline.pre_layer_states[2][0])
+    assert torch.equal(output.post_visual_state, baseline.pre_layer_states[2][1])
+    assert output.cache is not None
+    # Earlier-layer cache slots cannot affect this isolated target-layer call;
+    # keeping them would copy large K/V tensors without changing the output.
+    assert output.cache.lengths() == [0, 4, 0]
+
+
+def test_one_step_full_matches_final_layer_output_without_fabricating_layer_28():
+    model = FakeModel(layers=3)
+    baseline = capture_full_baseline(model, {}, prepared_inputs=fixture_inputs(), use_cache=True)
+    output = one_step_four_action_from_baseline(model, baseline, 2, "FULL")
+    assert torch.equal(output.post_text_state, baseline.text_hidden_state)
+    assert torch.equal(output.post_visual_state, baseline.visual_hidden_state)
+    assert output.cache is not None
+    assert output.cache.lengths() == [0, 0, 4]
+
+
 def test_online_action_selector_uses_routed_prefix_and_matches_fixed_route():
     meta = fixture_inputs()
     actions = ("FULL", "IGNORE", "READ_ONLY")
@@ -285,6 +343,173 @@ def test_online_action_selector_uses_routed_prefix_and_matches_fixed_route():
         assert torch.equal(text_states, online.pre_layer_states[index][0])
         assert torch.equal(visual_states, online.pre_layer_states[index][1])
         assert inputs is meta
+
+
+def test_online_route_can_use_native_full_rows_and_rejects_padding():
+    meta = fixture_inputs()
+    actions = ("FULL", "IGNORE", "READ_ONLY")
+    online_model = FakeModel(layers=3)
+    online = capture_online_four_action_route(
+        online_model,
+        {},
+        lambda layer_index, *_args: actions[layer_index],
+        prepared_inputs=meta,
+        use_cache=True,
+        native_full_rows=True,
+    )
+    fixed_model = FakeModel(layers=3)
+    fixed_model.load_state_dict(online_model.state_dict())
+    fixed = capture_four_action_route(
+        fixed_model,
+        {},
+        actions,
+        prepared_inputs=meta,
+        use_cache=True,
+        native_full_rows=True,
+    )
+    assert online.native_causal is True
+    assert torch.equal(online.full_hidden_state, fixed.full_hidden_state)
+    assert torch.equal(online.prompt_logits, fixed.prompt_logits)
+
+    padded = fixture_inputs()
+    padded.full_attention_mask[0, -1] = 0
+    with pytest.raises(ValueError, match="unpadded"):
+        capture_online_four_action_route(
+            FakeModel(layers=3),
+            {},
+            lambda _layer_index, *_args: "FULL",
+            prepared_inputs=padded,
+            native_full_rows=True,
+        )
+
+
+def test_suffix_execution_matches_complete_route_without_reexecuting_prefix():
+    meta = fixture_inputs()
+    actions = ("FULL", "IGNORE", "READ_ONLY")
+    suffix_model = FakeModel(layers=3)
+    baseline = capture_full_baseline(
+        suffix_model, {}, prepared_inputs=meta, use_cache=True
+    )
+    calls_before = [len(layer.calls) for layer in suffix_model.model.layers]
+    suffix = capture_four_action_suffix_from_full_baseline(
+        suffix_model, baseline, 1, actions[1:]
+    )
+    assert [len(layer.calls) for layer in suffix_model.model.layers] == [
+        calls_before[0],
+        calls_before[1] + 1,
+        calls_before[2] + 1,
+    ]
+
+    complete_model = FakeModel(layers=3)
+    complete_model.load_state_dict(suffix_model.state_dict())
+    complete = capture_four_action_route(
+        complete_model, {}, actions, prepared_inputs=meta, use_cache=True
+    )
+    assert suffix.layer_actions == actions
+    assert torch.equal(suffix.full_hidden_state, complete.full_hidden_state)
+    assert torch.equal(suffix.prompt_logits, complete.prompt_logits)
+    assert suffix.cache is not None and complete.cache is not None
+    assert suffix.cache.lengths() == complete.cache.lengths()
+
+
+def test_suffix_can_branch_from_native_dense_prefix_and_match_native_full_row_route():
+    meta = fixture_inputs()
+    actions = ("FULL", "IGNORE", "READ_ONLY")
+    suffix_model = FakeModel(layers=3)
+    baseline = capture_full_baseline(
+        suffix_model,
+        {},
+        prepared_inputs=meta,
+        use_cache=True,
+        native_causal=True,
+    )
+
+    suffix = capture_four_action_suffix_from_full_baseline(
+        suffix_model,
+        baseline,
+        1,
+        actions[1:],
+    )
+
+    complete_model = FakeModel(layers=3)
+    complete_model.load_state_dict(suffix_model.state_dict())
+    complete = capture_four_action_route(
+        complete_model,
+        {},
+        actions,
+        prepared_inputs=meta,
+        use_cache=True,
+        native_full_rows=True,
+    )
+    assert suffix.native_causal is True
+    assert suffix.layer_actions == actions
+    assert torch.equal(suffix.full_hidden_state, complete.full_hidden_state)
+    assert torch.equal(suffix.prompt_logits, complete.prompt_logits)
+    assert suffix.cache is not None and complete.cache is not None
+    assert suffix.cache.lengths() == complete.cache.lengths()
+
+
+def test_suffix_can_branch_from_arbitrary_routed_prefix_without_reexecuting_it():
+    meta = fixture_inputs()
+    anchor_actions = ("IGNORE", "READ_ONLY", "FULL")
+    branch_actions = ("IGNORE", "READ_ONLY", "WRITE_ONLY")
+    suffix_model = FakeModel(layers=3)
+    baseline = capture_four_action_route(
+        suffix_model,
+        {},
+        anchor_actions,
+        prepared_inputs=meta,
+        use_cache=True,
+        native_full_rows=True,
+    )
+    calls_before = [len(layer.calls) for layer in suffix_model.model.layers]
+
+    suffix = capture_four_action_suffix_from_route_baseline(
+        suffix_model,
+        baseline,
+        2,
+        branch_actions[2:],
+    )
+
+    assert [len(layer.calls) for layer in suffix_model.model.layers] == [
+        calls_before[0],
+        calls_before[1],
+        calls_before[2] + 2,
+    ]
+    complete_model = FakeModel(layers=3)
+    complete_model.load_state_dict(suffix_model.state_dict())
+    complete = capture_four_action_route(
+        complete_model,
+        {},
+        branch_actions,
+        prepared_inputs=meta,
+        use_cache=True,
+        native_full_rows=True,
+    )
+    assert suffix.layer_actions == branch_actions
+    assert torch.equal(suffix.full_hidden_state, complete.full_hidden_state)
+    assert torch.equal(suffix.prompt_logits, complete.prompt_logits)
+    assert suffix.cache is not None and complete.cache is not None
+    assert suffix.cache.lengths() == complete.cache.lengths()
+
+
+def test_arbitrary_route_suffix_rejects_a_prefix_mismatch():
+    model = FakeModel(layers=3)
+    baseline = capture_four_action_route(
+        model,
+        {},
+        ("IGNORE", "FULL", "FULL"),
+        prepared_inputs=fixture_inputs(),
+        use_cache=True,
+    )
+    with pytest.raises(ValueError, match="prefix"):
+        capture_four_action_suffix_from_route_baseline(
+            model,
+            baseline,
+            1,
+            ("READ_ONLY", "FULL"),
+            expected_prefix=("FULL",),
+        )
 
 
 def test_local_hybrid_target_states_match_their_exact_factorial_components():

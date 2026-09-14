@@ -1,0 +1,419 @@
+{
+  "scope": "Phase88 metadata snapshot while random execution is still active; NOT final results or raw UID records",
+  "contract_sha256": "b995483d75b300ef0170db9f06eff2a68801ba4f78fcb922e17951e96ee7492e",
+  "files": [
+    {
+      "path": "analysis/benchmark_calibrated_fixed_rw_schedule/calibration/R_complete.json",
+      "bytes": 126,
+      "sha256": "edb488876d1b31f966658f72083e5d35ab3fd1b4270812b8180cf467f293d4ed",
+      "git_storage": "analysis/benchmark_calibrated_fixed_rw_schedule/calibration/R_complete.json",
+      "encoding": "identity"
+    },
+    {
+      "path": "analysis/benchmark_calibrated_fixed_rw_schedule/calibration/R_execution_manifest.jsonl",
+      "bytes": 296099,
+      "sha256": "c931ab9ab8189d4b0c162f8bfc18db22ba5fdfd8548758d02851b08bd7a31b48",
+      "git_storage": "analysis/benchmark_calibrated_fixed_rw_schedule/calibration/R_execution_manifest.jsonl",
+      "encoding": "identity"
+    },
+    {
+      "path": "analysis/benchmark_calibrated_fixed_rw_schedule/calibration/W_complete.json",
+      "bytes": 126,
+      "sha256": "edb488876d1b31f966658f72083e5d35ab3fd1b4270812b8180cf467f293d4ed",
+      "git_storage": "analysis/benchmark_calibrated_fixed_rw_schedule/calibration/W_complete.json",
+      "encoding": "identity"
+    },
+    {
+      "path": "analysis/benchmark_calibrated_fixed_rw_schedule/calibration/W_execution_manifest.jsonl",
+      "bytes": 296099,
+      "sha256": "3e01a137e58a03c82651f439873daa55d9a9ea0916f40f239c89997f9770e907",
+      "git_storage": "analysis/benchmark_calibrated_fixed_rw_schedule/calibration/W_execution_manifest.jsonl",
+      "encoding": "identity"
+    },
+    {
+      "path": "analysis/benchmark_calibrated_fixed_rw_schedule/calibration/bootstrap_layer_selection.csv",
+      "bytes": 10025,
+      "sha256": "8baffcf4ccf9a47f6d623f807669da0ab60fabcbcf36eb5e8d0cd4f21458ac9e",
+      "git_storage": "analysis/benchmark_calibrated_fixed_rw_schedule/calibration/bootstrap_layer_selection.csv",
+      "encoding": "identity"
+    },
+    {
+      "path": "analysis/benchmark_calibrated_fixed_rw_schedule/calibration/calibration_size_stability.csv",
+      "bytes": 1432,
+      "sha256": "61c83b5849c938c5b6efc4219fae047d16fb92c655a48f5a0dc6993bdc1524fd",
+      "git_storage": "analysis/benchmark_calibrated_fixed_rw_schedule/calibration/calibration_size_stability.csv",
+      "encoding": "identity"
+    },
+    {
+      "path": "analysis/benchmark_calibrated_fixed_rw_schedule/calibration/chartqa_read_layer_effects.csv",
+      "bytes": 1979,
+      "sha256": "1870bc5977d7acaa7b0c31773cc2de3820c3bd6da958dbf3e686d73e02370c28",
+      "git_storage": "analysis/benchmark_calibrated_fixed_rw_schedule/calibration/chartqa_read_layer_effects.csv",
+      "encoding": "identity"
+    },
+    {
+      "path": "analysis/benchmark_calibrated_fixed_rw_schedule/calibration/chartqa_write_layer_effects.csv",
+      "bytes": 1974,
+      "sha256": "5837e4b0a82512eab5c7a847459a8f33c8c763ca82bd79555b45ca026fb25b7d",
+      "git_storage": "analysis/benchmark_calibrated_fixed_rw_schedule/calibration/chartqa_write_layer_effects.csv",
+      "encoding": "identity"
+    },
+    {
+      "path": "analysis/benchmark_calibrated_fixed_rw_schedule/calibration/mmmupro_read_layer_effects.csv",
+      "bytes": 1959,
+      "sha256": "59e3e609b94d22ee039a2ecb465969674d572a136b27542752f97aa2d7801a62",
+      "git_storage": "analysis/benchmark_calibrated_fixed_rw_schedule/calibration/mmmupro_read_layer_effects.csv",
+      "encoding": "identity"
+    },
+    {
+      "path": "analysis/benchmark_calibrated_fixed_rw_schedule/calibration/mmmupro_write_layer_effects.csv",
+      "bytes": 1957,
+      "sha256": "780b0375e6b9f58d9c70ea93331f55779155e0d31ebd3c97afe7de12e76ca56f",
+      "git_storage": "analysis/benchmark_calibrated_fixed_rw_schedule/calibration/mmmupro_write_layer_effects.csv",
+      "encoding": "identity"
+    },
+    {
+      "path": "analysis/benchmark_calibrated_fixed_rw_schedule/calibration/pope_read_layer_effects.csv",
+      "bytes": 2015,
+      "sha256": "ffd20ec98695de67159fb01abaa4a40dd229c5b450dd0fdd1432e01f0c20a446",
+      "git_storage": "analysis/benchmark_calibrated_fixed_rw_schedule/calibration/pope_read_layer_effects.csv",
+      "encoding": "identity"
+    },
+    {
+      "path": "analysis/benchmark_calibrated_fixed_rw_schedule/calibration/pope_write_layer_effects.csv",
+      "bytes": 1979,
+      "sha256": "2bacc7bfe7accaa606a3a4737686f3dd6c3e2266e8b4abc5d5dc1be0aea1a5b8",
+      "git_storage": "analysis/benchmark_calibrated_fixed_rw_schedule/calibration/pope_write_layer_effects.csv",
+      "encoding": "identity"
+    },
+    {
+      "path": "analysis/benchmark_calibrated_fixed_rw_schedule/calibration/selected_layers.csv",
+      "bytes": 539,
+      "sha256": "89076c75702d303ce6bf123f9157533021216153dd761c447adba2c76fa4009c",
+      "git_storage": "analysis/benchmark_calibrated_fixed_rw_schedule/calibration/selected_layers.csv",
+      "encoding": "identity"
+    },
+    {
+      "path": "analysis/benchmark_calibrated_fixed_rw_schedule/calibration/split_half_stability.csv",
+      "bytes": 566,
+      "sha256": "e8b7fae136e795e91b2f7d10e099ebbd6c0c35b984ae7f637f949dc92bb64a88",
+      "git_storage": "analysis/benchmark_calibrated_fixed_rw_schedule/calibration/split_half_stability.csv",
+      "encoding": "identity"
+    },
+    {
+      "path": "analysis/benchmark_calibrated_fixed_rw_schedule/calibration/textvqa_read_layer_effects.csv",
+      "bytes": 1583,
+      "sha256": "043096337a355403f36079fbe2c96e2bd8d6ded7982c191b87fb168b101aa519",
+      "git_storage": "analysis/benchmark_calibrated_fixed_rw_schedule/calibration/textvqa_read_layer_effects.csv",
+      "encoding": "identity"
+    },
+    {
+      "path": "analysis/benchmark_calibrated_fixed_rw_schedule/calibration/textvqa_write_layer_effects.csv",
+      "bytes": 1679,
+      "sha256": "f228896081d35e7c9ace55b59737c2d6a06415ffc83a07e8d1982929b4f24828",
+      "git_storage": "analysis/benchmark_calibrated_fixed_rw_schedule/calibration/textvqa_write_layer_effects.csv",
+      "encoding": "identity"
+    },
+    {
+      "path": "analysis/benchmark_calibrated_fixed_rw_schedule/execution_config.json",
+      "bytes": 4400,
+      "sha256": "52ba54018ffcc78b8dcfdd9642b34a59a03c1227aa6a0fbf9a4bce3486cd01c4",
+      "git_storage": "analysis/benchmark_calibrated_fixed_rw_schedule/execution_config.json",
+      "encoding": "identity"
+    },
+    {
+      "path": "analysis/benchmark_calibrated_fixed_rw_schedule/frozen_contract.json",
+      "bytes": 9029,
+      "sha256": "ebd48bf030acfd169728369d7f6d5984b963f71b88591157791adcdecde594f6",
+      "git_storage": "analysis/benchmark_calibrated_fixed_rw_schedule/frozen_contract.json",
+      "encoding": "identity"
+    },
+    {
+      "path": "analysis/benchmark_calibrated_fixed_rw_schedule/heldout/global_complete.json",
+      "bytes": 127,
+      "sha256": "5ded86890218f9188fc95d3751bb5355fc6cb693e499439585d9fdf183262f3f",
+      "git_storage": "analysis/benchmark_calibrated_fixed_rw_schedule/heldout/global_complete.json",
+      "encoding": "identity"
+    },
+    {
+      "path": "analysis/benchmark_calibrated_fixed_rw_schedule/heldout/global_execution_manifest.jsonl",
+      "bytes": 5715552,
+      "sha256": "638e79cc543c48540ddd8d5d6fbdc6fe4453d1b1d501bf10cb8c6305be0f5136",
+      "git_storage": "handoff/phase88_server_transfer/compressed/heldout/global_execution_manifest.jsonl.gz",
+      "encoding": "gzip"
+    },
+    {
+      "path": "analysis/benchmark_calibrated_fixed_rw_schedule/heldout/methods_complete.json",
+      "bytes": 127,
+      "sha256": "5ded86890218f9188fc95d3751bb5355fc6cb693e499439585d9fdf183262f3f",
+      "git_storage": "analysis/benchmark_calibrated_fixed_rw_schedule/heldout/methods_complete.json",
+      "encoding": "identity"
+    },
+    {
+      "path": "analysis/benchmark_calibrated_fixed_rw_schedule/heldout/methods_execution_manifest.jsonl",
+      "bytes": 5735004,
+      "sha256": "dd5d02f3928312b68344192e0baca29e3f20dd169519d1025e4281d5d8e52199",
+      "git_storage": "handoff/phase88_server_transfer/compressed/heldout/methods_execution_manifest.jsonl.gz",
+      "encoding": "gzip"
+    },
+    {
+      "path": "analysis/benchmark_calibrated_fixed_rw_schedule/main_agent_pause.json",
+      "bytes": 757,
+      "sha256": "22bcc574ff68e8507843fa164cb2a72a2c0e8199fccc2c8fafbb7c93dec38ee4",
+      "git_storage": "analysis/benchmark_calibrated_fixed_rw_schedule/main_agent_pause.json",
+      "encoding": "identity"
+    },
+    {
+      "path": "analysis/benchmark_calibrated_fixed_rw_schedule/parity/accepted_dense_parent_manifest.jsonl",
+      "bytes": 2161243,
+      "sha256": "d9cf5fc944b4b2079ee62af806e49fa90c50b62677c3240d0ba7a9b12c38e052",
+      "git_storage": "handoff/phase88_server_transfer/compressed/parity/accepted_dense_parent_manifest.jsonl.gz",
+      "encoding": "gzip"
+    },
+    {
+      "path": "analysis/benchmark_calibrated_fixed_rw_schedule/parity/analysis_environment.json",
+      "bytes": 494,
+      "sha256": "56f5f64ca10c69417e0abace49a55e5e55994b93e7336e68acc3a32138ac6abc",
+      "git_storage": "analysis/benchmark_calibrated_fixed_rw_schedule/parity/analysis_environment.json",
+      "encoding": "identity"
+    },
+    {
+      "path": "analysis/benchmark_calibrated_fixed_rw_schedule/parity/answer_reference_validity.json",
+      "bytes": 875,
+      "sha256": "65af84d167a83d09667e69c1d2154f361243d836ec9cc3fc56a636d9ac186d16",
+      "git_storage": "analysis/benchmark_calibrated_fixed_rw_schedule/parity/answer_reference_validity.json",
+      "encoding": "identity"
+    },
+    {
+      "path": "analysis/benchmark_calibrated_fixed_rw_schedule/parity/before_decode_position_repair_execution_config.json",
+      "bytes": 4884,
+      "sha256": "fdbd745dbd598f450ab666dba2f15e0feadaf40d376f81f88d24249ee0aafcca",
+      "git_storage": "analysis/benchmark_calibrated_fixed_rw_schedule/parity/before_decode_position_repair_execution_config.json",
+      "encoding": "identity"
+    },
+    {
+      "path": "analysis/benchmark_calibrated_fixed_rw_schedule/parity/before_decode_position_repair_frozen_contract.json",
+      "bytes": 9222,
+      "sha256": "af5974cad9deaef29b79444f64489dfab034f48f96e42e0fd96be836977c0734",
+      "git_storage": "analysis/benchmark_calibrated_fixed_rw_schedule/parity/before_decode_position_repair_frozen_contract.json",
+      "encoding": "identity"
+    },
+    {
+      "path": "analysis/benchmark_calibrated_fixed_rw_schedule/parity/calibration_category_scope_review.md",
+      "bytes": 1531,
+      "sha256": "913fb61b2c272f1da29a7e16d9542115db5425032f4383e7ae763b185de6731c",
+      "git_storage": "analysis/benchmark_calibrated_fixed_rw_schedule/parity/calibration_category_scope_review.md",
+      "encoding": "identity"
+    },
+    {
+      "path": "analysis/benchmark_calibrated_fixed_rw_schedule/parity/contract_before_native_token_repair.json",
+      "bytes": 8608,
+      "sha256": "2bae80597bdf27595889de9aaf6c5a2a59623b00858fba109e5ecb9e44c1d652",
+      "git_storage": "analysis/benchmark_calibrated_fixed_rw_schedule/parity/contract_before_native_token_repair.json",
+      "encoding": "identity"
+    },
+    {
+      "path": "analysis/benchmark_calibrated_fixed_rw_schedule/parity/contract_before_q_validity_repair.json",
+      "bytes": 8609,
+      "sha256": "2f457a3a283fd8a0826d16e28271d7c7f73fd0550438f9f02e44a59c10b22dee",
+      "git_storage": "analysis/benchmark_calibrated_fixed_rw_schedule/parity/contract_before_q_validity_repair.json",
+      "encoding": "identity"
+    },
+    {
+      "path": "analysis/benchmark_calibrated_fixed_rw_schedule/parity/decode_position_repair.md",
+      "bytes": 1037,
+      "sha256": "2f30e8f98a224473cb13a38a7bb91a0f2b3c90308cbcb9d2d18cc5bde65cdb19",
+      "git_storage": "analysis/benchmark_calibrated_fixed_rw_schedule/parity/decode_position_repair.md",
+      "encoding": "identity"
+    },
+    {
+      "path": "analysis/benchmark_calibrated_fixed_rw_schedule/parity/dense_complete.json",
+      "bytes": 127,
+      "sha256": "be90fd6f325f82648768b087e4b9d9dd730140be5915a29e74b077705a493e15",
+      "git_storage": "analysis/benchmark_calibrated_fixed_rw_schedule/parity/dense_complete.json",
+      "encoding": "identity"
+    },
+    {
+      "path": "analysis/benchmark_calibrated_fixed_rw_schedule/parity/dense_execution_manifest.jsonl",
+      "bytes": 5996275,
+      "sha256": "461b788b125e023ce379bc734a979d4e4a90a1dfddf7a5f80844f0a1efc99457",
+      "git_storage": "handoff/phase88_server_transfer/compressed/parity/dense_execution_manifest.jsonl.gz",
+      "encoding": "gzip"
+    },
+    {
+      "path": "analysis/benchmark_calibrated_fixed_rw_schedule/parity/dense_mismatch_diagnostic.json",
+      "bytes": 17315,
+      "sha256": "05bb00404a006e89c878de12d1390b0e8366fe3b601160f47a2d412916bfc33f",
+      "git_storage": "analysis/benchmark_calibrated_fixed_rw_schedule/parity/dense_mismatch_diagnostic.json",
+      "encoding": "identity"
+    },
+    {
+      "path": "analysis/benchmark_calibrated_fixed_rw_schedule/parity/dense_population_parity.csv",
+      "bytes": 664,
+      "sha256": "1b2e6da056c5cd407a7608ed3e8f3a9b712444fde43e6fbb5d2fc9ea4deaac80",
+      "git_storage": "analysis/benchmark_calibrated_fixed_rw_schedule/parity/dense_population_parity.csv",
+      "encoding": "identity"
+    },
+    {
+      "path": "analysis/benchmark_calibrated_fixed_rw_schedule/parity/dense_scorer_mismatch_diagnostic.json",
+      "bytes": 45872,
+      "sha256": "532520831272e1effb04909eec213b29c5d8d221822238ef8812ec124e9f6517",
+      "git_storage": "analysis/benchmark_calibrated_fixed_rw_schedule/parity/dense_scorer_mismatch_diagnostic.json",
+      "encoding": "identity"
+    },
+    {
+      "path": "analysis/benchmark_calibrated_fixed_rw_schedule/parity/dense_smoke.json",
+      "bytes": 2562,
+      "sha256": "82600cff6c8b7b471ef25c9b922186d69e78cacd6fd2c025e4515e9051465466",
+      "git_storage": "analysis/benchmark_calibrated_fixed_rw_schedule/parity/dense_smoke.json",
+      "encoding": "identity"
+    },
+    {
+      "path": "analysis/benchmark_calibrated_fixed_rw_schedule/parity/dense_smoke_before_decode_position_repair.json",
+      "bytes": 2268,
+      "sha256": "4cb3ba8fbb1c14cfa5795eccd76abbcb3a2e19aaf6f202d8c7a1834eb21b29c4",
+      "git_storage": "analysis/benchmark_calibrated_fixed_rw_schedule/parity/dense_smoke_before_decode_position_repair.json",
+      "encoding": "identity"
+    },
+    {
+      "path": "analysis/benchmark_calibrated_fixed_rw_schedule/parity/dense_smoke_before_native_token_repair.json",
+      "bytes": 1320,
+      "sha256": "a8dfa4091c673ccb4043ce4badce813689956f2003d7ca7ae960ef87246f239a",
+      "git_storage": "analysis/benchmark_calibrated_fixed_rw_schedule/parity/dense_smoke_before_native_token_repair.json",
+      "encoding": "identity"
+    },
+    {
+      "path": "analysis/benchmark_calibrated_fixed_rw_schedule/parity/dense_smoke_before_q_validity_repair.json",
+      "bytes": 1320,
+      "sha256": "f40c1aab7798f6173eaf9af70ec4480bf3761010bdf43d92d1445091ec60299f",
+      "git_storage": "analysis/benchmark_calibrated_fixed_rw_schedule/parity/dense_smoke_before_q_validity_repair.json",
+      "encoding": "identity"
+    },
+    {
+      "path": "analysis/benchmark_calibrated_fixed_rw_schedule/parity/interventions_smoke.json",
+      "bytes": 2762,
+      "sha256": "e33e420ad106b043dde5e32d8796335c794f3ef007484da9e8e62be17bebd126",
+      "git_storage": "analysis/benchmark_calibrated_fixed_rw_schedule/parity/interventions_smoke.json",
+      "encoding": "identity"
+    },
+    {
+      "path": "analysis/benchmark_calibrated_fixed_rw_schedule/parity/native_token_repair.md",
+      "bytes": 732,
+      "sha256": "44e53394e7552368c8af33e981f8d332e1825a85b9fe5f6c4446cbcb25f82a2f",
+      "git_storage": "analysis/benchmark_calibrated_fixed_rw_schedule/parity/native_token_repair.md",
+      "encoding": "identity"
+    },
+    {
+      "path": "analysis/benchmark_calibrated_fixed_rw_schedule/parity/protocol_review.md",
+      "bytes": 837,
+      "sha256": "d936b51108185f0e3a0b887a39dc81d67be43bc90428a565209bb08eec7d1f1d",
+      "git_storage": "analysis/benchmark_calibrated_fixed_rw_schedule/parity/protocol_review.md",
+      "encoding": "identity"
+    },
+    {
+      "path": "analysis/benchmark_calibrated_fixed_rw_schedule/parity/q_validity_repair.md",
+      "bytes": 864,
+      "sha256": "d1a9c7026bcdfd7f08a9e0a721b55febb33119b7a9822c3354b61e6fd7530a34",
+      "git_storage": "analysis/benchmark_calibrated_fixed_rw_schedule/parity/q_validity_repair.md",
+      "encoding": "identity"
+    },
+    {
+      "path": "analysis/benchmark_calibrated_fixed_rw_schedule/parity/test_summary.json",
+      "bytes": 312,
+      "sha256": "b3166030c68e449fe6bfa78dc770a106403a64b31b72b552719be04f7f066249",
+      "git_storage": "analysis/benchmark_calibrated_fixed_rw_schedule/parity/test_summary.json",
+      "encoding": "identity"
+    },
+    {
+      "path": "analysis/benchmark_calibrated_fixed_rw_schedule/protocol.md",
+      "bytes": 10715,
+      "sha256": "8693154bb951bca7407bac03113b1439d187f59d651e31698c4b319238eea824",
+      "git_storage": "analysis/benchmark_calibrated_fixed_rw_schedule/protocol.md",
+      "encoding": "identity"
+    },
+    {
+      "path": "analysis/benchmark_calibrated_fixed_rw_schedule/schedules/benchmark_specific_schedules.json",
+      "bytes": 6075,
+      "sha256": "c3987eb0f65f192c07da1565dfd389b857324afdb4d2817ea5ddd699d72ade21",
+      "git_storage": "analysis/benchmark_calibrated_fixed_rw_schedule/schedules/benchmark_specific_schedules.json",
+      "encoding": "identity"
+    },
+    {
+      "path": "analysis/benchmark_calibrated_fixed_rw_schedule/schedules/global_schedule.json",
+      "bytes": 431,
+      "sha256": "72df2db11333a333fda23de7ca550bceaa9d0787d75c500b3581e5705b3e34d6",
+      "git_storage": "analysis/benchmark_calibrated_fixed_rw_schedule/schedules/global_schedule.json",
+      "encoding": "identity"
+    },
+    {
+      "path": "analysis/benchmark_calibrated_fixed_rw_schedule/schedules/random_schedule_registry.jsonl",
+      "bytes": 28197,
+      "sha256": "5d80fe8d1752a39e57b3ca3fb4e330e935ad2aa9999407db5d20d5f5c8f80977",
+      "git_storage": "analysis/benchmark_calibrated_fixed_rw_schedule/schedules/random_schedule_registry.jsonl",
+      "encoding": "identity"
+    },
+    {
+      "path": "analysis/benchmark_calibrated_fixed_rw_schedule/schedules/schedule_freeze.json",
+      "bytes": 748,
+      "sha256": "f40ca5fae3552496be45c665164819139e00f34cf7339a4871c8d6e3a8719e2b",
+      "git_storage": "analysis/benchmark_calibrated_fixed_rw_schedule/schedules/schedule_freeze.json",
+      "encoding": "identity"
+    },
+    {
+      "path": "analysis/benchmark_calibrated_fixed_rw_schedule/schedules/schedule_freeze_report.md",
+      "bytes": 1668,
+      "sha256": "d135593754591e149d163e5224c4734098b2faa42c45d2b553474274e03f3e71",
+      "git_storage": "analysis/benchmark_calibrated_fixed_rw_schedule/schedules/schedule_freeze_report.md",
+      "encoding": "identity"
+    },
+    {
+      "path": "analysis/benchmark_calibrated_fixed_rw_schedule/splits/benchmark_support.csv",
+      "bytes": 482,
+      "sha256": "78cd03e3ef554165faaf97f818c20691ea5f5e3e8aa2c7e5233706e8a6dd6288",
+      "git_storage": "analysis/benchmark_calibrated_fixed_rw_schedule/splits/benchmark_support.csv",
+      "encoding": "identity"
+    },
+    {
+      "path": "analysis/benchmark_calibrated_fixed_rw_schedule/splits/complete.json",
+      "bytes": 1452,
+      "sha256": "a13d2099cb0e9b722c1510cef0b113b2d12d257c1f36556c37284150464a09ad",
+      "git_storage": "analysis/benchmark_calibrated_fixed_rw_schedule/splits/complete.json",
+      "encoding": "identity"
+    },
+    {
+      "path": "analysis/benchmark_calibrated_fixed_rw_schedule/splits/leakage_check.md",
+      "bytes": 1179,
+      "sha256": "17ee1e86861ed8f25c6a9ba07ee514e5a573d09136be3902e7ed430b3ff6cf30",
+      "git_storage": "analysis/benchmark_calibrated_fixed_rw_schedule/splits/leakage_check.md",
+      "encoding": "identity"
+    },
+    {
+      "path": "analysis/benchmark_calibrated_fixed_rw_schedule/splits/nested_support.csv",
+      "bytes": 317,
+      "sha256": "284f8195b6ec53c8a750942566a4cd974186386582fa02f966bd8275f41aec79",
+      "git_storage": "analysis/benchmark_calibrated_fixed_rw_schedule/splits/nested_support.csv",
+      "encoding": "identity"
+    },
+    {
+      "path": "analysis/benchmark_calibrated_fixed_rw_schedule/splits/split_registry.jsonl",
+      "bytes": 59737251,
+      "sha256": "21dc39f7ca4ac02a47fafda2dd583ed6fb37515a059f8eb74b5547fe42caa512",
+      "git_storage": "handoff/phase88_server_transfer/compressed/splits/split_registry.jsonl.gz",
+      "encoding": "gzip"
+    },
+    {
+      "path": "analysis/benchmark_calibrated_fixed_rw_schedule/splits/task_variant_support.csv",
+      "bytes": 418,
+      "sha256": "1c604f6c2d03b5dfa292b1ce6d06f6912e7ca48e7a5de0b89eb01c8f537897a1",
+      "git_storage": "analysis/benchmark_calibrated_fixed_rw_schedule/splits/task_variant_support.csv",
+      "encoding": "identity"
+    },
+    {
+      "path": "analysis/benchmark_calibrated_fixed_rw_schedule/summaries/calibration_summary.md",
+      "bytes": 10180,
+      "sha256": "f09ff7bad1b0fb3be1e4814c978f6a24af22cd34ee137a99822d4ef5932e7fd5",
+      "git_storage": "analysis/benchmark_calibrated_fixed_rw_schedule/summaries/calibration_summary.md",
+      "encoding": "identity"
+    }
+  ]
+}

@@ -1,0 +1,3 @@
+# Frozen WRITE features
+
+F1 magnitude and log1p magnitudes; F2 token and pooled cosine directions; F3 update concentration/entropy/Gini; F4 exact centered covariance spectrum, effective rank, spectral entropy, pair cosine, variance and centroid distances for pre/FULL/READ_ONLY and changes; F5 fixed pre-query alignment; F7 original merged image-grid spatial concentration. Use all valid visual tokens and frozen last text/control query. F6 is optional and omitted. No target, correctness, dataset/source, future outcome, answer logit or action sequence enters these feature groups. Geometry is FP32 with nonnegative covariance-eigenvalue clipping for numerical roundoff; no dimensionality reduction. Full scalar list is in feature_group_manifest.json.

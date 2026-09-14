@@ -1,0 +1,69 @@
+{
+  "schema_version": "current_dense_regeneration_config_v1",
+  "model_name": "Qwen/Qwen2.5-VL-7B-Instruct",
+  "model_revision": "cc594898137f460bfe9f0759e9844b3ce807cfb5",
+  "processor_revision": "cc594898137f460bfe9f0759e9844b3ce807cfb5",
+  "dtype": "bfloat16",
+  "attention_implementation": "sdpa",
+  "processor_use_fast": false,
+  "image_processing": "native Qwen processor defaults",
+  "custom_max_image_tokens": null,
+  "generation": {
+    "do_sample": false,
+    "num_beams": 1,
+    "max_new_tokens": 16,
+    "temperature": null,
+    "top_p": null,
+    "use_cache": true
+  },
+  "evaluators": {
+    "gqa": {
+      "metric_name": "exact_match_ignore_case_punctuation",
+      "correctness_threshold": 1.0,
+      "normalization": "strip_lower_remove_ascii_punctuation_v1"
+    },
+    "chartqa": {
+      "metric_name": "relaxed_accuracy",
+      "correctness_threshold": 1.0,
+      "normalization": "chartqa_relaxed_numeric_or_lowercase_exact_v1"
+    },
+    "textvqa": {
+      "metric_name": "textvqa_evalai_consensus",
+      "correctness_threshold": 0.5,
+      "normalization": "textvqa_evalai_leave_one_out_consensus_v1"
+    }
+  },
+  "backend_settings": {
+    "cublas_workspace_config": ":4096:8",
+    "deterministic_algorithms": true,
+    "deterministic_warn_only": false,
+    "flash_sdp_enabled": true,
+    "memory_efficient_sdp_enabled": true,
+    "math_sdp_enabled": true,
+    "cudnn_sdp_enabled": true,
+    "matmul_allow_tf32": false,
+    "matmul_allow_fp16_reduced_precision_reduction": true,
+    "matmul_allow_bf16_reduced_precision_reduction": true,
+    "cudnn_allow_tf32": false,
+    "cudnn_benchmark": false,
+    "cudnn_deterministic": false,
+    "float32_matmul_precision": "highest"
+  },
+  "datasets": {
+    "gqa": 4000,
+    "chartqa": 2000,
+    "textvqa": 2000
+  },
+  "smoke_seed": 20260830,
+  "smoke_records_per_dataset_bucket": 4,
+  "execution_seed": 20260830,
+  "feature_shard_size": 64,
+  "feature_layers": 28,
+  "feature_hidden_size": 3584,
+  "split_seed": 20260830,
+  "split_targets": {
+    "train": 6400,
+    "val": 800,
+    "test": 800
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "schema_version": "stage1_trigger_map_audit_config_v1",
+  "run_id": "stage1_trigger_map_audit_v1",
+  "seed": 20260831,
+  "world_size": 4,
+  "reproducibility_records": 24,
+  "output_root": "analysis/dense_failure_stage1/trigger_map",
+  "sources": {
+    "plan": "plans/stage1_trigger_map_audit_plan.md",
+    "split_manifest": "analysis/dense_failure_stage1/layerwise_failure_probe/split_manifest.jsonl",
+    "feature_shard_manifest": "analysis/dense_failure_stage1/layerwise_failure_probe/feature_shard_manifest.json",
+    "phase48_contract": "analysis/dense_failure_stage1/layerwise_failure_probe/probe_config.json",
+    "shared_contract": "analysis/dense_failure_stage1/shared_global_gate/frozen_protocol.json",
+    "shared_checkpoint": "analysis/dense_failure_stage1/shared_global_gate/training/checkpoints/state_layer_random4.pt",
+    "shared_training_complete": "analysis/dense_failure_stage1/shared_global_gate/training/histories/state_layer_random4.complete.json",
+    "shared_normalization": "analysis/dense_failure_stage1/shared_global_gate/training/global_normalization.pt",
+    "validation_scores": "analysis/dense_failure_stage1/shared_global_gate/evaluation/validation_scores/state_layer_random4.jsonl",
+    "test_scores": "analysis/dense_failure_stage1/shared_global_gate/evaluation/test_scores.jsonl",
+    "phase52_selection": "analysis/dense_failure_stage1/gate_winner_selection/selected_winner.json",
+    "phase52_validation_summary": "analysis/dense_failure_stage1/gate_winner_selection/validation_summary.csv",
+    "phase52_test_comparison": "analysis/dense_failure_stage1/gate_winner_selection/test_comparison.csv",
+    "phase53_trigger_manifest": "analysis/dense_failure_stage1/treatment_correctability/gate_trigger_manifests/shared_random4.jsonl"
+  },
+  "gate": {
+    "name": "shared_random4",
+    "variant": "state_layer_random4",
+    "control_type": "global_raw_threshold",
+    "comparison": "strict_greater_than",
+    "layers": [
+      0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13,
+      14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27
+    ],
+    "threshold": 0.9253839280601031
+  },
+  "population": {
+    "records": 7999,
+    "splits": {
+      "train": 6399,
+      "val": 800,
+      "test": 800
+    }
+  },
+  "reproducibility": {
+    "selection": "deterministic_sha256_stratified_by_split_dataset_dense_label",
+    "records_per_cell": 2,
+    "absolute_probability_tolerance": 1e-6
+  }
+}

@@ -1,0 +1,667 @@
+{
+  "prior_native": {
+    "benchmark": "mmmu_pro_standard_test",
+    "benchmark_family": "mmmu_pro",
+    "correct": true,
+    "generated_answer": "B.",
+    "generated_token_ids": [
+      33,
+      13,
+      151645
+    ],
+    "metric_name": "mmmu_acc",
+    "score": 1.0,
+    "uid": "mmmu_pro_standard_test:mmmu_pro_standard_test_test_Music_53"
+  },
+  "replays": [
+    {
+      "native": {
+        "benchmark": "mmmu_pro_standard_test",
+        "consumed_image_sha256s": [
+          "fd7edbda1e8c1d96dada941fb84426766665d3cffefcb5c40aaace488c0ad04c",
+          "45d47500769bee6106ad82b71bcc25118284b8f102764e173e8d18123dae1d3b"
+        ],
+        "correct": true,
+        "generated_answer": "B.",
+        "generated_token_ids": [
+          33,
+          13,
+          151645
+        ],
+        "metric": "mmmu_acc",
+        "prompt_tokens": 373,
+        "score": 1.0,
+        "threshold": 1.0,
+        "uid": "mmmu_pro_standard_test:mmmu_pro_standard_test_test_Music_53",
+        "visual_tokens": 304
+      },
+      "native_equals_prior": true,
+      "repeat": 0,
+      "unified": {
+        "action_trace": [
+          {
+            "action": "FULL",
+            "cache_rows": 373,
+            "decoder_calls": 1,
+            "layer_index": 0,
+            "read_on": true,
+            "residual_rows": 373,
+            "write_on": true
+          },
+          {
+            "action": "FULL",
+            "cache_rows": 373,
+            "decoder_calls": 1,
+            "layer_index": 1,
+            "read_on": true,
+            "residual_rows": 373,
+            "write_on": true
+          },
+          {
+            "action": "FULL",
+            "cache_rows": 373,
+            "decoder_calls": 1,
+            "layer_index": 2,
+            "read_on": true,
+            "residual_rows": 373,
+            "write_on": true
+          },
+          {
+            "action": "FULL",
+            "cache_rows": 373,
+            "decoder_calls": 1,
+            "layer_index": 3,
+            "read_on": true,
+            "residual_rows": 373,
+            "write_on": true
+          },
+          {
+            "action": "FULL",
+            "cache_rows": 373,
+            "decoder_calls": 1,
+            "layer_index": 4,
+            "read_on": true,
+            "residual_rows": 373,
+            "write_on": true
+          },
+          {
+            "action": "FULL",
+            "cache_rows": 373,
+            "decoder_calls": 1,
+            "layer_index": 5,
+            "read_on": true,
+            "residual_rows": 373,
+            "write_on": true
+          },
+          {
+            "action": "FULL",
+            "cache_rows": 373,
+            "decoder_calls": 1,
+            "layer_index": 6,
+            "read_on": true,
+            "residual_rows": 373,
+            "write_on": true
+          },
+          {
+            "action": "FULL",
+            "cache_rows": 373,
+            "decoder_calls": 1,
+            "layer_index": 7,
+            "read_on": true,
+            "residual_rows": 373,
+            "write_on": true
+          },
+          {
+            "action": "FULL",
+            "cache_rows": 373,
+            "decoder_calls": 1,
+            "layer_index": 8,
+            "read_on": true,
+            "residual_rows": 373,
+            "write_on": true
+          },
+          {
+            "action": "FULL",
+            "cache_rows": 373,
+            "decoder_calls": 1,
+            "layer_index": 9,
+            "read_on": true,
+            "residual_rows": 373,
+            "write_on": true
+          },
+          {
+            "action": "FULL",
+            "cache_rows": 373,
+            "decoder_calls": 1,
+            "layer_index": 10,
+            "read_on": true,
+            "residual_rows": 373,
+            "write_on": true
+          },
+          {
+            "action": "FULL",
+            "cache_rows": 373,
+            "decoder_calls": 1,
+            "layer_index": 11,
+            "read_on": true,
+            "residual_rows": 373,
+            "write_on": true
+          },
+          {
+            "action": "FULL",
+            "cache_rows": 373,
+            "decoder_calls": 1,
+            "layer_index": 12,
+            "read_on": true,
+            "residual_rows": 373,
+            "write_on": true
+          },
+          {
+            "action": "FULL",
+            "cache_rows": 373,
+            "decoder_calls": 1,
+            "layer_index": 13,
+            "read_on": true,
+            "residual_rows": 373,
+            "write_on": true
+          },
+          {
+            "action": "FULL",
+            "cache_rows": 373,
+            "decoder_calls": 1,
+            "layer_index": 14,
+            "read_on": true,
+            "residual_rows": 373,
+            "write_on": true
+          },
+          {
+            "action": "FULL",
+            "cache_rows": 373,
+            "decoder_calls": 1,
+            "layer_index": 15,
+            "read_on": true,
+            "residual_rows": 373,
+            "write_on": true
+          },
+          {
+            "action": "FULL",
+            "cache_rows": 373,
+            "decoder_calls": 1,
+            "layer_index": 16,
+            "read_on": true,
+            "residual_rows": 373,
+            "write_on": true
+          },
+          {
+            "action": "FULL",
+            "cache_rows": 373,
+            "decoder_calls": 1,
+            "layer_index": 17,
+            "read_on": true,
+            "residual_rows": 373,
+            "write_on": true
+          },
+          {
+            "action": "FULL",
+            "cache_rows": 373,
+            "decoder_calls": 1,
+            "layer_index": 18,
+            "read_on": true,
+            "residual_rows": 373,
+            "write_on": true
+          },
+          {
+            "action": "FULL",
+            "cache_rows": 373,
+            "decoder_calls": 1,
+            "layer_index": 19,
+            "read_on": true,
+            "residual_rows": 373,
+            "write_on": true
+          },
+          {
+            "action": "FULL",
+            "cache_rows": 373,
+            "decoder_calls": 1,
+            "layer_index": 20,
+            "read_on": true,
+            "residual_rows": 373,
+            "write_on": true
+          },
+          {
+            "action": "FULL",
+            "cache_rows": 373,
+            "decoder_calls": 1,
+            "layer_index": 21,
+            "read_on": true,
+            "residual_rows": 373,
+            "write_on": true
+          },
+          {
+            "action": "FULL",
+            "cache_rows": 373,
+            "decoder_calls": 1,
+            "layer_index": 22,
+            "read_on": true,
+            "residual_rows": 373,
+            "write_on": true
+          },
+          {
+            "action": "FULL",
+            "cache_rows": 373,
+            "decoder_calls": 1,
+            "layer_index": 23,
+            "read_on": true,
+            "residual_rows": 373,
+            "write_on": true
+          },
+          {
+            "action": "FULL",
+            "cache_rows": 373,
+            "decoder_calls": 1,
+            "layer_index": 24,
+            "read_on": true,
+            "residual_rows": 373,
+            "write_on": true
+          },
+          {
+            "action": "FULL",
+            "cache_rows": 373,
+            "decoder_calls": 1,
+            "layer_index": 25,
+            "read_on": true,
+            "residual_rows": 373,
+            "write_on": true
+          },
+          {
+            "action": "FULL",
+            "cache_rows": 373,
+            "decoder_calls": 1,
+            "layer_index": 26,
+            "read_on": true,
+            "residual_rows": 373,
+            "write_on": true
+          },
+          {
+            "action": "FULL",
+            "cache_rows": 373,
+            "decoder_calls": 1,
+            "layer_index": 27,
+            "read_on": true,
+            "residual_rows": 373,
+            "write_on": true
+          }
+        ],
+        "actions": [
+          "FULL",
+          "FULL",
+          "FULL",
+          "FULL",
+          "FULL",
+          "FULL",
+          "FULL",
+          "FULL",
+          "FULL",
+          "FULL",
+          "FULL",
+          "FULL",
+          "FULL",
+          "FULL",
+          "FULL",
+          "FULL",
+          "FULL",
+          "FULL",
+          "FULL",
+          "FULL",
+          "FULL",
+          "FULL",
+          "FULL",
+          "FULL",
+          "FULL",
+          "FULL",
+          "FULL",
+          "FULL"
+        ],
+        "correct": true,
+        "generated_answer": "B",
+        "generated_token_ids": [
+          33,
+          151645
+        ],
+        "metric": "mmmu_acc",
+        "prompt_tokens": 373,
+        "q": -0.3140183389186859,
+        "score": 1.0,
+        "threshold": 1.0,
+        "visual_tokens": 304
+      },
+      "unified_equals_native": false
+    },
+    {
+      "native": {
+        "benchmark": "mmmu_pro_standard_test",
+        "consumed_image_sha256s": [
+          "fd7edbda1e8c1d96dada941fb84426766665d3cffefcb5c40aaace488c0ad04c",
+          "45d47500769bee6106ad82b71bcc25118284b8f102764e173e8d18123dae1d3b"
+        ],
+        "correct": true,
+        "generated_answer": "B.",
+        "generated_token_ids": [
+          33,
+          13,
+          151645
+        ],
+        "metric": "mmmu_acc",
+        "prompt_tokens": 373,
+        "score": 1.0,
+        "threshold": 1.0,
+        "uid": "mmmu_pro_standard_test:mmmu_pro_standard_test_test_Music_53",
+        "visual_tokens": 304
+      },
+      "native_equals_prior": true,
+      "repeat": 1,
+      "unified": {
+        "action_trace": [
+          {
+            "action": "FULL",
+            "cache_rows": 373,
+            "decoder_calls": 1,
+            "layer_index": 0,
+            "read_on": true,
+            "residual_rows": 373,
+            "write_on": true
+          },
+          {
+            "action": "FULL",
+            "cache_rows": 373,
+            "decoder_calls": 1,
+            "layer_index": 1,
+            "read_on": true,
+            "residual_rows": 373,
+            "write_on": true
+          },
+          {
+            "action": "FULL",
+            "cache_rows": 373,
+            "decoder_calls": 1,
+            "layer_index": 2,
+            "read_on": true,
+            "residual_rows": 373,
+            "write_on": true
+          },
+          {
+            "action": "FULL",
+            "cache_rows": 373,
+            "decoder_calls": 1,
+            "layer_index": 3,
+            "read_on": true,
+            "residual_rows": 373,
+            "write_on": true
+          },
+          {
+            "action": "FULL",
+            "cache_rows": 373,
+            "decoder_calls": 1,
+            "layer_index": 4,
+            "read_on": true,
+            "residual_rows": 373,
+            "write_on": true
+          },
+          {
+            "action": "FULL",
+            "cache_rows": 373,
+            "decoder_calls": 1,
+            "layer_index": 5,
+            "read_on": true,
+            "residual_rows": 373,
+            "write_on": true
+          },
+          {
+            "action": "FULL",
+            "cache_rows": 373,
+            "decoder_calls": 1,
+            "layer_index": 6,
+            "read_on": true,
+            "residual_rows": 373,
+            "write_on": true
+          },
+          {
+            "action": "FULL",
+            "cache_rows": 373,
+            "decoder_calls": 1,
+            "layer_index": 7,
+            "read_on": true,
+            "residual_rows": 373,
+            "write_on": true
+          },
+          {
+            "action": "FULL",
+            "cache_rows": 373,
+            "decoder_calls": 1,
+            "layer_index": 8,
+            "read_on": true,
+            "residual_rows": 373,
+            "write_on": true
+          },
+          {
+            "action": "FULL",
+            "cache_rows": 373,
+            "decoder_calls": 1,
+            "layer_index": 9,
+            "read_on": true,
+            "residual_rows": 373,
+            "write_on": true
+          },
+          {
+            "action": "FULL",
+            "cache_rows": 373,
+            "decoder_calls": 1,
+            "layer_index": 10,
+            "read_on": true,
+            "residual_rows": 373,
+            "write_on": true
+          },
+          {
+            "action": "FULL",
+            "cache_rows": 373,
+            "decoder_calls": 1,
+            "layer_index": 11,
+            "read_on": true,
+            "residual_rows": 373,
+            "write_on": true
+          },
+          {
+            "action": "FULL",
+            "cache_rows": 373,
+            "decoder_calls": 1,
+            "layer_index": 12,
+            "read_on": true,
+            "residual_rows": 373,
+            "write_on": true
+          },
+          {
+            "action": "FULL",
+            "cache_rows": 373,
+            "decoder_calls": 1,
+            "layer_index": 13,
+            "read_on": true,
+            "residual_rows": 373,
+            "write_on": true
+          },
+          {
+            "action": "FULL",
+            "cache_rows": 373,
+            "decoder_calls": 1,
+            "layer_index": 14,
+            "read_on": true,
+            "residual_rows": 373,
+            "write_on": true
+          },
+          {
+            "action": "FULL",
+            "cache_rows": 373,
+            "decoder_calls": 1,
+            "layer_index": 15,
+            "read_on": true,
+            "residual_rows": 373,
+            "write_on": true
+          },
+          {
+            "action": "FULL",
+            "cache_rows": 373,
+            "decoder_calls": 1,
+            "layer_index": 16,
+            "read_on": true,
+            "residual_rows": 373,
+            "write_on": true
+          },
+          {
+            "action": "FULL",
+            "cache_rows": 373,
+            "decoder_calls": 1,
+            "layer_index": 17,
+            "read_on": true,
+            "residual_rows": 373,
+            "write_on": true
+          },
+          {
+            "action": "FULL",
+            "cache_rows": 373,
+            "decoder_calls": 1,
+            "layer_index": 18,
+            "read_on": true,
+            "residual_rows": 373,
+            "write_on": true
+          },
+          {
+            "action": "FULL",
+            "cache_rows": 373,
+            "decoder_calls": 1,
+            "layer_index": 19,
+            "read_on": true,
+            "residual_rows": 373,
+            "write_on": true
+          },
+          {
+            "action": "FULL",
+            "cache_rows": 373,
+            "decoder_calls": 1,
+            "layer_index": 20,
+            "read_on": true,
+            "residual_rows": 373,
+            "write_on": true
+          },
+          {
+            "action": "FULL",
+            "cache_rows": 373,
+            "decoder_calls": 1,
+            "layer_index": 21,
+            "read_on": true,
+            "residual_rows": 373,
+            "write_on": true
+          },
+          {
+            "action": "FULL",
+            "cache_rows": 373,
+            "decoder_calls": 1,
+            "layer_index": 22,
+            "read_on": true,
+            "residual_rows": 373,
+            "write_on": true
+          },
+          {
+            "action": "FULL",
+            "cache_rows": 373,
+            "decoder_calls": 1,
+            "layer_index": 23,
+            "read_on": true,
+            "residual_rows": 373,
+            "write_on": true
+          },
+          {
+            "action": "FULL",
+            "cache_rows": 373,
+            "decoder_calls": 1,
+            "layer_index": 24,
+            "read_on": true,
+            "residual_rows": 373,
+            "write_on": true
+          },
+          {
+            "action": "FULL",
+            "cache_rows": 373,
+            "decoder_calls": 1,
+            "layer_index": 25,
+            "read_on": true,
+            "residual_rows": 373,
+            "write_on": true
+          },
+          {
+            "action": "FULL",
+            "cache_rows": 373,
+            "decoder_calls": 1,
+            "layer_index": 26,
+            "read_on": true,
+            "residual_rows": 373,
+            "write_on": true
+          },
+          {
+            "action": "FULL",
+            "cache_rows": 373,
+            "decoder_calls": 1,
+            "layer_index": 27,
+            "read_on": true,
+            "residual_rows": 373,
+            "write_on": true
+          }
+        ],
+        "actions": [
+          "FULL",
+          "FULL",
+          "FULL",
+          "FULL",
+          "FULL",
+          "FULL",
+          "FULL",
+          "FULL",
+          "FULL",
+          "FULL",
+          "FULL",
+          "FULL",
+          "FULL",
+          "FULL",
+          "FULL",
+          "FULL",
+          "FULL",
+          "FULL",
+          "FULL",
+          "FULL",
+          "FULL",
+          "FULL",
+          "FULL",
+          "FULL",
+          "FULL",
+          "FULL",
+          "FULL",
+          "FULL"
+        ],
+        "correct": true,
+        "generated_answer": "B",
+        "generated_token_ids": [
+          33,
+          151645
+        ],
+        "metric": "mmmu_acc",
+        "prompt_tokens": 373,
+        "q": -0.3140183389186859,
+        "score": 1.0,
+        "threshold": 1.0,
+        "visual_tokens": 304
+      },
+      "unified_equals_native": false
+    }
+  ],
+  "scope": "Dense-only focused validity check; no heldout intervention or calibration",
+  "split": "TEST",
+  "uid": "mmmu_pro_standard_test:mmmu_pro_standard_test_test_Music_53"
+}

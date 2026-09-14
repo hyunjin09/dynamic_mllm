@@ -1,0 +1,38 @@
+{
+  "schema_version": "stage2_mcts_failure_diagnosis_config_v1",
+  "run_id": "stage2_mcts_failure_diagnosis_v1",
+  "seed": 20260904,
+  "world_size": 4,
+  "primary_operating_point": "P90",
+  "secondary_operating_points": ["P98", "P95"],
+  "bootstrap_replicates": 2000,
+  "decision_thresholds": {
+    "oracle_mcts_non_full_reasonable_min": 0.30,
+    "prefix_restore_absolute_min": 0.10,
+    "negative_transfer_recall_delta_max": -0.05,
+    "ambiguity_error_gap_min": 0.10,
+    "ambiguity_valid_set_recovery_min": 0.10,
+    "later_intervention_recall_gap_min": 0.10
+  },
+  "sources": {
+    "plan": "plans/stage2_mcts_failure_diagnosis_plan.md",
+    "phase66_contract": "analysis/dense_failure_stage2/shared_union_training/frozen_protocol.json",
+    "phase66_artifact_manifest": "analysis/dense_failure_stage2/shared_union_training/artifact_manifest.json",
+    "union_preservation": "analysis/dense_failure_stage2/shared_union_training/corpus/union_preservation_manifest.jsonl",
+    "union_single": "analysis/dense_failure_stage2/shared_union_training/corpus/union_single_manifest.jsonl",
+    "union_mcts": "analysis/dense_failure_stage2/shared_union_training/corpus/union_mcts_manifest.jsonl",
+    "train_samples": "analysis/dense_failure_stage2/shared_union_training/work/train_samples.jsonl",
+    "checkpoint_A": "analysis/dense_failure_stage2/shared_union_training/experiment_A_single/training/final_checkpoint.pt",
+    "checkpoint_A_selection": "analysis/dense_failure_stage2/shared_union_training/experiment_A_single/training/selected_checkpoint.json",
+    "checkpoint_B": "analysis/dense_failure_stage2/shared_union_training/experiment_B_single_plus_mcts/training/final_checkpoint.pt",
+    "checkpoint_B_selection": "analysis/dense_failure_stage2/shared_union_training/experiment_B_single_plus_mcts/training/selected_checkpoint.json",
+    "rollout_A_P90": "analysis/dense_failure_stage2/shared_union_training/experiment_A_single/rollout/P90/per_sample_results.jsonl",
+    "rollout_B_P90": "analysis/dense_failure_stage2/shared_union_training/experiment_B_single_plus_mcts/rollout/P90/per_sample_results.jsonl",
+    "phase65_contract": "analysis/dense_failure_stage2/robust_gate_corrective_search/frozen_protocol.json",
+    "phase65_artifact_manifest": "analysis/dense_failure_stage2/robust_gate_corrective_search/artifact_manifest.json",
+    "phase65_route_store": "analysis/dense_failure_stage2/robust_gate_corrective_search/routes/global_route_store.jsonl",
+    "phase65_state_schema": "analysis/dense_failure_stage2/robust_gate_corrective_search/states/feature_schema.json",
+    "phase65_state_manifest": "analysis/dense_failure_stage2/robust_gate_corrective_search/states/routed_state_manifest.jsonl"
+  },
+  "output_root": "analysis/dense_failure_stage2/mcts_failure_diagnosis"
+}

@@ -1,0 +1,15 @@
+split,benchmark,uids,image_groups
+CAL,chartqa,256,118
+CAL,mmmu_pro_standard_test,128,127
+CAL,mmmu_pro_vision_test,128,127
+CAL,pope_adversarial,84,14
+CAL,pope_popular,84,14
+CAL,pope_random,84,14
+CAL,textvqa,255,160
+TEST,chartqa,2500,1509
+TEST,mmmu_pro_standard_test,1602,1479
+TEST,mmmu_pro_vision_test,1602,1479
+TEST,pope_adversarial,2916,486
+TEST,pope_popular,2916,486
+TEST,pope_random,2916,486
+TEST,textvqa,5000,3166

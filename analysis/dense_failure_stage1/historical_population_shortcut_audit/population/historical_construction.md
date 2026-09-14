@@ -1,0 +1,9 @@
+# Historical Population Construction
+
+The historical three-task population came from the frozen 10,000-row `complete_correct`/`complete_wrong` manifest; excluding DocVQA leaves fixed quotas of 2,000 C + 2,000 W GQA and 1,000 C + 1,000 W for both ChartQA and TextVQA. Bucket membership was the previous Qwen dense all-on outcome (`source_full_score` against each task threshold), so the nearly 50:50 population is by construction, not measured natural prevalence. One ChartQA-C image was unavailable on this server, leaving 7,999 current executions (3,999 C / 4,000 W).
+
+The portable manifest records the originating dataset split, image SHA-256, question, previous prediction/score, and deterministic source split. The six raw quota files and any larger pre-quota harvesting pool are absent. Consequently the audit can reconstruct the fixed quota and outcome filter exactly but cannot estimate `P(selected | nuisance, correctness)` against a natural preselection population.
+
+Phase 48 later made a new deterministic greedy split with seed `20260830`, stratified by dataset × current dense outcome and grouped by SHA-256 image content. It contains 6,399/800/800 train/val/test rows with zero UID and image-content-group overlap. Every split is a held-out identity sample from the same historical quota/source mechanism; validation success is therefore same-regime generalization, not evidence of robustness to a new source.
+
+The canonical pool differs fundamentally: its 4,000 candidates were frozen outcome-blind from pinned canonical training sources, excluded all historical UIDs/content hashes, matched the 2,000/1,000/1,000 task quotas and observable source strata, and were not rebalanced after current dense inference. The candidate audit records 116797 eligible GQA questions and 1200 final eligible ChartQA rows; current outcomes are allowed to be naturally imbalanced.

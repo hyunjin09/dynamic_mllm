@@ -1,0 +1,15 @@
+{
+  "calibration_execution_manifests": {
+    "R": "c931ab9ab8189d4b0c162f8bfc18db22ba5fdfd8548758d02851b08bd7a31b48",
+    "W": "3e01a137e58a03c82651f439873daa55d9a9ea0916f40f239c89997f9770e907"
+  },
+  "contract_sha256": "b995483d75b300ef0170db9f06eff2a68801ba4f78fcb922e17951e96ee7492e",
+  "files": {
+    "schedules/benchmark_specific_schedules.json": "c3987eb0f65f192c07da1565dfd389b857324afdb4d2817ea5ddd699d72ade21",
+    "schedules/global_schedule.json": "72df2db11333a333fda23de7ca550bceaa9d0787d75c500b3581e5705b3e34d6",
+    "schedules/random_schedule_registry.jsonl": "5d80fe8d1752a39e57b3ca3fb4e330e935ad2aa9999407db5d20d5f5c8f80977"
+  },
+  "frozen_unix": 1789359851.2232919,
+  "no_test_intervention_execution_yet": true,
+  "passed": true
+}
