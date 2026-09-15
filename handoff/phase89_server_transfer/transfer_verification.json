@@ -1,0 +1,39 @@
+{
+  "source_metadata_files_verified": 10467,
+  "fresh_restore_precheck": {
+    "verified_files": 10467,
+    "missing_files": 10406,
+    "restored_files": 0,
+    "inference_launched": false,
+    "complete_route_replay": false,
+    "note": "Metadata validity does not establish destination runtime parity."
+  },
+  "fresh_restore_result": {
+    "verified_files": 10467,
+    "missing_files": 10406,
+    "restored_files": 10406,
+    "inference_launched": false,
+    "complete_route_replay": false,
+    "note": "Metadata validity does not establish destination runtime parity."
+  },
+  "fresh_restore_postcheck": {
+    "verified_files": 10467,
+    "missing_files": 0,
+    "restored_files": 0,
+    "inference_launched": false,
+    "complete_route_replay": false,
+    "note": "Metadata validity does not establish destination runtime parity."
+  },
+  "conflicting_destination_preserved": true,
+  "cpu_tests_passed": 20,
+  "external_files_verified": 22035,
+  "external_hash_failures": 0,
+  "source_raw_route_records_validated": 734481,
+  "all_jobs_stopped": true,
+  "large_payloads_uploaded": false,
+  "staged_source_payload_audit": "PASS: no model weights, bulk routed checkpoints, prepared source shards, machine-local policies or environments",
+  "credential_scan": "PASS",
+  "frozen_executor_reference_hashes_verified": 51,
+  "whitespace_check": "PASS excluding three preserved pre-existing blank EOF lines in exact runtime_snapshot sources",
+  "external_transfer_method": "rsync; file lists included; no large external payload uploaded"
+}

@@ -1,8 +1,23 @@
 # External Assets for a Second Server
 
-## Current Phase88 transfer
+## Current Phase89 transfer: stopped3B corpus replay
 
-Start with `handoff/phase88_server_transfer/README.md`. That runbook lists the current raw cache, exact model, absolute-path constraints, environment snapshot and final-sync requirement. The older sizes and training assets below are historical; they are not the minimum Phase88 transfer set. Source computation is still active, and Git alone does not include its raw UID records.
+Start with `handoff/phase89_server_transfer/README.md`. Git includes exact
+implementation, frozen metadata, Dense labels and compact execution evidence.
+Prepared source shards, partial routed checkpoints, canonical package assets
+and the exact3B model remain external. `external_files.jsonl.gz` in the handoff
+lists every required file with SHA256; `external_assets.json` gives exact sizes.
+Transfer without deleting or overwriting conflicting destination work. Source
+jobs2994/2957 are stopped; this handoff does not authorize a restart. Establish
+destination paths/runtime/parity before treating source labels as local labels.
+
+## Historical Phase88 transfer
+
+`handoff/phase88_server_transfer/README.md` lists its source raw cache, exact model,
+absolute-path constraints and snapshot environment. Computation was active when
+that earlier snapshot was taken; current source completion remains unknown.
+Git alone does not include its raw UID records. The older sizes and training
+assets below are historical, not the minimum Phase89 or Phase88 transfer set.
 
 These payloads are intentionally excluded from Git. Transfer only the subsets
 needed for the next action.

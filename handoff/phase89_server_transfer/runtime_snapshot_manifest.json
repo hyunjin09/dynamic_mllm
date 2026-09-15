@@ -1,0 +1,260 @@
+{
+  "destination_installation": "Reference only; canonical package paths are not automatically rewritten.",
+  "files": [
+    {
+      "git_path": "handoff/phase89_server_transfer/runtime_snapshot/dvr_qwen/__init__.py",
+      "sha256": "d5f37bf44713e8d7465d41fd553ec05e4c968517348e6e9a0a36844ff5bc54eb",
+      "source": "/data/research/datasets/Sparse_Visual_Contextualization/Qwen2.5-VL-3B-Instruct/07_RESUME_TOOLS/dvr_qwen/__init__.py"
+    },
+    {
+      "git_path": "handoff/phase89_server_transfer/runtime_snapshot/dvr_qwen/attention.py",
+      "sha256": "53d150a8332dd8f89bf1b5f9861742bd37959b64b3d87989459a5b0d1c5769a0",
+      "source": "/data/research/datasets/Sparse_Visual_Contextualization/Qwen2.5-VL-3B-Instruct/07_RESUME_TOOLS/dvr_qwen/attention.py"
+    },
+    {
+      "git_path": "handoff/phase89_server_transfer/runtime_snapshot/dvr_qwen/binary_generate.py",
+      "sha256": "3e151f4ba94ae876d822841c77a5ef90759434fd57298e5793e9211ace0248af",
+      "source": "/data/research/datasets/Sparse_Visual_Contextualization/Qwen2.5-VL-3B-Instruct/07_RESUME_TOOLS/dvr_qwen/binary_generate.py"
+    },
+    {
+      "git_path": "handoff/phase89_server_transfer/runtime_snapshot/dvr_qwen/binary_layer.py",
+      "sha256": "a2bb823251a147240f5d714e4a9f914b93b8d1d520000c947cb2445a3fde85c2",
+      "source": "/data/research/datasets/Sparse_Visual_Contextualization/Qwen2.5-VL-3B-Instruct/07_RESUME_TOOLS/dvr_qwen/binary_layer.py"
+    },
+    {
+      "git_path": "handoff/phase89_server_transfer/runtime_snapshot/dvr_qwen/cache.py",
+      "sha256": "91572cdcfe13e752f5712f410e73b8a85fb5de826b55bb9bdeff1be785519fd4",
+      "source": "/data/research/datasets/Sparse_Visual_Contextualization/Qwen2.5-VL-3B-Instruct/07_RESUME_TOOLS/dvr_qwen/cache.py"
+    },
+    {
+      "git_path": "handoff/phase89_server_transfer/runtime_snapshot/dvr_qwen/eval_metrics.py",
+      "sha256": "6626d84b7c9457ab192cbba716b0d276ebcfa5865cb18e8e136edba3f666f4ef",
+      "source": "/data/research/datasets/Sparse_Visual_Contextualization/Qwen2.5-VL-3B-Instruct/07_RESUME_TOOLS/dvr_qwen/eval_metrics.py"
+    },
+    {
+      "git_path": "handoff/phase89_server_transfer/runtime_snapshot/dvr_qwen/fallback_gate.py",
+      "sha256": "ec8758799faeb5809b1dcc651d9b7dbfa27d1df13c50fab07167d1a399bd77ab",
+      "source": "/data/research/datasets/Sparse_Visual_Contextualization/Qwen2.5-VL-3B-Instruct/07_RESUME_TOOLS/dvr_qwen/fallback_gate.py"
+    },
+    {
+      "git_path": "handoff/phase89_server_transfer/runtime_snapshot/dvr_qwen/generate.py",
+      "sha256": "ba9da9870172724f0429f31e0dd4f7f08a6674e1a0059775790ace1068d1d34f",
+      "source": "/data/research/datasets/Sparse_Visual_Contextualization/Qwen2.5-VL-3B-Instruct/07_RESUME_TOOLS/dvr_qwen/generate.py"
+    },
+    {
+      "git_path": "handoff/phase89_server_transfer/runtime_snapshot/dvr_qwen/hamming1_trajectory_preference.py",
+      "sha256": "23eb95a4e5661915da72c03f9d68ed59368d71613bf74d63a518c9818e80a7b0",
+      "source": "/data/research/datasets/Sparse_Visual_Contextualization/Qwen2.5-VL-3B-Instruct/07_RESUME_TOOLS/dvr_qwen/hamming1_trajectory_preference.py"
+    },
+    {
+      "git_path": "handoff/phase89_server_transfer/runtime_snapshot/dvr_qwen/heldout_reasoning_metrics.py",
+      "sha256": "4109c10dc80ab478839d1ffa3325fda8d8cdddf21473de0b95fa1274e06f5caa",
+      "source": "/data/research/datasets/Sparse_Visual_Contextualization/Qwen2.5-VL-3B-Instruct/07_RESUME_TOOLS/dvr_qwen/heldout_reasoning_metrics.py"
+    },
+    {
+      "git_path": "handoff/phase89_server_transfer/runtime_snapshot/dvr_qwen/input_builder.py",
+      "sha256": "bb41444526406653ba184d7e303d549bb8a69b9aa1c20e23003c355724bf6f17",
+      "source": "/data/research/datasets/Sparse_Visual_Contextualization/Qwen2.5-VL-3B-Instruct/07_RESUME_TOOLS/dvr_qwen/input_builder.py"
+    },
+    {
+      "git_path": "handoff/phase89_server_transfer/runtime_snapshot/dvr_qwen/local_counterfactual_pairs.py",
+      "sha256": "ec502ec26b9d8f4b19ed225151954a315bde786423061f8f462e86fc0c88faf6",
+      "source": "/data/research/datasets/Sparse_Visual_Contextualization/Qwen2.5-VL-3B-Instruct/07_RESUME_TOOLS/dvr_qwen/local_counterfactual_pairs.py"
+    },
+    {
+      "git_path": "handoff/phase89_server_transfer/runtime_snapshot/dvr_qwen/local_counterfactual_training.py",
+      "sha256": "7170ca15e3def171d82f218c3e316bef60a030ea591d6561c08dba4e0dc0023a",
+      "source": "/data/research/datasets/Sparse_Visual_Contextualization/Qwen2.5-VL-3B-Instruct/07_RESUME_TOOLS/dvr_qwen/local_counterfactual_training.py"
+    },
+    {
+      "git_path": "handoff/phase89_server_transfer/runtime_snapshot/dvr_qwen/local_counterfactual_trajectory.py",
+      "sha256": "f8efa4c2527b1d55226ae1757dc095104e21365d554f8a60a3988f11ca4e7f1e",
+      "source": "/data/research/datasets/Sparse_Visual_Contextualization/Qwen2.5-VL-3B-Instruct/07_RESUME_TOOLS/dvr_qwen/local_counterfactual_trajectory.py"
+    },
+    {
+      "git_path": "handoff/phase89_server_transfer/runtime_snapshot/dvr_qwen/losses.py",
+      "sha256": "da47acc1e00db52b682a35dc1ce477c7b4af77512ba4bb1a4b686df77f86dc20",
+      "source": "/data/research/datasets/Sparse_Visual_Contextualization/Qwen2.5-VL-3B-Instruct/07_RESUME_TOOLS/dvr_qwen/losses.py"
+    },
+    {
+      "git_path": "handoff/phase89_server_transfer/runtime_snapshot/dvr_qwen/masks.py",
+      "sha256": "3641cc647e68623c9bee6bf0e1e5a8d2c1588b5fbd2c8644f29b59e671600426",
+      "source": "/data/research/datasets/Sparse_Visual_Contextualization/Qwen2.5-VL-3B-Instruct/07_RESUME_TOOLS/dvr_qwen/masks.py"
+    },
+    {
+      "git_path": "handoff/phase89_server_transfer/runtime_snapshot/dvr_qwen/mce_inventory.py",
+      "sha256": "331ee76a5683d2d9f81880fa2f085cdcede3c29598ef4fa5e2b0e5cca7c48caa",
+      "source": "/data/research/datasets/Sparse_Visual_Contextualization/Qwen2.5-VL-3B-Instruct/07_RESUME_TOOLS/dvr_qwen/mce_inventory.py"
+    },
+    {
+      "git_path": "handoff/phase89_server_transfer/runtime_snapshot/dvr_qwen/mce_stage0.py",
+      "sha256": "bf58bacfa1e55d95fcb209a8dce2dab9c320b4caea88b2c659d2397564bad2aa",
+      "source": "/data/research/datasets/Sparse_Visual_Contextualization/Qwen2.5-VL-3B-Instruct/07_RESUME_TOOLS/dvr_qwen/mce_stage0.py"
+    },
+    {
+      "git_path": "handoff/phase89_server_transfer/runtime_snapshot/dvr_qwen/mce_stage3.py",
+      "sha256": "3b34d54c5dcba7306c9a06514dd8c3dfce02e4f00eb2a6eb5a726764bd6717b3",
+      "source": "/data/research/datasets/Sparse_Visual_Contextualization/Qwen2.5-VL-3B-Instruct/07_RESUME_TOOLS/dvr_qwen/mce_stage3.py"
+    },
+    {
+      "git_path": "handoff/phase89_server_transfer/runtime_snapshot/dvr_qwen/mce_stage4.py",
+      "sha256": "2e062758a9702e4e3a5e09f265d483f952727278c8f5bb5b5b68432adbb9b02b",
+      "source": "/data/research/datasets/Sparse_Visual_Contextualization/Qwen2.5-VL-3B-Instruct/07_RESUME_TOOLS/dvr_qwen/mce_stage4.py"
+    },
+    {
+      "git_path": "handoff/phase89_server_transfer/runtime_snapshot/dvr_qwen/mce_stage5.py",
+      "sha256": "974ee705c20291c64434ad4880f38eab8f761e486b7845dbb6558e5d2ec86d2d",
+      "source": "/data/research/datasets/Sparse_Visual_Contextualization/Qwen2.5-VL-3B-Instruct/07_RESUME_TOOLS/dvr_qwen/mce_stage5.py"
+    },
+    {
+      "git_path": "handoff/phase89_server_transfer/runtime_snapshot/dvr_qwen/mce_stage6.py",
+      "sha256": "29bba6820743263e6afdc0dfc77429c83078cd65d29dcacb09398fa6e28fe07f",
+      "source": "/data/research/datasets/Sparse_Visual_Contextualization/Qwen2.5-VL-3B-Instruct/07_RESUME_TOOLS/dvr_qwen/mce_stage6.py"
+    },
+    {
+      "git_path": "handoff/phase89_server_transfer/runtime_snapshot/dvr_qwen/mce_stage7.py",
+      "sha256": "7349d8cd2b3ad927e44748baa3a40925c488b99c5b14b27768ae7d0bddb9a719",
+      "source": "/data/research/datasets/Sparse_Visual_Contextualization/Qwen2.5-VL-3B-Instruct/07_RESUME_TOOLS/dvr_qwen/mce_stage7.py"
+    },
+    {
+      "git_path": "handoff/phase89_server_transfer/runtime_snapshot/dvr_qwen/mce_stage8.py",
+      "sha256": "bb39eeaf9d751383aa4be29577ebe972401559a9b35af86245e508eee4712428",
+      "source": "/data/research/datasets/Sparse_Visual_Contextualization/Qwen2.5-VL-3B-Instruct/07_RESUME_TOOLS/dvr_qwen/mce_stage8.py"
+    },
+    {
+      "git_path": "handoff/phase89_server_transfer/runtime_snapshot/dvr_qwen/modeling_dvr_qwen2_5_vl.py",
+      "sha256": "c22d0ee8d504f86944ec80d435c6a04b985eeec86411bab77d10d8b848834973",
+      "source": "/data/research/datasets/Sparse_Visual_Contextualization/Qwen2.5-VL-3B-Instruct/07_RESUME_TOOLS/dvr_qwen/modeling_dvr_qwen2_5_vl.py"
+    },
+    {
+      "git_path": "handoff/phase89_server_transfer/runtime_snapshot/dvr_qwen/online_route_beam.py",
+      "sha256": "db59220a52c0ac5d0895df1c4d5e406880070635e8d5e49bdf18c1c80cce6e3a",
+      "source": "/data/research/datasets/Sparse_Visual_Contextualization/Qwen2.5-VL-3B-Instruct/07_RESUME_TOOLS/dvr_qwen/online_route_beam.py"
+    },
+    {
+      "git_path": "handoff/phase89_server_transfer/runtime_snapshot/dvr_qwen/phase5b_v3_2_harm_aware.py",
+      "sha256": "81c3ffc3c3a8feae978ad0e2240d957cecec7df0a7802a32b8758b6eead8b25e",
+      "source": "/data/research/datasets/Sparse_Visual_Contextualization/Qwen2.5-VL-3B-Instruct/07_RESUME_TOOLS/dvr_qwen/phase5b_v3_2_harm_aware.py"
+    },
+    {
+      "git_path": "handoff/phase89_server_transfer/runtime_snapshot/dvr_qwen/phase5b_v3_3_failure_analysis.py",
+      "sha256": "04bd551313c7c7ce4d46dd5ba12f80f03f09534b305e877808919ebcdc6d87fd",
+      "source": "/data/research/datasets/Sparse_Visual_Contextualization/Qwen2.5-VL-3B-Instruct/07_RESUME_TOOLS/dvr_qwen/phase5b_v3_3_failure_analysis.py"
+    },
+    {
+      "git_path": "handoff/phase89_server_transfer/runtime_snapshot/dvr_qwen/phase5b_v3_4_relative.py",
+      "sha256": "9958d368ac42a56a91e6784ee70cb875d3a7e3d0f62ecf8c6b0f747fbb8a223c",
+      "source": "/data/research/datasets/Sparse_Visual_Contextualization/Qwen2.5-VL-3B-Instruct/07_RESUME_TOOLS/dvr_qwen/phase5b_v3_4_relative.py"
+    },
+    {
+      "git_path": "handoff/phase89_server_transfer/runtime_snapshot/dvr_qwen/phase5b_v3_5_listwise.py",
+      "sha256": "1051c80210a8e2d8d067bf642f76c6dc557b4d055c075466ddbf70d6da2f8f78",
+      "source": "/data/research/datasets/Sparse_Visual_Contextualization/Qwen2.5-VL-3B-Instruct/07_RESUME_TOOLS/dvr_qwen/phase5b_v3_5_listwise.py"
+    },
+    {
+      "git_path": "handoff/phase89_server_transfer/runtime_snapshot/dvr_qwen/phase5b_v3_6_preference.py",
+      "sha256": "f2a8192b0ecc11e869ff63e2fd56b6650f01ef56ecde453335edf0ea762d50a3",
+      "source": "/data/research/datasets/Sparse_Visual_Contextualization/Qwen2.5-VL-3B-Instruct/07_RESUME_TOOLS/dvr_qwen/phase5b_v3_6_preference.py"
+    },
+    {
+      "git_path": "handoff/phase89_server_transfer/runtime_snapshot/dvr_qwen/phase5b_v3_6_separability.py",
+      "sha256": "34a7aed385f9d1ddccbfec00cbccec20430259ced325d9a0f5f77233fae5a943",
+      "source": "/data/research/datasets/Sparse_Visual_Contextualization/Qwen2.5-VL-3B-Instruct/07_RESUME_TOOLS/dvr_qwen/phase5b_v3_6_separability.py"
+    },
+    {
+      "git_path": "handoff/phase89_server_transfer/runtime_snapshot/dvr_qwen/phase5b_v3_7_content_probe.py",
+      "sha256": "b1bd7915304506d10bb756dbf2fef537e96674b9c575125fcbe83a2dab416405",
+      "source": "/data/research/datasets/Sparse_Visual_Contextualization/Qwen2.5-VL-3B-Instruct/07_RESUME_TOOLS/dvr_qwen/phase5b_v3_7_content_probe.py"
+    },
+    {
+      "git_path": "handoff/phase89_server_transfer/runtime_snapshot/dvr_qwen/phase5b_v3_7_stratification.py",
+      "sha256": "49e94091b0885fcc4177391342c140c002c25b5dfc70608aa69b762427546d96",
+      "source": "/data/research/datasets/Sparse_Visual_Contextualization/Qwen2.5-VL-3B-Instruct/07_RESUME_TOOLS/dvr_qwen/phase5b_v3_7_stratification.py"
+    },
+    {
+      "git_path": "handoff/phase89_server_transfer/runtime_snapshot/dvr_qwen/phase5b_v3_7_transfer.py",
+      "sha256": "cc96572ae184e70e0d7757abcba1cd51e4e64e10af9cd93ead5865e779465701",
+      "source": "/data/research/datasets/Sparse_Visual_Contextualization/Qwen2.5-VL-3B-Instruct/07_RESUME_TOOLS/dvr_qwen/phase5b_v3_7_transfer.py"
+    },
+    {
+      "git_path": "handoff/phase89_server_transfer/runtime_snapshot/dvr_qwen/phase5b_v3_utility.py",
+      "sha256": "1dc2cfb75c317d345b23de9deacb817ea8d3ef4201566556c08331bf9a08f247",
+      "source": "/data/research/datasets/Sparse_Visual_Contextualization/Qwen2.5-VL-3B-Instruct/07_RESUME_TOOLS/dvr_qwen/phase5b_v3_utility.py"
+    },
+    {
+      "git_path": "handoff/phase89_server_transfer/runtime_snapshot/dvr_qwen/preference_gt.py",
+      "sha256": "e8086b627e51488fa7cba876faf1dbdefe3f2f209f047c5680c4c8fc3753a0a0",
+      "source": "/data/research/datasets/Sparse_Visual_Contextualization/Qwen2.5-VL-3B-Instruct/07_RESUME_TOOLS/dvr_qwen/preference_gt.py"
+    },
+    {
+      "git_path": "handoff/phase89_server_transfer/runtime_snapshot/dvr_qwen/preference_pair_analysis.py",
+      "sha256": "92c60af1b331bd4394ea7af5e582f844db716d5671a5da71cbf13d4cf8122da1",
+      "source": "/data/research/datasets/Sparse_Visual_Contextualization/Qwen2.5-VL-3B-Instruct/07_RESUME_TOOLS/dvr_qwen/preference_pair_analysis.py"
+    },
+    {
+      "git_path": "handoff/phase89_server_transfer/runtime_snapshot/dvr_qwen/preference_router_probe.py",
+      "sha256": "ef5c96adea5a8fb2e4b5d91ed3cb38a8825e99fc04aa65fa1397f1b5dca79396",
+      "source": "/data/research/datasets/Sparse_Visual_Contextualization/Qwen2.5-VL-3B-Instruct/07_RESUME_TOOLS/dvr_qwen/preference_router_probe.py"
+    },
+    {
+      "git_path": "handoff/phase89_server_transfer/runtime_snapshot/dvr_qwen/process_name.py",
+      "sha256": "b9e0600a0c191fb8f4ac22610af65edaddd419f1f945b6ea04bef02456078aa6",
+      "source": "/data/research/datasets/Sparse_Visual_Contextualization/Qwen2.5-VL-3B-Instruct/07_RESUME_TOOLS/dvr_qwen/process_name.py"
+    },
+    {
+      "git_path": "handoff/phase89_server_transfer/runtime_snapshot/dvr_qwen/route_proposal.py",
+      "sha256": "c14123586a59a6f99d66fb3478e7ab43b2a88b62c6754e86209f5ee1bdb06684",
+      "source": "/data/research/datasets/Sparse_Visual_Contextualization/Qwen2.5-VL-3B-Instruct/07_RESUME_TOOLS/dvr_qwen/route_proposal.py"
+    },
+    {
+      "git_path": "handoff/phase89_server_transfer/runtime_snapshot/dvr_qwen/route_selector.py",
+      "sha256": "7a8d3036a7c5ae542619c2746b31f6d201a67ad610183f57418c8a7934830ee1",
+      "source": "/data/research/datasets/Sparse_Visual_Contextualization/Qwen2.5-VL-3B-Instruct/07_RESUME_TOOLS/dvr_qwen/route_selector.py"
+    },
+    {
+      "git_path": "handoff/phase89_server_transfer/runtime_snapshot/dvr_qwen/router_checkpoint_selection.py",
+      "sha256": "bd08b009e0fd432f30ec24d9f56a0750f883bdd151ffb4f5a29866e844aa9a93",
+      "source": "/data/research/datasets/Sparse_Visual_Contextualization/Qwen2.5-VL-3B-Instruct/07_RESUME_TOOLS/dvr_qwen/router_checkpoint_selection.py"
+    },
+    {
+      "git_path": "handoff/phase89_server_transfer/runtime_snapshot/dvr_qwen/router_data.py",
+      "sha256": "7aeb642c5dc0805746dd18f6c061594bfb086f5d69152b30cdfb318418e8f2ad",
+      "source": "/data/research/datasets/Sparse_Visual_Contextualization/Qwen2.5-VL-3B-Instruct/07_RESUME_TOOLS/dvr_qwen/router_data.py"
+    },
+    {
+      "git_path": "handoff/phase89_server_transfer/runtime_snapshot/dvr_qwen/router_features.py",
+      "sha256": "174d8e8d53403f8d113856e94a4d467210f0b5834babe80383fe485d91540fce",
+      "source": "/data/research/datasets/Sparse_Visual_Contextualization/Qwen2.5-VL-3B-Instruct/07_RESUME_TOOLS/dvr_qwen/router_features.py"
+    },
+    {
+      "git_path": "handoff/phase89_server_transfer/runtime_snapshot/dvr_qwen/router_generation_ranking.py",
+      "sha256": "b39f06bdb190a85eaa91e6d799f2c7be4db41dce024f2a4184aeecf97dc890a3",
+      "source": "/data/research/datasets/Sparse_Visual_Contextualization/Qwen2.5-VL-3B-Instruct/07_RESUME_TOOLS/dvr_qwen/router_generation_ranking.py"
+    },
+    {
+      "git_path": "handoff/phase89_server_transfer/runtime_snapshot/dvr_qwen/router_training.py",
+      "sha256": "f45d63d4af59bb34e55b5a1b06deee4566d792be33a4738a4de49262aa2be620",
+      "source": "/data/research/datasets/Sparse_Visual_Contextualization/Qwen2.5-VL-3B-Instruct/07_RESUME_TOOLS/dvr_qwen/router_training.py"
+    },
+    {
+      "git_path": "handoff/phase89_server_transfer/runtime_snapshot/dvr_qwen/routing.py",
+      "sha256": "2c511c56ec104b842a2af9a234bc8631b4112bf77911949e7e63a03dc482555b",
+      "source": "/data/research/datasets/Sparse_Visual_Contextualization/Qwen2.5-VL-3B-Instruct/07_RESUME_TOOLS/dvr_qwen/routing.py"
+    },
+    {
+      "git_path": "handoff/phase89_server_transfer/runtime_snapshot/dvr_qwen/scripts/cache_preference_gt_router_features.py",
+      "sha256": "49974154bb7e0daeccfd36b4e2f1585e6fb5c270635f410845b53b2ceaf1cba5",
+      "source": "/data/research/datasets/Sparse_Visual_Contextualization/Qwen2.5-VL-3B-Instruct/07_RESUME_TOOLS/dvr_qwen/scripts/cache_preference_gt_router_features.py"
+    },
+    {
+      "git_path": "handoff/phase89_server_transfer/runtime_snapshot/dvr_qwen/set_valued_route_sft.py",
+      "sha256": "9e9004e432ec7196d85c309b005feeed870095bdaa5e60499da5616ef7fa20b4",
+      "source": "/data/research/datasets/Sparse_Visual_Contextualization/Qwen2.5-VL-3B-Instruct/07_RESUME_TOOLS/dvr_qwen/set_valued_route_sft.py"
+    },
+    {
+      "git_path": "handoff/phase89_server_transfer/runtime_snapshot/dvr_qwen/split_scatter.py",
+      "sha256": "2fb29c7e424c8b433955e41b6bdfcf1540c854a319f83c2a66d85e74ddd7daa4",
+      "source": "/data/research/datasets/Sparse_Visual_Contextualization/Qwen2.5-VL-3B-Instruct/07_RESUME_TOOLS/dvr_qwen/split_scatter.py"
+    }
+  ]
+}

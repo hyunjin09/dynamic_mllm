@@ -1,0 +1,134 @@
+{
+  "code": [
+    {
+      "path": ".venv/lib/python3.12/site-packages/transformers/generation/utils.py",
+      "expected": "9f248fb51b03a41f07f841bfeedd65ca296afd68a836e48085f66ada7c29215a",
+      "actual": "9f248fb51b03a41f07f841bfeedd65ca296afd68a836e48085f66ada7c29215a",
+      "match": true
+    },
+    {
+      "path": ".venv/lib/python3.12/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py",
+      "expected": "c5c8e7a842ff8132d3b07c62c8612ac977b5895cca874bd03c28aa44024eb018",
+      "actual": "c5c8e7a842ff8132d3b07c62c8612ac977b5895cca874bd03c28aa44024eb018",
+      "match": true
+    },
+    {
+      "path": "binary_policy/executor/cache.py",
+      "expected": "363faeb4e76932816f4e6784bf4acf803c5f3d46d72561587b0afe0482609b93",
+      "actual": "363faeb4e76932816f4e6784bf4acf803c5f3d46d72561587b0afe0482609b93",
+      "match": true
+    },
+    {
+      "path": "binary_policy/executor/four_action.py",
+      "expected": "a6b77be4197927d8146d6e2c3c70299bba32433679b916009197c97608a9c2e9",
+      "actual": "a6b77be4197927d8146d6e2c3c70299bba32433679b916009197c97608a9c2e9",
+      "match": true
+    },
+    {
+      "path": "binary_policy/executor/generation.py",
+      "expected": "8fa73ab035dc3655dae396c48674f5e2be052a9d41999b92d9fd075ebb7dfe96",
+      "actual": "8fa73ab035dc3655dae396c48674f5e2be052a9d41999b92d9fd075ebb7dfe96",
+      "match": true
+    },
+    {
+      "path": "binary_policy/executor/inputs.py",
+      "expected": "b0fa74da3ab134e5e08ae3e36877b64d59d42ff5b50f01cf01914f2daa137716",
+      "actual": "b0fa74da3ab134e5e08ae3e36877b64d59d42ff5b50f01cf01914f2daa137716",
+      "match": true
+    },
+    {
+      "path": "binary_policy/executor/layers.py",
+      "expected": "4aba5c8d61f76925b758889b738e665b019d3324d5380808c625ee45de8f1b71",
+      "actual": "4aba5c8d61f76925b758889b738e665b019d3324d5380808c625ee45de8f1b71",
+      "match": true
+    },
+    {
+      "path": "binary_policy/executor/model.py",
+      "expected": "432d4898ef438db1150521d1dd330ed324c9ae96898934793ff151f80c82318a",
+      "actual": "432d4898ef438db1150521d1dd330ed324c9ae96898934793ff151f80c82318a",
+      "match": true
+    },
+    {
+      "path": "dense_failure_stage1/runtime.py",
+      "expected": "73c15bdb06ed6e23cd5d7784796c12226f5512687cbc1180d643637b823b8258",
+      "actual": "73c15bdb06ed6e23cd5d7784796c12226f5512687cbc1180d643637b823b8258",
+      "match": true
+    },
+    {
+      "path": "dense_failure_stage2/benchmark_fixed_schedule.py",
+      "expected": "a13a7c7845f6c5a9a64b4dd79047f7f64dce9428b5aa5a768f3ab9318b9ec343",
+      "actual": "a13a7c7845f6c5a9a64b4dd79047f7f64dce9428b5aa5a768f3ab9318b9ec343",
+      "match": true
+    },
+    {
+      "path": "dense_failure_stage2/predictability_external_transfer.py",
+      "expected": "1c5fe00df8a506913822788bc4069ee48dc5724117e7253dca84d52b1cbefb96",
+      "actual": "1c5fe00df8a506913822788bc4069ee48dc5724117e7253dca84d52b1cbefb96",
+      "match": true
+    },
+    {
+      "path": "dense_failure_stage2/predictability_measurement.py",
+      "expected": "9752e9ff22080a0efc3a45c72f5b35839cbb5453d20f9ded7dbbd3f0a2eb65b8",
+      "actual": "9752e9ff22080a0efc3a45c72f5b35839cbb5453d20f9ded7dbbd3f0a2eb65b8",
+      "match": true
+    },
+    {
+      "path": "eval/reference/shared_prefix_eval_20260812/code/dvr_qwen/eval_metrics.py",
+      "expected": "b2d1b5221b3c0c3ea4e616e6eba328d89811d26fbf3c594524fe3dc5503ca62b",
+      "actual": "b2d1b5221b3c0c3ea4e616e6eba328d89811d26fbf3c594524fe3dc5503ca62b",
+      "match": true
+    },
+    {
+      "path": "eval/reference/shared_prefix_eval_20260812/code/dvr_qwen/scripts/cache_preference_gt_router_features.py",
+      "expected": "efe2a25e6cb5a1eba65785d3cd0e05ba6fabedee4e43d7cc7ecd69242d6ee967",
+      "actual": "efe2a25e6cb5a1eba65785d3cd0e05ba6fabedee4e43d7cc7ecd69242d6ee967",
+      "match": true
+    },
+    {
+      "path": "experiments/analyze_benchmark_fixed_schedule.py",
+      "expected": "25e96caf4622bae5a3ee3c3aae5e6f26587608320a006f319857a4404e2c2393",
+      "actual": "25e96caf4622bae5a3ee3c3aae5e6f26587608320a006f319857a4404e2c2393",
+      "match": true
+    },
+    {
+      "path": "experiments/prepare_benchmark_fixed_schedule.py",
+      "expected": "4c1c05d545bb058e74e4d3e675d9c4ebc4477bc308dc24f8ef9c5beda42dd179",
+      "actual": "4c1c05d545bb058e74e4d3e675d9c4ebc4477bc308dc24f8ef9c5beda42dd179",
+      "match": true
+    },
+    {
+      "path": "experiments/run_benchmark_fixed_schedule.py",
+      "expected": "008fc208d19120b73c03f6031349ac1d377fa11c7f0831f2ff147f486e573528",
+      "actual": "008fc208d19120b73c03f6031349ac1d377fa11c7f0831f2ff147f486e573528",
+      "match": true
+    },
+    {
+      "path": "experiments/run_full_benchmark_end_to_end_eval.py",
+      "expected": "9d6db7280a578d1379b6919917b796b9862b6e44d5ccb777699b668497ac0084",
+      "actual": "9d6db7280a578d1379b6919917b796b9862b6e44d5ccb777699b668497ac0084",
+      "match": true
+    },
+    {
+      "path": "experiments/run_stage2_v1_training_revised.py",
+      "expected": "f774d7238e12d180969dc99d4e13ab8a83a874b88e4f8a9a499cc4f1b8dd3061",
+      "actual": "f774d7238e12d180969dc99d4e13ab8a83a874b88e4f8a9a499cc4f1b8dd3061",
+      "match": true
+    },
+    {
+      "path": "plans/benchmark_calibrated_fixed_read_write_schedule_plan.md",
+      "expected": "ecb721fedb32fc017ef52671822a398327d6c08d69d2434cda68a70894d92258",
+      "actual": "ecb721fedb32fc017ef52671822a398327d6c08d69d2434cda68a70894d92258",
+      "match": true
+    },
+    {
+      "path": "tests/test_benchmark_fixed_schedule.py",
+      "expected": "bf544ccd43b280f73ace0d01288ec13b759eb310675148dbc8bac534db5b922d",
+      "actual": "bf544ccd43b280f73ace0d01288ec13b759eb310675148dbc8bac534db5b922d",
+      "match": true
+    }
+  ],
+  "split_sha256": "21dc39f7ca4ac02a47fafda2dd583ed6fb37515a059f8eb74b5547fe42caa512",
+  "protocol_sha256": "8693154bb951bca7407bac03113b1439d187f59d651e31698c4b319238eea824",
+  "config_matches_contract": true,
+  "split_rows": 20471
+}

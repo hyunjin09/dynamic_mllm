@@ -1,0 +1,45 @@
+{
+  "files": 22035,
+  "inventory_sha256": "d95031492d2aa7528b9cdba1466fb2407c55a0f12afa977999a82764d54d180e",
+  "source_roots": {
+    "model": "/data/research/models/models--Qwen--Qwen2.5-VL-3B-Instruct/snapshots/66285546d2b821cf421d4f5eb2576359d3770cd3",
+    "package": "/data/research/datasets/Sparse_Visual_Contextualization/Qwen2.5-VL-3B-Instruct",
+    "project": "/home/hyunjin/projects/dynamic_mllm"
+  },
+  "total_bytes": 24788970428,
+  "totals": {
+    "model/model_processor_metadata": {
+      "bytes": 11554456,
+      "files": 9
+    },
+    "model/model_weight_shard": {
+      "bytes": 7509337976,
+      "files": 2
+    },
+    "package/canonical_metadata_or_population": {
+      "bytes": 8741340268,
+      "files": 36
+    },
+    "package/frozen_executor_source": {
+      "bytes": 743477,
+      "files": 51
+    },
+    "package/input_image": {
+      "bytes": 2090661895,
+      "files": 10000
+    },
+    "package/raw_lineage": {
+      "bytes": 11771975,
+      "files": 48
+    },
+    "project/partial_replay_checkpoint": {
+      "bytes": 1869805287,
+      "files": 1889
+    },
+    "project/prepared_source_shard": {
+      "bytes": 4553755094,
+      "files": 10000
+    }
+  },
+  "transferred": false
+}

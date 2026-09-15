@@ -1,0 +1,14 @@
+{
+  "initial_head": "6c07e0aa1f0f1469c399b0b21caed9fa7f6f3ef2",
+  "head": "7d2feaae86da6192cf7639e13c74912801a7b00f",
+  "origin_main": "7d2feaae86da6192cf7639e13c74912801a7b00f",
+  "ahead_behind": "0\t0",
+  "initial_tracked_or_untracked_changes": false,
+  "incoming_added_file_collisions": 0,
+  "initial_local_only_commits": 0,
+  "sync": "git fetch origin; git pull --ff-only origin main",
+  "machine_local_policy_hashes": {
+    "ACCESS_POLICY.md": "b0a5e531251bab79388f6717262961ff6144872b3a05085cad25b07c0e1e7749",
+    "infra/gpu_policy.md": "e7dcbe39d62c1063a5abe55495fa16641bd21b3c9d58998996f5ed1c20880018"
+  }
+}

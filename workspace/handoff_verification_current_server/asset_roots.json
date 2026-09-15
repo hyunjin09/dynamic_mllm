@@ -1,0 +1,50 @@
+[
+  {
+    "path": "/data/research/datasets/dynamic_mllm/eval/data/heldout_lmms_recommended_v1/samples.jsonl",
+    "status": "file"
+  },
+  {
+    "path": "/data/research/datasets/dynamic_mllm/eval/data/heldout_mmstar_mmmu_final_v2/samples.jsonl",
+    "status": "file"
+  },
+  {
+    "path": "/data/research/datasets/dynamic_mllm/eval/data/heldout_pope_v1/samples.jsonl",
+    "status": "file"
+  },
+  {
+    "path": "/data/research/datasets/dynamic_mllm/stage2_scale_sources",
+    "status": "absent"
+  },
+  {
+    "path": "/data/research/datasets/dynamic_mllm/eval/sources",
+    "status": "absent"
+  },
+  {
+    "path": "/data/research/datasets/lmms-lab___textvqa",
+    "status": "directory",
+    "children": [
+      "default"
+    ]
+  },
+  {
+    "path": "/data/research/datasets/lmms-lab___chart_qa",
+    "status": "directory",
+    "children": [
+      "default"
+    ]
+  },
+  {
+    "path": "/data/research/datasets/ahmed-masry___chart_qa",
+    "status": "directory",
+    "children": [
+      "default"
+    ]
+  },
+  {
+    "path": "/data/research/datasets/HuggingFaceM4___chart_qa",
+    "status": "directory",
+    "children": [
+      "default"
+    ]
+  }
+]

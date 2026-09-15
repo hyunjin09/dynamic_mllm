@@ -1,6 +1,58 @@
 # Dynamic MLLM research handoff
 
-Updated for cross-server Git handoff: 2026-09-14T19:42:52+09:00
+Updated for cross-server Git handoff:2026-09-15, after the user's explicit stop.
+
+**Current frontier: Phase89,3B greedy route corpus audit, STOPPED and INCOMPLETE.**
+Read [the Phase89 transfer runbook](handoff/phase89_server_transfer/README.md)
+and its exact [stopped snapshot](handoff/phase89_server_transfer/progress_snapshot.json).
+The user requested cancellation, then Git packaging for another server.
+This authorizes handoff preparation, not restarting inference or experiments.
+
+The canonical3B corpus has10,000 samples,9,273 image groups and3,907,717
+unique36-layer binary routes. Current-runtime executor parity was repaired and
+verified before all10,000 Dense/FULL samples completed. Dense outcomes changed
+for220samples(2.2%); current Dense is5,702Correct/4,298Wrong. Full routed replay
+was interrupted by user request, so routed transition analysis, final current
+cohorts, RS-A/B/C and READY/NOT READY decisions are not complete.
+
+The first gate failure was an implementation mismatch, not established
+cross-server drift: identical layer0 Q/K/V first diverged at SDPA because FULL
+prefill used different masking/GQA dispatch. A scoped native-mask adapter fixed
+all32 anchors and72 recorded failing-anchor layer boundaries. Diagnostic,
+repair and execution contracts remain unchanged. The last configuration used
+24workers on8H100 GPUs; all9,323 outputs in24 pilot samples matched exactly.
+Its~1.9x historical pilot throughput comparison also changed CPU allocation
+32→96, and is not a controlled two-versus-three-process comparison.
+
+Jobs2994(replay) and2957(report) were cancelled on2026-09-15 11:41:56 KST.
+Earlier2956 was stopped deliberately when switching concurrency. All job IDs,
+PIDs, ETA estimates and “current-server” labels below or in analysis snapshots
+belong to their recorded servers/times. No pipeline is active on this server.
+Phase85 remains stopped. Phase88 completion and final interpretation on its
+original source server remain unknown; elapsed time is not evidence of success.
+
+Recommended reading order:
+
+1. Destination `ACCESS_POLICY.md`, `AGENTS.md`, `infra/gpu_policy.md`, then README.
+2. This current-frontier section and `workspace/workflow_state.md`.
+3. `workspace/phase_memory/phase_89_3b_greedy_route_replay_audit.md`.
+4. `handoff/phase89_server_transfer/README.md`, `progress_snapshot.json`, and
+   `research_summary.md` in that directory.
+5. `plans/3b_greedy_route_corpus_audit_replay_filtering_plan_v2.md`.
+6. Only if revisiting Phase88: its archived section and existing transfer runbook.
+
+Git contains the exact Phase89 implementation and compact metadata; bulk
+prepared-route shards, partial replay records, package data and model weights
+are listed separately with hashes. Restore metadata without overwriting
+differences. Validate destination paths, environment and executor parity before
+any newly authorized continuation; do not edit frozen files to bypass checks or
+silently mix source-server and destination-server labels.
+
+## Archived Phase88 handoff — source status not rechecked
+
+The following is the preserved2026-09-14T19:42:52+09:00 snapshot. Its statements
+about active source workers and remaining authorization are historical, not a
+command to start work on the destination.
 
 **Active frontier: Phase88 is IN PROGRESS, now in random matched-sparsity controls.**
 This Git snapshot is sufficient to recover code, plans, memories and key summary

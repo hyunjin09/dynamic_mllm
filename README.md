@@ -5,11 +5,14 @@ Qwen2.5-VL. The repository intentionally separates version-controlled source
 from machine-local datasets, model weights, checkpoints, and experiment
 artifacts.
 
-For the current Phase88 research state, start with
-[`research_handoff.md`](research_handoff.md). When moving to another server,
-follow the [Phase88 transfer runbook](handoff/phase88_server_transfer/README.md)
-for the current environment snapshot, frozen metadata restoration and external
-payloads. The source experiment was still running when this snapshot was made.
+For the current research state, start with
+[`research_handoff.md`](research_handoff.md), then the
+[Phase89 transfer runbook](handoff/phase89_server_transfer/README.md).
+Phase89's3B corpus replay was explicitly stopped by the user on2026-09-15;
+its saved results are partial and no restart is authorized by this handoff.
+The runbook includes exact source, metadata restoration, environment requirements
+and separately transferred assets. Phase88's earlier source-server completion
+remains unverified; its previous transfer snapshot is retained as historical evidence.
 
 ## What Git contains
 
@@ -21,8 +24,9 @@ payloads. The source experiment was still running when this snapshot was made.
 - project-local agent instructions and the research-control skill;
 - reference implementations used to validate execution and training semantics.
 
-Git does **not** contain `.venv`, datasets/labels, model weights, checkpoints,
-raw outputs, residual tensors, archives, or Slurm logs. See
+Git does **not** contain `.venv`, external datasets, model weights, bulk route
+checkpoints or residual tensors. The Phase89 handoff explicitly packages compact
+Dense labels and selected execution evidence in a checksummed metadata archive. See
 [`workspace/external_assets.md`](workspace/external_assets.md) for the manual
 transfer contract.
 

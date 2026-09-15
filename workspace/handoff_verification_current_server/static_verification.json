@@ -1,0 +1,117 @@
+{
+  "checked_at": "2026-09-14T11:10:37.623905+00:00",
+  "canonical_contract_sha256": "b995483d75b300ef0170db9f06eff2a68801ba4f78fcb922e17951e96ee7492e",
+  "contract_matches": true,
+  "schedule_file_hashes": {
+    "schedules/benchmark_specific_schedules.json": true,
+    "schedules/global_schedule.json": true,
+    "schedules/random_schedule_registry.jsonl": true
+  },
+  "calibration_manifest_hashes": {
+    "R": true,
+    "W": true
+  },
+  "schedule_freeze_claims_no_test_yet": true,
+  "launch_order_independently_verified": false,
+  "stages": {
+    "dense": {
+      "manifest_present": true,
+      "complete_present": true,
+      "raw_records_verified": false,
+      "records": 20471,
+      "unique_uids": 20471,
+      "exact_expected_uids": true,
+      "all_paths_source_absolute": true,
+      "completion_metadata": {
+        "contract_sha256": "b995483d75b300ef0170db9f06eff2a68801ba4f78fcb922e17951e96ee7492e",
+        "passed": true,
+        "uids": 20471
+      }
+    },
+    "R": {
+      "manifest_present": true,
+      "complete_present": true,
+      "raw_records_verified": false,
+      "records": 1019,
+      "unique_uids": 1019,
+      "exact_expected_uids": true,
+      "all_paths_source_absolute": true,
+      "completion_metadata": {
+        "contract_sha256": "b995483d75b300ef0170db9f06eff2a68801ba4f78fcb922e17951e96ee7492e",
+        "passed": true,
+        "uids": 1019
+      }
+    },
+    "W": {
+      "manifest_present": true,
+      "complete_present": true,
+      "raw_records_verified": false,
+      "records": 1019,
+      "unique_uids": 1019,
+      "exact_expected_uids": true,
+      "all_paths_source_absolute": true,
+      "completion_metadata": {
+        "contract_sha256": "b995483d75b300ef0170db9f06eff2a68801ba4f78fcb922e17951e96ee7492e",
+        "passed": true,
+        "uids": 1019
+      }
+    },
+    "methods": {
+      "manifest_present": true,
+      "complete_present": true,
+      "raw_records_verified": false,
+      "records": 19452,
+      "unique_uids": 19452,
+      "exact_expected_uids": true,
+      "all_paths_source_absolute": true,
+      "completion_metadata": {
+        "contract_sha256": "b995483d75b300ef0170db9f06eff2a68801ba4f78fcb922e17951e96ee7492e",
+        "passed": true,
+        "uids": 19452
+      }
+    },
+    "global": {
+      "manifest_present": true,
+      "complete_present": true,
+      "raw_records_verified": false,
+      "records": 19452,
+      "unique_uids": 19452,
+      "exact_expected_uids": true,
+      "all_paths_source_absolute": true,
+      "completion_metadata": {
+        "contract_sha256": "b995483d75b300ef0170db9f06eff2a68801ba4f78fcb922e17951e96ee7492e",
+        "passed": true,
+        "uids": 19452
+      }
+    },
+    "random": {
+      "manifest_present": false,
+      "complete_present": false,
+      "raw_records_verified": false
+    }
+  },
+  "task_split_counts": {
+    "chartqa/CAL": 256,
+    "chartqa/TEST": 2500,
+    "textvqa/CAL": 255,
+    "textvqa/TEST": 5000,
+    "mmmu_pro_standard_test/CAL": 128,
+    "mmmu_pro_vision_test/CAL": 128,
+    "mmmu_pro_standard_test/TEST": 1602,
+    "mmmu_pro_vision_test/TEST": 1602,
+    "pope_adversarial/CAL": 84,
+    "pope_popular/CAL": 84,
+    "pope_random/CAL": 84,
+    "pope_adversarial/TEST": 2916,
+    "pope_popular/TEST": 2916,
+    "pope_random/TEST": 2916
+  },
+  "missing_final_artifacts": [
+    "metrics/complete.json",
+    "artifact_manifest.json",
+    "final_verification.json",
+    "summaries/heldout_result_summary.md",
+    "summaries/benchmark_structure_characterization.md",
+    "summaries/next_research_direction.md"
+  ]
+}

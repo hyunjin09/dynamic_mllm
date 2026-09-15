@@ -1,5 +1,28 @@
 # Operational Research Plan: Binary Route Label Regeneration
 
+## Stopped Phase 89: 3B greedy route corpus audit and replay filtering
+
+Scope is the V2 plan, `plans/3b_greedy_route_corpus_audit_replay_filtering_plan_v2.md`.
+The user cancelled execution on2026-09-15 and requested handoff to another server.
+No restart is authorized by the transfer request. Parity repair is verified and
+all10,000 Dense/FULL samples completed; routed replay is partial. Jobs2994 and
+2957 are cancelled. See `handoff/phase89_server_transfer/README.md` for exact
+stopped counts, code, contracts, metadata and external assets. No geometry,
+training, pair rebuilding or final RS/readiness interpretation was performed.
+The earlier authorization below records the historical submission scope.
+
+User explicitly authorized `plans/3b_greedy_route_corpus_audit_replay_filtering_plan.md`
+on2026-09-14, with eight GPUs queued through local Slurm. This authorizes the
+named immutable-package census, current-runtime generation gate, unique-route
+replay, filtering, geometry-eligibility/storage estimates and V3.1 pair audit.
+It does not authorize geometry analysis, hidden visual-state capture, finetuning,
+pair-supervision rebuilding, or a new experiment. DocVQA is included here as part
+of the explicitly named existing3B corpus, not a change to standing external
+evaluation. Current turn ends after submission; memory:
+`workspace/phase_memory/phase_89_3b_greedy_route_replay_audit.md`.
+Phase88 below is source-server historical state and remains separately pending
+final interpretation; Phase85 remains stopped.
+
 ## Active Phase 88: Benchmark-calibrated fixed READ/WRITE schedules
 
 User authorized `plans/benchmark_calibrated_fixed_read_write_schedule_plan.md` on2026-09-14. Stage1 is disabled; no learning. Calibration-only independent bit selection, whole-group held-out evaluation, global and20random controls are required. Metadata split and reviewed contract frozen. Dense parity smoke passed; full dense baseline is running on four GPUs before sequential calibration and held-out stages. A missing-q edge case was repaired without excluding any UID. Current memory: `workspace/phase_memory/phase_88_benchmark_fixed_rw_schedule.md`. No top2 or old-search restart.

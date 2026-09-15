@@ -283,3 +283,51 @@ candidates. Manifest SHA-256:
 ## Phase88 fixed benchmark schedules (2026-09-14)
 
 Project datasets link resolves inside /mnt/hyemin. Existing ChartQA train images/annotations and TextVQA train Parquet shards supply CAL; existing evaluation manifests and images supply TEST and MMMU/POPE partitioning. No downloads. Train-derived materialized TextVQA image bytes are retained under `/mnt/hyemin/qwen_train_eval/outputs/benchmark_calibrated_fixed_rw_schedule_v1/calibration_images`. Frozen support: ChartQA CAL256/TEST2500, TextVQA255/5000, MMMU-Pro256/3204, POPE252/8748. Byte/RGB/native-identity group leakage check passes; five ChartQA train annotations excluded. See `analysis/benchmark_calibrated_fixed_rw_schedule/splits/`.
+
+## Phase88 destination inventory — H100 server, 2026-09-14
+
+The preceding Phase88 entry describes the source server. On this server,
+`datasets` links to `/data/research/datasets/dynamic_mllm`. Source `/mnt/hyemin`
+paths are outside the allowed roots and were not inspected.
+
+Candidate local equivalents exist for every frozen TEST UID (19,452) and all
+MMMU-Pro/POPE CAL UIDs (256/252). One image hash from each available family/split
+matches the frozen metadata (six checks); full image hash/decode verification
+remains pending. All three corresponding evaluation manifests exist.
+
+Expected ChartQA train materialization is absent for 256 CAL UID paths.
+TextVQA's Phase88 calibration materialization is absent for 255 CAL UID paths.
+The local `stage2_scale_sources` and `eval/sources` directories are absent.
+Shared ChartQA/TextVQA dataset caches exist elsewhere under the allowed dataset
+root, but their suitability for these exact missing assets was not verified.
+No substitution, extraction, download, or transfer was performed.
+
+The Phase88 raw work payload and analysis `work` link are absent at expected
+local locations. Existing code derives EXT as
+`/data/research/datasets/outputs/benchmark_calibrated_fixed_rw_schedule_v1`,
+which is also absent. Frozen paths remain unchanged; relocation is unresolved.
+
+Evidence: `workspace/handoff_verification_current_server/asset_inventory.json`
+and `asset_roots.json`; full context: repository-root
+`handoff_verification_current_server.md`. Earlier inventory entries remain
+historical provenance, not verification of this server's current assets.
+
+## Phase89 3B greedy route corpus (2026-09-14)
+
+User authorized the existing3B corpus audit/replay plan. Canonical package:
+`datasets/Qwen_3B_7B/Qwen2.5-VL-3B-Instruct`, resolving under allowed
+`/data/research/datasets/Sparse_Visual_Contextualization/`.
+All10,000 source-manifest images are present and SHA256-verified against the
+immutable package manifest. GQA4000, ChartQA2000, DocVQA2000, TextVQA2000.
+DocVQA is explicitly in this corpus-audit scope, not a new external benchmark.
+No download, data transfer, canonical relabeling, or source-path edits occurred.
+
+The exact3B snapshot66285546d2b821cf421d4f5eb2576359d3770cd3 is available in
+`/data/research/models`. CPU preprocessing for all32 source gate anchors matches
+saved text/visual token counts. GPU generation parity is still pending.
+Source file inventory, relocated input manifest, and current derived corpus:
+`analysis/3b_greedy_route_corpus_replay_audit/`.
+
+V2 audit verification2026-09-14: same canonical3B source package;84 inventoried
+file hashes,10,000 prepared sample hashes and10,000 image hashes verified again.
+No assets downloaded; no canonical source or V3.1 files changed.

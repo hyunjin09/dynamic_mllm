@@ -1,0 +1,1 @@
+Defer last-question-token capture and all raw visual tensors. Storage is available, but label/runtime validation is the primary action and exact question-token capture is not validated. A future authorized geometry phase can capture only the filtered corpus; this costs a further pass. No hidden-state geometry or router training is authorized.

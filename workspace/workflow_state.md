@@ -1,5 +1,34 @@
 # Workflow State
 
+## Stopped Phase 89: 3B greedy corpus audit and current-server replay
+
+**STOPPED by user on2026-09-15 11:41:56 KST.** Replay2994 and dependent
+report2957 cancelled; saved outputs preserved. No automatic restart authorized.
+V2 is incomplete. The execution details below are historical.
+Transfer entry: `handoff/phase89_server_transfer/README.md`; exact durable
+frontier and record verification: `progress_snapshot.json` in that directory.
+
+User authorized V2; latest steering requests3 processes/GPU, brief monitoring
+and a measured ETA, then user notification when jobs finish.
+Output: `analysis/3b_greedy_route_corpus_replay_audit_v2/`.
+Verified corpus:10,000 samples,9,273 image groups,3,907,717 unique routes.
+Initial gate2939 failed31/32; diagnostic2941 supported a native FULL SDPA mask
+repair. Repaired gate2942 PASSED32/32 and all72 recorded failing-anchor layer
+boundaries agree numerically. Canonical package and old attempts are preserved.
+Dense2954 and CPU certification2955 COMPLETED all10,000 samples. Current
+dense5702C/4298W;220 labels changed(125C→W/95W→C). Routed2994 RUNNING on8GPUs
+with24workers since2026-09-15 11:23:14 KST;2957 reporting now depends on2994.
+Original2956 was deliberately stopped with720,540 records/1,834 complete
+samples preserved. Original inference contracts unchanged; scheduling overlay
+`concurrency_v1/contract.json` binds new24worker execution. Gate32/32 and all
+9,323 pilot routes across24 saved samples match exactly. Pilot34.5routes/s;
+initial expensive DocVQA production17.5routes/s. Eight new production samples
+independently verify,8,414new routes saved with no failures at11:36:42 KST.
+Preliminary remaining replay ETA25–55hours. Brief monitoring complete;2994
+continues, and the user will notify us when finished. No geometry.
+Memory: `workspace/phase_memory/phase_89_3b_greedy_route_replay_audit.md`.
+Phase88 source completion remains unverified; Phase85 remains stopped.
+
 ## Active Phase 88: Benchmark-calibrated fixed READ/WRITE schedules
 
 User authorized `plans/benchmark_calibrated_fixed_read_write_schedule_plan.md` on2026-09-14. Stage1 is disabled; no learning. Calibration-only independent bit selection, whole-group held-out evaluation, global and20random controls are required. Metadata split and reviewed contract frozen. Nine-case Dense parity smoke and all20,471 regenerated Dense rows passed; CAL-only action smoke and the complete READ sweep passed. Both calibration sweeps passed and all schedules are frozen. M1/M2/M3 and global are complete on all19,452TEST UIDs; four-GPU random controls are active (15,703/19,452 complete at 2026-09-14T19:42:52+09:00). Cross-server snapshot/runbook: `handoff/phase88_server_transfer/README.md`. Final interpretation/reporting remains pending. A missing-q edge case was repaired without excluding any UID. Current memory: `workspace/phase_memory/phase_88_benchmark_fixed_rw_schedule.md`. No top2 or old-search restart.

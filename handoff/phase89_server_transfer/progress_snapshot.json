@@ -1,0 +1,58 @@
+{
+  "additional_dense_records_available": 8111,
+  "checked_at": "2026-09-15T05:01:03.351039+00:00",
+  "concurrency_overlay_sha256": "9a4f24328f8b86d22d6e97d0257a3fe42c3948e4ff23df7e12f90089c1495292",
+  "dense_stage": {
+    "contract_sha256": "0e096f78a05a5f139fc9976931c22328493beb9cc966f2b60334ed83f6ccac47",
+    "dense_correct": 5702,
+    "dense_wrong": 4298,
+    "manifest_sha256": "0fe3091b7d2853b7983eda17ee4bcc51e258204c79d24a2a5b4686aa03b5e094",
+    "passed": true,
+    "samples": 10000
+  },
+  "final_report_complete": false,
+  "geometry_readiness": "NOT ASSESSED: full replay and interpretation pending",
+  "git_parent_commit": "7d2feaae86da6192cf7639e13c74912801a7b00f",
+  "inference_contract_sha256": "0e096f78a05a5f139fc9976931c22328493beb9cc966f2b60334ed83f6ccac47",
+  "record_identity_hash_validation_passed": true,
+  "remaining_new_route_inferences": 3165125,
+  "remaining_routes": 3173236,
+  "restart_authorized": false,
+  "route_checkpoint_counts": {
+    "checkpoint_files": 1889,
+    "complete_samples": 1858,
+    "error_records": 0,
+    "partial_samples": 31,
+    "saved_records": 734481
+  },
+  "route_counts_by_dataset": {
+    "chartqa": {
+      "checkpoint_files": 1841,
+      "complete_samples": 1834,
+      "error_records": 0,
+      "partial_samples": 7,
+      "saved_records": 720540
+    },
+    "docvqa": {
+      "checkpoint_files": 48,
+      "complete_samples": 24,
+      "error_records": 0,
+      "partial_samples": 24,
+      "saved_records": 13941
+    }
+  },
+  "route_record_jobs": {
+    "2954": 1889,
+    "2956": 718699,
+    "2994": 13893
+  },
+  "slurm_accounting": "JobID|JobName|State|ExitCode|Elapsed|Start|End\n2939|3b-route-replay-audit|FAILED|1:0|00:00:58|2026-09-14T21:14:13|2026-09-14T21:15:11\n2939.batch|batch|FAILED|1:0|00:00:58|2026-09-14T21:14:13|2026-09-14T21:15:11\n2939.0|torchrun|FAILED|1:0|00:00:57|2026-09-14T21:14:14|2026-09-14T21:15:11\n2940|3b-route-audit-report|CANCELLED|0:0|00:00:00|None|2026-09-14T21:15:11\n2941|3b-v2-parity-diagnostic|COMPLETED|0:0|00:00:20|2026-09-14T23:22:58|2026-09-14T23:23:18\n2941.batch|batch|COMPLETED|0:0|00:00:20|2026-09-14T23:22:58|2026-09-14T23:23:18\n2941.0|python|COMPLETED|0:0|00:00:20|2026-09-14T23:22:58|2026-09-14T23:23:18\n2942|3b-v2-repaired-gate|COMPLETED|0:0|00:00:48|2026-09-15T00:30:46|2026-09-15T00:31:34\n2942.batch|batch|COMPLETED|0:0|00:00:48|2026-09-15T00:30:46|2026-09-15T00:31:34\n2942.0|python|COMPLETED|0:0|00:00:47|2026-09-15T00:30:47|2026-09-15T00:31:34\n2954|3b-v2-dense|COMPLETED|0:0|00:16:19|2026-09-15T00:32:06|2026-09-15T00:48:25\n2954.batch|batch|COMPLETED|0:0|00:16:19|2026-09-15T00:32:06|2026-09-15T00:48:25\n2954.0|torchrun|COMPLETED|0:0|00:16:18|2026-09-15T00:32:07|2026-09-15T00:48:25\n2955|3b-v2-dense-report|COMPLETED|0:0|00:01:06|2026-09-15T01:26:37|2026-09-15T01:27:43\n2955.batch|batch|COMPLETED|0:0|00:01:06|2026-09-15T01:26:37|2026-09-15T01:27:43\n2956|3b-v2-routes|CANCELLED by 1003|0:0|09:53:14|2026-09-15T01:29:56|2026-09-15T11:23:10\n2956.batch|batch|CANCELLED|0:15|09:53:15|2026-09-15T01:29:56|2026-09-15T11:23:11\n2956.0|torchrun|FAILED|1:0|09:53:15|2026-09-15T01:29:57|2026-09-15T11:23:12\n2957|3b-v2-final-report|CANCELLED by 1003|0:0|00:00:00|None|2026-09-15T11:41:56\n2994|3b-v2-routes-3pg|CANCELLED by 1003|0:0|00:18:42|2026-09-15T11:23:14|2026-09-15T11:41:56\n2994.batch|batch|CANCELLED|0:15|00:18:43|2026-09-15T11:23:14|2026-09-15T11:41:57\n2994.0|python|CANCELLED|0:15|00:18:44|2026-09-15T11:23:14|2026-09-15T11:41:58\n",
+  "source_checkout": "/home/hyunjin/projects/dynamic_mllm",
+  "source_model": "/data/research/models/models--Qwen--Qwen2.5-VL-3B-Instruct/snapshots/66285546d2b821cf421d4f5eb2576359d3770cd3",
+  "source_package": "/data/research/datasets/Sparse_Visual_Contextualization/Qwen2.5-VL-3B-Instruct",
+  "status": "STOPPED_BY_USER_INCOMPLETE",
+  "total_routes": 3907717,
+  "total_samples": 10000,
+  "unique_route_results_available": 742592,
+  "untouched_samples": 8111
+}
